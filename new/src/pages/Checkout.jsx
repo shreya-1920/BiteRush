@@ -4,372 +4,428 @@ import Footer from "../Components/Footer";
 import Container from "react-bootstrap/Container";
 import "../styles/Checkout.css";
 import {
+  FaMapMarkerAlt,
+  FaClock,
+  FaUser,
   FaCreditCard,
-  FaWallet,
-  FaQrcode,
+  FaTag,
+
+  FaEdit,
+  FaPlus,
+  FaLock,
   FaMoneyBillWave,
-  FaShieldAlt,
+  FaWallet
 } from "react-icons/fa";
+
+import { MdDeliveryDining } from "react-icons/md";
+import { SiGooglepay } from "react-icons/si";
 function Checkout() {
   return (
     <>
       <Header />
+<Container>
+      <div className="checkout-container">
 
-      <section className="checkout-page">
-        <Container>
-          <div className="checkout-header">
-            <p className="checkout-breadcrumb">
-              Home
-              <span>›</span>
-              Cart
-              <span>›</span>
-              <span className="active">Checkout</span>
-            </p>
+    {/* HERO */}
 
-            <h1>Checkout</h1>
+    <section className="checkout-hero">
 
-            <p className="checkout-subtitle">Complete your order securely.</p>
-          </div>
+        <p className="checkout-breadcrumb">
+            Home <span>›</span> Cart <span>›</span> <strong>Checkout</strong>
+        </p>
 
-          <div className="checkout-container">
-            <div className="checkout-left">
-             <div className="checkout-card">
+        <h1>Checkout</h1>
 
-  <div className="address-header">
+        <p className="checkout-subtitle">
+            Complete your order securely.
+        </p>
+
+    </section>
+
+    {/* MAIN LAYOUT */}
+
+    <section className="checkout-layout">
+
+        {/* LEFT SIDE */}
+
+        <div className="checkout-left">
+
+            {/* Delivery Address */}
+
+          <div className="checkout-card">
+
+  <div className="checkout-card-header">
 
     <div className="checkout-title">
-
-
-
-    <span className="address-icon">📍</span>
-
-    <h3>Delivery Address</h3>
-
-  </div>
-
-  <div className="address-actions">
-
-  
-
-   <div
-  style={{
-    display: "flex",
-    gap: "20px",
-    border: "2px solid red",
-  }}
->
-  <span>Edit</span>
-  <span style={{ color: "red" }}>+ Add New</span>
+      <div className="checkout-icon">
+    <FaMapMarkerAlt />
 </div>
+      <h3>Delivery Address</h3>
+    </div>
 
-  </div>
+   <div className="checkout-address-actions">
 
+    <button className="checkout-edit-btn">
+        <FaEdit />
+        <span>Edit</span>
+    </button>
+
+    <button className="checkout-add-btn">
+        <FaPlus />
+        <span>Add New</span>
+    </button>
+
+</div>
 </div>
 
   <div className="address-box">
-
     <h4>Jane Doe</h4>
-
-    <p>+91 9876543210</p>
-
-    <p>221B Baker Street, Jaipur, Rajasthan</p>
-
+    <p>+1 234 567 890</p>
+    <p>123 Gourmet Lane, Foodie District, Jaipur, Rajasthan - 302001</p>
   </div>
 
 </div>
-<div className="checkout-card">
 
-  <h3 className="section-heading">
-    🕒 Delivery Schedule
-  </h3>
+            {/* Delivery Schedule */}
 
-  <div className="schedule-grid">
+           <div className="checkout-card">
 
-    <label className="schedule-card active">
+    <div className="checkout-title">
 
-      <input
-        type="radio"
-        name="delivery"
-        defaultChecked
-      />
-
-      <div className="schedule-content">
-        <h4>Deliver ASAP</h4>
-        <p>Arrives in 25–30 min</p>
-      </div>
-
-    </label>
-
-    <label className="schedule-card">
-
-      <input
-        type="radio"
-        name="delivery"
-      />
-
-      <div className="schedule-content">
-        <h4>Schedule Delivery</h4>
-        <p>Pick a later date/time</p>
-      </div>
-
-    </label>
-
-  </div>
-
+        <div className="checkout-icon">
+    <FaClock />
 </div>
-<div className="checkout-card">
 
-  <h3 className="section-heading">
-    👤 Contact Details
-  </h3>
-
-  <div className="form-grid">
-
-    <div>
-
-      <label>Full Name</label>
-
-      <input
-        type="text"
-        placeholder="Jane Doe"
-      />
+        <h3>Delivery Schedule</h3>
 
     </div>
 
-    <div>
+    <div className="delivery-options">
 
-      <label>Phone Number</label>
+        <div className="delivery-option active">
 
-      <input
-        type="text"
-        placeholder="+91 9876543210"
-      />
+            <div className="delivery-radio"></div>
 
-    </div>
+            <div>
 
-  </div>
+                <h4>Deliver ASAP</h4>
 
-  <label>Email Address</label>
+                <p>Arrives in 25–30 min</p>
 
-  <input
-    type="email"
-    placeholder="jane@example.com"
-  />
-
-  <label>Delivery Instructions (Optional)</label>
-
-  <textarea
-    rows="4"
-    placeholder="Leave at the door..."
-  />
-
-</div>
-<div className="checkout-card">
-
-  <div className="payment-header">
-
-    <h3>
-      <FaCreditCard />
-      Payment Method
-    </h3>
-
-    <span>
-
-      <FaShieldAlt />
-
-      256-bit SSL Secure
-
-    </span>
-
-  </div>
-
-  <div className="payment-tabs">
-
-    <button className="payment-tab active">
-
-      <FaCreditCard />
-
-      <span>Card</span>
-
-    </button>
-
-    <button className="payment-tab">
-
-      <FaWallet />
-
-      <span>Wallet</span>
-
-    </button>
-
-    <button className="payment-tab">
-
-      <FaQrcode />
-
-      <span>UPI</span>
-
-    </button>
-
-    <button className="payment-tab">
-
-      <FaMoneyBillWave />
-
-      <span>Cash</span>
-
-    </button>
-
-  </div>
-
-  <div className="card-form">
-
-    <label>Card Number</label>
-
-    <input
-      type="text"
-      placeholder="XXXX XXXX XXXX XXXX"
-    />
-
-    <div className="card-grid">
-
-      <div>
-
-        <label>Expiry Date</label>
-
-        <input
-          type="text"
-          placeholder="MM/YY"
-        />
-
-      </div>
-
-      <div>
-
-        <label>CVV</label>
-
-        <input
-          type="password"
-          placeholder="***"
-        />
-
-      </div>
-
-    </div>
-
-  </div>
-
-</div>
-<div className="checkout-card">
-
-  <h3 className="section-heading">
-
-    🏷 Apply Promo Code
-
-  </h3>
-
-  <div className="promo-row">
-
-    <input
-      type="text"
-      placeholder="ENTER PROMO CODE"
-    />
-
-    <button>
-
-      Apply
-
-    </button>
-
-  </div>
-
-  <div className="promo-tags">
-
-    <span>BITE100</span>
-
-    <span>FREEDEL</span>
-
-    <span>SAVE50</span>
-
-  </div>
-
-</div>
-
-{/*right*/}
-</div>
-
-            <div className="checkout-right">
-
-              <div className="checkout-item">
-
-        <img
-            src="https://images.unsplash.com/photo-1576107232684-1279f390859f?w=200"
-            alt=""
-        />
-
-        <div>
-
-            <h4>Loaded Fries</h4>
-
-            <p>Qty: 1</p>
+            </div>
 
         </div>
 
-        <span>₹199</span>
+        <div className="delivery-option">
+
+            <div className="delivery-radio"></div>
+
+            <div>
+
+                <h4>Schedule Delivery</h4>
+
+                <p>Pick a later date & time</p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+            {/* Contact */}
+
+        <div className="checkout-card">
+
+    <div className="checkout-title">
+
+        <div className="checkout-icon">
+    <FaUser />
+</div>
+
+        <h3>Contact Details</h3>
+
+    </div>
+
+    <div className="contact-form-grid">
+
+        <div className="form-group">
+
+            <label>Full Name</label>
+
+            <input
+                type="text"
+                placeholder="Jane Doe"
+            />
+
+        </div>
+
+        <div className="form-group">
+
+            <label>Phone Number</label>
+
+            <input
+                type="text"
+                placeholder="+1 234 567 890"
+            />
+
+        </div>
+
+        <div className="form-group full-width">
+
+            <label>Email Address</label>
+
+            <input
+                type="email"
+                placeholder="jane@example.com"
+            />
+
+        </div>
+
+        <div className="form-group full-width">
+
+            <label>Delivery Instructions (Optional)</label>
+
+            <textarea
+                rows="4"
+                placeholder="Leave at the front door, ring the bell..."
+            ></textarea>
+
+        </div>
+
+    </div>
+
+</div>
+
+            {/* Payment */}
+
+          <div className="checkout-card">
+
+    <div className="payment-header">
+
+        <div className="checkout-title">
+            <div className="checkout-icon">
+    <FaCreditCard />
+</div>
+            <h3>Payment Method</h3>
+        </div>
+
+        <span className="secure-payment">
+
+<FaLock/>
+
+256-bit SSL Secure
+
+</span>
+    </div>
+
+   <div className="payment-options">
+
+    <div className="payment-option active">
+        <FaCreditCard className="payment-icon" />
+        <span>Card</span>
+    </div>
+
+    <div className="payment-option">
+        <FaWallet className="payment-icon" />
+        <span>Wallet</span>
+    </div>
+
+    <div className="payment-option">
+        <SiGooglepay className="payment-icon" />
+        <span>UPI</span>
+    </div>
+
+    <div className="payment-option">
+        <FaMoneyBillWave className="payment-icon" />
+        <span>Cash</span>
+    </div>
+
+</div>
+
+    <div className="card-details">
+
+        <div className="form-group full-width">
+
+            <label>Card Number</label>
+
+            <input
+                type="text"
+                placeholder="XXXX XXXX XXXX XXXX"
+            />
+
+        </div>
+
+        <div className="form-group">
+
+            <label>Expiry Date</label>
+
+            <input
+                type="text"
+                placeholder="MM/YY"
+            />
+
+        </div>
+
+        <div className="form-group">
+
+            <label>CVV</label>
+
+            <input
+                type="password"
+                placeholder="***"
+            />
+
+        </div>
+
+    </div>
+
+</div>
+
+            {/* Promo */}
+
+           <div className="checkout-card">
+
+    <div className="checkout-title">
+<div className="checkout-icon">
+    <FaTag />
+</div>
+
+        <h3>Promo Code</h3>
+
+    </div>
+
+    <div className="promo-box">
+
+        <input
+            type="text"
+            placeholder="Enter promo code"
+        />
+
+        <button>
+            Apply
+        </button>
+
+    </div>
+
+    <div className="promo-chips">
+
+        <span>WELCOME50</span>
+
+        <span>FREEDEL</span>
+
+        <span>SAVE20</span>
+
+    </div>
+
+</div>
+
+        </div>
+
+        {/* RIGHT SIDE */}
+
+        <aside className="checkout-right">
+
+            <div className="order-summary">
+
+    <h2>Order Summary</h2>
+
+    <div className="summary-items">
+
+        <div className="summary-item">
+
+            <div>
+
+                <h4>Classic Burger</h4>
+
+                <span>Qty: 2</span>
+
+            </div>
+
+            <strong>₹398</strong>
+
+        </div>
+
+        <div className="summary-item">
+
+            <div>
+
+                <h4>French Fries</h4>
+
+                <span>Qty: 1</span>
+
+            </div>
+
+            <strong>₹149</strong>
+
+        </div>
 
     </div>
 
     <hr />
 
-    <div className="summary-row">
+    <div className="price-row">
+
         <span>Subtotal</span>
-        <span>₹797</span>
+
+        <span>₹547</span>
+
     </div>
 
-    <div className="summary-row">
+    <div className="price-row">
+
         <span>Delivery Fee</span>
-        <span className="free">FREE</span>
+
+        <span>₹40</span>
+
     </div>
 
-    <div className="summary-row">
-        <span>GST</span>
-        <span>₹54</span>
-    </div>
+    <div className="price-row">
 
-    <div className="summary-row discount">
         <span>Discount</span>
-        <span>-₹120</span>
-    </div>
 
-    <hr />
-
-    <div className="grand-total">
-
-        <h3>Total</h3>
-
-        <h3>₹731</h3>
+        <span className="discount">-₹50</span>
 
     </div>
-<div className="eta-card">
 
-    <p>Estimated Arrival</p>
+    <div className="price-row total">
 
-    <h2>25–30 min</h2>
+        <span>Total</span>
 
-    <span>🚚 Track your order in real time</span>
+        <span>₹537</span>
+
+    </div>
+
+ <div className="eta-card">
+
+    <MdDeliveryDining className="eta-icon"/>
+
+    <div>
+
+        <h4>Estimated Delivery</h4>
+
+        <p>25 - 30 Minutes</p>
+
+    </div>
 
 </div>
-<button className="place-order-btn">
-    🔒 Place Order
-</button>
 
-<p className="terms">
-    By placing the order, you agree to our Terms & Privacy Policy.
-</p>
+    <button className="place-order-btn">
+
+        Place Order →
+
+    </button>
+
 </div>
 
+        </aside>
+
+    </section>
 
 </div>
     
         </Container>
-      </section>
+     
 
       <Footer />
     </>

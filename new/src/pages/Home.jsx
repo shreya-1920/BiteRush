@@ -20,7 +20,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 
 import { Navigation } from "swiper/modules";
 import "swiper/css/navigation";
-
+import { useState } from "react";
 import "swiper/css";
 import burgerImg from "../assets/images/burger-image.png";
 import pizzaImg from "../assets/images/pizza-image.png";
@@ -41,7 +41,7 @@ import burgerImg2 from "../assets/images/restaurant-1.png";
 import pizzaImg2 from "../assets/images/restaurant-2.png";
 import saladImg from "../assets/images/restaurant-3.png";
 import ramenImg from "../assets/images/restaurant-4.png";
-
+import { useNavigate } from "react-router-dom";
 {/*function Counter({ end, duration = 2000, suffix = "", decimals = 0 }) {
   const [count, setCount] = useState(0);
   const [started, setStarted] = useState(false);
@@ -93,6 +93,21 @@ import ramenImg from "../assets/images/restaurant-4.png";
 
 
 function Home() {
+
+ const [copied, setCopied] = useState(false);
+
+const copyCoupon = () => {
+
+    navigator.clipboard.writeText("BITEFIRST");
+
+    setCopied(true);
+
+    setTimeout(() => {
+        setCopied(false);
+    }, 2000);
+};
+  const [location, setLocation] = useState("");
+const [search, setSearch] = useState("");
   const categories=[
               {
                   id:1,
@@ -268,7 +283,7 @@ const steps = [
     offer: "Free delivery",
   },
 ];
-
+const navigate = useNavigate();
   return (
     <>
       <Header />
@@ -314,18 +329,29 @@ const steps = [
               <Form className="br-search-form">
 
                 <Form.Control
-                  className="br-location-input"
-                  placeholder="📍 Your Location"
-                />
-
+    className="br-location-input"
+    placeholder="📍 Your Location"
+    value={location}
+    onChange={(e) => setLocation(e.target.value)}
+/>
                 <Form.Control
-                  className="br-search-input"
-                  placeholder="🍕 Search dishes or restaurants"
-                />
+    className="br-search-input"
+    placeholder="🍕 Search dishes or restaurants"
+    value={search}
+    onChange={(e) => setSearch(e.target.value)}
+/>
 
-                <Button className="br-search-btn">
-                  Search
-                </Button>
+               <Button
+    className="br-search-btn"
+    onClick={() =>
+        navigate(
+            `/restaurants?search=${encodeURIComponent(search)}`
+        )
+    }
+>
+    Search
+</Button>
+                
 
               </Form>
 
@@ -335,12 +361,18 @@ const steps = [
 
             <div className="br-hero-buttons">
 
-              <Button className="br-order-btn">
+             <Button
+    className="br-order-btn"
+    onClick={() => navigate("/restaurants")}
+>
                 Order Now
                 <HiArrowLongRight />
               </Button>
 
-              <Button className="br-explore-btn">
+       <Button
+    className="br-explore-btn"
+    onClick={() => navigate("/restaurants")}
+>
                 Explore Restaurants
                 <HiArrowLongRight />
               </Button>
@@ -459,7 +491,14 @@ const steps = [
       
                           <SwiperSlide key={category.id}>
       
-                              <div className="category-card">
+                              <div
+    className="category-card"
+    onClick={() =>
+        navigate(
+            `/restaurants?category=${category.name.toLowerCase()}`
+        )
+    }
+>
       
                                   <div className="category-image">
                                       <img
@@ -504,19 +543,23 @@ Featured Restaurants
 
 </div>
 
-<a href="#" className="view-all">
-View All <FaArrowRight />
-</a>
-
+<div
+    className="view-all"
+    onClick={() => navigate("/restaurants")}
+>
+    View All  <FaArrowRight />
 </div>
+</div>
+
 
 <div className="br-restaurant-grid">
 
 {restaurants.map((restaurant)=>(
 
 <div
-className="br-restaurant-card"
-key={restaurant.id}
+    className="br-restaurant-card"
+    key={restaurant.id}
+    onClick={() => navigate(`/restaurant/${restaurant.id}`)}
 >
 
 <div className="br-restaurant-image">
@@ -694,13 +737,20 @@ View Menu
       
                   <div className="home-offer-buttons">
       
-                    <button className="home-claim-btn">
-                      Claim Offers
-                    </button>
+            <Button
+    variant="none"
+    className="home-claim-btn"
+    onClick={() => navigate("/restaurants?offers=true")}
+>
+    Claim Offers
+</Button>
       
-                    <button className="home-browse-btn">
-                      Browse All →
-                    </button>
+                   <div
+    className="browse-all"
+    onClick={() => navigate("/restaurants")}
+>
+    Browse All →
+</div>
       
                   </div>
       
@@ -792,9 +842,12 @@ View Menu
       
                 <span>Auto-applied</span>
       
-                <button className="home-order-btn">
-                  Order now →
-                </button>
+               <Button
+    className="home-order-btn"
+    onClick={() => navigate("/restaurants")}
+>
+    Order Now
+</Button>
       
               </div>
       
@@ -827,9 +880,12 @@ View Menu
       
                 <span>Weekend only</span>
       
-                <button className="home-explore-btn">
-                  Explore →
-                </button>
+               <Button
+    className="home-explore-btn"
+    onClick={() => navigate("/restaurants")}
+>
+    Explore
+</Button>
       
               </div>
       
@@ -863,9 +919,11 @@ View Menu
       
           </div>
       
-          <button className="home-copy-btn">
-            Copy Code
-          </button>
+      <Button 
+      className="home-copy-btn"
+      onClick={copyCoupon}>
+    {copied ? "✓ Copied" : "Copy Code"}
+</Button>
       
         </div>
               </div>

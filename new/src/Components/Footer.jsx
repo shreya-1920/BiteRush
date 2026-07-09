@@ -1,6 +1,6 @@
 
 import Container from "react-bootstrap/Container";
-
+import { useNavigate } from "react-router-dom";
 import {
   FaFacebookF,
   FaInstagram,
@@ -15,6 +15,7 @@ import {
 } from "react-icons/fi";
 
 function Footer() {
+  const navigate = useNavigate();
   return (
     <footer className="footer">
       <Container>
@@ -50,12 +51,19 @@ function Footer() {
 
             <h4>QUICK LINKS</h4>
 
-            <ul>
-              <li>Home</li>
-              <li>Restaurants</li>
-              <li>Offers</li>
-              <li>About Us</li>
-            </ul>
+            <li onClick={() => navigate("/")}>Home</li>
+
+<li onClick={() => navigate("/restaurants")}>
+    Restaurants
+</li>
+
+<li onClick={() => navigate("/restaurants?offers=true")}>
+    Offers
+</li>
+
+<li onClick={() => navigate("/about")}>
+    About Us
+</li>
 
           </div>
 
