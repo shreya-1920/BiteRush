@@ -2,11 +2,13 @@ import { Routes, Route } from "react-router-dom";
 import ScrollToTop from "./Components/ScrollToTop";
 
 import Home from "./pages/Home";
-import AuthPage from "./Components/AuthPage";
+import AuthPage from "./pages/AuthPage";
 import Restaurants from "./pages/Restaurants";
 import RestaurantDetails from "./pages/RestaurantDetails";
 import Cart from "./pages/Cart";
 import Checkout from "./pages/Checkout";
+import About from "./pages/About";
+import Contact from "./pages/Contact";
 
 function App() {
   return (
@@ -20,6 +22,8 @@ function App() {
         <Route path="/restaurant/:id" element={<RestaurantDetails />} />
         <Route path="/cart" element={<Cart />} />
         <Route path="/checkout" element={<Checkout/>}/>
+          <Route path="/about" element={<About />} />
+           <Route path="/contact" element={<Contact />} />
       </Routes>
     </>
   );

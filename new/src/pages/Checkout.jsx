@@ -35,25 +35,36 @@ function Checkout() {
             <div className="checkout-left">
              <div className="checkout-card">
 
-  <div className="checkout-card-header">
+  <div className="address-header">
 
     <div className="checkout-title">
 
-      <span className="checkout-icon">📍</span>
 
-      <h3>Delivery Address</h3>
 
-    </div>
+    <span className="address-icon">📍</span>
 
-    <div className="checkout-actions">
-
-      <button>Edit</button>
-
-      <button className="add-btn">+ Add New</button>
-
-    </div>
+    <h3>Delivery Address</h3>
 
   </div>
+
+  <div className="address-actions">
+
+  
+
+   <div
+  style={{
+    display: "flex",
+    gap: "20px",
+    border: "2px solid red",
+  }}
+>
+  <span>Edit</span>
+  <span style={{ color: "red" }}>+ Add New</span>
+</div>
+
+  </div>
+
+</div>
 
   <div className="address-box">
 
@@ -74,40 +85,34 @@ function Checkout() {
 
   <div className="schedule-grid">
 
-    <div className="schedule-card active">
+    <label className="schedule-card active">
 
       <input
         type="radio"
-        checked
-        readOnly
+        name="delivery"
+        defaultChecked
       />
 
-      <div>
-
+      <div className="schedule-content">
         <h4>Deliver ASAP</h4>
-
-        <p>Arrives in 25–30 mins</p>
-
+        <p>Arrives in 25–30 min</p>
       </div>
 
-    </div>
+    </label>
 
-    <div className="schedule-card">
+    <label className="schedule-card">
 
       <input
         type="radio"
-        readOnly
+        name="delivery"
       />
 
-      <div>
-
+      <div className="schedule-content">
         <h4>Schedule Delivery</h4>
-
-        <p>Pick a later date & time</p>
-
+        <p>Pick a later date/time</p>
       </div>
 
-    </div>
+    </label>
 
   </div>
 

@@ -4,6 +4,7 @@ import Container from "react-bootstrap/Container";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import foodPlatter from "../assets/images/food-platter.png";
+import Stats from "../Components/Stats";
 import {
   FaStar,
   FaMotorcycle,
@@ -19,7 +20,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 
 import { Navigation } from "swiper/modules";
 import "swiper/css/navigation";
-import { useEffect, useRef, useState } from "react";
+
 import "swiper/css";
 import burgerImg from "../assets/images/burger-image.png";
 import pizzaImg from "../assets/images/pizza-image.png";
@@ -41,7 +42,7 @@ import pizzaImg2 from "../assets/images/restaurant-2.png";
 import saladImg from "../assets/images/restaurant-3.png";
 import ramenImg from "../assets/images/restaurant-4.png";
 
-function Counter({ end, duration = 2000, suffix = "", decimals = 0 }) {
+{/*function Counter({ end, duration = 2000, suffix = "", decimals = 0 }) {
   const [count, setCount] = useState(0);
   const [started, setStarted] = useState(false);
   const ref = useRef(null);
@@ -88,7 +89,7 @@ function Counter({ end, duration = 2000, suffix = "", decimals = 0 }) {
       {suffix}
     </span>
   );
-}
+}*/}
 
 
 function Home() {
@@ -606,8 +607,10 @@ View Menu
 </Container>
 
 </section>
-     
-{/*stats*/}
+
+
+ <Stats/>    
+{/*stats
 <section className="br-stats">
   <Container>
 
@@ -652,7 +655,7 @@ View Menu
     </div>
 
   </Container>
-</section>
+</section>*/}
       
 {/*offers*/}     
       <section className="home-offers-section">
