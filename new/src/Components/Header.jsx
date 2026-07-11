@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-
+import { useCart } from "../Context/CartContext";
 import Button from "react-bootstrap/Button";
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
@@ -13,6 +13,8 @@ import { logoutUser } from "../services/AuthServices";
 import { toast } from "react-toastify";
 
 function Header() {
+
+  const { cartItems } = useCart();
   const [scrolled, setScrolled] = useState(false);
   const navigate = useNavigate();
   useEffect(() => {
@@ -80,8 +82,24 @@ function Header() {
         </Nav>
 
         <div className="d-flex align-items-center">
-          <Link to="/cart" className="cart-link">
-    <LuShoppingCart size={26} />
+         <Link to="/cart" className="cart-link">
+
+    <div className="cart-icon">
+
+        <LuShoppingCart size={26} />
+
+        {cartItems.length > 0 && (
+
+            <span className="cart-count">
+
+                {cartItems.length}
+
+            </span>
+
+        )}
+
+    </div>
+
 </Link>
 
           {localStorage.getItem("token") ? (

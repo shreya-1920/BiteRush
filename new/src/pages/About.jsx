@@ -1,9 +1,12 @@
 import Header from "../Components/Header";
 import Footer from "../Components/Footer";
-import aboutHero from "../assets/images/about-hero.png";
+/*import aboutHero from "../assets/images/about-hero2.png";*/
 import ourStory from "../assets/images/our-story.png";
 import "../styles/About.css";
 import Stats from "../Components/Stats";
+import { useNavigate } from "react-router-dom";
+
+import ctaBg from "../assets/images/cta-bg.png.png";
 import {
     FaBolt,
     FaStore,
@@ -14,6 +17,7 @@ import {
 } from "react-icons/fa";
 
 export default function About() {
+  const navigate = useNavigate();
   return (
     <>
       <Header />
@@ -45,37 +49,49 @@ export default function About() {
             </p>
 
             <div className="hero-buttons">
-              <button className="primary-btn">
+              <button 
+             className="primary-btn"
+             onClick={() => navigate("/restaurants")}>
                 Explore Restaurants
               </button>
 
-              <button className="secondary-btn">
-                Learn More
-              </button>
+              <button
+    className="secondary-btn"
+    onClick={() => {
+        document
+            .getElementById("our-story")
+            .scrollIntoView({
+                behavior: "smooth"
+            });
+    }}
+>
+    Learn More
+</button>
             </div>
 
           </div>
 
-          <div className="hero-right">
+         
+{/*<div className="about-hero-right">
 
             <img
-              src={aboutHero}
-              alt="Food Delivery"
+                src={aboutHero}
+                alt="About BiteRush"
             />
 
-            <div className="floating burger">🍔</div>
+        </div>*/}
+
+            {/*<div className="floating burger">🍔</div>
             <div className="floating pizza">🍕</div>
             <div className="floating fries">🍟</div>
-            <div className="floating drink">🥤</div>
+            <div className="floating drink">🥤</div>*/}
 
           </div>
-
-        </div>
-      </section>
+        </section>
 
       {/* ================= OUR STORY ================= */}
 
-      <section className="our-story">
+      <section className="our-story" id="our-story">
 
         <div className="story-image">
           <img
@@ -106,16 +122,25 @@ export default function About() {
             secure, and seamless ordering experience.
           </p>
 
-          <button className="story-btn">
-            Learn More →
-          </button>
+          <button
+    className="story-btn"
+    onClick={() => {
+        document
+            .getElementById("why-us")
+            .scrollIntoView({
+                behavior: "smooth"
+            });
+    }}
+>
+    Learn More →
+</button>
 
         </div>
 
       </section>
 {/* ================= WHY CHOOSE US ================= */}
 
-<section className="why-us">
+<section className="why-us" id="why-us">
 
     <span className="section-tag">
         WHY CHOOSE US
@@ -228,7 +253,7 @@ export default function About() {
 {/* ================= HOW IT WORKS ================= */}
 
 <section className="how-it-works">
-
+  <div className="how-it-works-container">
     <span className="section-tag">
         HOW IT WORKS
     </span>
@@ -290,12 +315,12 @@ export default function About() {
         </div>
 
     </div>
-
+</div>
 </section>
 {/* ================= TESTIMONIALS ================= */}
 
 <section className="testimonials">
-
+<div className="testimonials-container">
   <span className="section-tag">
     TESTIMONIALS
   </span>
@@ -335,7 +360,7 @@ export default function About() {
 
     </div>
 
-    <div className="testimonial-card-about">
+    <div className="testimonial-card">
 
       <div className="stars">⭐⭐⭐⭐⭐</div>
 
@@ -386,28 +411,38 @@ export default function About() {
     </div>
 
   </div>
-
+</div>
 </section>
 {/* ================= CTA ================= */}
 
-<section className="about-cta">
+<section
+  className="cta-section"
+  style={{
+    backgroundImage: `url(${ctaBg})`,
+  }}
+>
+  <div className="cta-overlay">
 
     <h2>
-        Ready to Satisfy
-        <br />
-        Your Cravings?
+      Ready to Satisfy <br />
+      Your Cravings?
     </h2>
 
     <p>
-        Explore hundreds of restaurants and enjoy
-        delicious meals delivered right to your doorstep.
+      Explore hundreds of restaurants and enjoy delicious meals
+      delivered right to your doorstep.
     </p>
 
-    <button>
-        Explore Restaurants →
-    </button>
+    <button
+  className="cta-btn"
+  onClick={() => navigate("/restaurants")}
+>
+  Explore Restaurants →
+</button>
 
+  </div>
 </section>
+
       <Footer />
     </>
   );

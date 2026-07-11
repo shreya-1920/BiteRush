@@ -7,11 +7,16 @@ import DeliveryProgress from "../Components/DeliveryProgress";
 import CouponSection from "../Components/CouponSection";
 import RecommendedItems from "../Components/RecommendedItems";
 import EmptyCart from "../Components/EmptyCart";
+import { useCart } from "../Context/CartContext";
+
 
 
 export default function Cart() {
 
-    const cartItems = [];
+    
+
+const { cartItems } = useCart();
+console.log("Cart Items:", cartItems);
 
     return (
         <>
@@ -36,7 +41,12 @@ export default function Cart() {
 
                                 <div className="cart-left">
 
-                                    <CartItem />
+                                  {cartItems.map((item, index) => (
+    <CartItem
+        key={index}
+        item={item}
+    />
+))}
                                     <DeliveryProgress />
                                     <CouponSection />
                                     <RecommendedItems />

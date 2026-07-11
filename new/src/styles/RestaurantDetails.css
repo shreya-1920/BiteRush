@@ -303,7 +303,7 @@
     transition:.35s ease;
 
 }
-.add-btn{
+.rest-add-btn{
 
     position:absolute;
 
@@ -383,13 +383,46 @@
 
 .menu-image img{
 
-    width:210px;
+    width:230px;
 
-    height:160px;
+    height:180px;
 
     border-radius:18px;
 }
+.quantity-box{
+    position:absolute;
+    bottom:-22px;
+    left:50%;
+    transform:translateX(-50%);
 
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+
+    width:150px;
+    height:54px;
+
+    background:#ff5a3c;
+    color:#fff;
+
+    border-radius:30px;
+    box-shadow:0 15px 30px rgba(255,90,60,.35);
+}
+
+.quantity-box button{
+    width:45px;
+    height:100%;
+    border:none;
+    background:transparent;
+    color:#fff;
+    font-size:28px;
+    cursor:pointer;
+}
+
+.quantity-box span{
+    font-size:20px;
+    font-weight:700;
+}
 
 
 .menu-content{

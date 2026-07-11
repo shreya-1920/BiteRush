@@ -3,6 +3,7 @@ import Footer from "../Components/Footer";
 import "../styles/Contact.css";
 import contactHero from "../assets/images/contactHero.png";
 import contactMap from "../assets/images/contactMap.png";
+import ctaBg from "../assets/images/cta-bg.png.png";
 import {
 FaMapMarkerAlt,
 FaPhoneAlt,
@@ -12,10 +13,53 @@ FaClock,
   FaShieldAlt,
   FaUsers,
 } from "react-icons/fa";
-
+import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
+import { useState } from "react";
+import { sendContactMessage } from "../services/contactService";
 import Accordion from "react-bootstrap/Accordion";
 
 export default function Contact(){
+    const navigate=useNavigate();
+    const handleDirections = () => {
+    window.open(
+        "https://www.google.com/maps/search/?api=1&query=C-Scheme+Jaipur+Rajasthan",
+        "_blank"
+    );
+};
+    const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    phone: "",
+    subject: "",
+    message: ""
+});
+const handleChange = (e) => {
+    setFormData({
+        ...formData,
+        [e.target.name]: e.target.value
+    });
+};
+
+const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    const result = await sendContactMessage(formData);
+
+    if (result.success) {
+        toast.success("Message sent successfully! 🎉");
+
+        setFormData({
+            name: "",
+            email: "",
+            phone: "",
+            subject: "",
+            message: ""
+        });
+    } else {
+        toast.error(result.message);
+    }
+};
     return(
         <>
         <Header/>
@@ -45,11 +89,23 @@ export default function Contact(){
 
             <div className="contact-buttons">
 
-                <button className="primary-btn">
+                <button className="primary-btn"    onClick={() => {
+        document
+            .getElementById("faq")
+            ?.scrollIntoView({
+                behavior: "smooth",
+            });
+    }}>
                     View FAQs
                 </button>
 
-                <button className="secondary-btn">
+                <button className="secondary-btn"  onClick={() => {
+        document
+            .getElementById("contact-form")
+            ?.scrollIntoView({
+                behavior: "smooth",
+            });
+    }}>
                     Support Center
                 </button>
 
@@ -75,78 +131,94 @@ export default function Contact(){
 </section>
 {/* ================= CONTACT INFO ================= */}
 
+{/* ================= CONTACT INFO ================= */}
+
 <section className="contact-info">
+<div className="contact-heading">
+    <span className="section-tag">
+        CONTACT DETAILS
+    </span>
 
-<div className="info-grid">
+    <h2>We're Always Here to Help</h2>
 
-<div className="info-card">
-
-<div className="info-icon">
-<FaMapMarkerAlt/>
-</div>
-
-<h3>Visit Us</h3>
-
-<p>
-C-Scheme, Jaipur
-<br/>
-Rajasthan 302001
-</p>
+    <p className="contact-subtitle">
+        Reach us through your preferred channel. Whether it's an order,
+        feedback, partnership, or support request—we'd love to hear from you.
+    </p>
 
 </div>
+    <div className="contact-container">
 
-<div className="info-card">
+        <div className="contact-card">
 
-<div className="info-icon">
-<FaPhoneAlt/>
-</div>
+            <div className="contact-card-icon">
+                <FaMapMarkerAlt />
+            </div>
 
-<h3>Call Us</h3>
+            <div className="contact-card-content">
+                <h3>Visit Our Office</h3>
+                <p>
+                    C-Scheme<br />
+                    Jaipur, Rajasthan 302001
+                </p>
+            </div>
 
-<p>
-+91 9876543210
-<br/>
-Mon - Sun
-</p>
+        </div>
 
-</div>
+        <div className="contact-card">
 
-<div className="info-card">
+            <div className="contact-card-icon">
+                <FaPhoneAlt />
+            </div>
 
-<div className="info-icon">
-<FaEnvelope/>
-</div>
+            <div className="contact-card-content">
+                <h3>Call Us</h3>
+                <p>
+                    +91 98765 43210<br />
+                    Available 24×7
+                </p>
+            </div>
 
-<h3>Email Us</h3>
+        </div>
 
-<p>
-support@biterush.com
-</p>
+        <div className="contact-card">
 
-</div>
+            <div className="contact-card-icon">
+                <FaEnvelope />
+            </div>
 
-<div className="info-card">
+            <div className="contact-card-content">
+                <h3>Email Support</h3>
+                <p>
+                    support@biterush.com<br />
+                    Reply within 1 hour
+                </p>
+            </div>
 
-<div className="info-icon">
-<FaClock/>
-</div>
+        </div>
 
-<h3>Hours</h3>
+        <div className="contact-card">
 
-<p>
-10 AM - 12 AM
-<br/>
-24×7 Support
-</p>
+            <div className="contact-card-icon">
+                <FaClock />
+            </div>
 
-</div>
+            <div className="contact-card-content">
+                <h3>Business Hours</h3>
+                <p>
+                    Monday – Sunday<br />
+                    10:00 AM – 12:00 AM
+                </p>
+            </div>
 
-</div>
+        </div>
+
+    </div>
 
 </section>
 {/* ================= CONTACT FORM ================= */}
 
-<section className="contact-form-section">
+<section className="contact-form-section" id="contact-form" >
 
     <div className="contact-left-info">
 
@@ -227,26 +299,37 @@ support@biterush.com
 
     <div className="contact-form-card">
 
-        <form>
+        <form onSubmit={handleSubmit}>
 
             <div className="form-grid">
 
                 <input
-                    type="text"
-                    placeholder="Your Name"
-                />
+    type="text"
+    name="name"
+    placeholder="Your Name"
+    value={formData.name}
+    onChange={handleChange}
+/>
+<input
+    type="email"
+    name="email"
+    placeholder="Email Address"
+    value={formData.email}
+    onChange={handleChange}
+/>
+<input
+    type="tel"
+    name="phone"
+    placeholder="Phone Number"
+    value={formData.phone}
+    onChange={handleChange}
+/>
 
-                <input
-                    type="email"
-                    placeholder="Email Address"
-                />
-
-                <input
-                    type="tel"
-                    placeholder="Phone Number"
-                />
-
-                <select>
+                <select
+    name="subject"
+    value={formData.subject}
+    onChange={handleChange}
+>
 
                     <option>General Query</option>
                     <option>Order Issue</option>
@@ -258,9 +341,12 @@ support@biterush.com
             </div>
 
             <textarea
-                rows="6"
-                placeholder="How can we help you today?"
-            ></textarea>
+    rows="6"
+    name="message"
+    placeholder="How can we help you today?"
+    value={formData.message}
+    onChange={handleChange}
+/>
 
             <button
                 type="submit"
@@ -312,9 +398,12 @@ support@biterush.com
                 🚌 Near Central Park
             </div>
 
-            <button>
-                Get Directions
-            </button>
+            <button
+    className="directions-btn"
+    onClick={handleDirections}
+>
+    Get Directions
+</button>
 
         </div>
 
@@ -323,7 +412,7 @@ support@biterush.com
 </section>
 {/* ================= FAQ ================= */}
 
-<section className="br-faq-section">
+<section className="br-faq-section" id="faq">
 
     <span className="br-section-tag">
         FAQ
@@ -381,23 +470,32 @@ support@biterush.com
     </Accordion>
 
 </section>
-<section className="about-cta">
+<section
+  className="cta-section"
+  style={{
+    backgroundImage: `url(${ctaBg})`,
+  }}
+>
+  <div className="cta-overlay">
 
     <h2>
-        Ready to Satisfy
-        <br />
-        Your Cravings?
+      Ready to Satisfy <br />
+      Your Cravings?
     </h2>
 
     <p>
-        Explore hundreds of restaurants and enjoy
-        delicious meals delivered right to your doorstep.
+      Explore hundreds of restaurants and enjoy delicious meals
+      delivered right to your doorstep.
     </p>
 
-    <button>
-        Explore Restaurants →
-    </button>
+   <button
+  className="cta-btn"
+  onClick={() => navigate("/restaurants")}
+>
+  Explore Restaurants →
+</button>
 
+  </div>
 </section>
         <Footer/>
         </>

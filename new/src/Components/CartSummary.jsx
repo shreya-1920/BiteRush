@@ -1,4 +1,17 @@
+import { useCart } from "../Context/CartContext";
+import { useNavigate } from "react-router-dom";
 export default function CartSummary() {
+    const { cartItems } = useCart();
+const navigate = useNavigate();
+
+const subtotal = cartItems.reduce(
+    (total, item) => total + item.price,
+    0
+);
+
+const gst = Math.round(subtotal * 0.05);
+const discount = 0;
+const total = subtotal + gst - discount;
   return (
     <div>
      {/* RIGHT */}
@@ -11,7 +24,7 @@ export default function CartSummary() {
 
         <span>Subtotal</span>
 
-        <span>₹897</span>
+        <span>₹{subtotal}</span>
 
     </div>
 
@@ -29,7 +42,7 @@ export default function CartSummary() {
 
         <span>GST</span>
 
-        <span>₹54</span>
+        <span>₹{gst}</span>
 
     </div>
 
@@ -37,7 +50,7 @@ export default function CartSummary() {
 
         <span>Discount</span>
 
-        <span>-₹120</span>
+        <span>-₹{discount}</span>
 
     </div>
 
@@ -47,11 +60,11 @@ export default function CartSummary() {
 
         <span>Total</span>
 
-        <span>₹831</span>
+        <span>₹{total}</span>
 
     </div>
 
-    <button className="checkout-btn">
+    <button className="checkout-btn"  onClick={() => navigate("/checkout")}>
         Proceed to Checkout
     </button>
 

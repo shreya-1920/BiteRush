@@ -1,8 +1,9 @@
 import Header from "../Components/Header";
 import Footer from "../Components/Footer";
-
+import { useState } from "react";
 import Container from "react-bootstrap/Container";
 import "../styles/Checkout.css";
+import { placeOrder } from "../services/CheckoutServices";
 import {
   FaMapMarkerAlt,
   FaClock,
@@ -19,7 +20,62 @@ import {
 
 import { MdDeliveryDining } from "react-icons/md";
 import { SiGooglepay } from "react-icons/si";
+
+import { useNavigate } from "react-router-dom";
+
+import { toast } from "react-toastify";
+
+
 function Checkout() {
+    const [name, setName] = useState("");
+const [phone, setPhone] = useState("");
+
+    const navigate = useNavigate();
+
+const [email, setEmail] = useState("");
+const [instructions, setInstructions] = useState("");
+
+const handlePlaceOrder = async () => {
+
+    if (!name.trim()) {
+        toast.error("Please enter your name.");
+        return;
+    }
+
+    if (!phone.trim()) {
+        toast.error("Please enter your phone number.");
+        return;
+    }
+
+   
+
+    try {
+
+        await placeOrder({
+
+            name,
+            phone,
+            
+            paymentMethod: "Cash"
+
+        });
+
+        toast.success("Order placed successfully!");
+
+        navigate("/");
+
+    } catch (error) {
+
+        toast.error(
+            error.response?.data?.message || "Checkout failed."
+        );
+
+    }
+
+};
+   
+
+    
   return (
     <>
       <Header />
@@ -153,10 +209,12 @@ function Checkout() {
 
             <label>Full Name</label>
 
-            <input
-                type="text"
-                placeholder="Jane Doe"
-            />
+         <input
+    type="text"
+    placeholder="Jane Doe"
+    value={name}
+    onChange={(e) => setName(e.target.value)}
+/>
 
         </div>
 
@@ -164,21 +222,24 @@ function Checkout() {
 
             <label>Phone Number</label>
 
-            <input
-                type="text"
-                placeholder="+1 234 567 890"
-            />
-
+         <input
+    type="text"
+    placeholder="+91 9876543210"
+    value={phone}
+    onChange={(e) => setPhone(e.target.value)}
+/>
         </div>
 
         <div className="form-group full-width">
 
             <label>Email Address</label>
 
-            <input
-                type="email"
-                placeholder="jane@example.com"
-            />
+          <input
+    type="email"
+    placeholder="jane@example.com"
+    value={email}
+    onChange={(e) => setEmail(e.target.value)}
+/>
 
         </div>
 
@@ -186,10 +247,12 @@ function Checkout() {
 
             <label>Delivery Instructions (Optional)</label>
 
-            <textarea
-                rows="4"
-                placeholder="Leave at the front door, ring the bell..."
-            ></textarea>
+          <textarea
+    rows="4"
+    placeholder="Leave at the front door..."
+    value={instructions}
+    onChange={(e) => setInstructions(e.target.value)}
+></textarea>
 
         </div>
 
@@ -410,11 +473,12 @@ function Checkout() {
 
 </div>
 
-    <button className="place-order-btn">
-
-        Place Order →
-
-    </button>
+   <button
+    className="place-order-btn"
+    onClick={handlePlaceOrder}
+>
+    Place Order
+</button>
 
 </div>
 

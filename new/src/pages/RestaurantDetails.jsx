@@ -7,6 +7,10 @@ import { useParams } from "react-router-dom";
 import "../styles/RestaurantDetails.css";
 import RestaurantHero from "../Components/RestaurantHero";
 import { Link } from "react-router-dom";
+import { useCart } from "../Context/CartContext";
+import { toast } from "react-toastify";
+import { useEffect } from "react";
+
 /*import {
   FaHeart,
   FaStar,
@@ -18,6 +22,17 @@ import { menuData } from "../data/menuData";
 import { FaHeart } from "react-icons/fa";
 
 function RestaurantDetails() {
+useEffect(() => {
+  console.log("RestaurantDetails mounted");
+  console.log(window.scrollY);
+}, []);
+    const {
+  cartItems,
+  addToCart,
+  increaseQuantity,
+  decreaseQuantity,
+} = useCart();
+   
   const { id } = useParams();
   const menuItems = menuData[id] || [];
 
@@ -178,11 +193,33 @@ function RestaurantDetails() {
         alt={item.name}
     />
 
-   <button className="add-btn">
-    <span>ADD</span>
-    <span className="divider"></span>
-    <span>+</span>
-</button>
+  {cartItems.find(cartItem => cartItem.id === item.id) ? (
+
+    <div className="quantity-box">
+
+        <button onClick={() => decreaseQuantity(item.id)}>-</button>
+
+        <span>
+            {cartItems.find(cartItem => cartItem.id === item.id).quantity}
+        </span>
+
+        <button onClick={() => increaseQuantity(item.id)}>+</button>
+
+    </div>
+
+) : (
+
+    <button
+        className="rest-add-btn"
+        onClick={() => {
+            addToCart(item);
+            toast.success("Added to Cart!");
+        }}
+    >
+        ADD
+    </button>
+
+)}
 
 </div>
       </div>

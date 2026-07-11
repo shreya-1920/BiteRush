@@ -1,19 +1,22 @@
-import { cartItems } from "../data/cartData";
-function CartItem(){
+import { useCart } from "../Context/CartContext";
+function CartItem({item}){
+    const {
+    increaseQuantity,
+    decreaseQuantity,
+    removeFromCart
+} = useCart();
     return(
         <>
-        <div className="cart-items">
+      
 
-{cartItems.map(item=>(
+<div className="cart-item">
 
-<div className="cart-item" key={item.id}>
-    <button className="remove-btn">
+    <button className="remove-btn"   onClick={() => removeFromCart(item.id)}>
         ✕
     </button>
 
-
     <img
-     className="cart-item-image"
+        className="cart-item-image"
         src={item.image}
         alt={item.name}
     />
@@ -30,17 +33,21 @@ function CartItem(){
 
     <div className="cart-item-actions">
 
-        <button>-</button>
+        <button
+    onClick={() => decreaseQuantity(item.id)}
+>
+    -
+</button>
 
         <span>{item.quantity}</span>
 
-        <button>+</button>
+        <button
+    onClick={() => increaseQuantity(item.id)}
+>
+    +
+</button>
 
     </div>
-
-</div>
-
-))}
 
 </div>
 

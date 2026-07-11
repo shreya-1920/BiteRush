@@ -1,5 +1,18 @@
 import deliveryScooter from "../assets/images/food-scooter.png";
+import { useCart } from "../Context/CartContext";
 function DeliveryProgress(){
+    const { cartItems } = useCart();
+
+const subtotal = cartItems.reduce(
+    (total, item) => total + item.price * item.quantity,
+    0
+);
+
+const target = 1500; // Free delivery after ₹1500
+
+const remaining = Math.max(target - subtotal, 0);
+
+const progress = Math.min((subtotal / target) * 100, 100);
     return(
         <>
        <div className="delivery-card">
@@ -14,13 +27,24 @@ function DeliveryProgress(){
         <h3>Almost There! 🚀</h3>
 
         <p>
-            Spend <strong>₹150</strong> more to unlock
-            <strong> FREE Delivery</strong>
+            {remaining > 0 ? (
+    <p>
+        Spend <strong>₹{remaining}</strong> more to unlock
+        <strong> FREE Delivery</strong>
+    </p>
+) : (
+    <p>
+        🎉 <strong>Congratulations!</strong> Free Delivery Unlocked
+    </p>
+)}
         </p>
 
         <div className="progress-bar">
 
-            <div className="progress-fill"></div>
+           <div
+    className="progress-fill"
+    style={{ width: `${progress}%` }}
+></div>
 
         </div>
 

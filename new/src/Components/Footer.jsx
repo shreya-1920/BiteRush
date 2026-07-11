@@ -50,7 +50,7 @@ function Footer() {
           <div className="footer-links">
 
             <h4>QUICK LINKS</h4>
-
+<ul>
             <li onClick={() => navigate("/")}>Home</li>
 
 <li onClick={() => navigate("/restaurants")}>
@@ -64,7 +64,7 @@ function Footer() {
 <li onClick={() => navigate("/about")}>
     About Us
 </li>
-
+</ul>
           </div>
 
           {/* SUPPORT */}
