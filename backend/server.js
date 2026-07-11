@@ -1,5 +1,6 @@
-require("dotenv").config();
 
+require("dotenv").config();
+const checkoutRoutes = require("./routes/checkoutRoutes");
 const express = require("express");
 const cors = require("cors");
 const mongoose = require("mongoose");
@@ -7,7 +8,8 @@ const mongoose = require("mongoose");
 const app = express();
 
 const authRoutes = require("./routes/authRoutes");
-
+const contactRoutes = require("./routes/contactRoutes");
+const cartRoutes = require("./routes/cartRoutes");
 // MongoDB Connection
 mongoose
   .connect(process.env.MONGO_URI)
@@ -26,10 +28,12 @@ app.use(express.json());
 
 // Routes
 app.use("/api/auth", authRoutes);
-
+app.use("/api/checkout", checkoutRoutes);
 app.get("/", (req, res) => {
   res.send("Backend Running");
 });
+app.use("/api/contact",contactRoutes);
+app.use("/api/cart", cartRoutes);
 
 const PORT = process.env.PORT || 5000;
 

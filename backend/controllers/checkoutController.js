@@ -1,0 +1,66 @@
+const Order = require("../models/Order");
+const Cart = require("../models/Cart");
+
+exports.placeOrder = async (req, res) => {
+
+  try {
+
+    const {
+      name,
+      phone,
+      address,
+      paymentMethod,
+    } = req.body;
+
+    const cart = await Cart.find();
+
+    if (cart.length === 0) {
+
+      return res.status(400).json({
+        success: false,
+        message: "Cart is empty",
+      });
+
+    }
+
+    const total = cart.reduce(
+      (sum, item) => sum + item.price * item.quantity,
+      0
+    );
+
+    const order = await Order.create({
+
+      name,
+      phone,
+      address,
+      paymentMethod,
+
+      items: cart,
+
+      total,
+
+    });
+
+    await Cart.deleteMany();
+
+    res.status(201).json({
+
+      success: true,
+      message: "Order placed successfully",
+
+      order,
+
+    });
+
+  } catch (err) {
+
+    res.status(500).json({
+
+      success: false,
+      message: err.message,
+
+    });
+
+  }
+
+};
