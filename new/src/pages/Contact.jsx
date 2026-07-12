@@ -1,7 +1,7 @@
 import Header from "../Components/Header";
 import Footer from "../Components/Footer";
 import "../styles/Contact.css";
-import contactHero from "../assets/images/contactHero.png";
+import contactHero from "../assets/images/contact-hero2.png";
 import contactMap from "../assets/images/contactMap.png";
 import ctaBg from "../assets/images/cta-bg.png.png";
 import {
@@ -120,9 +120,7 @@ const handleSubmit = async (e) => {
                 alt="Contact Hero"
             />
 
-            <div className="floating burger">🍔</div>
-            <div className="floating pizza">🍕</div>
-            <div className="floating fries">🍟</div>
+           
 
         </div>
 

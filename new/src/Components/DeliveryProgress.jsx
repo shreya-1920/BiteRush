@@ -25,19 +25,17 @@ const progress = Math.min((subtotal / target) * 100, 100);
     <div className="delivery-content">
 
         <h3>Almost There! 🚀</h3>
-
-        <p>
-            {remaining > 0 ? (
-    <p>
-        Spend <strong>₹{remaining}</strong> more to unlock
-        <strong> FREE Delivery</strong>
-    </p>
-) : (
-    <p>
-        🎉 <strong>Congratulations!</strong> Free Delivery Unlocked
-    </p>
-)}
-        </p>
+        {/* Message about remaining amount or unlocked delivery */}
+        {remaining > 0 ? (
+            <p>
+                Spend <strong>₹{remaining}</strong> more to unlock
+                <strong> FREE Delivery</strong>
+            </p>
+        ) : (
+            <p>
+                🎉 <strong>Congratulations!</strong> Free Delivery Unlocked
+            </p>
+        )}
 
         <div className="progress-bar">
 
@@ -48,8 +46,9 @@ const progress = Math.min((subtotal / target) * 100, 100);
 
         </div>
 
-    </div>
+ 
 
+        </div>
 </div>
         </>
     );

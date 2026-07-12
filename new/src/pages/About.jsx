@@ -33,11 +33,13 @@ export default function About() {
               ABOUT BITERUSH
             </span>
 
-            <h1>
-              Delivering Happiness,
-              <br />
-              One Bite at a Time.
-            </h1>
+           <h1>
+    Delivering
+    <br />
+    <span>Happiness,</span>
+    <br />
+    One Bite at a Time
+</h1>
 
             <p>
               At BiteRush, we believe great food brings people together.

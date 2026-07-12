@@ -5,10 +5,35 @@
     padding:0;
     box-sizing:border-box;
 }
+:root{
 
-body{
-    font-family:'DM Sans',sans-serif;
+  /* Colors */
+
+  --primary:#FF6B35;
+  --secondary:#E74C3C;
+
+  --bg:#FFF8F1;
+
+  --text:#222222;
+
+  /* Fonts */
+
+  --heading-font:"Playfair Display", serif;
+  --body-font:"Poppins", sans-serif;
+
+  /* Others */
+
+  --radius:24px;
+  --transition:.3s ease;
+
 }
+body{
+    font-family: var(--body-font);
+    background: var(--bg);
+    color: var(--text);
+}
+
+
 a {
     text-decoration: none;
     color: inherit;
