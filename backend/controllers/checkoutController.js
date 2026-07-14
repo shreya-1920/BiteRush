@@ -2,6 +2,7 @@ const Order = require("../models/Order");
 const Cart = require("../models/Cart");
 
 exports.placeOrder = async (req, res) => {
+  
 
   try {
 
@@ -28,7 +29,9 @@ exports.placeOrder = async (req, res) => {
       0
     );
 
-    const order = await Order.create({
+   const order = await Order.create({
+
+      user: req.user.userId,
 
       name,
       phone,
@@ -39,7 +42,9 @@ exports.placeOrder = async (req, res) => {
 
       total,
 
-    });
+});
+
+  
 
     await Cart.deleteMany();
 
@@ -57,6 +62,37 @@ exports.placeOrder = async (req, res) => {
     res.status(500).json({
 
       success: false,
+      message: err.message,
+
+    });
+
+  }
+
+};
+exports.getOrders = async (req, res) => {
+
+  try {
+
+    const orders = await Order.find({
+  user: req.user.userId,
+}).sort({
+  createdAt: -1,
+});
+
+    res.json({
+
+      success: true,
+
+      orders,
+
+    });
+
+  } catch (err) {
+
+    res.status(500).json({
+
+      success: false,
+
       message: err.message,
 
     });

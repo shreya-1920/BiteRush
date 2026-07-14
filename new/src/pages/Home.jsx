@@ -958,31 +958,36 @@ View Menu
         {testimonial.review}
       </p>
 
+     
+
       <div className="customer">
 
-        <div className="customer-image">
-          <img
-            src={testimonial.image}
-            alt={testimonial.name}
-            className="customer-image"
-        />
+    <img
+        src={testimonial.image}
+        alt={testimonial.name}
+        className="customer-image"
+    />
+
+    <div className="customer-content">
+
+        <div className="customer-top">
+
+            <h5>{testimonial.name}</h5>
+
+            <div className="stars">
+                ⭐⭐⭐⭐⭐
+            </div>
 
         </div>
 
-        <div className="customer-info">
-          <h5>{testimonial.name}</h5>
-          <span>{testimonial.role}</span>
-        </div>
-
-        <div className="stars">
-          ⭐⭐⭐⭐⭐
-        </div>
-
-      </div>
+        <span>{testimonial.role}</span>
 
     </div>
 
-  ))}
+</div>
+
+    </div>
+    ))}
 
 </div>
       </Container>

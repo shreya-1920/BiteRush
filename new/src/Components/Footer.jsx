@@ -1,6 +1,7 @@
 
 import Container from "react-bootstrap/Container";
-import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
+
 import {
   FaFacebookF,
   FaInstagram,
@@ -15,7 +16,7 @@ import {
 } from "react-icons/fi";
 
 function Footer() {
-  const navigate = useNavigate();
+  
   return (
     <footer className="footer">
       <Container>
@@ -51,19 +52,25 @@ function Footer() {
 
             <h4>QUICK LINKS</h4>
 <ul>
-            <li onClick={() => navigate("/")}>Home</li>
 
-<li onClick={() => navigate("/restaurants")}>
-    Restaurants
+<li>
+    <Link to="/">Home</Link>
 </li>
 
-<li onClick={() => navigate("/restaurants?offers=true")}>
-    Offers
+<li>
+    <Link to="/restaurants">Restaurants</Link>
 </li>
 
-<li onClick={() => navigate("/about")}>
-    About Us
+
+
+<li>
+    <Link to="/about">About Us</Link>
 </li>
+
+<li>
+    <Link to="/Contact">Contact </Link>
+</li>
+
 </ul>
           </div>
 
@@ -74,12 +81,12 @@ function Footer() {
             <h4>SUPPORT</h4>
 
             <ul>
-              <li>Help Center</li>
-              <li>Order Tracking</li>
-              <li>Partner With Us</li>
-              <li>Privacy Policy</li>
-              <li>Terms of Service</li>
-              <li>Accessibility</li>
+              <li><Link to="/contact">Help Center</Link></li>
+              <li><Link to="/orders">Order Tracking</Link></li>
+              <li><Link to="/contact">Partner With Us</Link></li>
+              <li><Link to="/privacy-policy">Privacy Policy</Link></li>
+              <li><Link to="/terms">Terms of Service</Link></li>
+              <li><Link to="/accessibility">Accessibility</Link></li>
             </ul>
 
           </div>
@@ -124,11 +131,7 @@ function Footer() {
 
           <p>© 2026 BiteRush. All rights reserved.</p>
 
-          <div className="footer-bottom-links">
-            <a href="#">Privacy</a>
-            <a href="#">Terms</a>
-            <a href="#">Cookies</a>
-          </div>
+          
 
         </div>
 

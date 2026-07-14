@@ -8,6 +8,7 @@ import { useNavigate, useLocation } from "react-router-dom";
 import {
   loginUser,
   registerUser,
+  forgotPassword,
 } from "../services/AuthServices";
 import {
   FaUser,
@@ -24,12 +25,12 @@ function AuthPage() {
  
   const navigate = useNavigate();
   const location = useLocation();
-
+const [loading, setLoading] = useState(false);
 
 const [isLogin, setIsLogin] = useState(
   location.state?.mode === "login"
 );
-
+const [sendingReset, setSendingReset] = useState(false);
 const [isForgotPassword, setIsForgotPassword] = useState(false);
 
 
@@ -108,28 +109,31 @@ const validateForm = () => {
 };
 
 const handleSubmit = async () => {
-    if (!validateForm()) return;
+  if (!validateForm()) return;
+
+  setLoading(true);
 
   try {
     if (isLogin) {
-   const res = await loginUser({
-  email: formData.email,
-  password: formData.password,
-});
+      const res = await loginUser({
+        email: formData.email,
+        password: formData.password,
+      });
 
-localStorage.setItem("token", res.data.token);
-localStorage.setItem(
-  "user",
-  JSON.stringify(res.data.user)
-);
+      localStorage.setItem("token", res.data.token);
+      localStorage.setItem(
+        "user",
+        JSON.stringify(res.data.user)
+      );
 
-toast.success("Login successful!");
+      toast.success("Login successful!");
 
-navigate("/");
-window.location.reload();
+      navigate("/");
+      window.location.reload();
     } else {
       if (formData.password !== formData.confirmPassword) {
         toast.error("Passwords do not match!");
+        setLoading(false);
         return;
       }
 
@@ -141,7 +145,7 @@ window.location.reload();
 
       console.log("Registration Success:", res.data);
 
-    toast.success("Account created successfully!");
+      toast.success("Account created successfully!");
 
       setIsLogin(true);
     }
@@ -152,14 +156,49 @@ window.location.reload();
       error.response?.data?.message ||
       "Something went wrong!"
     );
+  } finally {
+    setLoading(false);
   }
 };
+const handleForgotPassword = async () => {
 
+  if (!formData.email.trim()) {
+    toast.error("Please enter your email.");
+    return;
+  }
+
+  setSendingReset(true);
+
+  try {
+
+    const res = await forgotPassword({
+      email: formData.email,
+    });
+
+    toast.success(res.data.message);
+
+    setIsResetSent(true);
+
+  } catch (error) {
+
+    toast.error(
+      error.response?.data?.message ||
+      "Unable to send reset email."
+    );
+
+  } finally {
+
+    setSendingReset(false);
+
+  }
+
+};
 
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirm, setShowConfirm] = useState(false);
 
   return (
+    <>
     <section className="auth-page">
 
       {/* LEFT PANEL */}
@@ -200,45 +239,39 @@ window.location.reload();
               fast delivery to your doorstep.
             </p>
 
-            <div className="stats">
+<div className="stats">
 
-              <div className="stat-card">
+  <div className="stat-card">
 
-                <div className="icon-box">
-                  <FaMotorcycle />
-                </div>
+    <div className="stat-icon">
+      <FaMotorcycle />
+    </div>
 
-                <div>
-                  <h3>30 min</h3>
-                  <span>Avg. delivery</span>
-                </div>
+    <div className="stat-info">
+      <h3>30 min</h3>
+      <span>Avg. Delivery</span>
+    </div>
 
-              </div>
+  </div>
 
-              <div className="stat-card">
+  <div className="stat-card">
 
-                <div className="icon-box">
-                  <FaStar />
-                </div>
+    <div className="stat-icon">
+      <FaStar />
+    </div>
 
-                <div>
-                  <h3>4.9★</h3>
-                  <span>App Rating</span>
-                </div>
+    <div className="stat-info">
+      <h3>4.9</h3>
+      <span>App Rating</span>
+    </div>
 
-              </div>
+  </div>
 
-            </div>
+</div>
+  </div>
+</div>
+</div>
 
-          </div>
-
-          <div className="food-image">
-            <img src={foodImage} alt="Food" />
-          </div>
-
-        </div>
-
-      </div>
 
       {/* RIGHT PANEL */}
 
@@ -272,13 +305,15 @@ window.location.reload();
           />
         </div>
 
-        <button
-          className="create-btn"
-          onClick={() => setIsResetSent(true)}
-        >
-          Send Reset Link →
-        </button>
-
+<button
+  className="create-btn"
+  onClick={handleForgotPassword}
+  disabled={sendingReset}
+>
+  {sendingReset
+    ? "Sending..."
+    : "Send Reset Link →"}
+</button>
         <p
           className="forgot"
           onClick={() => {
@@ -466,23 +501,23 @@ window.location.reload();
   </p>
 )}
 
-          <button
+  <button
+  type="button"
   className="create-btn"
   onClick={handleSubmit}
+  disabled={loading}
 >
-
-            {isLogin
-              ? "Sign In To BiteRush →"
-              : "Create Account →"}
-
-          </button>
+  {loading
+    ? (isLogin ? "Logging in..." : "Creating Account...")
+    : (isLogin ? "Login" : "Register")}
+</button>
 
 </>
             )}
       </div>
       </div>
-
     </section>
+    </>
   );
 }
 export default AuthPage;

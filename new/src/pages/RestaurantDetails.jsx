@@ -8,7 +8,7 @@ import "../styles/RestaurantDetails.css";
 import RestaurantHero from "../Components/RestaurantHero";
 import { Link } from "react-router-dom";
 import { useCart } from "../Context/CartContext";
-import { toast } from "react-toastify";
+
 import { useEffect } from "react";
 
 /*import {
@@ -133,97 +133,67 @@ useEffect(() => {
 
   <div className="menu-items">
 
-    {menuItems.map((item) => (
-      <div className="menu-card" key={item.id}>
+        {menuItems.map((item) => {
 
-        <div className="menu-content">
-<div className={item.veg ? "veg-badge" : "nonveg-badge"}>
+            const cartItem = cartItems.find(
+    cart => Number(cart.productId) === Number(item.id)
+);
 
-    {item.veg ? "🟢 Veg" : "🔴 Non Veg"}
+            const quantity = cartItem ? cartItem.quantity : 0;
+            console.log("Cart Items:", cartItems);
+console.log("Current Item ID:", item.id);
 
-</div>
+            return (
 
+                <div className="menu-card" key={item.id}>
 
-{item.bestseller && (
+                    <div className="menu-content">
+                        <div className={item.veg ? "veg-badge" : "nonveg-badge"}>
+                            {item.veg ? "🟢 Veg" : "🔴 Non Veg"}
+                        </div>
 
-<div className="best-badge">
+                        {item.bestseller && <div className="best-badge">🔥 Bestseller</div>}
 
-🔥 Bestseller
+                        <h3>{item.name}</h3>
 
-</div>
+                        <div className="menu-meta">
+                            <span>⭐ {item.rating}</span>
+                            <span>({item.reviews})</span>
+                            <span>•</span>
+                            <span>{item.time}</span>
+                        </div>
 
-)}
+                        <div className="price-row">
+                            <span className="new-price">₹{item.price}</span>
+                            <span className="old-price">₹{item.oldPrice}</span>
+                            <span className="discount-badge">15% OFF</span>
+                        </div>
 
-          <h3>{item.name}</h3>
-          
-          <div className="menu-meta">
-  <span>⭐ {item.rating}</span>
-  <span>({item.reviews})</span>
-  <span>•</span>
-  <span>{item.time}</span>
-</div>
+                        <p className="menu-desc">{item.description}</p>
+                    </div>
 
- <div className="price-row">
-    <span className="new-price">
-        ₹{item.price}
-    </span>
+                    <div className="menu-image">
+                        <button className="wishlist-btn">
+                            <FaHeart />
+                        </button>
 
-    <span className="old-price">
-        ₹{item.oldPrice}
-    </span>
+                        <img src={item.image} alt={item.name} />
 
-    <span className="discount-badge">
-        15% OFF
-    </span>
-</div>
-          <p className="menu-desc">
-            {item.description}
-          </p>
-
-        </div>
-
-       <div className="menu-image">
-
-    <button className="wishlist-btn">
-        <FaHeart />
-    </button>
-
-    <img
-        src={item.image}
-        alt={item.name}
-    />
-
-  {cartItems.find(cartItem => cartItem.id === item.id) ? (
-
-    <div className="quantity-box">
-
-        <button onClick={() => decreaseQuantity(item.id)}>-</button>
-
-        <span>
-            {cartItems.find(cartItem => cartItem.id === item.id).quantity}
-        </span>
-
-        <button onClick={() => increaseQuantity(item.id)}>+</button>
-
-    </div>
-
-) : (
-
-    <button
-        className="rest-add-btn"
-        onClick={() => {
-            addToCart(item);
-            toast.success("Added to Cart!");
-        }}
-    >
-        ADD
-    </button>
-
-)}
-
-</div>
-      </div>
-    ))}
+                        {cartItem ? (
+                            <div className="quantity-box">
+                                <button onClick={() => decreaseQuantity(cartItem)}>-</button>
+                                <span>{quantity}</span>
+                                <button onClick={() => increaseQuantity(cartItem)}>+</button>
+                            </div>
+                        ) : (
+                            <button className="rest-add-btn" onClick={() => addToCart(item)}>
+                                ADD
+                            </button>
+                        )}
+                    </div>
+                </div>
+            );
+        })}
 
   </div>
 

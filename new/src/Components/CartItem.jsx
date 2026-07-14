@@ -11,7 +11,7 @@ function CartItem({item}){
 
 <div className="cart-item">
 
-    <button className="remove-btn"   onClick={() => removeFromCart(item.id)}>
+    <button className="remove-btn"   onClick={() => removeFromCart(item)}>
         ✕
     </button>
 
@@ -34,7 +34,7 @@ function CartItem({item}){
     <div className="cart-item-actions">
 
         <button
-    onClick={() => decreaseQuantity(item.id)}
+    onClick={() => decreaseQuantity(item)}
 >
     -
 </button>
@@ -42,7 +42,7 @@ function CartItem({item}){
         <span>{item.quantity}</span>
 
         <button
-    onClick={() => increaseQuantity(item.id)}
+    onClick={() => increaseQuantity(item)}
 >
     +
 </button>

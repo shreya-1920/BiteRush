@@ -1,75 +1,67 @@
 import { Link } from "react-router-dom";
-import {
-    FaArrowRight,
-    FaPizzaSlice,
-    FaBirthdayCake,
-    FaFish,
-} from "react-icons/fa";
+import { FaArrowRight, FaShoppingCart } from "react-icons/fa";
 
-import emptyCart from "../assets/images/empty-cart.png";
+import heroFood from "../assets/images/food-hero.png";
 
 import "../styles/Cart.css";
 
 function EmptyCart() {
-
     return (
-
         <section className="empty-cart">
 
-            <div className="empty-cart-content">
+            <div className="empty-cart-card">
 
-                <img
-                    src={emptyCart}
-                    alt="Empty Cart"
-                    className="empty-cart-image"
-                />
+                {/* Left Side */}
 
-                <h1>
-                    Your cart is feeling a bit lonely.
-                </h1>
+                <div className="empty-cart-left">
 
-                <p>
-                    Let's find something delicious to fill it up.
-                </p>
+                    <div className="hero-blob"></div>
 
-                <div className="cart-buttons">
-
-                    <Link
-                        to="/restaurants"
-                        className="explore-btn"
-                    >
-                        Start Exploring
-                        <FaArrowRight />
-                    </Link>
-
-                    <Link
-                        to="/orders"
-                        className="orders-btn"
-                    >
-                        View Recent Orders
-                    </Link>
+                    <img
+                        src={heroFood}
+                        alt="Delicious Food"
+                        className="hero-food-image"
+                    />
 
                 </div>
 
-                <span className="trending-heading">
-                    Trending Near You
-                </span>
+                {/* Right Side */}
 
-                <div className="trending-tags">
+                <div className="empty-cart-right">
 
-                    <div className="tag">
-                        <FaPizzaSlice />
-                        Artisan Pizza
+                    <div className="cart-badge">
+                        <FaShoppingCart />
+                        Empty Cart
                     </div>
 
-                    <div className="tag">
-                        <FaBirthdayCake />
-                        Fine Pastries
-                    </div>
+                    <h1>
+                        Your next delicious
+                        <br />
+                        meal is waiting.
+                    </h1>
 
-                    <div className="tag">
-                        <FaFish />
-                        Sushi
+                    <p>
+                        Browse our restaurants, discover your favorites,
+                        and we'll deliver them fresh to your doorstep.
+                    </p>
+
+                    <div className="cart-buttons">
+
+                        <Link
+                            to="/restaurants"
+                            className="explore-btn"
+                        >
+                            Start Exploring
+                            <FaArrowRight />
+                        </Link>
+
+                        <Link
+                            to="/orders"
+                            className="orders-btn"
+                        >
+                            View Recent Orders
+                        </Link>
+
                     </div>
 
                 </div>
@@ -77,7 +69,6 @@ function EmptyCart() {
             </div>
 
         </section>
-
     );
 }
 

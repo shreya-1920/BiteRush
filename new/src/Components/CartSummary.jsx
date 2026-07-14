@@ -1,102 +1,110 @@
 import { useCart } from "../Context/CartContext";
 import { useNavigate } from "react-router-dom";
-export default function CartSummary() {
+import { toast } from "react-toastify";
+
+export default function CartSummary({
+    subtotal,
+    appliedCoupon,
+}) {
+
+    const navigate = useNavigate();
     const { cartItems } = useCart();
-const navigate = useNavigate();
 
-const subtotal = cartItems.reduce(
-    (total, item) => total + item.price,
-    0
-);
+    // Existing calculations
+    const deliveryFee = subtotal > 499 ? 0 : 40;
 
-const gst = Math.round(subtotal * 0.05);
-const discount = 0;
-const total = subtotal + gst - discount;
-  return (
-    <div>
-     {/* RIGHT */}
+    const gst = Math.round(subtotal * 0.05);
 
-<div className="cart-summary">
+    // Coupon discount
+    const discount = appliedCoupon
+        ? (subtotal * appliedCoupon.discount) / 100
+        : 0;
 
-    <h2>Order Summary</h2>
+    // Final total
+    const total = subtotal + deliveryFee + gst - discount;
 
-    <div className="summary-row">
+    const handleCheckout = () => {
 
-        <span>Subtotal</span>
+        if (cartItems.length === 0) {
+            toast.error("Your cart is empty!");
+            return;
+        }
 
-        <span>₹{subtotal}</span>
+        const token = localStorage.getItem("token");
 
-    </div>
+        if (!token) {
+            toast.warning("Please login first!");
+            navigate("/auth");
+            return;
+        }
 
-    <div className="summary-row">
+        navigate("/checkout");
+    };
 
-        <span>Delivery Fee</span>
+    return (
+        <div className="cart-summary">
 
-        <span className="free-delivery">
-    FREE
-</span>
+            <h2>Order Summary</h2>
 
-    </div>
+            <div className="summary-row">
+                <span>Subtotal</span>
+                <span>₹{subtotal}</span>
+            </div>
 
-    <div className="summary-row">
+            <div className="summary-row">
+                <span>Delivery Fee</span>
 
-        <span>GST</span>
+                <span className="free-delivery">
+                    {deliveryFee === 0 ? "FREE" : `₹${deliveryFee}`}
+                </span>
+            </div>
 
-        <span>₹{gst}</span>
+            <div className="summary-row">
+                <span>GST</span>
+                <span>₹{gst}</span>
+            </div>
 
-    </div>
+            {appliedCoupon && (
+                <div className="summary-row discount">
+                    <span>Coupon ({appliedCoupon.code})</span>
+                    <span>-₹{discount.toFixed(2)}</span>
+                </div>
+            )}
 
-    <div className="summary-row discount">
+            <hr />
 
-        <span>Discount</span>
+            <div className="summary-total">
+                <span>Total</span>
+                <span>₹{total.toFixed(2)}</span>
+            </div>
 
-        <span>-₹{discount}</span>
+            <button
+                className="checkout-btn"
+                onClick={handleCheckout}
+            >
+                Proceed to Checkout
+            </button>
 
-    </div>
+            <p className="secure-payment">
+                🔒 Secure payments powered by BiteRush
+            </p>
 
-    <hr />
+            <div className="summary-info">
 
-    <div className="summary-total">
+                <div className="info-box">
+                    <span>📍</span>
+                    <h4>Deliver To</h4>
+                    <p>Home</p>
+                </div>
 
-        <span>Total</span>
+                <div className="info-box">
+                    <span>⏱️</span>
+                    <h4>ETA</h4>
+                    <p>25-30 mins</p>
+                </div>
 
-        <span>₹{total}</span>
-
-    </div>
-
-    <button className="checkout-btn"  onClick={() => navigate("/checkout")}>
-        Proceed to Checkout
-    </button>
-
-    <p className="secure-payment">
-        🔒 Secure payments powered by BiteRush
-    </p>
-
-    <div className="summary-info">
-
-        <div className="info-box">
-
-            <span>📍</span>
-
-            <h4>Deliver To</h4>
-
-            <p>Home</p>
+            </div>
 
         </div>
-
-        <div className="info-box">
-
-            <span>⏱️</span>
-
-            <h4>ETA</h4>
-
-            <p>25-30 mins</p>
-
-        </div>
-
-    </div>
-
-</div>
-    </div>
-  );
+    );
 }

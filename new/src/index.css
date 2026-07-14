@@ -7,14 +7,36 @@
 }
 :root{
 
-  /* Colors */
 
-  --primary:#FF6B35;
-  --secondary:#E74C3C;
 
-  --bg:#FFF8F1;
 
-  --text:#222222;
+   
+
+    /* Brand Colors */
+
+    --primary: #D94841;
+    --primary-hover: #BF3E37;
+    --primary-light: #FFF5F4;
+    --primary-border: #F5C5C2;
+
+    /* Text */
+
+    --heading: #1F3558;
+    --text: #555555;
+
+    /* Background */
+
+    --background: #FFF9F3;
+    --white: #FFFFFF;
+    --border: #E8E8E8;
+
+    /* Optional Colors */
+
+    --success: #22C55E;
+    --warning: #F59E0B;
+    --danger: #D94841;
+
+
 
   /* Fonts */
 
@@ -32,7 +54,17 @@ body{
     background: var(--bg);
     color: var(--text);
 }
-
+body{
+    margin:0;
+    padding:0;
+    background:linear-gradient(
+        135deg,
+        #FFF8F2 0%,
+        #FFF3EA 35%,
+        #FFF8F5 70%,
+        #FFFDFB 100%
+    );
+}
 
 a {
     text-decoration: none;

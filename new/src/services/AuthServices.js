@@ -18,6 +18,11 @@ export const forgotPassword = async (data) => {
   return axios.post(`${API_URL}/forgotpassword`, data);
 };
 
-export const resetPassword = async (data) => {
-  return axios.post(`${API_URL}/resetpassword`, data);
+export const resetPassword = async ({ token, password }) => {
+  return axios.post(
+    `${API_URL}/resetpassword/${token}`,
+    {
+      password,
+    }
+  );
 };

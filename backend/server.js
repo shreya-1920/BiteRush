@@ -10,6 +10,7 @@ const app = express();
 const authRoutes = require("./routes/authRoutes");
 const contactRoutes = require("./routes/contactRoutes");
 const cartRoutes = require("./routes/cartRoutes");
+const wishlistRoutes=require("./routes/wishlistRoutes");
 // MongoDB Connection
 mongoose
   .connect(process.env.MONGO_URI)
@@ -34,7 +35,7 @@ app.get("/", (req, res) => {
 });
 app.use("/api/contact",contactRoutes);
 app.use("/api/cart", cartRoutes);
-
+app.use("/api/wishlist",wishlistRoutes);
 const PORT = process.env.PORT || 5000;
 
 app.listen(PORT, () => {

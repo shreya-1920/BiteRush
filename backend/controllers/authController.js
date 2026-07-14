@@ -3,7 +3,8 @@
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const User = require("../models/User");
-
+const crypto = require("crypto");
+const sendEmail = require("../utils/sendEmail");
 // ================= REGISTER =================
 
 const register = async (req, res) => {
@@ -161,57 +162,151 @@ const logout = (req, res) => {
 
 // ================= FORGOT PASSWORD =================
 
-const forgotPassword = (req, res) => {
+const forgotPassword = async (req, res) => {
 
-    const { email } = req.body;
+    try {
 
-    res.status(200).json({
-        success: true,
-        message: `Password reset link sent to ${email}`
-    });
+        const { email } = req.body;
+
+        const user = await User.findOne({ email });
+
+        if (!user) {
+
+            return res.status(404).json({
+                success:false,
+                message:"No account found with this email."
+            });
+
+        }
+
+        const resetToken = crypto
+            .randomBytes(32)
+            .toString("hex");
+
+        user.resetPasswordToken = resetToken;
+
+        user.resetPasswordExpire =
+            Date.now() + 15 * 60 * 1000;
+
+        await user.save();
+
+        const resetUrl =
+            `${process.env.CLIENT_URL}/reset-password/${resetToken}`;
+
+        const message = `
+            <h2>BiteRush Password Reset</h2>
+
+            <p>Hello ${user.name},</p>
+
+            <p>Click below to reset your password.</p>
+
+            <a href="${resetUrl}">
+                Reset Password
+            </a>
+
+            <br><br>
+
+            <p>This link expires in 15 minutes.</p>
+        `;
+
+        await sendEmail({
+
+            email:user.email,
+
+            subject:"BiteRush Password Reset",
+
+            message,
+
+        });
+
+        res.status(200).json({
+
+            success:true,
+
+            message:"Password reset email sent."
+
+        });
+
+    }
+
+    catch(error){
+
+        res.status(500).json({
+
+            success:false,
+
+            message:error.message
+
+        });
+
+    }
 
 };
 
 // ================= RESET PASSWORD =================
 
+
+
 const resetPassword = async (req, res) => {
 
     try {
 
-        const { email, newPassword } = req.body;
+        const { token } = req.params;
 
-        const user =
-            await User.findOne({ email });
+        const { password } = req.body;
+
+        const user = await User.findOne({
+
+            resetPasswordToken: token,
+
+            resetPasswordExpire: {
+                $gt: Date.now(),
+            },
+
+        });
 
         if (!user) {
-            return res.status(404).json({
+
+            return res.status(400).json({
+
                 success: false,
-                message: "User not found"
+
+                message: "Reset link is invalid or has expired.",
+
             });
+
         }
 
-        const hashedPassword =
-            await bcrypt.hash(
-                newPassword,
-                10
-            );
+        const hashedPassword = await bcrypt.hash(password, 10);
 
-        user.password =
-            hashedPassword;
+        user.password = hashedPassword;
+
+        user.resetPasswordToken = null;
+
+        user.resetPasswordExpire = null;
 
         await user.save();
 
         res.status(200).json({
+
             success: true,
-            message:
-                "Password updated successfully"
+
+            message: "Password reset successfully!",
+
         });
 
-    } catch (error) {
+    }
+
+    catch (error) {
+
+        console.log(error);
 
         res.status(500).json({
+
             success: false,
-            message: error.message
+
+            message: error.message,
+
         });
 
     }

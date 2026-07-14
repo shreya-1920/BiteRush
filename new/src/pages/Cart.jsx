@@ -1,6 +1,7 @@
 import Header from "../Components/Header";
 import Footer from "../Components/Footer";
 import "../styles/Cart.css";
+import  { useState } from "react";
 import CartItem from "../Components/CartItem";
 import CartSummary from "../Components/CartSummary";
 import DeliveryProgress from "../Components/DeliveryProgress";
@@ -14,8 +15,12 @@ import { useCart } from "../Context/CartContext";
 export default function Cart() {
 
     
-
+const [appliedCoupon, setAppliedCoupon] = useState(null);
 const { cartItems } = useCart();
+const subtotal = cartItems.reduce(
+    (sum, item) => sum + item.price * item.quantity,
+    0
+);
 console.log("Cart Items:", cartItems);
 
     return (
@@ -48,14 +53,21 @@ console.log("Cart Items:", cartItems);
     />
 ))}
                                     <DeliveryProgress />
-                                    <CouponSection />
+<CouponSection
+    subtotal={subtotal}
+    onApplyCoupon={setAppliedCoupon}
+    appliedCoupon={appliedCoupon}
+/>
                                     <RecommendedItems />
 
                                 </div>
 
                                 <div className="cart-right">
 
-                                    <CartSummary />
+                                   <CartSummary
+    subtotal={subtotal}
+    appliedCoupon={appliedCoupon}
+/>
 
                                 </div>
 

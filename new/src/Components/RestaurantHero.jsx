@@ -44,26 +44,25 @@ function RestaurantHero({ restaurant }) {
     Serving handcrafted burgers & fresh meals made with premium ingredients.
 </p>
           <div className="details-meta">
+<div className="details-chip rating-chip">
+    <FaStar />
+    <span>{restaurant.rating}</span>
+    <span>({restaurant.reviews})</span>
+</div>
 
-            <div className="details-chip">
-              <FaStar />
-              <span className="hero-chip rating-card">{restaurant.rating}</span>
-              <span>({restaurant.reviews})</span>
-            </div>
+<div className="details-chip time-chip">
+    <IoTimeOutline />
+    <span>{restaurant.time}</span>
+</div>
 
-            <div className="details-chip">
-              <IoTimeOutline />
-              <span className="hero-chip time-chip">{restaurant.time}</span>
-            </div>
+<div className="details-chip delivery-chip">
+    <FaMotorcycle />
+    <span>{restaurant.delivery}</span>
+</div>
 
-            <div className="details-chip">
-              <FaMotorcycle />
-              <span className="hero-chip delivery-chip">{restaurant.delivery}</span>
-            </div>
-
-            <div className="details-chip">
-              <span className="hero-chip price-chip">{restaurant.price} for two</span>
-            </div>
+<div className="details-chip price-chip">
+    <span>{restaurant.price} for two</span>
+</div>
 
           </div>
 

@@ -1,7 +1,7 @@
 export const menuData = {
   1: [
     {
-      id: 1,
+      id: 101,
       name: "Classic Cheeseburger",
       price: 299,
       oldPrice: 349,
@@ -17,7 +17,7 @@ export const menuData = {
     },
 
     {
-      id: 2,
+      id: 102,
       name: "BBQ Chicken Burger",
       price: 349,
       oldPrice: 399,
@@ -33,7 +33,7 @@ export const menuData = {
     },
 
     {
-      id: 3,
+      id: 103,
       name: "Loaded Cheese Fries",
       price: 199,
       oldPrice: 249,
@@ -49,7 +49,7 @@ export const menuData = {
     },
 
     {
-      id: 4,
+      id: 104,
       name: "Crispy Chicken Wings",
       price: 329,
       oldPrice: 379,
@@ -65,7 +65,7 @@ export const menuData = {
     },
 
     {
-      id: 5,
+      id: 105,
       name: "Veggie Supreme Burger",
       price: 249,
       oldPrice: 299,
@@ -81,7 +81,7 @@ export const menuData = {
     },
 
     {
-      id: 6,
+      id: 106,
       name: "Chocolate Brownie",
       price: 179,
       oldPrice: 219,
@@ -97,7 +97,7 @@ export const menuData = {
     },
 
     {
-      id: 7,
+      id:107,
       name: "Cold Coffee",
       price: 149,
       oldPrice: 179,
@@ -113,7 +113,7 @@ export const menuData = {
     },
 
     {
-      id: 8,
+      id: 108,
       name: "Oreo Milkshake",
       price: 199,
       oldPrice: 239,
@@ -131,7 +131,7 @@ export const menuData = {
 
   2:[
 {
-id:1,
+id:201,
 name:"Margherita Pizza",
 price:399,
 oldPrice:459,
@@ -144,7 +144,7 @@ description:"Classic wood-fired pizza topped with mozzarella, basil and tomato s
 image:"https://images.unsplash.com/photo-1574071318508-1cdbab80d002?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8TWFyZ2hlcml0YSUyMFBpenphfGVufDB8fDB8fHww"
 },
 {
-id:2,
+id:202,
 name:"Pepperoni Pizza",
 price:499,
 oldPrice:549,
@@ -157,7 +157,7 @@ description:"Loaded pepperoni with melted mozzarella cheese.",
 image:"https://images.unsplash.com/photo-1628840042765-356cda07504e?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8UGVwcGVyb25pJTIwUGl6emF8ZW58MHx8MHx8fDA%3D"
 },
 {
-id:3,
+id:203,
 name:"Creamy Alfredo Pasta",
 price:349,
 oldPrice:399,
@@ -170,7 +170,7 @@ description:"Penne pasta tossed in rich Alfredo sauce.",
 image:"https://images.unsplash.com/photo-1662197480393-2a82030b7b83?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8Q3JlYW15JTIwQWxmcmVkbyUyMFBhc3RhfGVufDB8fDB8fHww"
 },
 {
-id:4,
+id:204,
 name:"Garlic Bread",
 price:179,
 oldPrice:229,
@@ -183,7 +183,7 @@ description:"Freshly baked garlic bread with herbs.",
 image:"https://images.unsplash.com/photo-1593527270723-834c53a3fed4?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OHx8Z2FybGljJTIwYnJlYWR8ZW58MHx8MHx8fDA%3D"
 },
 {
-id:5,
+id:205,
 name:"Lasagna",
 price:429,
 oldPrice:489,
@@ -196,7 +196,7 @@ description:"Layers of pasta with cheese and meat sauce.",
 image:"https://plus.unsplash.com/premium_photo-1671559021023-3da68c12aeed?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8TGFzYWduYXxlbnwwfHwwfHx8MA%3D%3D"
 },
 {
-id:6,
+id:206,
 name:"Tiramisu",
 price:249,
 oldPrice:299,
@@ -209,7 +209,7 @@ description:"Classic Italian coffee-flavoured dessert.",
 image:"https://plus.unsplash.com/premium_photo-1695028378225-97fbe39df62a?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8dGlyYW1pc3V8ZW58MHx8MHx8fDA%3D"
 },
 {
-id:7,
+id:207,
 name:"Italian Lemonade",
 price:149,
 oldPrice:179,
@@ -224,7 +224,7 @@ image:"https://images.unsplash.com/photo-1623084921164-4a8c5c37a912?w=600&auto=f
 ],
   3: [
   {
-    id: 1,
+    id: 301,
     name: "Signature Sushi Platter",
     price: 599,
     oldPrice: 699,
@@ -240,7 +240,7 @@ image:"https://images.unsplash.com/photo-1623084921164-4a8c5c37a912?w=600&auto=f
   },
 
   {
-    id: 2,
+    id: 302,
     name: "Chicken Ramen",
     price: 429,
     oldPrice: 479,
@@ -256,7 +256,7 @@ image:"https://images.unsplash.com/photo-1623084921164-4a8c5c37a912?w=600&auto=f
   },
 
   {
-    id: 3,
+    id: 303,
     name: "Veg Tempura",
     price: 299,
     oldPrice: 349,
@@ -272,7 +272,7 @@ image:"https://images.unsplash.com/photo-1623084921164-4a8c5c37a912?w=600&auto=f
   },
 
   {
-    id: 4,
+    id: 304,
     name: "Teriyaki Chicken",
     price: 499,
     oldPrice: 549,
@@ -288,7 +288,7 @@ image:"https://images.unsplash.com/photo-1623084921164-4a8c5c37a912?w=600&auto=f
   },
 
   {
-    id: 5,
+    id: 305,
     name: "Salmon Nigiri",
     price: 449,
     oldPrice: 499,
@@ -304,7 +304,7 @@ image:"https://images.unsplash.com/photo-1623084921164-4a8c5c37a912?w=600&auto=f
   },
 
   {
-    id: 6,
+    id: 306,
     name: "Miso Soup",
     price: 179,
     oldPrice: 219,
@@ -320,7 +320,7 @@ image:"https://images.unsplash.com/photo-1623084921164-4a8c5c37a912?w=600&auto=f
   },
 
   {
-    id: 7,
+    id: 307,
     name: "Matcha Cheesecake",
     price: 249,
     oldPrice: 299,
@@ -336,7 +336,7 @@ image:"https://images.unsplash.com/photo-1623084921164-4a8c5c37a912?w=600&auto=f
   },
 
   {
-    id: 8,
+    id: 308,
     name: "Japanese Green Tea",
     price: 129,
     oldPrice: 159,
@@ -353,7 +353,7 @@ image:"https://images.unsplash.com/photo-1623084921164-4a8c5c37a912?w=600&auto=f
 ],
   4: [
   {
-    id: 1,
+    id: 401,
     name: "Butter Chicken",
     price: 429,
     oldPrice: 499,
@@ -369,7 +369,7 @@ image:"https://images.unsplash.com/photo-1623084921164-4a8c5c37a912?w=600&auto=f
   },
 
   {
-    id: 2,
+    id: 402,
     name: "Paneer Butter Masala",
     price: 379,
     oldPrice: 429,
@@ -385,7 +385,7 @@ image:"https://images.unsplash.com/photo-1623084921164-4a8c5c37a912?w=600&auto=f
   },
 
   {
-    id: 3,
+    id: 403,
     name: "Hyderabadi Biryani",
     price: 449,
     oldPrice: 519,
@@ -401,7 +401,7 @@ image:"https://images.unsplash.com/photo-1623084921164-4a8c5c37a912?w=600&auto=f
   },
 
   {
-    id: 4,
+    id: 404,
     name: "Garlic Butter Naan",
     price: 99,
     oldPrice: 129,
@@ -417,7 +417,7 @@ image:"https://images.unsplash.com/photo-1623084921164-4a8c5c37a912?w=600&auto=f
   },
 
   {
-    id: 5,
+    id: 405,
     name: "Dal Makhani",
     price: 289,
     oldPrice: 339,
@@ -433,7 +433,7 @@ image:"https://images.unsplash.com/photo-1623084921164-4a8c5c37a912?w=600&auto=f
   },
 
   {
-    id: 6,
+    id: 406,
     name: "Tandoori Chicken",
     price: 469,
     oldPrice: 539,
@@ -449,7 +449,7 @@ image:"https://images.unsplash.com/photo-1623084921164-4a8c5c37a912?w=600&auto=f
   },
 
   {
-    id: 7,
+    id: 407,
     name: "Gulab Jamun",
     price: 149,
     oldPrice: 179,
@@ -465,7 +465,7 @@ image:"https://images.unsplash.com/photo-1623084921164-4a8c5c37a912?w=600&auto=f
   },
 
   {
-    id: 8,
+    id: 408,
     name: "Mango Lassi",
     price: 159,
     oldPrice: 199,
@@ -482,7 +482,7 @@ image:"https://images.unsplash.com/photo-1623084921164-4a8c5c37a912?w=600&auto=f
 ],
   5: [
   {
-    id: 1,
+    id: 501,
     name: "Hakka Noodles",
     price: 299,
     oldPrice: 349,
@@ -498,7 +498,7 @@ image:"https://images.unsplash.com/photo-1623084921164-4a8c5c37a912?w=600&auto=f
   },
 
   {
-    id: 2,
+    id: 502,
     name: "Schezwan Fried Rice",
     price: 329,
     oldPrice: 379,
@@ -514,7 +514,7 @@ image:"https://images.unsplash.com/photo-1623084921164-4a8c5c37a912?w=600&auto=f
   },
 
   {
-    id: 3,
+    id: 503,
     name: "Veg Manchurian",
     price: 289,
     oldPrice: 339,
@@ -530,7 +530,7 @@ image:"https://images.unsplash.com/photo-1623084921164-4a8c5c37a912?w=600&auto=f
   },
 
   {
-    id: 4,
+    id: 504,
     name: "Chicken Dumplings",
     price: 359,
     oldPrice: 419,
@@ -546,7 +546,7 @@ image:"https://images.unsplash.com/photo-1623084921164-4a8c5c37a912?w=600&auto=f
   },
 
   {
-    id: 5,
+    id: 505,
     name: "Spring Rolls",
     price: 199,
     oldPrice: 239,
@@ -562,7 +562,7 @@ image:"https://images.unsplash.com/photo-1623084921164-4a8c5c37a912?w=600&auto=f
   },
 
   {
-    id: 6,
+    id: 506,
     name: "Hot & Sour Soup",
     price: 179,
     oldPrice: 219,
@@ -578,7 +578,7 @@ image:"https://images.unsplash.com/photo-1623084921164-4a8c5c37a912?w=600&auto=f
   },
 
   {
-    id: 7,
+    id: 507,
     name: "Honey Chilli Potato",
     price: 249,
     oldPrice: 299,
@@ -594,7 +594,7 @@ image:"https://images.unsplash.com/photo-1623084921164-4a8c5c37a912?w=600&auto=f
   },
 
   {
-    id: 8,
+    id: 508,
     name: "Bubble Tea",
     price: 199,
     oldPrice: 239,
@@ -611,7 +611,7 @@ image:"https://images.unsplash.com/photo-1623084921164-4a8c5c37a912?w=600&auto=f
 ],
   6: [
   {
-    id: 1,
+    id: 601,
     name: "Chicken Street Tacos",
     price: 299,
     oldPrice: 349,
@@ -627,7 +627,7 @@ image:"https://images.unsplash.com/photo-1623084921164-4a8c5c37a912?w=600&auto=f
   },
 
   {
-    id: 2,
+    id: 602,
     name: "Veggie Fiesta Taco",
     price: 249,
     oldPrice: 299,
@@ -643,7 +643,7 @@ image:"https://images.unsplash.com/photo-1623084921164-4a8c5c37a912?w=600&auto=f
   },
 
   {
-    id: 3,
+    id: 603,
     name: "Loaded Chicken Burrito",
     price: 389,
     oldPrice: 449,
@@ -659,7 +659,7 @@ image:"https://images.unsplash.com/photo-1623084921164-4a8c5c37a912?w=600&auto=f
   },
 
   {
-    id: 4,
+    id: 604,
     name: "Cheesy Quesadilla",
     price: 329,
     oldPrice: 379,
@@ -675,7 +675,7 @@ image:"https://images.unsplash.com/photo-1623084921164-4a8c5c37a912?w=600&auto=f
   },
 
   {
-    id: 5,
+    id: 605,
     name: "Nachos Supreme",
     price: 279,
     oldPrice: 329,
@@ -691,7 +691,7 @@ image:"https://images.unsplash.com/photo-1623084921164-4a8c5c37a912?w=600&auto=f
   },
 
   {
-    id: 6,
+    id: 606,
     name: "Mexican Rice Bowl",
     price: 349,
     oldPrice: 399,
@@ -707,7 +707,7 @@ image:"https://images.unsplash.com/photo-1623084921164-4a8c5c37a912?w=600&auto=f
   },
 
   {
-    id: 7,
+    id: 607,
     name: "Churros with Chocolate",
     price: 199,
     oldPrice: 239,
@@ -723,7 +723,7 @@ image:"https://images.unsplash.com/photo-1623084921164-4a8c5c37a912?w=600&auto=f
   },
 
   {
-    id: 8,
+    id: 608,
     name: "Classic Lemon Soda",
     price: 149,
     oldPrice: 179,
@@ -738,10 +738,64 @@ image:"https://images.unsplash.com/photo-1623084921164-4a8c5c37a912?w=600&auto=f
       "https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?w=600&auto=format&fit=crop&q=60",
   },
 ],
-  7: [],
-  8: [],
-  9: [],
-  10: [],
-  11: [],
-  12: []
+  7:[ 
+  { id: 701, name: "Grilled Salmon", price: 499, category: "Main", isVeg: false },
+  { id: 702, name: "Garlic Butter Prawns", price: 459, category: "Main", isVeg: false },
+  { id: 703, name: "Fish & Chips", price: 389, category: "Main", isVeg: false },
+  { id: 704, name: "Seafood Platter", price: 699, category: "Special", isVeg: false },
+  { id: 705, name: "Lemon Herb Fish", price: 429, category: "Main", isVeg: false },
+  { id: 706, name: "Crispy Calamari", price: 349, category: "Starter", isVeg: false },
+  { id: 707, name: "Shrimp Fried Rice", price: 329, category: "Rice", isVeg: false },
+  { id: 708, name: "Lobster Bisque", price: 299, category: "Soup", isVeg: false }
+],
+  8:  [
+  { id: 801, name: "Greek Salad Bowl", price: 249, category: "Salad", isVeg: true },
+  { id: 802, name: "Quinoa Power Bowl", price: 299, category: "Healthy", isVeg: true },
+  { id: 803, name: "Avocado Toast", price: 229, category: "Breakfast", isVeg: true },
+  { id: 804, name: "Berry Smoothie", price: 189, category: "Drinks", isVeg: true },
+  { id: 805, name: "Green Detox Juice", price: 169, category: "Drinks", isVeg: true },
+  { id: 806, name: "Fruit Yogurt Bowl", price: 219, category: "Healthy", isVeg: true },
+  { id: 807, name: "Protein Wrap", price: 279, category: "Wrap", isVeg: true },
+  { id: 808, name: "Chia Pudding", price: 199, category: "Dessert", isVeg: true }
+],
+  9: [
+  { id: 901, name: "Cappuccino", price: 169, category: "Coffee", isVeg: true },
+  { id: 902, name: "Café Latte", price: 189, category: "Coffee", isVeg: true },
+  { id: 903, name: "Butter Croissant", price: 149, category: "Bakery", isVeg: true },
+  { id: 904, name: "Blueberry Cheesecake", price: 249, category: "Dessert", isVeg: true },
+  { id: 905, name: "Chocolate Brownie", price: 199, category: "Dessert", isVeg: true },
+  { id: 906, name: "French Toast", price: 239, category: "Breakfast", isVeg: true },
+  { id: 907, name: "Cold Coffee", price: 199, category: "Drinks", isVeg: true },
+  { id: 908, name: "Hazelnut Mocha", price: 229, category: "Coffee", isVeg: true }
+],
+  10:  [
+  { id: 1001, name: "Chicken Dum Biryani", price: 359, category: "Biryani", isVeg: false },
+  { id: 1002, name: "Mutton Biryani", price: 429, category: "Biryani", isVeg: false },
+  { id: 1003, name: "Veg Hyderabadi Biryani", price: 279, category: "Biryani", isVeg: true },
+  { id: 1004, name: "Butter Chicken", price: 389, category: "Curry", isVeg: false },
+  { id: 1005, name: "Paneer Butter Masala", price: 299, category: "Curry", isVeg: true },
+  { id: 1006, name: "Garlic Naan", price: 79, category: "Bread", isVeg: true },
+  { id: 1007, name: "Chicken Seekh Kebab", price: 319, category: "Starter", isVeg: false },
+  { id: 1008, name: "Gulab Jamun", price: 99, category: "Dessert", isVeg: true }
+],
+  11:  [
+  { id: 1101, name: "Classic Cheeseburger", price: 249, category: "Burger", isVeg: false },
+  { id: 1102, name: "Double BBQ Burger", price: 329, category: "Burger", isVeg: false },
+  { id: 1103, name: "Crispy Chicken Burger", price: 289, category: "Burger", isVeg: false },
+  { id: 1104, name: "Veg Supreme Burger", price: 219, category: "Burger", isVeg: true },
+  { id: 1105, name: "Loaded Fries", price: 169, category: "Sides", isVeg: true },
+  { id: 1106, name: "Chicken Nuggets", price: 229, category: "Sides", isVeg: false },
+  { id: 1107, name: "Coke", price: 69, category: "Drinks", isVeg: true },
+  { id: 1108, name: "Chocolate Shake", price: 179, category: "Drinks", isVeg: true }
+],
+  12: [
+  { id: 1201, name: "Creamy Alfredo Pasta", price: 329, category: "Pasta", isVeg: true },
+  { id: 1202, name: "Spaghetti Arrabbiata", price: 299, category: "Pasta", isVeg: true },
+  { id: 1203, name: "Classic Lasagna", price: 369, category: "Lasagna", isVeg: true },
+  { id: 1204, name: "Margherita Pizza", price: 349, category: "Pizza", isVeg: true },
+  { id: 1205, name: "Garlic Bread", price: 149, category: "Sides", isVeg: true },
+  { id: 1206, name: "Mushroom Risotto", price: 359, category: "Rice", isVeg: true },
+  { id: 1207, name: "Tiramisu", price: 249, category: "Dessert", isVeg: true },
+  { id: 1208, name: "Italian Lemonade", price: 159, category: "Drinks", isVeg: true }
+]
 };

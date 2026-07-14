@@ -11,10 +11,10 @@
 }
 
 .checkout-container{
-
-    max-width:1400px;
+    max-width:1450px;
+    width:100%;
     margin:auto;
-
+    margin-top:60px;
 }
 
 /* ===========================
@@ -69,24 +69,23 @@
 =========================== */
 
 .checkout-layout{
-
     display:grid;
-    grid-template-columns:2fr 1fr;
-    gap:35px;
+    grid-template-columns:minmax(0,2fr) 420px;
+    gap:50px;
     align-items:start;
-
 }
-
+.checkout-card{
+    
+    padding:42px;
+}
 /* ===========================
       LEFT
 =========================== */
 
 .checkout-left{
-
     display:flex;
     flex-direction:column;
     gap:28px;
-
 }
 
 /* ===========================
@@ -94,12 +93,10 @@
 =========================== */
 
 .checkout-card{
-
-    background:white;
+    background:#fff;
     border-radius:28px;
-    padding:35px;
-    box-shadow:0 12px 35px rgba(0,0,0,.06);
-
+    padding:40px;
+    box-shadow:0 14px 40px rgba(0,0,0,.06);
 }
 
 .checkout-card h3{
@@ -132,18 +129,18 @@
 
 }
 
-
+.checkout-card{
+    padding:36px;
+    border-radius:28px;
+}
 /*==========================
     DELIVERY ADDRESS
 ===========================*/
-
 .checkout-card-header{
-
     display:flex;
     justify-content:space-between;
     align-items:center;
-    margin-bottom:30px;
-
+    margin-bottom:38px;
 }
 
 .checkout-title{
@@ -155,13 +152,17 @@
 }
 
 .checkout-title h3{
-
+    font-size:2rem;
+    font-weight:700;
+    color:var(--heading);
     margin:0;
-    font-size:28px;
-    color:#203864;
-
+    letter-spacing:.3px;
 }
-
+.checkout-title p{
+    margin-top:4px;
+    color:#6b7280;
+    font-size:15px;
+}
 .checkout-icon{
 
     width:52px;
@@ -185,7 +186,211 @@
     gap:18px;
 
 }
+.address-form{
 
+display:flex;
+flex-direction:column;
+gap:18px;
+
+}
+
+.save-address-btn{
+
+margin-top:10px;
+
+width:220px;
+
+height:48px;
+
+border:none;
+
+border-radius:12px;
+
+background:#FF6B35;
+
+color:white;
+
+font-weight:600;
+
+cursor:pointer;
+
+transition:.3s;
+
+}
+
+.save-address-btn:hover{
+
+background:#E65A28;
+
+}
+
+
+
+
+/* ==========================
+   NEW ADDRESS CARD
+========================== */
+
+.new-address-card{
+
+    margin-top:28px;
+
+    padding:30px;
+
+    background:#fff;
+
+    border:2px dashed #FFD8C9;
+
+    border-radius:22px;
+
+}
+
+.new-address-card h4{
+
+    margin-bottom:22px;
+
+    font-size:28px;
+
+    font-weight:700;
+
+    color:var(--heading);
+
+}
+
+/* ==========================
+   GRID
+========================== */
+
+.new-address-grid{
+
+    display:grid;
+
+    grid-template-columns:1fr 1fr;
+
+    gap:18px;
+
+    margin-bottom:20px;
+
+}
+
+/* ==========================
+   INPUTS
+========================== */
+
+.new-address-card input,
+.new-address-card textarea{
+
+    width:100%;
+
+    padding:16px 18px;
+
+    border:2px solid #E8E8E8;
+
+    border-radius:14px;
+
+    font-size:16px;
+
+    font-family:inherit;
+
+    background:#fff;
+
+    outline:none;
+
+    transition:.3s;
+
+}
+
+.new-address-card textarea{
+
+    resize:none;
+
+    min-height:140px;
+
+    margin-top:4px;
+
+}
+
+.new-address-card input:focus,
+.new-address-card textarea:focus{
+
+    border-color:#FF6B35;
+
+    box-shadow:0 0 0 4px rgba(255,107,53,.08);
+
+}
+
+/* ==========================
+   BUTTON
+========================== */
+
+.save-address-btn{
+
+    margin-top:22px;
+
+    width:220px;
+
+    height:52px;
+
+    border:none;
+
+    border-radius:14px;
+
+    background:linear-gradient(135deg,#FF6B35,#FF8C42);
+
+    color:#fff;
+
+    font-size:16px;
+
+    font-weight:700;
+
+    cursor:pointer;
+
+    transition:.3s;
+
+}
+
+.save-address-btn:hover{
+
+    transform:translateY(-3px);
+
+    box-shadow:0 14px 28px rgba(255,107,53,.25);
+
+}
+
+
+.save-address-btn{
+
+    margin-top:22px;
+
+    width:220px;
+
+    height:52px;
+
+    border:none;
+
+    border-radius:14px;
+
+    background:linear-gradient(135deg,#FF6B35,#FF8A45);
+
+    color:#fff;
+
+    font-size:16px;
+
+    font-weight:700;
+
+    cursor:pointer;
+
+    transition:.3s;
+
+}
+
+.save-address-btn:hover{
+
+    transform:translateY(-3px);
+
+    box-shadow:0 15px 25px rgba(255,107,53,.25);
+
+}
 .edit-btn,
 .add-btn{
 
@@ -228,16 +433,38 @@
 
     border:2px solid #FFE0D5;
 
-    border-radius:18px;
+    
 
-    padding:24px;
+    
 
     background:#FFF9F7;
-
+margin-bottom:20px;
     transition:.3s;
 
 }
+.address-box{
+    padding:30px;
+    border-radius:20px;
+    margin-top:18px;
+}
+.address-box h4{
+    margin-bottom:14px;
+}
 
+.address-box p{
+    margin:8px 0;
+}
+.schedule-option{
+
+padding:30px;
+
+min-height:120px;
+
+display:flex;
+
+align-items:center;
+
+}
 .address-box:hover{
 
     border-color:#FF6B35;
@@ -301,28 +528,25 @@
     margin-top:30px;
 
 }
-
 .delivery-option{
-
     display:flex;
-
     align-items:center;
+    gap:20px;
 
-    gap:18px;
+    padding:28px 30px;
 
-    padding:24px;
+    border:2px solid #ECECEC;
+    border-radius:22px;
 
-    border:2px solid #EAEAEA;
-
-    border-radius:18px;
+    background:#fff;
 
     cursor:pointer;
 
-    transition:.3s;
+    transition:all .3s ease;
 
-    background:white;
-
+    margin-top:18px;
 }
+
 
 .delivery-option:hover{
 
@@ -336,26 +560,27 @@
 
     border-color:#FF6B35;
 
-    background:#FFF7F3;
+    background:#FFF6F2;
+
+    box-shadow:0 12px 30px rgba(255,107,53,.08);
 
 }
 
 .delivery-radio{
 
-    width:22px;
+    width:30px;
 
-    height:22px;
+    height:30px;
+
+    border:3px solid #D9D9D9;
 
     border-radius:50%;
 
-    border:2px solid #CFCFCF;
+    flex-shrink:0;
 
     position:relative;
 
-    flex-shrink:0;
-
 }
-
 .delivery-option.active .delivery-radio{
 
     border-color:#FF6B35;
@@ -388,19 +613,20 @@
 
     margin:0;
 
-    font-size:18px;
+    font-size:20px;
 
-    color:#203864;
+    font-weight:700;
+
+    color:var(--heading);
 
 }
-
 .delivery-option p{
 
-    margin-top:6px;
+    margin-top:8px;
 
     color:#777;
 
-    font-size:14px;
+    font-size:17px;
 
 }
 
@@ -641,103 +867,255 @@ grid-template-columns:1fr;
         PROMO
 ===========================*/
 
-.promo-box{
+/* ===========================================================
+   PROMO CODE SECTION
+=========================================================== */
 
-display:flex;
+.promo-input-wrapper{
+    display:flex;
+    align-items:center;
+    width:100%;
+    margin:30px 0;
+}
 
-gap:15px;
+.promo-input{
+    flex:1;
+    height:64px;
 
-margin-top:30px;
+    padding:0 22px;
+
+    border:2px solid #FFD9CA;
+    border-right:none;
+
+    border-radius:18px 0 0 18px;
+
+    outline:none;
+
+    font-size:17px;
+
+    background:#fff;
+
+    transition:.3s;
+}
+
+.promo-input::placeholder{
+    color:#9CA3AF;
+}
+
+.promo-input:focus{
+    border-color:#FF6B35;
+}
+
+.apply-btn{
+
+    width:180px;
+    height:64px;
+
+    border:none;
+
+    border-radius:0 18px 18px 0;
+
+    background:linear-gradient(135deg,#FF6B35,#FF8C42);
+
+    color:#fff;
+
+    font-size:17px;
+    font-weight:700;
+
+    cursor:pointer;
+
+    transition:.3s;
+}
+
+.apply-btn:hover:not(:disabled){
+
+    background:linear-gradient(135deg,#E95A2C,#FF7D3A);
 
 }
 
-.promo-box input{
+.apply-btn:disabled{
 
-flex:1;
+    background:#D9D9D9;
 
-padding:16px 20px;
+    color:#777;
 
-border:1px solid #E5E5E5;
-
-border-radius:15px;
-
-outline:none;
-
-font-size:16px;
+    cursor:not-allowed;
 
 }
 
-.promo-box input:focus{
 
-border-color:#FF6B35;
+/* ===========================================================
+   DIVIDER
+=========================================================== */
 
-}
+.offers-title{
 
-.promo-box button{
+    position:relative;
 
-padding:0 30px;
+    text-align:center;
 
-background:#FF6B35;
+    margin:35px 0 28px;
 
-color:white;
+    color:#666;
 
-border:none;
+    font-size:16px;
 
-border-radius:15px;
-
-font-weight:600;
-
-cursor:pointer;
-
-transition:.3s;
+    font-weight:600;
 
 }
 
-.promo-box button:hover{
+.offers-title::before,
+.offers-title::after{
 
-background:#e85a2b;
+    content:"";
 
-}
+    position:absolute;
 
-.promo-chips{
+    top:50%;
 
-display:flex;
+    width:30%;
 
-gap:12px;
+    height:1px;
 
-margin-top:20px;
-
-flex-wrap:wrap;
-
-}
-
-.promo-chips span{
-
-padding:10px 18px;
-
-background:#FFF2EA;
-
-color:#FF6B35;
-
-border-radius:30px;
-
-font-size:14px;
-
-font-weight:600;
-
-cursor:pointer;
-
-transition:.3s;
+    background:#EAEAEA;
 
 }
 
-.promo-chips span:hover{
+.offers-title::before{
 
-background:#FF6B35;
-
-color:white;
+    left:0;
 
 }
+
+.offers-title::after{
+
+    right:0;
+
+}
+
+
+/* ===========================================================
+   OFFER CARDS
+=========================================================== */
+
+.promo-grid{
+
+    display:grid;
+
+    grid-template-columns:repeat(3,1fr);
+
+    gap:20px;
+
+}
+
+.promo-offer{
+
+    background:#FFF8F3;
+
+    border:2px solid #FFDCCD;
+
+    border-radius:18px;
+
+    padding:28px 20px;
+
+    text-align:center;
+
+    cursor:pointer;
+
+    transition:.3s;
+
+}
+
+.promo-offer:hover{
+
+    transform:translateY(-6px);
+
+    border-color:#FF6B35;
+
+    box-shadow:0 12px 25px rgba(255,107,53,.12);
+
+}
+
+.offer-icon{
+
+    display:block;
+
+    font-size:34px;
+
+    margin-bottom:15px;
+
+}
+
+.promo-offer h5{
+
+    margin:10px 0;
+
+    color:#FF6B35;
+
+    font-size:24px;
+
+    font-weight:700;
+
+}
+
+.promo-offer p{
+
+    margin:8px 0;
+
+    color:#444;
+
+    font-size:18px;
+
+}
+
+.promo-offer small{
+
+    display:block;
+
+    margin-top:12px;
+
+    color:#8B8B8B;
+
+    font-size:15px;
+
+}
+
+
+/* ===========================================================
+   ACTIVE OFFER
+=========================================================== */
+
+.promo-offer.active{
+
+    background:#EAFBF0;
+
+    border-color:#2ECC71;
+
+}
+
+.promo-offer.active h5{
+
+    color:#27AE60;
+
+}
+
+
+/* ===========================================================
+   NOTE
+=========================================================== */
+
+.promo-note{
+
+    margin-top:28px;
+
+    color:#777;
+
+    font-size:15px;
+
+}
+
+
+
 /*==========================
       ORDER SUMMARY
 ===========================*/
@@ -867,7 +1245,24 @@ margin:0;
 font-size:18px;
 
 }
+.place-order-btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    pointer-events: none;
+}
+.address-edit-input{
 
+width:100%;
+
+padding:12px;
+
+border:1px solid #ddd;
+
+border-radius:10px;
+
+margin-top:10px;
+
+}
 .eta-card p{
 
 margin:5px 0 0;

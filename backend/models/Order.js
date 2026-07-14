@@ -1,25 +1,51 @@
-const addToCart = async (item) => {
+const mongoose = require("mongoose");
 
-    try {
+const orderSchema = new mongoose.Schema({
+  user: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "User",
+    required: true,
+  },
 
-        await addCart({
+  
+    name: {
+      type: String,
+      required: true,
+    },
 
-            productId: item.id,
-            name: item.name,
-            image: item.image,
-            price: item.price,
-            quantity: 1
+    phone: {
+      type: String,
+      required: true,
+    },
 
-        });
+    address: {
+      type: String,
+      default: "",
+    },
 
-        fetchCart();
+    paymentMethod: {
+      type: String,
+      default: "Cash",
+    },
 
-    }
+    items: [
+      {
+        productId: String,
+        name: String,
+        image: String,
+        price: Number,
+        quantity: Number,
+      },
+    ],
 
-    catch (err) {
+    total: {
+      type: Number,
+      required: true,
+    },
+  },
+  {
+    timestamps: true,
+  }
+);
 
-        console.log(err);
-
-    }
-
-};
+module.exports = mongoose.model("Order", orderSchema);

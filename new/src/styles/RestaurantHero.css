@@ -47,7 +47,7 @@
     justify-content:center;
     align-items:center;
 
-    color:#D94841;
+    color:var(--primary);
 }
 .details-favorite-btn{
 
@@ -57,7 +57,7 @@
 
 .details-favorite-btn:hover{
 
-    background:#D94841;
+    background:var(--primary);
 
     color:white;
 
@@ -127,7 +127,7 @@ box-shadow:
 .details-content h1{
     font-size:45px;
     font-weight: 700;
-    color:#1F3558;
+    color:var(--heading);
     margin-bottom:10px;
     font-family:'Playfair Display', serif;
 }
@@ -146,22 +146,41 @@ box-shadow:
 
 .details-chip{
 
-    background:#FFF6F0;
+display:flex;
+align-items:center;
+justify-content:center;
+gap:10px;
 
-    padding:15px 22px;
+padding:16px 26px;
 
-    border-radius:50px;
+border-radius:999px;
 
-    display:flex;
-    align-items:center;
-    gap:8px;
+font-size:18px;
+font-weight:700;
 
-    font-weight:600;
+transition:.3s ease;
+
+cursor:pointer;
+
+box-shadow:0 8px 20px rgba(0,0,0,.05);
+
 }
+
 
 .details-chip svg{
-    color:#D94841;
+
+font-size:18px;
+
+margin-left:6px;
+
 }
+.details-chip:nth-child(1) svg{ color:var(--primary); }
+
+.details-chip:nth-child(2) svg{ color:#2563EB; }
+
+.details-chip:nth-child(3) svg{ color:#1E9E62; }
+
+.details-chip:nth-child(4) svg{ color:#2D3B55; }
 
 .details-chip{
 
@@ -172,13 +191,16 @@ box-shadow:
 
 .details-chip:hover{
 
-    background:#D94841;
+    background:var(--primary);
 
     color:white;
 
-    transform:translateY(-4px);
+   
 
-    box-shadow:0 12px 25px rgba(217,72,65,.25);
+transform:translateY(-4px);
+
+box-shadow:0 14px 28px rgba(0,0,0,.08);
+
 
 }
 
@@ -203,26 +225,74 @@ box-shadow:
 
 }
 .hero-chip{
-  
-    padding:14px 24px;
-    border-radius:999px;
-    font-weight:600;
+
+display:flex;
+
+align-items:center;
+
+justify-content:center;
+
+padding:12px 22px;
+
+border-radius:999px;
+
+font-size:17px;
+
+font-weight:700;
+
+min-width:120px;
+
 }
 .rating-chip{
-    background:#FFF5E8;
-    color:#E67E22;
+
+background:#FFF3EC;
+
+color:var(--primary);
+
 }
 
 .time-chip{
-    background:#EEF6FF;
-    color:#2563EB;
+
+background:#EEF4FF;
+
+color:#3366FF;
+
 }
 
 .delivery-chip{
-    background:#ECFDF5;
-    color:#059669;
+
+background:#ECFDF5;
+
+color:#059669;
+
 }
+
 .price-chip{
-    background:#F3F4F6;
-    color:#444;
+
+background:#F5F5F5;
+
+color:#2D3B55;
+
+}
+.rating-chip svg{
+color:var(--primary);
+}
+
+.time-chip svg{
+color:#3366FF;
+}
+
+.delivery-chip svg{
+color:#059669;
+}
+
+.price-chip svg{
+color:#2D3B55;
+}
+.details-chip:hover{
+
+transform:translateY(-4px);
+
+box-shadow:0 15px 30px rgba(0,0,0,.08);
+
 }

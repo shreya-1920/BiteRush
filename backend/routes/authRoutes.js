@@ -29,6 +29,6 @@ router.get("/profile", authMiddleware, getProfile);
 router.get("/logout", logout);
 
 router.post("/forgotpassword", forgotPassword);
-router.post("/resetpassword", resetPassword);
+router.post("/resetpassword/:token", resetPassword);
 
 module.exports = router;

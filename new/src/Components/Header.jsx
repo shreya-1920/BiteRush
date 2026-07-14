@@ -7,14 +7,21 @@ import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 
 import { LuShoppingCart } from "react-icons/lu";
-
+import { FaUserCircle } from "react-icons/fa";
 import logo from "../assets/images/logo.png";
 import { logoutUser } from "../services/AuthServices";
 import { toast } from "react-toastify";
 
 function Header() {
-
+const user = JSON.parse(localStorage.getItem("user"));
+const [showMenu, setShowMenu] = useState(false);
   const { cartItems } = useCart();
+
+
+const cartCount = cartItems.reduce(
+    (sum, item) => sum + item.quantity,
+    0
+);
   const [scrolled, setScrolled] = useState(false);
   const navigate = useNavigate();
   useEffect(() => {
@@ -92,7 +99,7 @@ function Header() {
 
             <span className="cart-count">
 
-                {cartItems.length}
+               {cartCount}
 
             </span>
 
@@ -102,11 +109,60 @@ function Header() {
 
 </Link>
 
-          {localStorage.getItem("token") ? (
-            <Button className="register-btn" onClick={handleLogout}>
-              Logout
-            </Button>
-          ) : (
+         {user ? (
+
+<div className="profile-container">
+
+    <button
+        className="profile-btn"
+        onClick={() => setShowMenu(!showMenu)}
+    >
+
+        <FaUserCircle className="profile-icon"/>
+
+        <span>{user.name}</span>
+
+    </button>
+
+    {showMenu && (
+
+        <div className="profile-dropdown">
+
+            <Link
+                to="/profile"
+                className="dropdown-item"
+            >
+                My Profile
+            </Link>
+
+            <Link
+                to="/orders"
+                className="dropdown-item"
+            >
+                Recent Orders
+            </Link>
+
+            <Link
+                to="/wishlist"
+                className="dropdown-item"
+            >
+                Wishlist
+            </Link>
+
+            <button
+                className="dropdown-item logout-item"
+                onClick={handleLogout}
+            >
+                Logout
+            </button>
+
+        </div>
+
+    )}
+
+</div>
+
+) : (
             <>
               <Button
                 className="login-btn"
