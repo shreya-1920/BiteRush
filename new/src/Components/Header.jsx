@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link,NavLink, useNavigate } from "react-router-dom";
 import { useCart } from "../Context/CartContext";
 import Button from "react-bootstrap/Button";
 import Container from "react-bootstrap/Container";
@@ -70,23 +70,45 @@ const cartCount = cartItems.reduce(
           </span>
         </Navbar.Brand>
 
-        <Nav className="menu">
-          <Nav.Link as={Link} to="/">
-            Home
-          </Nav.Link>
+       <Nav className="mx-auto custom-nav-links">
 
-          <Nav.Link as={Link} to="/restaurants">
-            Restaurants
-          </Nav.Link>
+    <NavLink
+        to="/"
+        className={({ isActive }) =>
+            isActive ? "nav-link active-link" : "nav-link"
+        }
+    >
+        Home
+    </NavLink>
 
-          <Nav.Link as={Link} to="/about">
-            About
-          </Nav.Link>
+    <NavLink
+        to="/restaurants"
+        className={({ isActive }) =>
+            isActive ? "nav-link active-link" : "nav-link"
+        }
+    >
+        Restaurants
+    </NavLink>
 
-          <Nav.Link as={Link} to="/contact">
-            Contact
-          </Nav.Link>
-        </Nav>
+    <NavLink
+        to="/about"
+        className={({ isActive }) =>
+            isActive ? "nav-link active-link" : "nav-link"
+        }
+    >
+        About
+    </NavLink>
+
+    <NavLink
+        to="/contact"
+        className={({ isActive }) =>
+            isActive ? "nav-link active-link" : "nav-link"
+        }
+    >
+        Contact
+    </NavLink>
+
+</Nav>
 
         <div className="d-flex align-items-center">
          <Link to="/cart" className="cart-link">

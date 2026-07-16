@@ -1,4 +1,4 @@
-import { Container, Breadcrumb, Form, Button } from "react-bootstrap";
+import { Container,  Form, Button } from "react-bootstrap";
 import {
   FaSearch,
   FaMapMarkerAlt,
@@ -6,13 +6,14 @@ import {
   FaStar,
   FaTag,
 } from "react-icons/fa";
-
+import { useLocation } from "../context/LocationContext";
 
 
 function RestaurantHero({
     searchTerm,
     setSearchTerm
 }) {
+     const { location, setLocation } = useLocation();
   return (
     <section className="restaurant-hero">
       <Container>
@@ -23,10 +24,7 @@ function RestaurantHero({
 
           <div className="hero-left">
 
-            <Breadcrumb className="hero-breadcrumb">
-              <Breadcrumb.Item href="/">Home</Breadcrumb.Item>
-              <Breadcrumb.Item active>Restaurants</Breadcrumb.Item>
-            </Breadcrumb>
+          
 
             <div className="hero-badge">
               🍽 100+ Restaurants Near You
@@ -48,7 +46,18 @@ function RestaurantHero({
                 <FaMapMarkerAlt />
 
                 <div>
-                  <p>Jaipur,RJ</p>
+  <select
+    className="location-select"
+    value={location}
+    onChange={(e) => setLocation(e.target.value)}
+>
+    <option value="">All Locations</option>
+    <option value="Jaipur">Jaipur</option>
+    <option value="Delhi">Delhi</option>
+    <option value="Mumbai">Mumbai</option>
+    <option value="Noida">Noida</option>
+    <option value="Kolkata">Kolkata</option>
+</select>
                 
                 </div>
 
@@ -67,8 +76,12 @@ function RestaurantHero({
 />
 
               </div>
-
-             <Button className="search-btn" type="button">
+<Button
+    className="search-btn"
+    onClick={() => {
+        // No navigation needed because filtering is live
+    }}
+>
     <FaSearch />
     Search
 </Button>

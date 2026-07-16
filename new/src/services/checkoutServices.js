@@ -20,24 +20,18 @@ export const placeOrder = async (orderData) => {
 
     );
 
-    return res.data;
+  return res.data;
 };
 
 export const getOrders = async () => {
 
     const token = localStorage.getItem("token");
 
-    const res = await axios.get(
-
-        API,
-
-        {
-            headers: {
-                Authorization: `Bearer ${token}`
-            }
+    const res = await axios.get(API,{
+        headers:{
+            Authorization:`Bearer ${token}`
         }
+    });
 
-    );
-
-    return res.data;
+    return res.data.orders;   // ✅ return only the array
 };

@@ -1,6 +1,6 @@
 import Header from "../Components/Header";
 import Footer from "../Components/Footer";
-/*import aboutHero from "../assets/images/about-hero2.png";*/
+import aboutHero from "../assets/images/about-hero3.png";
 import ourStory from "../assets/images/our-story.png";
 import "../styles/About.css";
 import Stats from "../Components/Stats";
@@ -24,72 +24,81 @@ export default function About() {
 
       {/* ================= HERO ================= */}
 
-      <section className="about-hero">
-        <div className="hero-content">
+<section className="about-hero">
 
-          <div className="hero-left">
+    <div className="about-hero-content">
 
-            <span className="hero-tag">
-              ABOUT BITERUSH
+        <div className="about-hero-left">
+
+            <span className="about-hero-tag">
+                ABOUT BITERUSH
             </span>
 
-           <h1>
-    Delivering
-    <br />
-    <span>Happiness,</span>
-    <br />
-    One Bite at a Time
-</h1>
+            <h1>
+                Delivering
+                <br/>
+                <span>Happiness,</span>
+                <br />
+                One Bite at a Time
+            </h1>
 
             <p>
-              At BiteRush, we believe great food brings people together.
-              Our platform connects food lovers with their favorite restaurants
-              through a fast, secure, and seamless ordering experience.
-              <br /><br />
-              Whether you're craving burgers, pizza, desserts, or healthy meals,
-              BiteRush makes every order simple, reliable, and enjoyable.
+                At BiteRush, we believe great food brings people together.
+                Our platform connects food lovers with their favorite
+                restaurants through a fast, secure and seamless ordering
+                experience.
             </p>
 
-            <div className="hero-buttons">
-              <button 
-             className="primary-btn"
-             onClick={() => navigate("/restaurants")}>
-                Explore Restaurants
-              </button>
+            <p>
+                Whether you're craving burgers, pizza, desserts or healthy
+                meals, BiteRush makes every order simple, reliable and
+                enjoyable.
+            </p>
 
-              <button
-    className="secondary-btn"
-    onClick={() => {
-        document
-            .getElementById("our-story")
-            .scrollIntoView({
-                behavior: "smooth"
-            });
-    }}
->
-    Learn More
-</button>
+            <div className="about-hero-buttons">
+
+                <button
+                    className="about-primary-btn"
+                    onClick={() => navigate("/restaurants")}
+                >
+                    Explore Restaurants
+                </button>
+
+                <button
+                    className="about-secondary-btn"
+                    onClick={() =>
+                        document
+                            .getElementById("our-story")
+                            .scrollIntoView({
+                                behavior: "smooth",
+                            })
+                    }
+                >
+                    Learn More
+                </button>
+
             </div>
 
-          </div>
+        </div>
 
-         
-{/*<div className="about-hero-right">
+        <div className="about-hero-right">
 
             <img
                 src={aboutHero}
                 alt="About BiteRush"
+                className="about-hero-image"
             />
 
-        </div>*/}
+        </div>
 
-            {/*<div className="floating burger">🍔</div>
-            <div className="floating pizza">🍕</div>
-            <div className="floating fries">🍟</div>
-            <div className="floating drink">🥤</div>*/}
+    </div>
 
-          </div>
-        </section>
+</section>
+
+         
+
+
+          
 
       {/* ================= OUR STORY ================= */}
 

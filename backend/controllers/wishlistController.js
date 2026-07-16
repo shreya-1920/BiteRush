@@ -92,11 +92,62 @@ const removeWishlist = async(req,res)=>{
     });
 
 };
+const toggleWishlist = async (req, res) => {
+
+    try {
+
+        const user = req.user.userId;
+
+        const { restaurantId } = req.body;
+
+        const exists = await Wishlist.findOne({
+            user,
+            restaurantId
+        });
+
+        if (exists) {
+
+            await Wishlist.findByIdAndDelete(exists._id);
+
+            return res.json({
+                added: false,
+                message: "Removed from wishlist"
+            });
+
+        }
+
+        const item = await Wishlist.create({
+
+            user,
+
+            ...req.body
+
+        });
+
+        res.json({
+
+            added: true,
+
+            message: "Added to wishlist",
+
+            item
+
+        });
+
+    } catch (error) {
+
+        res.status(500).json({
+            message: error.message
+        });
+
+    }
+
+};
 
 module.exports={
 
-    addToWishlist,
-
+    
+toggleWishlist,
     getWishlist,
 
     removeWishlist

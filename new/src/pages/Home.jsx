@@ -5,6 +5,8 @@ import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import foodPlatter from "../assets/images/food-platter.png";
 import Stats from "../Components/Stats";
+import { useLocation } from "../context/LocationContext";
+import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import {
   FaStar,
   FaMotorcycle,
@@ -25,8 +27,8 @@ import "swiper/css";
 import burgerImg from "../assets/images/burger-image.png";
 import pizzaImg from "../assets/images/pizza-image.png";
 import coffeeImg from "../assets/images/coffee.png";
-import chineseImg from "../assets/images/chinese.png";
-import dessertImg from "../assets/images/desserts.png";
+/*import chineseImg from "../assets/images/chinese.png";*/
+/*import dessertImg from "../assets/images/desserts.png";*/
 import drinksImg from "../assets/images/drinks.png";
 import northIndianImg from "../assets/images/north-indian.png";
 import southIndianImg from "../assets/images/south-indian.png";
@@ -93,6 +95,8 @@ import { useNavigate } from "react-router-dom";
 
 
 function Home() {
+  const [showLocation, setShowLocation] = useState(false);
+  const { location, setLocation } = useLocation();
 
  const [copied, setCopied] = useState(false);
 
@@ -106,7 +110,7 @@ const copyCoupon = () => {
         setCopied(false);
     }, 2000);
 };
-  const [location, setLocation] = useState("");
+  
 const [search, setSearch] = useState("");
   const categories=[
               {
@@ -124,7 +128,7 @@ const [search, setSearch] = useState("");
               {
                   id:3,
                   name:"Burger",
-                  image:burgerImg, 
+                  image:"https://plus.unsplash.com/premium_photo-1695822019254-29dbf739474d?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MzN8fGJ1cmdlciUyMGltYWdlfGVufDB8fDB8fHww", 
                   count:"90+",
               },
               {
@@ -160,13 +164,13 @@ const [search, setSearch] = useState("");
               {
                   id:9,
                   name:"Chinese",
-                  image:chineseImg, 
+                  image:"https://images.unsplash.com/photo-1614104030967-5ca61a54247b?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTh8fGNoaW5lc2UlMjBmb29kfGVufDB8fDB8fHww", 
                    count: "30+"
               },
               {
                   id:10,
                   name:"Desserts",
-                  image:dessertImg, 
+                  image:"https://plus.unsplash.com/premium_photo-1681826475987-0e91bd4e6428?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OXx8ZGVzc2VydHMlMjBpbWFnZXN8ZW58MHx8MHx8fDA%3D", 
                    count: "45+",
               },
                {
@@ -328,12 +332,59 @@ const navigate = useNavigate();
 
               <Form className="br-search-form">
 
-                <Form.Control
-    className="br-location-input"
-    placeholder="📍 Your Location"
-    value={location}
-    onChange={(e) => setLocation(e.target.value)}
-/>
+<div className="br-location-dropdown">
+
+    <button
+        type="button"
+        className="br-location-btn"
+        onClick={() => setShowLocation(!showLocation)}
+    >
+        📍 {location}
+        <span>▼</span>
+    </button>
+
+    {showLocation && (
+
+        <div className="br-location-menu">
+
+            {[
+              "All Locations",
+                "Jaipur",
+                "Delhi",
+                "Mumbai",
+                "Noida",
+                "Kolkata"
+            ].map((city) => (
+
+                <div
+                    key={city}
+                    className="br-location-item"
+                    onClick={() => {
+
+                        setLocation(city);
+
+                        localStorage.setItem(
+                            "location",
+                            city
+                        );
+
+                        setShowLocation(false);
+
+                    }}
+                >
+
+                    {city}
+
+                </div>
+
+            ))}
+
+        </div>
+
+    )}
+
+</div>
+
                 <Form.Control
     className="br-search-input"
     placeholder="🍕 Search dishes or restaurants"
@@ -341,11 +392,11 @@ const navigate = useNavigate();
     onChange={(e) => setSearch(e.target.value)}
 />
 
-               <Button
+<Button
     className="br-search-btn"
     onClick={() =>
         navigate(
-            `/restaurants?search=${encodeURIComponent(search)}`
+            `/restaurants?search=${encodeURIComponent(search)}&location=${encodeURIComponent(location)}`
         )
     }
 >
@@ -361,21 +412,21 @@ const navigate = useNavigate();
 
             <div className="br-hero-buttons">
 
-             <Button
+        <Button
     className="br-order-btn"
     onClick={() => navigate("/restaurants")}
 >
-                Order Now
-                <HiArrowLongRight />
-              </Button>
+    Order Now
+    <HiArrowLongRight />
+</Button>
 
-       <Button
+<Button
     className="br-explore-btn"
     onClick={() => navigate("/restaurants")}
 >
-                Explore Restaurants
-                <HiArrowLongRight />
-              </Button>
+    Explore Restaurants
+    <HiArrowLongRight />
+</Button>
 
             </div>
 
@@ -473,53 +524,61 @@ const navigate = useNavigate();
                   </svg>
               </div>
       
-              <Container>
+              <Container fluid className="px-5">
       
                   <div className="section-title">
                       <h2>Browse Categories</h2>
                       <p>Choose your favourite dishes</p>
                   </div>
       
-                  <Swiper
-                      modules={[Navigation]}
-                      navigation
-                      spaceBetween={20}
-                      slidesPerView={3.6}
-                  >
-      
-                      {categories.map((category) => (
-      
-                          <SwiperSlide key={category.id}>
-      
-                              <div
-    className="category-card"
-    onClick={() =>
-        navigate(
-            `/restaurants?category=${category.name.toLowerCase()}`
-        )
-    }
->
-      
-                                  <div className="category-image">
-                                      <img
-                                          src={category.image}
-                                          alt={category.name}
-                                      />
-                                  </div>
-      
-                                  <div className="category-content">
-                                      <h4>{category.name}</h4>
-                                      <p>{category.count} Restaurants</p>
-                                  </div>
-      
-                              </div>
-      
-                          </SwiperSlide>
-      
-                      ))}
-      
-                  </Swiper>
-      
+  <div className="categories-slider">
+
+    <button className="category-prev">
+        <FaChevronLeft />
+    </button>
+
+    <button className="category-next">
+        <FaChevronRight />
+    </button>
+
+    <Swiper
+        modules={[Navigation]}
+        navigation={{
+            prevEl: ".category-prev",
+            nextEl: ".category-next",
+        }}
+        spaceBetween={20}
+        slidesPerView={3.6}
+    >
+
+        {categories.map((category) => (
+
+            <SwiperSlide key={category.id}>
+
+                <div
+                    className="category-card"
+                    onClick={() =>
+                        navigate(`/restaurants?category=${category.name.toLowerCase()}`)
+                    }
+                >
+                    <div className="category-image">
+                        <img src={category.image} alt={category.name} />
+                    </div>
+
+                    <div className="category-content">
+                        <h4>{category.name}</h4>
+                        <p>{category.count} Restaurants</p>
+                    </div>
+
+                </div>
+
+            </SwiperSlide>
+
+        ))}
+
+    </Swiper>
+
+</div>
               </Container>
       
           </section>

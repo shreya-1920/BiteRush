@@ -3,7 +3,10 @@ exports.addToCart = async (req, res) => {
   try {
     const { productId, name, image, price, quantity } = req.body;
 
-    const existingItem = await Cart.findOne({ productId });
+   const existingItem = await Cart.findOne({
+    user: req.user.userId,
+    productId,
+});
 
     if (existingItem) {
       existingItem.quantity += quantity || 1;
@@ -17,12 +20,13 @@ exports.addToCart = async (req, res) => {
     }
 
     const cartItem = await Cart.create({
-      productId,
-      name,
-      image,
-      price,
-      quantity,
-    });
+    user: req.user.userId,
+    productId,
+    name,
+    image,
+    price,
+    quantity,
+});
 
     res.status(201).json({
       success: true,
@@ -40,8 +44,9 @@ exports.addToCart = async (req, res) => {
 
 exports.getCart = async (req, res) => {
   try {
-    const cart = await Cart.find();
-
+    const cart = await Cart.find({
+    user: req.user.userId,
+});
     res.json({
       success: true,
       cart,
@@ -61,11 +66,18 @@ exports.updateCart = async (req, res) => {
   try {
     const { quantity } = req.body;
 
-    const cart = await Cart.findByIdAndUpdate(
-      req.params.id,
-      { quantity },
-      { new: true }
-    );
+    const cart = await Cart.findOneAndUpdate(
+    {
+        _id: req.params.id,
+        user: req.user.userId,
+    },
+    {
+        quantity,
+    },
+    {
+        new: true,
+    }
+);
 
     res.json({
       success: true,
@@ -82,7 +94,10 @@ exports.updateCart = async (req, res) => {
 
 exports.removeCartItem = async (req, res) => {
   try {
-    await Cart.findByIdAndDelete(req.params.id);
+    await Cart.findOneAndDelete({
+    _id: req.params.id,
+    user: req.user.userId,
+});
 
     res.json({
       success: true,
@@ -99,8 +114,9 @@ exports.removeCartItem = async (req, res) => {
 
 exports.clearCart = async (req, res) => {
   try {
-    await Cart.deleteMany();
-
+   await Cart.deleteMany({
+    user: req.user.userId,
+});
     res.json({
       success: true,
       message: "Cart cleared",

@@ -8,7 +8,7 @@ const subtotal = cartItems.reduce(
     0
 );
 
-const target = 1500; // Free delivery after ₹1500
+const target = 500; // Free delivery after ₹500
 
 const remaining = Math.max(target - subtotal, 0);
 

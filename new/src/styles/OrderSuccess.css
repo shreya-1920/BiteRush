@@ -99,7 +99,7 @@
 }
 
 .success-hero span{
-    color:#FF6B35;
+    color:var(--primary);
     font-weight:600;
 }
 
@@ -120,7 +120,7 @@
     display:flex;
     align-items:center;
     gap:12px;
-    color:#FF6B35;
+    color:var(--primary);
     margin-bottom:25px;
 }
 
@@ -145,7 +145,7 @@
 
 .detail-box svg{
     font-size:24px;
-    color:#FF6B35;
+    color:var(--primary);
 }
 
 .detail-box small{
@@ -203,12 +203,12 @@
 }
 
 .progress-step.active .progress-icon{
-    background:#FF6B35;
+    background:var(--primary);
     color:#fff;
 }
 
 .progress-step.active p{
-    color:#FF6B35;
+    color:var(--primary);
     font-weight:600;
 }
 
@@ -228,7 +228,7 @@
     padding:16px 34px;
     border:none;
     border-radius:14px;
-    background:#FF6B35;
+    background:var(--primary);
     color:#fff;
     font-size:16px;
     font-weight:600;
@@ -243,10 +243,10 @@
 
 .continue-btn{
     padding:16px 34px;
-    border:2px solid #FF6B35;
+    border:2px solid var(--primary);
     border-radius:14px;
     background:#fff;
-    color:#FF6B35;
+    color:var(--primary);
     font-size:16px;
     font-weight:600;
     cursor:pointer;
@@ -254,7 +254,7 @@
 }
 
 .continue-btn:hover{
-    background:#FF6B35;
+    background:var(--primary);
     color:#fff;
 }
 

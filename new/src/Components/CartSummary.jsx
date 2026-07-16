@@ -54,9 +54,13 @@ export default function CartSummary({
             <div className="summary-row">
                 <span>Delivery Fee</span>
 
-                <span className="free-delivery">
-                    {deliveryFee === 0 ? "FREE" : `₹${deliveryFee}`}
-                </span>
+                {deliveryFee === 0 ? (
+    <span className="free-delivery">
+        <del>₹40</del> FREE
+    </span>
+) : (
+    <span>₹{deliveryFee}</span>
+)}
             </div>
 
             <div className="summary-row">

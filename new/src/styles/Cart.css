@@ -1,6 +1,5 @@
 .cart-page{
-    background:#FFF9F5;
-    min-height:100vh;
+    background:var(--bg);    min-height:100vh;
     padding:120px 0 60px;
 }
 
@@ -844,19 +843,17 @@ font-size:18px;
     box-shadow:0 10px 25px rgba(211,84,34,.18);
 }
 
-.explore-btn:hover{
 
-    background:var(--primary-dark);
-
-    border-color:var(--primary-dark);
-
-    color:var(--white);
-
-    transform:translateY(-3px);
-
-    box-shadow:0 15px 35px rgba(211,84,34,.25);
+.free-delivery del{
+    color:#999;
+    margin-right:8px;
+    font-weight:400;
 }
 
+.free-delivery{
+    color:#16A34A;
+    font-weight:700;
+}
 .orders-btn{
 
     display:flex;

@@ -5,10 +5,55 @@ import {
   FaMotorcycle,
   FaArrowRight,
 } from "react-icons/fa";
-
+import { addToWishlist } from "../services/WishlistService";
+import { toast } from "react-toastify";
 import { Link } from "react-router-dom";
 
-function RestaurantCard({ restaurant }) {
+
+function RestaurantCard({
+    restaurant,
+    wishlistIds,
+    fetchWishlist
+})  {
+  const isWishlisted = wishlistIds.includes(
+    String(restaurant.id)
+);
+  const handleWishlist = async (e) => {
+
+    e.preventDefault();
+
+    try {
+
+        const res = await addToWishlist({
+
+            restaurantId: String(restaurant.id),
+
+            restaurantName: restaurant.name,
+
+            image: restaurant.logo,
+
+            category: restaurant.category,
+
+            rating: restaurant.rating,
+
+            deliveryTime: restaurant.time
+
+        });
+
+        toast.success(res.data.message);
+
+        fetchWishlist();
+
+    }
+
+    catch(error){
+
+        toast.error(error.response?.data?.message);
+
+    }
+
+};
+
   return (
     <Link to={`/restaurant/${restaurant.id}`} className="restaurant-card-link" >
     <div className="restaurant-card">
@@ -17,9 +62,14 @@ function RestaurantCard({ restaurant }) {
 
        <img src={restaurant.logo} alt={restaurant.name} />
 
-        <button className="favorite-btn">
-          <FaHeart />
-        </button>
+       <button
+    className="favorite-btn"
+    onClick={handleWishlist}
+>
+    <FaHeart
+    className={isWishlisted ? "heart active" : "heart"}
+/>
+</button>
 
         <div className="offer-badge">
           {restaurant.offer}

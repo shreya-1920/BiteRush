@@ -10,15 +10,25 @@ import "./styles/global.css";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import ScrollToTop from "./Components/ScrollToTop";
+import { LocationProvider } from "./context/LocationContext";
 window.history.scrollRestoration = "manual";
 ReactDOM.createRoot(document.getElementById("root")).render(
 
     <>
-    <CartProvider>
-      <BrowserRouter>
-      <ScrollToTop/>
-        <App />
-      </BrowserRouter>
+      <CartProvider>
+
+        <LocationProvider>
+
+            <BrowserRouter>
+
+                <ScrollToTop />
+
+                <App />
+
+            </BrowserRouter>
+
+        </LocationProvider>
+
     </CartProvider>
 
       <ToastContainer

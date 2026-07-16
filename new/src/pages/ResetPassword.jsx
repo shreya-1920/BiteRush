@@ -3,19 +3,43 @@ import { useState } from "react";
 import logo from "../assets/images/logo.png";
 /*import burger from "../assets/images/burger.png";
 import pasta from "../assets/images/pasta.png";*/
-
+import { resetPassword } from "../services/AuthServices";
+import {
+    IoEyeOutline,
+    IoEyeOffOutline,
+    IoArrowBackOutline
+} from "react-icons/io5";
 import { FaLock } from "react-icons/fa";
-import { IoEyeOutline } from "react-icons/io5";
-import { IoArrowBackOutline } from "react-icons/io5";
+import { useNavigate, useParams } from "react-router-dom";
+import { toast } from "react-toastify";
 
 export default function ResetPassword() {
-const [password, setPassword] = useState("");
+    const navigate = useNavigate();
+const { token } = useParams();
+
 const [confirmPassword, setConfirmPassword] = useState("");
 
-const [showPassword, setShowPassword] = useState(false);
 const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
+const [loading, setLoading] = useState(false);
+const [password, setPassword] = useState("");
+
+
+const [showPassword, setShowPassword] = useState(false);
+
+
 const getPasswordStrength = (password) => {
+    if(password.length===0){
+
+    return{
+
+        text:"",
+
+        level:0
+
+    };
+
+}
     let score = 0;
 
     if (password.length >= 8) score++;
@@ -52,9 +76,64 @@ const validations = {
     number: /\d/.test(password),
     special: /[!@#$%^&*(),.?":{}|<>]/.test(password),
     match:
-        password !== "" &&
-        password === confirmPassword
+    confirmPassword.length > 0 &&
+    password === confirmPassword
 };
+const isPasswordValid =
+    validations.length &&
+    validations.uppercase &&
+    validations.lowercase &&
+    validations.number &&
+    validations.special &&
+    validations.match;
+const handleResetPassword = async () => {
+
+    if (!password || !confirmPassword) {
+        toast.error("Please fill all fields.");
+        return;
+    }
+
+    if (!isPasswordValid) {
+        toast.error("Please satisfy all password requirements.");
+        return;
+    }
+
+    try {
+
+        setLoading(true);
+
+        const { data } = await resetPassword({
+            token,
+            password
+        });
+
+        toast.success(data.message);
+
+        setTimeout(() => {
+
+            navigate("/auth");
+
+        }, 1500);
+
+    }
+    catch (error) {
+
+        toast.error(
+            error.response?.data?.message ||
+            "Something went wrong."
+        );
+
+    }
+    finally {
+
+        setLoading(false);
+
+    }
+
+};
+
+
+ 
     return (
 
         <section className="reset-page">
@@ -106,11 +185,11 @@ const validations = {
     onChange={(e) => setPassword(e.target.value)}
 />
 
-                   <span
+                 <span
     className="eye-icon"
     onClick={() => setShowPassword(!showPassword)}
 >
-    <IoEyeOutline />
+    {showPassword ? <IoEyeOffOutline /> : <IoEyeOutline />}
 </span>
 
                 </div>
@@ -132,11 +211,9 @@ const validations = {
 />
 <span
     className="eye-icon"
-    onClick={() =>
-        setShowConfirmPassword(!showConfirmPassword)
-    }
+    onClick={() => setShowConfirmPassword(!showConfirmPassword)}
 >
-    <IoEyeOutline />
+    {showConfirmPassword ? <IoEyeOffOutline /> : <IoEyeOutline />}
 </span>
 
                 </div>
@@ -187,11 +264,18 @@ const validations = {
 
 </div>
 
-<button className="reset-btn">
-    Reset Password
+<button
+    className="reset-btn"
+    onClick={handleResetPassword}
+    disabled={loading}
+>
+    {loading ? "Resetting..." : "Reset Password"}
 </button>
 
-<div className="back">
+<div
+    className="back"
+    onClick={() => navigate("/auth")}
+>
     <IoArrowBackOutline />
     Back to Login
 </div>

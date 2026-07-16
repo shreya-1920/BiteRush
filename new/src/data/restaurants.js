@@ -2,6 +2,7 @@ const restaurants = [
   {
     id: 1,
     name: "The Smokehouse Grill",
+    city:"Jaipur",
     category: "American",
     cuisine: "American • Burgers • BBQ",
     rating: 4.9,
@@ -25,6 +26,7 @@ const restaurants = [
   {
     id: 2,
     name: "Napoli Express",
+    city:"Jaipur",
     category: "Italian",
     cuisine: "Italian • Pizza • Pasta",
     rating: 4.7,
@@ -48,6 +50,7 @@ const restaurants = [
   {
     id: 3,
     name: "Sakura Kitchen",
+    city:"Delhi",
     category: "Japanese",
     cuisine: "Japanese • Sushi • Ramen",
     rating: 4.8,
@@ -68,6 +71,7 @@ const restaurants = [
   {
     id: 4,
     name: "Spice Junction",
+    city:"Delhi",
     category: "Indian",
     cuisine: "North Indian • Biryani",
     rating: 4.6,
@@ -88,6 +92,7 @@ const restaurants = [
   {
     id: 5,
     name: "Dragon Bowl",
+    city:"Mumbai",
     category: "Chinese",
     cuisine: "Chinese • Noodles • Dumplings",
     rating: 4.5,
@@ -113,6 +118,7 @@ const restaurants = [
   {
     id: 6,
     name: "Taco Fiesta",
+    city:"Mumbai",
     category: "Mexican",
     cuisine: "Tacos • Burritos",
     rating: 4.8,
@@ -135,6 +141,7 @@ const restaurants = [
   {
     id: 7,
     name: "Ocean Catch",
+    city:"Noida",
     category: "Seafood",
     cuisine: "Fish • Prawns",
     rating: 4.7,
@@ -155,6 +162,7 @@ const restaurants = [
   {
     id: 8,
     name: "Green Bowl",
+    city:"Noida",
     category: "Healthy",
     cuisine: "Salads • Smoothies",
     rating: 4.9,
@@ -175,6 +183,7 @@ const restaurants = [
   {
     id: 9,
     name: "Paris Café",
+    city:"Kolkata",
     category: "Cafe",
     cuisine: "Coffee • Desserts",
     rating: 4.6,
@@ -197,6 +206,7 @@ const restaurants = [
   {
     id: 10,
     name: "Royal Biryani",
+    city:"Chennai",
     category: "Indian",
     cuisine: "Hyderabadi • Mughlai",
     rating: 4.8,
@@ -221,6 +231,7 @@ const restaurants = [
   {
     id: 11,
     name: "Burger Republic",
+    city:"Jaipur",
     category: "Fast Food",
     cuisine: "Burgers • Fries",
     rating: 4.7,
@@ -245,6 +256,7 @@ const restaurants = [
   {
     id: 12,
     name: "Bella Pasta",
+    city:"Jaipur",
     category: "Italian",
     cuisine: "Pasta • Lasagna",
     rating: 4.9,

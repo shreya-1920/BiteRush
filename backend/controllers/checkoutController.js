@@ -13,8 +13,9 @@ exports.placeOrder = async (req, res) => {
       paymentMethod,
     } = req.body;
 
-    const cart = await Cart.find();
-
+   const cart = await Cart.find({
+    user: req.user.userId,
+});
     if (cart.length === 0) {
 
       return res.status(400).json({
@@ -46,7 +47,9 @@ exports.placeOrder = async (req, res) => {
 
   
 
-    await Cart.deleteMany();
+   await Cart.deleteMany({
+    user: req.user.userId,
+});
 
     res.status(201).json({
 

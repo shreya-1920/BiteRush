@@ -36,7 +36,7 @@ function Checkout() {
   const [paymentMethod, setPaymentMethod] = useState("Cash");
   const [deliveryType, setDeliveryType] = useState("ASAP");
   const [scheduledDate, setScheduledDate] = useState("");
-
+const [appliedCoupon, setAppliedCoupon] = useState("");
   const [promo, setPromo] = useState("");
   const [discount, setDiscount] = useState(0);
 
@@ -71,14 +71,16 @@ useEffect(() => {
 
     if (promo === "WELCOME50") {
 
+        setAppliedCoupon("WELCOME50");
         setDiscount(50);
 
-        toast.success("₹50 OFF Applied!");
+        toast.success("WELCOME50 Applied!");
 
     }
 
     else if (promo === "FREEDEL") {
 
+        setAppliedCoupon("FREEDEL");
         setDiscount(deliveryFee);
 
         toast.success("Free Delivery Applied!");
@@ -89,14 +91,16 @@ useEffect(() => {
 
         const save20Discount = Math.min(subtotal * 0.20, 150);
 
+        setAppliedCoupon("SAVE20");
         setDiscount(save20Discount);
 
-        toast.success("20% OFF Applied!");
+        toast.success("SAVE20 Applied!");
 
     }
 
     else {
 
+        setAppliedCoupon("");
         setDiscount(0);
 
         toast.error("Invalid Coupon!");
@@ -557,8 +561,8 @@ useEffect(() => {
 
     <div
       className={`promo-offer ${
-        promo === "WELCOME50" ? "active" : ""
-      }`}
+    appliedCoupon === "WELCOME50" ? "active" : ""
+}`}
       onClick={() => setPromo("WELCOME50")}
     >
       <span className="offer-icon">🎉</span>
@@ -571,9 +575,9 @@ useEffect(() => {
     </div>
 
     <div
-      className={`promo-offer ${
-        promo === "FREEDEL" ? "active" : ""
-      }`}
+     className={`promo-offer ${
+    appliedCoupon === "FREEDEL" ? "active" : ""
+}`}
       onClick={() => setPromo("FREEDEL")}
     >
       <span className="offer-icon">🚚</span>
@@ -586,9 +590,9 @@ useEffect(() => {
     </div>
 
     <div
-      className={`promo-offer ${
-        promo === "SAVE20" ? "active" : ""
-      }`}
+     className={`promo-offer ${
+    appliedCoupon === "SAVE20" ? "active" : ""
+}`}
       onClick={() => setPromo("SAVE20")}
     >
       <span className="offer-icon">🔥</span>

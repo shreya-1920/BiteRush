@@ -16,6 +16,7 @@ import Terms from "./pages/Terms";
 import Accessibility from "./pages/Accessibility";
 import ResetPassword from "./pages/ResetPassword";
 import Profile from "./pages/Profile";
+import Wishlist from "./pages/Wishlist";
 function App() {
   return (
     <>
@@ -39,6 +40,7 @@ function App() {
     path="/reset-password/:token"
     element={<ResetPassword />}/>
     <Route path="/profile" element={<Profile />} />
+    <Route path="/wishlist" element={<Wishlist />} />
 
 
 

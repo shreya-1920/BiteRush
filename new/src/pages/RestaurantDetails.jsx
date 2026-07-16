@@ -2,7 +2,8 @@ import Header from "../Components/Header";
 import Footer from "../Components/Footer";
 
 import restaurants from "../data/restaurants";
-
+import { addToWishlist } from "../services/WishlistService";
+import { toast } from "react-toastify";
 import { useParams } from "react-router-dom";
 import "../styles/RestaurantDetails.css";
 import RestaurantHero from "../Components/RestaurantHero";
@@ -32,7 +33,7 @@ useEffect(() => {
   increaseQuantity,
   decreaseQuantity,
 } = useCart();
-   
+
   const { id } = useParams();
   const menuItems = menuData[id] || [];
 
@@ -43,7 +44,44 @@ useEffect(() => {
   if (!restaurant) {
     return <h2>Restaurant Not Found</h2>;
   }
-  
+  const handleWishlist = async () => {
+    console.log("Restaurant:", restaurant.name);
+console.log("Restaurant ID:", restaurant.id);
+
+    try {
+
+        await addToWishlist({
+
+            restaurantId: restaurant.id,
+
+            restaurantName: restaurant.name,
+
+            image: restaurant.logo,
+
+            category: restaurant.category,
+
+            rating: restaurant.rating,
+
+            deliveryTime: restaurant.deliveryTime
+
+        });
+
+        toast.success("Added to Wishlist ❤️");
+
+    }
+
+    catch(error){
+
+    console.log(error.response.data);
+        toast.error(
+            
+            error.response?.data?.message || "Failed"
+        );
+        
+
+    }
+
+};
  return (
     <>
      <Header />
@@ -173,7 +211,7 @@ console.log("Current Item ID:", item.id);
                     </div>
 
                     <div className="menu-image">
-                        <button className="wishlist-btn">
+                        <button className="wishlist-btn" onClick={handleWishlist}>
                             <FaHeart />
                         </button>
 
@@ -351,13 +389,13 @@ console.log("Current Item ID:", item.id);
     </p>
 
 </div>
-<button className="view-review-btn">
+{/*<button className="view-review-btn">
 
     View All Reviews
 
     <span>→</span>
 
-</button>
+</button>*/}
     </div>
 
 </div>

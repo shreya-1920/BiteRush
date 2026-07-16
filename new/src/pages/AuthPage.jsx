@@ -1,8 +1,8 @@
-import { useState,  } from "react";
+import { useState } from "react";
 import { toast } from "react-toastify";
 
-import logo from "../assets/images/logo.png";
-import foodImage from "../assets/images/auth-food.png";
+import Logo from "../assets/images/logo.png";
+/*import foodImage from "../assets/images/auth-food.png";*/
 
 import { useNavigate, useLocation } from "react-router-dom";
 import {
@@ -213,12 +213,25 @@ const handleForgotPassword = async () => {
 
           <div>
 
-   <div className="logo">
-    <div className="logo-icon">
-        <img src={logo} alt="logo" />
+<div className="hero-brand">
+
+    <div className="logo-circle">
+
+        <img
+            src={Logo}
+            alt="BiteRush"
+            className="hero-logo"
+        />
+
     </div>
 
-    <h3>BiteRush</h3>
+    <h2 className="hero-brand-name">
+        BiteRush
+    </h2>
+
+</div>
+
+   
 </div>
 
             <div className="customer-badge">
@@ -270,7 +283,7 @@ const handleForgotPassword = async () => {
 </div>
   </div>
 </div>
-</div>
+
 
 
       {/* RIGHT PANEL */}

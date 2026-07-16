@@ -4,9 +4,9 @@
 
 .checkout-page{
 
-    background:#FFF9F5;
-    min-height:100vh;
+    background:var(--bg);    min-height:100vh;
     padding:120px 8% 90px;
+    
 
 }
 
@@ -15,6 +15,7 @@
     width:100%;
     margin:auto;
     margin-top:60px;
+    margin-bottom: 80px;
 }
 
 /* ===========================
@@ -38,13 +39,13 @@
 .checkout-breadcrumb span{
 
     margin:0 10px;
-    color:#FF6B35;
+    color:var(--primary);
 
 }
 
 .checkout-breadcrumb strong{
 
-    color:#FF6B35;
+    color:var(--primary);
 
 }
 
@@ -52,8 +53,7 @@
 
     font-size:64px;
     font-family:"Playfair Display",serif;
-    color:#203864;
-    margin-bottom:10px;
+    color:var(--heading);    margin-bottom:10px;
 
 }
 
@@ -102,8 +102,7 @@
 .checkout-card h3{
 
     font-size:28px;
-    color:#203864;
-    margin:0;
+    color:var(--heading);    margin:0;
 
 }
 
@@ -206,7 +205,7 @@ border:none;
 
 border-radius:12px;
 
-background:#FF6B35;
+background:var(--primary);
 
 color:white;
 
@@ -313,7 +312,7 @@ background:#E65A28;
 .new-address-card input:focus,
 .new-address-card textarea:focus{
 
-    border-color:#FF6B35;
+    border-color:var(--primary);
 
     box-shadow:0 0 0 4px rgba(255,107,53,.08);
 
@@ -335,7 +334,7 @@ background:#E65A28;
 
     border-radius:14px;
 
-    background:linear-gradient(135deg,#FF6B35,#FF8C42);
+    background:var(--primary);
 
     color:#fff;
 
@@ -370,7 +369,7 @@ background:#E65A28;
 
     border-radius:14px;
 
-    background:linear-gradient(135deg,#FF6B35,#FF8A45);
+    background:linear-gradient(135deg,var(--primary),#FF8A45);
 
     color:#fff;
 
@@ -413,13 +412,12 @@ background:#E65A28;
 
 .edit-btn:hover{
 
-    color:#203864;
-
+    color:var(--heading);
 }
 
 .add-btn{
 
-    color:#FF6B35;
+    color:var(--primary);
 
 }
 
@@ -467,7 +465,7 @@ align-items:center;
 }
 .address-box:hover{
 
-    border-color:#FF6B35;
+    border-color:var(--primary);
 
 }
 
@@ -477,8 +475,7 @@ align-items:center;
 
     margin-bottom:10px;
 
-    color:#203864;
-
+    color:var(--heading);
 }
 
 .address-box p{
@@ -510,7 +507,7 @@ align-items:center;
 }
 
 .checkout-add-btn{
-    color:#FF6B35;
+    color:var(--primary);
 }
 
 /*==========================
@@ -550,7 +547,7 @@ align-items:center;
 
 .delivery-option:hover{
 
-    border-color:#FF6B35;
+    border-color:var(--primary);
 
     transform:translateY(-2px);
 
@@ -558,7 +555,7 @@ align-items:center;
 
 .delivery-option.active{
 
-    border-color:#FF6B35;
+    border-color:var(--primary);
 
     background:#FFF6F2;
 
@@ -583,7 +580,7 @@ align-items:center;
 }
 .delivery-option.active .delivery-radio{
 
-    border-color:#FF6B35;
+    border-color:var(--primary);
 
 }
 
@@ -597,7 +594,7 @@ align-items:center;
 
     height:10px;
 
-    background:#FF6B35;
+    background:var(--primary);
 
     border-radius:50%;
 
@@ -669,8 +666,7 @@ align-items:center;
 
     font-weight:600;
 
-    color:#203864;
-
+    color:var(--heading);
     margin-bottom:10px;
 
 }
@@ -699,7 +695,7 @@ align-items:center;
 .form-group input:focus,
 .form-group textarea:focus{
 
-    border-color:#FF6B35;
+    border-color:var(--primary);
 
     box-shadow:0 0 0 4px rgba(255,107,53,.12);
 
@@ -804,13 +800,12 @@ font-size:15px;
 
 font-weight:600;
 
-color:#203864;
-
+color:var(--heading);
 }
 
 .payment-option:hover{
 
-border-color:#FF6B35;
+border-color:var(--primary);
 
 transform:translateY(-3px);
 
@@ -818,7 +813,7 @@ transform:translateY(-3px);
 
 .payment-option.active{
 
-border-color:#FF6B35;
+border-color:var(--primary);
 
 background:#FFF7F3;
 
@@ -903,7 +898,7 @@ grid-template-columns:1fr;
 }
 
 .promo-input:focus{
-    border-color:#FF6B35;
+    border-color:var(--primary);
 }
 
 .apply-btn{
@@ -915,9 +910,14 @@ grid-template-columns:1fr;
 
     border-radius:0 18px 18px 0;
 
-    background:linear-gradient(135deg,#FF6B35,#FF8C42);
+  
 
-    color:#fff;
+    background:var(--primary);
+
+    color:var(--white);
+
+
+   
 
     font-size:17px;
     font-weight:700;
@@ -942,7 +942,10 @@ grid-template-columns:1fr;
     cursor:not-allowed;
 
 }
+.apply-btn:hover{
 
+    background:var(--primary-hover);
+}
 
 /* ===========================================================
    DIVIDER
@@ -1030,7 +1033,7 @@ grid-template-columns:1fr;
 
     transform:translateY(-6px);
 
-    border-color:#FF6B35;
+    border-color:var(--primary);
 
     box-shadow:0 12px 25px rgba(255,107,53,.12);
 
@@ -1050,7 +1053,7 @@ grid-template-columns:1fr;
 
     margin:10px 0;
 
-    color:#FF6B35;
+    color:var(--primary);
 
     font-size:24px;
 
@@ -1142,8 +1145,7 @@ margin-bottom:30px;
 
 font-size:30px;
 
-color:#203864;
-
+color:var(--heading);
 }
 
 .summary-items{
@@ -1268,6 +1270,7 @@ margin-top:10px;
 margin:5px 0 0;
 
 color:#666;
+font-size: 25px;
 
 }
 
@@ -1281,9 +1284,9 @@ border:none;
 
 border-radius:50px;
 
-background:#FF6B35;
+background:var(--primary);
 
-color:white;
+    color:var(--white);
 
 font-size:18px;
 
@@ -1319,14 +1322,14 @@ color:#777;
 
 font-size:38px;
 
-color:#FF6B35;
+color:var(--primary);
 
 }
 .payment-icon{
 
     font-size:32px;
 
-    color:#FF6B35;
+    color:var(--primary);
 
     margin-bottom:10px;
 
@@ -1382,6 +1385,6 @@ color:#FF6B35;
 
     font-size:42px;
 
-    color:#FF6B35;
+    color:var(--primary);
 
 }

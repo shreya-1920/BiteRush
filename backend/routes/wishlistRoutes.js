@@ -6,7 +6,7 @@ const auth = require("../middleware/authMiddleware");
 
 const {
 
-    addToWishlist,
+    toggleWishlist,
 
     getWishlist,
 
@@ -14,7 +14,7 @@ const {
 
 }=require("../controllers/wishlistController");
 
-router.post("/",auth,addToWishlist);
+router.post("/",auth,toggleWishlist);
 
 router.get("/",auth,getWishlist);
 

@@ -1,7 +1,7 @@
 const jwt = require("jsonwebtoken");
 
 const authMiddleware = (req, res, next) => {
-
+console.log("HEADERS RECEIVED:", req.headers);
     const authHeader =
         req.headers.authorization;
 
@@ -20,7 +20,7 @@ const authMiddleware = (req, res, next) => {
             token,
             process.env.JWT_SECRET
         );
-
+console.log(decoded);
         req.user = decoded;
 
         next();

@@ -89,7 +89,7 @@ const handleSubmit = async (e) => {
 
             <div className="contact-buttons">
 
-                <button className="primary-btn"    onClick={() => {
+                <button className="contact-primary-btn"    onClick={() => {
         document
             .getElementById("faq")
             ?.scrollIntoView({
@@ -99,7 +99,7 @@ const handleSubmit = async (e) => {
                     View FAQs
                 </button>
 
-                <button className="secondary-btn"  onClick={() => {
+                <button className="contact-secondary-btn"  onClick={() => {
         document
             .getElementById("contact-form")
             ?.scrollIntoView({
