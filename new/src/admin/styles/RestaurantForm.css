@@ -1,0 +1,218 @@
+/* ===========================
+   Restaurant Form
+=========================== */
+
+.rf-admin-form{
+    padding:30px;
+}
+
+/* ===========================
+   Section Card
+=========================== */
+
+.rf-form-section{
+    background:#ffffff;
+    border:1px solid #edf1f5;
+    border-radius:22px;
+    padding:28px;
+    margin-bottom:28px;
+    box-shadow:0 8px 24px rgba(0,0,0,.05);
+    transition:.3s;
+}
+
+.rf-form-section:hover{
+    transform:translateY(-2px);
+    box-shadow:0 12px 28px rgba(0,0,0,.08);
+}
+
+/* ===========================
+   Header
+=========================== */
+
+.rf-section-header{
+    margin-bottom:24px;
+    border-bottom:1px solid #eceff3;
+    padding-bottom:16px;
+}
+
+.rf-section-title{
+    display:flex;
+    align-items:center;
+    gap:16px;
+}
+
+.rf-section-icon{
+    width:50px;
+    height:50px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    border-radius:16px;
+    background:#fff3eb;
+    color:#ff6b00;
+    font-size:22px;
+    flex-shrink:0;
+}
+
+.rf-section-title h3{
+    margin:0;
+    font-size:24px;
+    font-weight:700;
+    color:#23324d;
+}
+
+/* ===========================
+   Grid
+=========================== */
+
+.rf-form-grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:22px;
+}
+
+/* ===========================
+   Inputs
+=========================== */
+
+.rf-form-group{
+    display:flex;
+    flex-direction:column;
+}
+
+.rf-form-group label{
+    margin-bottom:10px;
+    font-weight:600;
+    color:#555;
+    font-size:14px;
+}
+
+.rf-form-group input,
+.rf-form-group select{
+    width:100%;
+    height:54px;
+    border:1px solid #dfe4ea;
+    border-radius:14px;
+    padding:0 18px;
+    font-size:15px;
+    background:#fafafa;
+    transition:.25s;
+    outline:none;
+}
+
+.rf-form-group input:focus,
+.rf-form-group select:focus{
+    border-color:#ff6b00;
+    background:#fff;
+    box-shadow:0 0 0 4px rgba(255,107,0,.12);
+}
+
+/* ===========================
+   Feature Cards
+=========================== */
+
+.rf-feature-grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:18px;
+}
+
+.rf-feature-card{
+    display:flex;
+    align-items:center;
+    gap:14px;
+    padding:18px;
+    border-radius:16px;
+    border:1px solid #ececec;
+    background:#fafafa;
+    cursor:pointer;
+    transition:.25s;
+}
+
+.rf-feature-card:hover{
+    border-color:#ff6b00;
+    background:#fff6ef;
+    transform:translateY(-2px);
+}
+
+.rf-feature-card input{
+    width:20px;
+    height:20px;
+    accent-color:#ff6b00;
+}
+
+.rf-feature-card span{
+    font-weight:600;
+    color:#333;
+}
+
+/* ===========================
+   Buttons
+=========================== */
+
+.rf-form-buttons{
+    display:flex;
+    justify-content:flex-end;
+    gap:16px;
+    margin-top:35px;
+}
+
+.rf-cancel-btn{
+    height:52px;
+    padding:0 28px;
+    border:none;
+    border-radius:14px;
+    background:#eef2f6;
+    color:#555;
+    font-weight:600;
+    cursor:pointer;
+    transition:.25s;
+}
+
+.rf-cancel-btn:hover{
+    background:#dfe6ee;
+}
+
+.br-save-btn{
+    height:52px;
+    padding:0 30px;
+    border:none;
+    border-radius:14px;
+    background:linear-gradient(135deg,#ff7a18,#ff5100);
+    color:white;
+    font-size:15px;
+    font-weight:700;
+    cursor:pointer;
+    transition:.3s;
+    box-shadow:0 8px 20px rgba(255,107,0,.25);
+}
+
+.br-save-btn:hover{
+    transform:translateY(-2px);
+    box-shadow:0 12px 28px rgba(255,107,0,.35);
+}
+
+/* ===========================
+   Responsive
+=========================== */
+
+@media(max-width:900px){
+
+.form-grid{
+    grid-template-columns:1fr;
+}
+
+.feature-grid{
+    grid-template-columns:1fr;
+}
+
+.form-buttons{
+    flex-direction:column;
+}
+
+.cancel-btn,
+.br-save-btn{
+    width:100%;
+}
+
+}

@@ -173,10 +173,10 @@
     display:flex;
 
     justify-content:flex-end;
-
+padding-top:120px;
     align-items:center;
 
-    padding-right:40px;
+    padding-right:120px;
 }
 
 .about-hero-image{

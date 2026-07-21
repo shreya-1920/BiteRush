@@ -148,7 +148,59 @@ const getProfile = async (req, res) => {
 
     }
 };
+// ================= UPDATE PROFILE =================
 
+const updateProfile = async (req, res) => {
+
+    try {
+
+        const { name, phone } = req.body;
+
+        const user = await User.findById(req.user.userId);
+
+        if (!user) {
+
+            return res.status(404).json({
+                success: false,
+                message: "User not found"
+            });
+
+        }
+
+        user.name = name || user.name;
+        user.phone = phone || user.phone;
+
+        await user.save();
+
+        res.status(200).json({
+
+            success: true,
+
+            message: "Profile updated successfully",
+
+            user: {
+                id: user._id,
+                name: user.name,
+                email: user.email,
+                phone: user.phone
+            }
+
+        });
+
+    }
+
+    catch (error) {
+
+        res.status(500).json({
+
+            success: false,
+            message: error.message
+
+        });
+
+    }
+
+};
 // ================= LOGOUT =================
 
 const logout = (req, res) => {
@@ -319,6 +371,7 @@ module.exports = {
     register,
     login,
     getProfile,
+    updateProfile,
     logout,
     forgotPassword,
     resetPassword

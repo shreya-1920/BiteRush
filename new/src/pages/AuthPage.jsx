@@ -524,13 +524,24 @@ const handleForgotPassword = async () => {
     ? (isLogin ? "Logging in..." : "Creating Account...")
     : (isLogin ? "Login" : "Register")}
 </button>
+<div className="admin-portal-link">
+  <span>Administrator?</span>
 
+  <button
+    type="button"
+    onClick={() => navigate("/admin/login")}
+  >
+    Admin Portal →
+  </button>
+</div>
 </>
             )}
       </div>
+    
       </div>
     </section>
     </>
   );
+  
 }
 export default AuthPage;

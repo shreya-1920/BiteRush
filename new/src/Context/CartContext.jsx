@@ -61,9 +61,11 @@ const fetchCart = async () => {
   }
 };
 useEffect(() => {
+  const token = localStorage.getItem("token"); // customer token
 
-    fetchCart();
+  if (!token) return;
 
+  fetchCart();
 }, []);
 useEffect(() => {
   console.log("Cart State:", cartItems);

@@ -5,6 +5,7 @@ const {
   register,
   login,
   getProfile,
+  updateProfile,
   logout,
   forgotPassword,
   resetPassword,

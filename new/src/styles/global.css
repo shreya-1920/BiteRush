@@ -28,7 +28,28 @@ align-items:center;
 overflow:hidden;
 padding:24px 36px;
 }
+.admin-portal-link{
+    margin-top:20px;
+    text-align:center;
+    font-size:15px;
+}
 
+.admin-portal-link span{
+    color:#777;
+}
+
+.admin-portal-link button{
+    border:none;
+    background:transparent;
+    color:var(--primary-color);
+    font-weight:600;
+    cursor:pointer;
+    margin-left:5px;
+}
+
+.admin-portal-link button:hover{
+    text-decoration:underline;
+}
 .left-content{
 width:100%;
 max-width:440px;

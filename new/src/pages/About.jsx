@@ -35,9 +35,9 @@ export default function About() {
             </span>
 
             <h1>
-                Delivering
-                <br/>
-                <span>Happiness,</span>
+                Delivering     <span>Happiness,</span>
+                
+               
                 <br />
                 One Bite at a Time
             </h1>
