@@ -1,26 +1,25 @@
 import Header from "../Components/Header";
 import Footer from "../Components/Footer";
-
-import restaurants from "../data/restaurants";
-import { addToWishlist } from "../services/WishlistService";
-import { toast } from "react-toastify";
-import { useParams } from "react-router-dom";
-import "../styles/RestaurantDetails.css";
 import RestaurantHero from "../Components/RestaurantHero";
-import { Link } from "react-router-dom";
+
+import "../styles/RestaurantDetails.css";
+
+import { Link, useParams } from "react-router-dom";
+import { useState, useEffect } from "react";
+
+import { FaHeart } from "react-icons/fa";
+import { toast } from "react-toastify";
+
 import { useCart } from "../Context/CartContext";
 
-import { useEffect } from "react";
+import { addToWishlist } from "../services/WishlistService";
 
-/*import {
-  FaHeart,
-  FaStar,
-  FaMotorcycle,
-} from "react-icons/fa";
+import {
+  getRestaurant,
+  getRestaurants,
+} from "../admin/Services/RestaurantService";
 
-import { IoTimeOutline } from "react-icons/io5";*/
-import { menuData } from "../data/menuData";
-import { FaHeart } from "react-icons/fa";
+import { getRestaurantMenu } from "../admin/Services/MenuService";
 
 function RestaurantDetails() {
 useEffect(() => {
@@ -28,59 +27,76 @@ useEffect(() => {
   console.log(window.scrollY);
 }, []);
     const {
-  cartItems,
+  
   addToCart,
   increaseQuantity,
   decreaseQuantity,
 } = useCart();
 
-  const { id } = useParams();
-  const menuItems = menuData[id] || [];
+ const { id } = useParams();
 
-  const restaurant = restaurants.find(
-    (item) => item.id === Number(id)
-  );
+const [restaurant, setRestaurant] = useState(null);
+const [restaurants, setRestaurants] = useState([]);
+const [menuItems, setMenuItems] = useState([]);
 
-  if (!restaurant) {
-    return <h2>Restaurant Not Found</h2>;
+const {
+  cartItems,
+  
+  
+  
+} = useCart();
+
+const fetchRestaurant = async () => {
+  try {
+    const res = await getRestaurant(id);
+    setRestaurant(res.data);
+  } catch (err) {
+    console.log(err);
   }
+};
+
+const fetchRestaurants = async () => {
+  try {
+    const res = await getRestaurants();
+    setRestaurants(res.data);
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+const fetchMenu = async () => {
+  try {
+    const res = await getRestaurantMenu(id);
+    setMenuItems(res.data);
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+useEffect(() => {
+  fetchRestaurant();
+  fetchRestaurants();
+  fetchMenu();
+}, [id]);
+
+if (!restaurant) {
+  return <h2>Loading...</h2>;
+}
   const handleWishlist = async () => {
-    console.log("Restaurant:", restaurant.name);
-console.log("Restaurant ID:", restaurant.id);
+  try {
+    await addToWishlist({
+      restaurantId: restaurant._id,
+      restaurantName: restaurant.name,
+      image: restaurant.logo,
+      category: restaurant.category,
+      rating: restaurant.rating,
+      deliveryTime: restaurant.time,
+    });
 
-    try {
-
-        await addToWishlist({
-
-            restaurantId: restaurant.id,
-
-            restaurantName: restaurant.name,
-
-            image: restaurant.logo,
-
-            category: restaurant.category,
-
-            rating: restaurant.rating,
-
-            deliveryTime: restaurant.deliveryTime
-
-        });
-
-        toast.success("Added to Wishlist ❤️");
-
-    }
-
-    catch(error){
-
-    console.log(error.response.data);
-        toast.error(
-            
-            error.response?.data?.message || "Failed"
-        );
-        
-
-    }
-
+    toast.success("Added to Wishlist ❤️");
+  } catch (error) {
+    toast.error(error.response?.data?.message || "Failed");
+  }
 };
  return (
     <>
@@ -173,22 +189,22 @@ console.log("Restaurant ID:", restaurant.id);
 
         {menuItems.map((item) => {
 
-            const cartItem = cartItems.find(
-    cart => Number(cart.productId) === Number(item.id)
+const cartItem = cartItems.find(
+    (cart) => String(cart.productId) === String(item._id)
 );
 
-            const quantity = cartItem ? cartItem.quantity : 0;
+const quantity = cartItem ? cartItem.quantity : 0;
             console.log("Cart Items:", cartItems);
 console.log("Current Item ID:", item.id);
 
             return (
 
-                <div className="menu-card" key={item.id}>
+                <div className="menu-card" key={item._id}>
 
                     <div className="menu-content">
-                        <div className={item.veg ? "veg-badge" : "nonveg-badge"}>
-                            {item.veg ? "🟢 Veg" : "🔴 Non Veg"}
-                        </div>
+                        <div className={item.isVeg ? "veg-badge" : "nonveg-badge"}>
+    {item.isVeg ? "🟢 Veg" : "🔴 Non Veg"}
+</div>
 
                         {item.bestseller && <div className="best-badge">🔥 Bestseller</div>}
 
@@ -198,12 +214,16 @@ console.log("Current Item ID:", item.id);
                             <span>⭐ {item.rating}</span>
                             <span>({item.reviews})</span>
                             <span>•</span>
-                            <span>{item.time}</span>
+                            <span>{restaurant.time}</span>
                         </div>
 
                         <div className="price-row">
                             <span className="new-price">₹{item.price}</span>
-                            <span className="old-price">₹{item.oldPrice}</span>
+                           {item.oldPrice && (
+    <span className="old-price">
+        ₹{item.oldPrice}
+    </span>
+)}
                             <span className="discount-badge">15% OFF</span>
                         </div>
 
@@ -224,9 +244,18 @@ console.log("Current Item ID:", item.id);
                                 <button onClick={() => increaseQuantity(cartItem)}>+</button>
                             </div>
                         ) : (
-                            <button className="rest-add-btn" onClick={() => addToCart(item)}>
-                                ADD
-                            </button>
+                       <button
+  className="rest-add-btn"
+  onClick={() =>
+    addToCart({
+      ...item,
+      id: item._id,
+      restaurant: restaurant._id,
+    })
+  }
+>
+  ADD
+</button>
                         )}
                     </div>
                 </div>
@@ -433,7 +462,7 @@ console.log("Current Item ID:", item.id);
 
     <div className="gallery-grid">
 
-        {restaurant.gallery.map((image,index)=>(
+        {restaurant.gallery?.map((image, index) => (
 
     <div
         className="gallery-card"
@@ -463,35 +492,43 @@ console.log("Current Item ID:", item.id);
 
 <section className="similar-section">
 
-  <h2 className="section-title">
-    You May Also Like
-  </h2>
+<h2 className="section-title">
+You May Also Like
+</h2>
 
-  <div className="similar-grid">
+<div className="similar-grid">
 
-    {restaurants
-      .filter(item => item.id !== restaurant.id)
-      .slice(0,4)
-      .map(item => (
-      <Link
-        key={item.id}
-        to={`/restaurant/${item.id}`}
-        className="similar-card"
-      >
-        <img
-          src={item.banner}
-          alt={item.name}
-        />
+{restaurants
+.filter(item=>item._id!==restaurant._id)
+.slice(0,4)
+.map(item=>(
 
-        <div className="similar-content">
-          <h3>{item.name}</h3>
-          <p>{item.cuisine}</p>
-          <span>⭐ {item.rating}</span>
-        </div>
-      </Link>
-    ))}
+<Link
+key={item._id}
+to={`/restaurant/${item._id}`}
+className="similar-card"
+>
 
-  </div>
+<img
+src={item.banner}
+alt={item.name}
+/>
+
+<div className="similar-content">
+
+<h3>{item.name}</h3>
+
+<p>{item.cuisine}</p>
+
+<span>⭐ {item.rating}</span>
+
+</div>
+
+</Link>
+
+))}
+
+</div>
 
 </section>
 </main>

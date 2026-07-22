@@ -22,14 +22,13 @@ const addToCart = async (item) => {
     try {
 
         const res = await addCart({
-
-            productId: item.id,   // We'll check this after seeing the console
-            name: item.name,
-            image: item.image,
-            price: item.price,
-            quantity: 1,
-
-        });
+    restaurant: item.restaurant,
+    productId: item._id || item.id,
+    name: item.name,
+    image: item.image,
+    price: item.price,
+    quantity: 1,
+});
 
         console.log("API Response:", res);
 

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { FaClipboardList } from "react-icons/fa";
-import { getOrders } from "../services/checkoutServices";
+import { getMyOrders } from "../services/checkoutServices";
 import "../styles/Orders.css";
 
 const Orders = () => {
@@ -16,8 +16,7 @@ const Orders = () => {
     const fetchOrders = async () => {
         try {
 
-            const data = await getOrders();
-
+            const data = await getMyOrders();
             console.log(data);
 
             setOrders(data);

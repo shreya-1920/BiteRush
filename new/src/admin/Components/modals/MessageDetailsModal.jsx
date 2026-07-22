@@ -1,23 +1,49 @@
 import Modal from "../Modal";
 
 function MessageDetailsModal({ open, message, onClose }) {
+  if (!message) return null;
 
-    return (
+  return (
+    <Modal
+      open={open}
+      title="Message Details"
+      onClose={onClose}
+    >
+      <div className="message-details">
 
-        <Modal
-            open={open}
-            title="Message"
-            onClose={onClose}
-        >
+        <div className="detail-item">
+          <strong>Name</strong>
+          <p>{message.name}</p>
+        </div>
 
-            <h3>{message?.subject}</h3>
+        <div className="detail-item">
+          <strong>Email</strong>
+          <p>{message.email}</p>
+        </div>
 
-            <p>{message?.content}</p>
+        <div className="detail-item">
+          <strong>Phone</strong>
+          <p>{message.phone}</p>
+        </div>
 
-        </Modal>
+        <div className="detail-item">
+          <strong>Subject</strong>
+          <p>{message.subject}</p>
+        </div>
 
-    );
+        <div className="detail-item">
+          <strong>Message</strong>
+          <p>{message.message}</p>
+        </div>
 
+        <div className="detail-item">
+          <strong>Received On</strong>
+          <p>{new Date(message.createdAt).toLocaleString()}</p>
+        </div>
+
+      </div>
+    </Modal>
+  );
 }
 
 export default MessageDetailsModal;

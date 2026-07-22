@@ -1,44 +1,39 @@
-import { useState } from "react";
-import {FaUserPlus , FaSearch, FaEye, FaTrash } from "react-icons/fa";
+import { useEffect, useState } from "react";
+
+import {
+  getAllCustomers,
+  deleteCustomer,
+  toggleBlockCustomer,
+} from "../services/AdminCustomerServices";
+import { FaSearch, FaEye, FaTrash, FaBan } from "react-icons/fa";
 import { toast } from "react-toastify";
-import Modal from "../components/Modal";
+
 import ConfirmModal from "../components/ConfirmModal";
-import CustomerForm from "../components/forms/CustomerForm";
+
 import CustomerDetailsModal from "../components/modals/CustomerDetailsModal";
 
 function Customers() {
 const [modalType, setModalType] = useState(null);
 const [selectedCustomer, setSelectedCustomer] = useState(null);
-  const customers = [
-    {
-      id: 1,
-      name: "Rahul Sharma",
-      email: "rahul@gmail.com",
-      phone: "+91 9876543210",
-      orders: 18,
-      joined: "12 Jul 2026",
-      status: "Active",
-    },
-    {
-      id: 2,
-      name: "Priya Verma",
-      email: "priya@gmail.com",
-      phone: "+91 9123456789",
-      orders: 24,
-      joined: "18 Jul 2026",
-      status: "Active",
-    },
-    {
-      id: 3,
-      name: "Aman Singh",
-      email: "aman@gmail.com",
-      phone: "+91 9988776655",
-      orders: 6,
-      joined: "20 Jul 2026",
-      status: "Blocked",
-    },
-  ];
+  const [customers, setCustomers] = useState([]);
+const [loading, setLoading] = useState(true);
+const fetchCustomers = async () => {
+  try {
+    const data = await getAllCustomers();
+    setCustomers(data);
+  } catch (err) {
+    console.log(err);
+  } finally {
+    setLoading(false);
+  }
+};
 
+useEffect(() => {
+  fetchCustomers();
+}, []);
+if (loading) {
+  return <h2>Loading...</h2>;
+}
   return (
     <div className="restaurants-page">
 
@@ -49,16 +44,7 @@ const [selectedCustomer, setSelectedCustomer] = useState(null);
           <p>Manage registered customers</p>
         </div>
 
-<button
-    className="admin-btn"
-    onClick={() => {
-        setSelectedCustomer(null);
-        setModalType("add");
-    }}
->
-    <FaUserPlus />
-    <span>Add Customer</span>
-</button>
+
 
       </div>
 
@@ -99,7 +85,7 @@ const [selectedCustomer, setSelectedCustomer] = useState(null);
 
             {customers.map((customer) => (
 
-              <tr key={customer.id}>
+              <tr key={customer._id}>
 
                 <td>
 
@@ -111,7 +97,7 @@ const [selectedCustomer, setSelectedCustomer] = useState(null);
 
                     <div>
                       <h4>{customer.name}</h4>
-                      <span>ID #{customer.id}</span>
+                      <span>ID #{customer._id.slice(-6)}</span>
                     </div>
 
                   </div>
@@ -122,20 +108,20 @@ const [selectedCustomer, setSelectedCustomer] = useState(null);
 
                 <td>{customer.phone}</td>
 
-                <td>{customer.orders}</td>
+                <td>{customer.totalOrders}</td>
 
-                <td>{customer.joined}</td>
+                <td>{new Date(customer.createdAt).toLocaleDateString()}</td>
 
                 <td>
 
                   <span
                     className={
-                      customer.status === "Active"
+                      !customer.isBlocked
                         ? "status delivered"
                         : "status cancelled"
                     }
                   >
-                    {customer.status}
+                    {customer.isBlocked ? "Blocked" : "Active"}
                   </span>
 
                 </td>
@@ -153,7 +139,29 @@ const [selectedCustomer, setSelectedCustomer] = useState(null);
 >
     <FaEye />
 </button>
+<button
+  className={`icon-btn ${
+    customer.isBlocked ? "success-btn" : "warning-btn"
+  }`}
+  title={customer.isBlocked ? "Unblock Customer" : "Block Customer"}
+  onClick={async () => {
+    try {
+      await toggleBlockCustomer(customer._id);
 
+      toast.success(
+        customer.isBlocked
+          ? "Customer unblocked successfully!"
+          : "Customer blocked successfully!"
+      );
+
+      fetchCustomers();
+    } catch (err) {
+      toast.error(err.response?.data?.message || "Something went wrong");
+    }
+  }}
+>
+  <FaBan />
+</button>
                     <button
     className="icon-btn delete-btn"
     onClick={() => {
@@ -177,17 +185,9 @@ const [selectedCustomer, setSelectedCustomer] = useState(null);
         </table>
 
       </div>
-{/* Add Customer */}
 
-<Modal
-    open={modalType === "add"}
-    title="Add Customer"
-    onClose={() => setModalType(null)}
->
-    <CustomerForm
-        onClose={() => setModalType(null)}
-    />
-</Modal>
+
+
 
 {/* View Customer */}
 
@@ -204,13 +204,19 @@ const [selectedCustomer, setSelectedCustomer] = useState(null);
     title="Delete Customer"
     message={`Are you sure you want to delete "${selectedCustomer?.name}"?`}
     onClose={() => setModalType(null)}
-  onConfirm={() => {
-    console.log(selectedCustomer);
+    onConfirm={async () => {
+      try {
+        await deleteCustomer(selectedCustomer._id);
 
-    toast.success("Customer deleted successfully!");
+        toast.success("Customer deleted successfully!");
 
-    setModalType(null);
-}}
+        fetchCustomers();
+
+        setModalType(null);
+      } catch (err) {
+        toast.error(err.response?.data?.message || "Something went wrong");
+      }
+    }}
 />
     </div>
   );

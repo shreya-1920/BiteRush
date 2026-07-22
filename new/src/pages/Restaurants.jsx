@@ -4,7 +4,7 @@ import FilterBar from "../Components/FilterBar";
 import RestaurantCard from "../Components/RestaurantCard";
 import Footer from "../Components/Footer";
 import { getWishlist } from "../services/WishlistService";
-import restaurants from "../data/restaurants";
+import { getRestaurants } from "../admin/Services/RestaurantService";
 import { useLocation } from "../context/LocationContext";
 
 import { useState,useEffect } from "react";
@@ -12,6 +12,7 @@ function Restaurants() {
   const [selectedFilters, setSelectedFilters] = useState([]);
   const [sortBy, setSortBy] = useState("Relevance");
   const [searchTerm, setSearchTerm] = useState("");
+  const [restaurants, setRestaurants] = useState([]);
   const { location } = useLocation();
   const currentCity = location?.split(",")[0].trim() || "";
 const [wishlistIds, setWishlistIds] = useState([]);
@@ -28,13 +29,24 @@ const fetchWishlist = async () => {
     }
 };
 
+
+
+const fetchRestaurants = async () => {
+  try {
+    const res = await getRestaurants();
+    setRestaurants(res.data);
+  } catch (err) {
+    console.log(err);
+  }
+};
 useEffect(() => {
-    fetchWishlist();
+  fetchWishlist();
+  fetchRestaurants();
 }, []);
   let filteredRestaurants = [...restaurants];
   // Filter by city only if a city is selected
 
-  if (
+ /* if (
     currentCity !== "" &&
     currentCity !== "All Locations" &&
     currentCity !== "Detecting..."
@@ -43,7 +55,7 @@ useEffect(() => {
       (restaurant) =>
         restaurant.city.toLowerCase() === currentCity.toLowerCase(),
     );
-  }
+  }*/
 
 if (searchTerm.trim() !== "") {
   filteredRestaurants = filteredRestaurants.filter(
@@ -121,6 +133,7 @@ console.log("Selected Filters:", selectedFilters);
 console.log("After Filtering:", filteredRestaurants);
 console.log("Final:", finalRestaurants);
 return (
+  
   <>
     <Header />
 
@@ -139,13 +152,14 @@ return (
           <div className="restaurant-grid">
             {finalRestaurants.length > 0 ? (
               finalRestaurants.map((restaurant) => (
-    <RestaurantCard
-        key={restaurant.id}
-        restaurant={restaurant}
-        wishlistIds={wishlistIds}
-        fetchWishlist={fetchWishlist}
-    />
+   <RestaurantCard
+    key={restaurant._id}
+    restaurant={restaurant}
+    wishlistIds={wishlistIds}
+    fetchWishlist={fetchWishlist}
+/>
 ))
+
             ) : (
               <div className="no-restaurants">
                 <h2>No restaurants found 🍽️</h2>

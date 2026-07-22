@@ -1,6 +1,9 @@
 import { FaSearch, FaEye,FaEdit } from "react-icons/fa";
-import { useState } from "react";
-
+import { useEffect, useState } from "react";
+import {
+  getAllOrders,
+  updateOrderStatus,
+} from "../services/AdminOrderServices";
 
 import OrderDetailsModal from "../components/modals/OrderDetailsModal";
 import StatusForm from "../components/forms/StatusForm";
@@ -8,49 +11,26 @@ import Modal from "../components/Modal";
 function AdminOrders() {
   const [modalType, setModalType] = useState(null);
 const [selectedOrder, setSelectedOrder] = useState(null);
-  const orders = [
-  {
-    id: "#1001",
-    customer: "Rahul",
-    restaurant: "La Pinoz",
-    amount: "₹520",
-    status: "Delivered",
-    payment: "Online",
-    address: "Jaipur, Rajasthan",
-    time: "20 Jul 2026, 7:30 PM",
-  },
-  {
-    id: "#1002",
-    customer: "Priya",
-    restaurant: "Burger Farm",
-    amount: "₹340",
-    status: "Preparing",
-    payment: "Cash",
-    address: "Vaishali Nagar, Jaipur",
-    time: "20 Jul 2026, 8:15 PM",
-  },
-  {
-    id: "#1003",
-    customer: "Aman",
-    restaurant: "Pizza Hut",
-    amount: "₹670",
-    status: "Pending",
-    payment: "Online",
-    address: "Malviya Nagar, Jaipur",
-    time: "20 Jul 2026, 8:45 PM",
-  },
-  {
-    id: "#1004",
-    customer: "Neha",
-    restaurant: "Domino's",
-    amount: "₹450",
-    status: "Cancelled",
-    payment: "Online",
-    address: "Mansarovar, Jaipur",
-    time: "20 Jul 2026, 9:10 PM",
-  },
-];
+  const [orders, setOrders] = useState([]);
+const [loading, setLoading] = useState(true);
 
+const fetchOrders = async () => {
+  try {
+    const data = await getAllOrders();
+    setOrders(data);
+  } catch (err) {
+    console.log(err);
+  } finally {
+    setLoading(false);
+  }
+};
+useEffect(() => {
+  fetchOrders();
+}, []);
+
+if (loading) {
+  return <h2>Loading...</h2>;
+}
   return (
     <div className="restaurants-page">
 
@@ -87,15 +67,15 @@ const [selectedOrder, setSelectedOrder] = useState(null);
 
             {orders.map((order) => (
 
-              <tr key={order.id}>
+              <tr key={order._id}>
 
-                <td>{order.id}</td>
+                <td>#{order._id.slice(-6)}</td>
 
-                <td>{order.customer}</td>
+               <td>{order.user?.name}</td>
 
-                <td>{order.restaurant}</td>
+                <td>#{order._id.slice(-6)}</td>
 
-                <td>{order.amount}</td>
+               <td>₹{order.total}</td>
 
                 <td>
                   <span className={`status ${order.status.toLowerCase()}`}>
@@ -140,6 +120,7 @@ const [selectedOrder, setSelectedOrder] = useState(null);
         </table>
 
       </div>
+
 <OrderDetailsModal
     open={modalType === "view"}
     order={selectedOrder}
@@ -152,9 +133,16 @@ const [selectedOrder, setSelectedOrder] = useState(null);
     onClose={() => setModalType(null)}
 >
     <StatusForm
-        status={selectedOrder?.status}
-        onClose={() => setModalType(null)}
-    />
+    order={selectedOrder}
+    onSave={async (status) => {
+        await updateOrderStatus(selectedOrder._id, status);
+
+        await fetchOrders();
+
+        setModalType(null);
+    }}
+    onClose={() => setModalType(null)}
+/>
 </Modal>
     </div>
   );

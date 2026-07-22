@@ -129,7 +129,74 @@ function Dashboard() {
         {/* Left Side */}
 
         <div className="dashboard-left">
+<div className="admin-card chart-card">
 
+  <div className="chart-top">
+
+    <div>
+      <h3>Revenue Overview</h3>
+      <p>Weekly revenue performance</p>
+    </div>
+
+    <select>
+      <option>This Week</option>
+      <option>Last Week</option>
+    </select>
+
+  </div>
+
+  <div className="chart-container">
+
+    <div className="chart-grid">
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+
+    <div className="bars">
+
+      <div className="bar-box">
+        <div className="chart-bar h1"></div>
+        <p>Mon</p>
+      </div>
+
+      <div className="bar-box">
+        <div className="chart-bar h2"></div>
+        <p>Tue</p>
+      </div>
+
+      <div className="bar-box">
+        <div className="chart-bar h3"></div>
+        <p>Wed</p>
+      </div>
+
+      <div className="bar-box">
+        <div className="chart-bar h4 active"></div>
+        <p>Thu</p>
+      </div>
+
+      <div className="bar-box">
+        <div className="chart-bar h5"></div>
+        <p>Fri</p>
+      </div>
+
+      <div className="bar-box">
+        <div className="chart-bar h6"></div>
+        <p>Sat</p>
+      </div>
+
+      <div className="bar-box">
+        <div className="chart-bar h2"></div>
+        <p>Sun</p>
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
           <div className="admin-card recent-orders">
 
             <div className="section-header">

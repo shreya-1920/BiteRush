@@ -1,45 +1,47 @@
-import { FaSearch, FaEye, FaReply } from "react-icons/fa";
-import { useState } from "react";
+import { FaSearch, FaEye, FaTrash } from "react-icons/fa";
+import { useEffect, useState } from "react";
+import { toast } from "react-toastify";
 
-
+import {
+  getAllMessages,
+  deleteMessage,
+} from "../services/AdminMessageServices";
 
 import MessageDetailsModal from "../components/modals/MessageDetailsModal";
-import ReplyModal from "../components/modals/ReplyModal";
 function Messages() {
 const [modalType, setModalType] = useState(null);
 const [selectedMessage, setSelectedMessage] = useState(null);
-  const messages = [
-  {
-    id: 1,
-    customer: "Rahul Sharma",
-    email: "rahul@gmail.com",
-    subject: "Payment Failed",
-    content:
-      "I tried placing an order but my payment failed twice. Please help.",
-    date: "20 Jul 2026",
-    status: "Unread",
-  },
-  {
-    id: 2,
-    customer: "Priya Verma",
-    email: "priya@gmail.com",
-    subject: "Refund Request",
-    content:
-      "I received the wrong order and would like a refund.",
-    date: "19 Jul 2026",
-    status: "Read",
-  },
-  {
-    id: 3,
-    customer: "Aman Singh",
-    email: "aman@gmail.com",
-    subject: "Order Delayed",
-    content:
-      "My order has been delayed for more than an hour.",
-    date: "18 Jul 2026",
-    status: "Unread",
-  },
-];
+  const [messages, setMessages] = useState([]);
+const [loading, setLoading] = useState(true);
+
+const fetchMessages = async () => {
+  try {
+    const data = await getAllMessages();
+    setMessages(data);
+  } catch (error) {
+    toast.error("Failed to fetch messages");
+  } finally {
+    setLoading(false);
+  }
+};
+
+useEffect(() => {
+  fetchMessages();
+}, []);
+const handleDelete = async (id) => {
+  if (!window.confirm("Delete this message?")) return;
+
+  try {
+    await deleteMessage(id);
+    toast.success("Message deleted");
+    fetchMessages();
+  } catch (error) {
+    toast.error("Delete failed");
+  }
+};
+if (loading) {
+  return <h3>Loading Messages...</h3>;
+}
   return (
     <div className="restaurants-page">
 
@@ -79,15 +81,17 @@ const [selectedMessage, setSelectedMessage] = useState(null);
           <tbody>
 
             {messages.map((msg)=>(
-              <tr key={msg.id}>
+              <tr key={msg._id}>
 
-                <td>{msg.customer}</td>
+                <td>{msg.name}</td>
 
                 <td>{msg.email}</td>
 
                 <td>{msg.subject}</td>
 
-                <td>{msg.date}</td>
+                <td>
+  {new Date(msg.createdAt).toLocaleDateString()}
+</td>
 
                 <td>
 
@@ -98,16 +102,20 @@ const [selectedMessage, setSelectedMessage] = useState(null);
                       : "status pending"
                     }
                   >
-                    {msg.status}
+                   <td>
+    <span className="status delivered">
+        Received
+    </span>
+</td>
                   </span>
 
                 </td>
 
                 <td>
 
-                  <div className="table-actions">
+                 <div className="table-actions">
 
-  <button
+<button
     className="icon-btn edit-btn"
     onClick={() => {
         setSelectedMessage(msg);
@@ -118,16 +126,13 @@ const [selectedMessage, setSelectedMessage] = useState(null);
 </button>
 
 <button
-    className="icon-btn"
-    onClick={() => {
-        setSelectedMessage(msg);
-        setModalType("reply");
-    }}
+    className="icon-btn delete-btn"
+    onClick={() => handleDelete(msg._id)}
 >
-    <FaReply />
+    <FaTrash />
 </button>
 
-                  </div>
+</div>
 
                 </td>
 
@@ -145,12 +150,7 @@ const [selectedMessage, setSelectedMessage] = useState(null);
     onClose={() => setModalType(null)}
 />
 
-<ReplyModal
-    open={modalType === "reply"}
-    message={selectedMessage}
-    onClose={() => setModalType(null)}
-/>
-    </div>
+</div>
   );
 }
 

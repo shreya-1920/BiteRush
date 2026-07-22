@@ -17,7 +17,10 @@ import {
   FaMoneyBillWave,
   FaWallet,
 } from "react-icons/fa";
-
+import {
+  getAvailableCoupons,
+  applyCoupon as applyCouponAPI,
+} from "../services/couponServices";
 import { MdDeliveryDining } from "react-icons/md";
 import { SiGooglepay } from "react-icons/si";
 
@@ -39,12 +42,24 @@ function Checkout() {
 const [appliedCoupon, setAppliedCoupon] = useState("");
   const [promo, setPromo] = useState("");
   const [discount, setDiscount] = useState(0);
-
+const [coupons, setCoupons] = useState([]);
   const [loading, setLoading] = useState(false);
 
   const { cartItems, clearCartState } = useCart();
 
   const navigate = useNavigate();
+  useEffect(() => {
+  const fetchCoupons = async () => {
+    try {
+      const data = await getAvailableCoupons();
+      setCoupons(data);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  fetchCoupons();
+}, []);
 useEffect(() => {
 
     const token = localStorage.getItem("token");
@@ -67,46 +82,22 @@ useEffect(() => {
 
   const total = subtotal + deliveryFee - discount;
 
- const applyCoupon = () => {
+ const applyCoupon = async () => {
+  try {
+    const data = await applyCouponAPI(promo, subtotal);
 
-    if (promo === "WELCOME50") {
+    setAppliedCoupon(data.coupon);
+    setDiscount(data.discount);
 
-        setAppliedCoupon("WELCOME50");
-        setDiscount(50);
+    toast.success(`${data.coupon} Applied!`);
+  } catch (err) {
+    setAppliedCoupon("");
+    setDiscount(0);
 
-        toast.success("WELCOME50 Applied!");
-
-    }
-
-    else if (promo === "FREEDEL") {
-
-        setAppliedCoupon("FREEDEL");
-        setDiscount(deliveryFee);
-
-        toast.success("Free Delivery Applied!");
-
-    }
-
-    else if (promo === "SAVE20") {
-
-        const save20Discount = Math.min(subtotal * 0.20, 150);
-
-        setAppliedCoupon("SAVE20");
-        setDiscount(save20Discount);
-
-        toast.success("SAVE20 Applied!");
-
-    }
-
-    else {
-
-        setAppliedCoupon("");
-        setDiscount(0);
-
-        toast.error("Invalid Coupon!");
-
-    }
-
+    toast.error(
+      err.response?.data?.message || "Invalid Coupon"
+    );
+  }
 };
   const handlePlaceOrder = async () => {
     if (!name.trim()) {
@@ -130,21 +121,18 @@ useEffect(() => {
     setLoading(true);
 
     try {
-      await placeOrder({
-        name,
-
-        phone,
-
-        address,
-
-        paymentMethod,
-
-        deliveryType,
-
-        scheduledDate,
-
-        instructions,
-      });
+await placeOrder({
+  restaurant: cartItems[0]?.restaurant,
+  name,
+  phone,
+  address,
+  paymentMethod,
+  items: cartItems,
+  subtotal,
+  deliveryFee,
+  discount,
+  total,
+});
 
       clearCartState();
 
@@ -557,55 +545,29 @@ useEffect(() => {
     Or choose from our best offers
   </h4>
 
-  <div className="promo-grid">
-
+ <div className="promo-grid">
+  {coupons.map((coupon) => (
     <div
+      key={coupon._id}
       className={`promo-offer ${
-    appliedCoupon === "WELCOME50" ? "active" : ""
-}`}
-      onClick={() => setPromo("WELCOME50")}
+        appliedCoupon === coupon.code ? "active" : ""
+      }`}
+      onClick={() => setPromo(coupon.code)}
     >
       <span className="offer-icon">🎉</span>
 
-      <h5>WELCOME50</h5>
+      <h5>{coupon.code}</h5>
 
-      <p>Flat ₹50 OFF</p>
-
-      <small>Tap to Apply</small>
-    </div>
-
-    <div
-     className={`promo-offer ${
-    appliedCoupon === "FREEDEL" ? "active" : ""
-}`}
-      onClick={() => setPromo("FREEDEL")}
-    >
-      <span className="offer-icon">🚚</span>
-
-      <h5>FREEDEL</h5>
-
-      <p>Free Delivery</p>
+      <p>
+        {coupon.discountType === "Percentage"
+          ? `${coupon.discountValue}% OFF`
+          : `₹${coupon.discountValue} OFF`}
+      </p>
 
       <small>Tap to Apply</small>
     </div>
-
-    <div
-     className={`promo-offer ${
-    appliedCoupon === "SAVE20" ? "active" : ""
-}`}
-      onClick={() => setPromo("SAVE20")}
-    >
-      <span className="offer-icon">🔥</span>
-
-      <h5>SAVE20</h5>
-
-      <p>20% OFF up to ₹150</p>
-
-      <small>Tap to Apply</small>
-    </div>
-
-  </div>
-
+  ))}
+</div>
   <p className="promo-note">
     ℹ️ Only one coupon can be applied per order.
   </p>

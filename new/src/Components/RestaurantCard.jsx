@@ -15,8 +15,8 @@ function RestaurantCard({
     wishlistIds,
     fetchWishlist
 })  {
-  const isWishlisted = wishlistIds.includes(
-    String(restaurant.id)
+const isWishlisted = wishlistIds.includes(
+    String(restaurant._id)
 );
   const handleWishlist = async (e) => {
 
@@ -26,7 +26,7 @@ function RestaurantCard({
 
         const res = await addToWishlist({
 
-            restaurantId: String(restaurant.id),
+            restaurantId: String(restaurant._id),
 
             restaurantName: restaurant.name,
 
@@ -55,7 +55,7 @@ function RestaurantCard({
 };
 
   return (
-    <Link to={`/restaurant/${restaurant.id}`} className="restaurant-card-link" >
+    <Link to={`/restaurant/${restaurant._id}`} className="restaurant-card-link">
     <div className="restaurant-card">
 
       <div className="restaurant-image">

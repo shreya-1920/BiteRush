@@ -6,38 +6,74 @@ const mongoose = require("mongoose");
 
 const app = express();
 
-// Routes
+// ==================== Import Routes ====================
+
 const authRoutes = require("./routes/authRoutes");
 const adminRoutes = require("./routes/adminRoutes");
 const contactRoutes = require("./routes/contactRoutes");
 const cartRoutes = require("./routes/cartRoutes");
 const wishlistRoutes = require("./routes/wishlistRoutes");
-const checkoutRoutes = require("./routes/checkoutRoutes");
-const restaurantRoutes = require("./routes/restaurantRoutes");
 
-// MongoDB Connection
+const restaurantRoutes = require("./routes/restaurantRoutes");
+const menuRoutes = require("./routes/MenuRoutes");
+const orderRoutes = require("./routes/orderRoutes");
+const customerRoutes = require("./routes/customerRoutes");
+
+// Coupon Routes
+const couponRoutes = require("./routes/couponRoutes"); // Admin
+const customerCouponRoutes = require("./routes/customerCouponRoutes"); // Customer
+
+// ==================== MongoDB ====================
+
 mongoose
   .connect(process.env.MONGO_URI)
   .then(() => console.log("MongoDB Connected Successfully"))
   .catch((err) => console.log(err));
 
-// Middleware
+// ==================== Middleware ====================
+
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// Routes
+// ==================== Root Route ====================
+const messageRoutes = require("./routes/messageRoutes");
+app.use("/api/admin/messages", messageRoutes);
 app.get("/", (req, res) => {
   res.send("Backend Running");
 });
 
+// ==================== API Routes ====================
+
+// Authentication
 app.use("/api/auth", authRoutes);
+const settingRoutes = require("./routes/settingRoutes");
+app.use("/api/admin/settings", settingRoutes);
+// Admin
 app.use("/api/admin", adminRoutes);
+app.use("/api/admin/customers", customerRoutes);
+app.use("/api/admin/coupons", couponRoutes);
+
+// Customer Coupons
+app.use("/api/coupons", customerCouponRoutes);
+
+// Contact
 app.use("/api/contact", contactRoutes);
+
+// Cart
 app.use("/api/cart", cartRoutes);
+
+// Wishlist
 app.use("/api/wishlist", wishlistRoutes);
-app.use("/api/checkout", checkoutRoutes);
+
+// Restaurants & Menu
 app.use("/api/restaurants", restaurantRoutes);
+app.use("/api/menu", menuRoutes);
+
+// Orders
+app.use("/api/orders", orderRoutes);
+
+// ==================== Server ====================
 
 const PORT = process.env.PORT || 5000;
 

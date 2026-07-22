@@ -1,6 +1,12 @@
 import { FaPlus, FaSearch, FaEdit, FaTrash } from "react-icons/fa";
-import { useState } from "react";
-
+import { useState,useEffect } from "react";
+import { FaPowerOff } from "react-icons/fa";
+import { toast } from "react-toastify";
+import {
+  getAllCoupons,
+  deleteCoupon,
+  toggleCoupon,
+} from "../services/AdminCouponServices";
 
 
 import Modal from "../components/Modal";
@@ -9,33 +15,25 @@ import CouponForm from "../components/forms/CouponForm";
 function Coupons() {
 const [modalType, setModalType] = useState(null);
 const [selectedCoupon, setSelectedCoupon] = useState(null);
-  const coupons = [
-    {
-      id:1,
-      code:"SAVE20",
-      discount:"20%",
-      minimum:"₹500",
-      expiry:"31 Aug 2026",
-      status:"Active"
-    },
-    {
-      id:2,
-      code:"WELCOME50",
-      discount:"50%",
-      minimum:"₹800",
-      expiry:"15 Sep 2026",
-      status:"Active"
-    },
-    {
-      id:3,
-      code:"FREEDLV",
-      discount:"Free Delivery",
-      minimum:"₹299",
-      expiry:"10 Aug 2026",
-      status:"Expired"
-    }
-  ];
+  const [coupons, setCoupons] = useState([]);
+const [loading, setLoading] = useState(true);
+const fetchCoupons = async () => {
+  try {
+    const data = await getAllCoupons();
+    setCoupons(data);
+  } catch (err) {
+    console.log(err);
+  } finally {
+    setLoading(false);
+  }
+};
 
+useEffect(() => {
+  fetchCoupons();
+}, []);
+if (loading) {
+  return <h2>Loading...</h2>;
+}
   return (
 
     <div className="restaurants-page">
@@ -101,7 +99,7 @@ const [selectedCoupon, setSelectedCoupon] = useState(null);
 
             {coupons.map((coupon)=>(
 
-              <tr key={coupon.id}>
+              <tr key={coupon._id}>
 
                 <td>
 
@@ -109,23 +107,29 @@ const [selectedCoupon, setSelectedCoupon] = useState(null);
 
                 </td>
 
-                <td>{coupon.discount}</td>
+                <td>
+  {coupon.discountType === "Percentage"
+    ? `${coupon.discountValue}%`
+    : `₹${coupon.discountValue}`}
+</td>
 
-                <td>{coupon.minimum}</td>
+              <td>₹{coupon.minimumAmount}</td>
 
-                <td>{coupon.expiry}</td>
+                <td>
+  {new Date(coupon.expiryDate).toLocaleDateString()}
+</td>
 
                 <td>
 
                   <span
                     className={
-                      coupon.status==="Active"
+                      coupon.isActive
                       ? "status delivered"
                       : "status cancelled"
                     }
                   >
 
-                    {coupon.status}
+                   {coupon.isActive ? "Active" : "Inactive"}
 
                   </span>
 
@@ -143,6 +147,20 @@ const [selectedCoupon, setSelectedCoupon] = useState(null);
     }}
 >
     <FaEdit />
+</button>
+<button
+  className="icon-btn"
+  onClick={async () => {
+    try {
+      await toggleCoupon(coupon._id);
+      toast.success("Coupon status updated!");
+      fetchCoupons();
+    } catch (err) {
+      toast.error(err.response?.data?.message || "Something went wrong");
+    }
+  }}
+>
+  <FaPowerOff />
 </button>
 <button
     className="icon-btn delete-btn"
@@ -176,11 +194,12 @@ const [selectedCoupon, setSelectedCoupon] = useState(null);
     }
     onClose={() => setModalType(null)}
 >
-    <CouponForm
-        mode={modalType}
-        coupon={selectedCoupon}
-        onClose={() => setModalType(null)}
-    />
+   <CouponForm
+    mode={modalType}
+    coupon={selectedCoupon}
+    onClose={() => setModalType(null)}
+    onSuccess={fetchCoupons}
+/>
 </Modal>
 
 <ConfirmModal
@@ -188,10 +207,23 @@ const [selectedCoupon, setSelectedCoupon] = useState(null);
     title="Delete Coupon"
     message={`Are you sure you want to delete "${selectedCoupon?.code}"?`}
     onClose={() => setModalType(null)}
-    onConfirm={() => {
-        console.log("Delete Coupon", selectedCoupon);
-        setModalType(null);
-    }}
+   onConfirm={async () => {
+  try {
+    await deleteCoupon(selectedCoupon._id);
+
+    toast.success("Coupon deleted successfully!");
+
+    fetchCoupons();
+
+    setModalType(null);
+
+  } catch (err) {
+    toast.error(
+      err.response?.data?.message ||
+      "Something went wrong"
+    );
+  }
+}}
 />
     </div>
 

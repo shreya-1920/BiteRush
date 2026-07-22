@@ -1,4 +1,4 @@
-export const menuData = {
+ const menuData = {
   1: [
     {
       id: 101,
@@ -1435,3 +1435,4 @@ image:"https://images.unsplash.com/photo-1623084921164-4a8c5c37a912?w=600&auto=f
   }
 ]
 };
+module.exports = menuData;
