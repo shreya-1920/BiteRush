@@ -9,7 +9,7 @@ import {
   FaCog,
   FaSignOutAlt,
 } from "react-icons/fa";
-import logo from "../../assets/images/logo.png";
+import logo2 from "../../assets/images/logo2.png";
 import { NavLink, useNavigate } from "react-router-dom";
 
 function Sidebar() {
@@ -27,14 +27,12 @@ function Sidebar() {
 <div className="sidebar-logo">
 
   <div className="brand">
-
-    <img src={logo} alt="Logo" className="brand-icon" />
+    <img src={logo2} alt="Logo" className="brand-icon" />
 
     <h1 className="brand-name">
       <span className="bite">Bite</span>
       <span className="rush">Rush</span>
     </h1>
-
   </div>
 
   <p className="admin-title">Admin Panel</p>

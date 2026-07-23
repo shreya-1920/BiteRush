@@ -9,9 +9,7 @@ const Orders = () => {
     const [orders, setOrders] = useState([]);
     const [loading, setLoading] = useState(true);
 
-    useEffect(() => {
-        fetchOrders();
-    }, []);
+    
 
     const fetchOrders = async () => {
         try {
@@ -31,11 +29,14 @@ const Orders = () => {
 
         }
     };
+ useEffect(() => {
+        fetchOrders();
+    }, []);
 
     if (loading) {
         return <h2 style={{ textAlign: "center" }}>Loading...</h2>;
     }
-
+ 
     return (
         <div className="orders-page">
 

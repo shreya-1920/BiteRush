@@ -1,5 +1,5 @@
 const Coupon = require("../models/Coupon");
-
+const Notification = require("../models/Notification");
 // Get All Coupons
 const getAllCoupons = async (req, res) => {
   try {
@@ -37,6 +37,11 @@ const createCoupon = async (req, res) => {
       message: "Coupon created successfully",
       coupon,
     });
+    await Notification.create({
+  title: "New Order",
+  message: `${name} placed a new order.`,
+  type: "order",
+});
   } catch (err) {
     res.status(500).json({ message: err.message });
   }

@@ -1,10 +1,10 @@
-import { FaSearch, FaEye,FaEdit } from "react-icons/fa";
+import { FaEye } from "react-icons/fa";
 import { useEffect, useState } from "react";
 import {
   getAllOrders,
   updateOrderStatus,
 } from "../services/AdminOrderServices";
-
+import { useSearch } from "../context/SearchContext";
 import OrderDetailsModal from "../components/modals/OrderDetailsModal";
 import StatusForm from "../components/forms/StatusForm";
 import Modal from "../components/Modal";
@@ -12,8 +12,9 @@ function AdminOrders() {
   const [modalType, setModalType] = useState(null);
 const [selectedOrder, setSelectedOrder] = useState(null);
   const [orders, setOrders] = useState([]);
-const [loading, setLoading] = useState(true);
 
+const [loading, setLoading] = useState(true);
+const { search } = useSearch();
 const fetchOrders = async () => {
   try {
     const data = await getAllOrders();
@@ -31,6 +32,16 @@ useEffect(() => {
 if (loading) {
   return <h2>Loading...</h2>;
 }
+const filteredOrders = orders.filter((order) => {
+  const query = search.toLowerCase();
+
+  return (
+    order._id.slice(-6).toLowerCase().includes(query) ||
+    order.user?.name?.toLowerCase().includes(query) ||
+    order.restaurant?.name?.toLowerCase().includes(query) ||
+    order.status?.toLowerCase().includes(query)
+  );
+});
   return (
     <div className="restaurants-page">
 
@@ -41,13 +52,8 @@ if (loading) {
         </div>
       </div>
 
-      <div className="table-toolbar">
-        <div className="search-box">
-          <FaSearch className="search-icon"/>
-          <input placeholder="Search orders..." />
-        </div>
-      </div>
-
+      
+     
       <div className="table-card">
 
         <table className="admin-table">
@@ -63,59 +69,53 @@ if (loading) {
             </tr>
           </thead>
 
-          <tbody>
+       <tbody>
+  {filteredOrders.length > 0 ? (
+    filteredOrders.map((order) => (
+      <tr key={order._id}>
+        <td>#{order._id.slice(-6)}</td>
 
-            {orders.map((order) => (
+        <td>{order.user?.name}</td>
 
-              <tr key={order._id}>
+        <td>{order.restaurant?.name}</td>
 
-                <td>#{order._id.slice(-6)}</td>
+        <td>₹{order.total}</td>
 
-               <td>{order.user?.name}</td>
+        <td>
+          <span className={`status ${order.status.toLowerCase()}`}>
+            {order.status}
+          </span>
+        </td>
 
-                <td>#{order._id.slice(-6)}</td>
-
-               <td>₹{order.total}</td>
-
-                <td>
-                  <span className={`status ${order.status.toLowerCase()}`}>
-                    {order.status}
-                  </span>
-                </td>
-
-              <td>
-
-    <div className="table-actions">
-
-        <button
-            className="icon-btn edit-btn"
-            onClick={() => {
+        <td>
+          <div className="table-actions">
+            <button
+              className="icon-btn edit-btn"
+              onClick={() => {
                 setSelectedOrder(order);
                 setModalType("view");
-            }}
-        >
-            <FaEye />
-        </button>
-
-        <button
-            className="icon-btn"
-            onClick={() => {
-                setSelectedOrder(order);
-                setModalType("status");
-            }}
-        >
-            <FaEdit />
-        </button>
-
-    </div>
-
-</td>
-
-              </tr>
-
-            ))}
-
-          </tbody>
+              }}
+            >
+              <FaEye />
+            </button>
+          </div>
+        </td>
+      </tr>
+    ))
+  ) : (
+    <tr>
+      <td
+        colSpan="6"
+        style={{
+          textAlign: "center",
+          padding: "25px",
+        }}
+      >
+        No orders found.
+      </td>
+    </tr>
+  )}
+</tbody>
 
         </table>
 

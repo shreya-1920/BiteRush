@@ -1,4 +1,4 @@
-import { FaPlus, FaSearch, FaEdit, FaTrash } from "react-icons/fa";
+import { FaEye,FaPlus, FaSearch, FaEdit, FaTrash } from "react-icons/fa";
 import { useState,useEffect } from "react";
 import { FaPowerOff } from "react-icons/fa";
 import { toast } from "react-toastify";
@@ -17,6 +17,7 @@ const [modalType, setModalType] = useState(null);
 const [selectedCoupon, setSelectedCoupon] = useState(null);
   const [coupons, setCoupons] = useState([]);
 const [loading, setLoading] = useState(true);
+const [search, setSearch] = useState("");
 const fetchCoupons = async () => {
   try {
     const data = await getAllCoupons();
@@ -34,6 +35,16 @@ useEffect(() => {
 if (loading) {
   return <h2>Loading...</h2>;
 }
+const filteredCoupons = coupons.filter((coupon) => {
+  const query = search.toLowerCase();
+
+  return (
+    coupon.code?.toLowerCase().includes(query) ||
+    coupon.description?.toLowerCase().includes(query) ||
+    coupon.discount?.toString().includes(query) ||
+    coupon.status?.toLowerCase().includes(query)
+  );
+});
   return (
 
     <div className="restaurants-page">
@@ -67,10 +78,12 @@ if (loading) {
 
           <FaSearch className="search-icon"/>
 
-          <input
-            type="text"
-            placeholder="Search coupons..."
-          />
+         <input
+  type="text"
+  placeholder="Search coupons..."
+  value={search}
+  onChange={(e) => setSearch(e.target.value)}
+/>
 
         </div>
 
@@ -95,92 +108,148 @@ if (loading) {
 
           </thead>
 
-          <tbody>
+    <tbody>
 
-            {coupons.map((coupon)=>(
+  {filteredCoupons.length > 0 ? (
 
-              <tr key={coupon._id}>
+    filteredCoupons.map((coupon) => (
 
-                <td>
+      <tr key={coupon._id}>
 
-                  <strong>{coupon.code}</strong>
+        <td>
+          <strong>{coupon.code}</strong>
+        </td>
 
-                </td>
+        <td>
+          {coupon.discountType === "Percentage"
+            ? `${coupon.discountValue}%`
+            : `₹${coupon.discountValue}`}
+        </td>
 
-                <td>
-  {coupon.discountType === "Percentage"
-    ? `${coupon.discountValue}%`
-    : `₹${coupon.discountValue}`}
-</td>
+        <td>₹{coupon.minimumAmount}</td>
 
-              <td>₹{coupon.minimumAmount}</td>
+        <td>
+          {new Date(coupon.expiryDate).toLocaleDateString()}
+        </td>
 
-                <td>
-  {new Date(coupon.expiryDate).toLocaleDateString()}
-</td>
+        <td>
 
-                <td>
+          <span
+            className={
+              coupon.isActive
+                ? "status delivered"
+                : "status cancelled"
+            }
+          >
+            {coupon.isActive ? "Active" : "Inactive"}
+          </span>
 
-                  <span
-                    className={
-                      coupon.isActive
-                      ? "status delivered"
-                      : "status cancelled"
-                    }
-                  >
+        </td>
 
-                   {coupon.isActive ? "Active" : "Inactive"}
+        <td>
 
-                  </span>
+          <div className="table-actions">
 
-                </td>
+            {/* View */}
 
-                <td>
+            <button
+              className="icon-btn view-btn"
+              title="View Coupon"
+              onClick={() => {
+                setSelectedCoupon(coupon);
+                setModalType("view");
+              }}
+            >
+              <FaEye />
+            </button>
 
-                  <div className="table-actions">
+            {/* Edit */}
 
-                <button
-    className="icon-btn edit-btn"
-    onClick={() => {
-        setSelectedCoupon(coupon);
-        setModalType("edit");
-    }}
->
-    <FaEdit />
-</button>
-<button
-  className="icon-btn"
-  onClick={async () => {
-    try {
-      await toggleCoupon(coupon._id);
-      toast.success("Coupon status updated!");
-      fetchCoupons();
-    } catch (err) {
-      toast.error(err.response?.data?.message || "Something went wrong");
-    }
-  }}
->
-  <FaPowerOff />
-</button>
-<button
-    className="icon-btn delete-btn"
-    onClick={() => {
-        setSelectedCoupon(coupon);
-        setModalType("delete");
-    }}
->
-    <FaTrash />
-</button>
+            <button
+              className="icon-btn edit-btn"
+              title="Edit Coupon"
+              onClick={() => {
+                setSelectedCoupon(coupon);
+                setModalType("edit");
+              }}
+            >
+              <FaEdit />
+            </button>
 
-                  </div>
+            {/* Activate / Deactivate */}
 
-                </td>
+            <button
+              className={`icon-btn ${
+                coupon.isActive
+                  ? "warning-btn"
+                  : "success-btn"
+              }`}
+              title={
+                coupon.isActive
+                  ? "Deactivate Coupon"
+                  : "Activate Coupon"
+              }
+              onClick={async () => {
+                try {
+                  await toggleCoupon(coupon._id);
 
-              </tr>
+                  toast.success("Coupon status updated!");
 
-            ))}
+                  fetchCoupons();
 
-          </tbody>
+                } catch (err) {
+                  toast.error(
+                    err.response?.data?.message ||
+                    "Something went wrong"
+                  );
+                }
+              }}
+            >
+              <FaPowerOff />
+            </button>
+
+            {/* Delete */}
+
+            <button
+              className="icon-btn delete-btn"
+              title="Delete Coupon"
+              onClick={() => {
+                setSelectedCoupon(coupon);
+                setModalType("delete");
+              }}
+            >
+              <FaTrash />
+            </button>
+
+          </div>
+
+        </td>
+
+      </tr>
+
+    ))
+
+  ) : (
+
+    <tr>
+
+      <td
+        colSpan="6"
+        style={{
+          textAlign: "center",
+          padding: "25px",
+          fontWeight: "500",
+          color: "#777",
+        }}
+      >
+        No coupons found.
+      </td>
+
+    </tr>
+
+  )}
+
+</tbody>
 
         </table>
 

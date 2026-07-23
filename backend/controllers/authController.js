@@ -38,7 +38,11 @@ const register = async (req, res) => {
                 email: user.email
             }
         });
-
+await Notification.create({
+  title: "New Customer",
+  message: `${user.name} joined BiteRush.`,
+  type: "customer",
+});
     } catch (error) {
 
         res.status(500).json({

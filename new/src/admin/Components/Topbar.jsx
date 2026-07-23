@@ -4,73 +4,71 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
 import {
- 
- 
-  
+  getNotifications,
+  markAllRead,
+} from "../services/NotificationServices";
+
+import { useSearch } from "../context/SearchContext";
+
+import {
   FaChevronDown,
   FaCog,
   FaSignOutAlt,
-  FaUser
+  FaUser,
 } from "react-icons/fa";
+
 function Topbar() {
   const navigate = useNavigate();
 
-const [showNotifications, setShowNotifications] = useState(false);
-const [showProfile, setShowProfile] = useState(false);
+  const { search, setSearch } = useSearch();
 
+  const [showNotifications, setShowNotifications] = useState(false);
+  const [showProfile, setShowProfile] = useState(false);
 
-const [search, setSearch] = useState("");
-const notificationRef = useRef(null);
-const profileRef = useRef(null);
-const notifications = [
-  {
-    id: 1,
-    title: "New Order",
-    message: "Order #1245 has been placed.",
-    time: "2 min ago",
-  },
-  {
-    id: 2,
-    title: "New Customer",
-    message: "Rahul Sharma joined.",
-    time: "12 min ago",
-  },
-  {
-    id: 3,
-    title: "Restaurant Added",
-    message: "Burger Point added.",
-    time: "1 hour ago",
-  },
-];
-useEffect(() => {
+  const [notifications, setNotifications] = useState([]);
 
+  const notificationRef = useRef(null);
+  const profileRef = useRef(null);
+
+  useEffect(() => {
     const handleClickOutside = (e) => {
+      if (
+        notificationRef.current &&
+        !notificationRef.current.contains(e.target)
+      ) {
+        setShowNotifications(false);
+      }
 
-        if (
-            notificationRef.current &&
-            !notificationRef.current.contains(e.target)
-        ) {
-            setShowNotifications(false);
-        }
-
-        if (
-            profileRef.current &&
-            !profileRef.current.contains(e.target)
-        ) {
-            setShowProfile(false);
-        }
-
+      if (
+        profileRef.current &&
+        !profileRef.current.contains(e.target)
+      ) {
+        setShowProfile(false);
+      }
     };
 
     document.addEventListener("mousedown", handleClickOutside);
 
     return () =>
-        document.removeEventListener(
-            "mousedown",
-            handleClickOutside
-        );
+      document.removeEventListener(
+        "mousedown",
+        handleClickOutside
+      );
+  }, []);
 
-}, []);
+  const loadNotifications = async () => {
+    try {
+      const data = await getNotifications();
+      setNotifications(data);
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  useEffect(() => {
+    loadNotifications();
+  }, []);
+
   return (
     <header className="admin-topbar">
 
@@ -79,161 +77,165 @@ useEffect(() => {
         <FaSearch className="search-icon" />
 
         <input
-    type="text"
-    placeholder="Search restaurants, customers..."
-    value={search}
-    onChange={(e)=>setSearch(e.target.value)}
-/>
+          type="text"
+          placeholder="Search..."
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+        />
 
       </div>
 
       <div className="topbar-right">
 
-        <div className="notification-btn">
-          <div
-    className="notification-wrapper"
-    ref={notificationRef}
->
+        <div
+          className="notification-wrapper"
+          ref={notificationRef}
+        >
 
-    <button
-        className="icon-btn"
-        onClick={() =>
-            setShowNotifications(!showNotifications)
-        }
-    >
-        <FaBell />
+          <button
+            className="icon-btn"
+            onClick={() => {
+              loadNotifications();
+              setShowNotifications(!showNotifications);
+            }}
+          >
+            <FaBell />
 
-        <span className="notification-count">
-            {notifications.length}
-        </span>
+            <span className="notification-count">
+              {notifications.filter((n) => !n.read).length}
+            </span>
 
-    </button>
+          </button>
 
-   {showNotifications && (
+          {showNotifications && (
 
-<div className="notification-dropdown">
+            <div className="notification-dropdown">
 
-    <div className="notification-header">
+              <div className="notification-header">
 
-        <h4>Notifications</h4>
+                <h4>Notifications</h4>
 
-        <button>Mark all read</button>
+                <button
+                  onClick={async () => {
+                    await markAllRead();
+                    loadNotifications();
+                  }}
+                >
+                  Mark all read
+                </button>
 
-    </div>
+              </div>
 
-    {notifications.map(item => (
+              {notifications.map((item) => (
 
-        <div className="notification-card" key={item.id}>
+                <div
+                  className="notification-card"
+                  key={item._id}
+                >
 
-            <div className="notification-icon">
-                <FaBell />
+                  <div className="notification-icon">
+                    <FaBell />
+                  </div>
+
+                  <div className="notification-content">
+
+                    <h5>{item.title}</h5>
+
+                    <p>{item.message}</p>
+
+                    <span>
+                      {new Date(item.createdAt).toLocaleString()}
+                    </span>
+
+                  </div>
+
+                </div>
+
+              ))}
+
+              <div className="notification-footer">
+
+                <button>
+                  View All Notifications
+                </button>
+
+              </div>
+
             </div>
 
-            <div className="notification-content">
+          )}
 
-                <h5>{item.title}</h5>
+        </div>
 
-                <p>{item.message}</p>
+        <div
+          className="profile-wrapper"
+          ref={profileRef}
+        >
 
-                <span>{item.time}</span>
+          <button
+            className="profile-btn"
+            onClick={() =>
+              setShowProfile(!showProfile)
+            }
+          >
+
+            <FaUserCircle className="profile-icon" />
+
+            <div>
+
+              <h4>Admin</h4>
+
+              <span>Administrator</span>
 
             </div>
 
-        </div>
+            <FaChevronDown />
 
-    ))}
+          </button>
 
-    <div className="notification-footer">
+          {showProfile && (
 
-        <button>
-            View All Notifications
-        </button>
+            <div className="profile-dropdown">
 
-    </div>
-
-</div>
-
-)}
-</div>
-        </div>
-
-       <div
-    className="profile-wrapper"
-    ref={profileRef}
->
-
-    <button
-        className="profile-btn"
-        onClick={() =>
-            setShowProfile(!showProfile)
-        }
-    >
-
-        <FaUserCircle className="profile-icon"/>
-
-        <div>
-
-            <h4>Admin</h4>
-
-            <span>Administrator</span>
-
-        </div>
-
-        <FaChevronDown/>
-
-    </button>
-
-    {showProfile && (
-
-        <div className="profile-dropdown">
-
-            <button
+              <button
                 onClick={() =>
-                    navigate("/admin/profile")
+                  navigate("/admin/profile")
                 }
-            >
-
-                <FaUser/>
-
+              >
+                <FaUser />
                 My Profile
+              </button>
 
-            </button>
-
-            <button
+              <button
                 onClick={() =>
-                    navigate("/admin/settings")
+                  navigate("/admin/settings")
                 }
-            >
-
-                <FaCog/>
-
+              >
+                <FaCog />
                 Settings
+              </button>
 
-            </button>
-
-            <button
+              <button
                 onClick={() => {
 
-                    localStorage.removeItem("adminToken");
+                  localStorage.removeItem("adminToken");
 
-                    toast.info("Logged out successfully!");
+                  toast.info("Logged out successfully!");
 
-                    navigate("/admin/login");
+                  navigate("/admin/login");
 
                 }}
-            >
-
-                <FaSignOutAlt/>
-
+              >
+                <FaSignOutAlt />
                 Logout
+              </button>
 
-            </button>
+            </div>
+
+          )}
 
         </div>
 
-    )}
-
-</div>
       </div>
 
     </header>

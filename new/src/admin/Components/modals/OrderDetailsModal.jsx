@@ -12,7 +12,13 @@ function OrderDetailsModal({ open, order, onClose }) {
       <p><strong>Email:</strong> {order.user?.email}</p>
 
       <p><strong>Restaurant:</strong> {order.restaurant?.name}</p>
-
+<div className="dish-tags">
+  {order.items?.map((item, index) => (
+    <span className="dish-tag" key={index}>
+      {item.name} × {item.quantity}
+    </span>
+  ))}
+</div>
       <p><strong>Total:</strong> ₹{order.total}</p>
 
       <p><strong>Status:</strong> {order.status}</p>

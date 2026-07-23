@@ -17,6 +17,7 @@ const [modalType, setModalType] = useState(null);
 const [selectedCustomer, setSelectedCustomer] = useState(null);
   const [customers, setCustomers] = useState([]);
 const [loading, setLoading] = useState(true);
+const [search, setSearch] = useState("");
 const fetchCustomers = async () => {
   try {
     const data = await getAllCustomers();
@@ -34,6 +35,17 @@ useEffect(() => {
 if (loading) {
   return <h2>Loading...</h2>;
 }
+
+const filteredCustomers = customers.filter((customer) => {
+  const query = search.toLowerCase();
+
+  return (
+    customer.name?.toLowerCase().includes(query) ||
+    customer.email?.toLowerCase().includes(query) ||
+    customer.phone?.toLowerCase().includes(query) ||
+    customer._id.slice(-6).toLowerCase().includes(query)
+  );
+});
   return (
     <div className="restaurants-page">
 
@@ -54,10 +66,12 @@ if (loading) {
 
           <FaSearch className="search-icon" />
 
-          <input
-            type="text"
-            placeholder="Search customers..."
-          />
+        <input
+  type="text"
+  placeholder="Search customers..."
+  value={search}
+  onChange={(e) => setSearch(e.target.value)}
+/>
 
         </div>
 
@@ -81,106 +95,133 @@ if (loading) {
 
           </thead>
 
-          <tbody>
+         <tbody>
 
-            {customers.map((customer) => (
+  {filteredCustomers.length > 0 ? (
 
-              <tr key={customer._id}>
+    filteredCustomers.map((customer) => (
 
-                <td>
+      <tr key={customer._id}>
 
-                  <div className="restaurant-info">
+        <td>
 
-                    <div className="restaurant-avatar">
-                      👤
-                    </div>
+          <div className="restaurant-info">
 
-                    <div>
-                      <h4>{customer.name}</h4>
-                      <span>ID #{customer._id.slice(-6)}</span>
-                    </div>
+            <div className="restaurant-avatar">
+              👤
+            </div>
 
-                  </div>
+            <div>
+              <h4>{customer.name}</h4>
+              <span>ID #{customer._id.slice(-6)}</span>
+            </div>
 
-                </td>
+          </div>
 
-                <td>{customer.email}</td>
+        </td>
 
-                <td>{customer.phone}</td>
+        <td>{customer.email}</td>
 
-                <td>{customer.totalOrders}</td>
+        <td>{customer.phone}</td>
 
-                <td>{new Date(customer.createdAt).toLocaleDateString()}</td>
+        <td>{customer.totalOrders}</td>
 
-                <td>
+        <td>{new Date(customer.createdAt).toLocaleDateString()}</td>
 
-                  <span
-                    className={
-                      !customer.isBlocked
-                        ? "status delivered"
-                        : "status cancelled"
-                    }
-                  >
-                    {customer.isBlocked ? "Blocked" : "Active"}
-                  </span>
+        <td>
+          <span
+            className={
+              !customer.isBlocked
+                ? "status delivered"
+                : "status cancelled"
+            }
+          >
+            {customer.isBlocked ? "Blocked" : "Active"}
+          </span>
+        </td>
 
-                </td>
+        <td>
 
-                <td>
+          <div className="table-actions">
 
-                  <div className="table-actions">
+            <button
+              className="icon-btn edit-btn"
+              onClick={() => {
+                setSelectedCustomer(customer);
+                setModalType("view");
+              }}
+            >
+              <FaEye />
+            </button>
 
-                <button
-    className="icon-btn edit-btn"
-    onClick={() => {
-        setSelectedCustomer(customer);
-        setModalType("view");
-    }}
->
-    <FaEye />
-</button>
-<button
-  className={`icon-btn ${
-    customer.isBlocked ? "success-btn" : "warning-btn"
-  }`}
-  title={customer.isBlocked ? "Unblock Customer" : "Block Customer"}
-  onClick={async () => {
-    try {
-      await toggleBlockCustomer(customer._id);
+            <button
+              className={`icon-btn ${
+                customer.isBlocked
+                  ? "success-btn"
+                  : "warning-btn"
+              }`}
+              title={
+                customer.isBlocked
+                  ? "Unblock Customer"
+                  : "Block Customer"
+              }
+              onClick={async () => {
+                try {
+                  await toggleBlockCustomer(customer._id);
 
-      toast.success(
-        customer.isBlocked
-          ? "Customer unblocked successfully!"
-          : "Customer blocked successfully!"
-      );
+                  toast.success(
+                    customer.isBlocked
+                      ? "Customer unblocked successfully!"
+                      : "Customer blocked successfully!"
+                  );
 
-      fetchCustomers();
-    } catch (err) {
-      toast.error(err.response?.data?.message || "Something went wrong");
-    }
-  }}
->
-  <FaBan />
-</button>
-                    <button
-    className="icon-btn delete-btn"
-    onClick={() => {
-        setSelectedCustomer(customer);
-        setModalType("delete");
-    }}
->
-    <FaTrash />
-</button>
+                  fetchCustomers();
+                } catch (err) {
+                  toast.error(
+                    err.response?.data?.message ||
+                      "Something went wrong"
+                  );
+                }
+              }}
+            >
+              <FaBan />
+            </button>
 
-                  </div>
+            <button
+              className="icon-btn delete-btn"
+              onClick={() => {
+                setSelectedCustomer(customer);
+                setModalType("delete");
+              }}
+            >
+              <FaTrash />
+            </button>
 
-                </td>
+          </div>
 
-              </tr>
+        </td>
 
-            ))}
+      </tr>
 
-          </tbody>
+    ))
+
+  ) : (
+
+    <tr>
+      <td
+        colSpan="7"
+        style={{
+          textAlign: "center",
+          padding: "25px",
+        }}
+      >
+        No customers found.
+      </td>
+    </tr>
+
+  )}
+
+</tbody>
 
         </table>
 

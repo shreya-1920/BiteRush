@@ -50,10 +50,16 @@ app.use("/api/auth", authRoutes);
 const settingRoutes = require("./routes/settingRoutes");
 app.use("/api/admin/settings", settingRoutes);
 // Admin
+const dashboardRoutes = require("./routes/dashboardRoutes");
+app.use("/api/admin/dashboard", dashboardRoutes);
 app.use("/api/admin", adminRoutes);
 app.use("/api/admin/customers", customerRoutes);
 app.use("/api/admin/coupons", couponRoutes);
+const notificationRoutes = require("./routes/notificationRoutes");
 
+app.use("/api/admin/notifications", notificationRoutes);
+const searchRoutes = require("./routes/searchRoutes");
+app.use("/api/admin/search", searchRoutes);
 // Customer Coupons
 app.use("/api/coupons", customerCouponRoutes);
 

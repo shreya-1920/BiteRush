@@ -1,135 +1,143 @@
 import {
- FaClipboardList,
- FaMoneyBillWave,
-  FaUtensils ,
+  FaClipboardList,
+  FaMoneyBillWave,
+  FaUtensils,
   FaUsers,
-  
-FaCheckCircle,
-FaShoppingBag
+  FaCheckCircle,
+  FaShoppingBag,
 } from "react-icons/fa";
-import "../styles/statCard.css";
+import {
+  ResponsiveContainer,
+  BarChart,
+  Bar,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+} from "recharts";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+
+import "../styles/statCard.css";
+import { getDashboardStats } from "../services/AdminDashboardServices";
+
 function Dashboard() {
   const navigate = useNavigate();
 
+  const [dashboard, setDashboard] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  const fetchDashboard = async () => {
+    try {
+      const data = await getDashboardStats();
+      setDashboard(data);
+    } catch (err) {
+      toast.error("Failed to load dashboard");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchDashboard();
+  }, []);
+
+  if (loading) {
+    return <h2>Loading Dashboard...</h2>;
+  }
 
   return (
     <div className="dashboard">
 
-      {/* Welcome Banner */}
-<div className="welcome-card">
+      <div className="welcome-card">
 
-    <div>
-
-        <h2>Welcome Back, Admin 👋</h2>
-
-        <p>
+        <div>
+          <h2>Welcome Back, Admin 👋</h2>
+          <p>
             Manage restaurants, orders and customers
             from one place.
-        </p>
-
-    </div>
-
-    <div className="welcome-right">
-
-        <h3>Today's Summary</h3>
-
-        <p><strong>12</strong> New Orders</p>
-
-        <p><strong>3</strong> Restaurant Requests</p>
-
-    </div>
-
-</div>
-
-      {/* Stats */}
-
-   <div className="admin-stats-grid">
-
-  {[
-    {
-      icon: <FaClipboardList />,
-      title: "TOTAL ORDERS",
-      value: "1,284",
-      change: "+12%",
-      className: "orders",
-    },
-    {
-      icon: <FaMoneyBillWave />,
-      title: "REVENUE",
-      value: "$42.5k",
-      change: "+8.4%",
-      className: "revenue",
-    },
-    {
-      icon: <FaUsers />,
-      title: "CUSTOMERS",
-      value: "8,902",
-      change: "+24%",
-      className: "customers",
-    },
-    {
-      icon: <FaUtensils />,
-      title: "RESTAURANTS",
-      value: "142",
-      change: "Stable",
-      className: "restaurants",
-    },
-    {
-      icon: <FaShoppingBag />,
-      title: "PENDING",
-      value: "18",
-      change: "High",
-      className: "pending",
-    },
-    {
-      icon: <FaCheckCircle />,
-      title: "DELIVERED",
-      value: "1,210",
-      change: "98%",
-      className: "delivered",
-    },
-  ].map((card, index) => (
-
-    <div className="admin-stat-card" key={index}>
-
-      <div className="admin-stat-header">
-
-        <div className={`admin-stat-icon ${card.className}`}>
-          {card.icon}
+          </p>
         </div>
 
-        <span className="admin-stat-change">
-          {card.change}
-        </span>
+       <div className="welcome-right">
+  <h3>Today's Summary</h3>
+
+  <p>
+    <strong>{dashboard.totalOrders}</strong> Orders
+  </p>
+
+  <p>
+    <strong>₹{dashboard.totalRevenue}</strong> Revenue
+  </p>
+
+ 
+</div>
 
       </div>
 
-      <div className="admin-stat-body">
+      <div className="admin-stats-grid">
 
-    <p className="admin-stat-title">
-        {card.title}
-    </p>
+        {[
+          {
+            icon: <FaClipboardList />,
+            title: "TOTAL ORDERS",
+            value: dashboard.totalOrders,
+            className: "orders",
+          },
+          {
+            icon: <FaMoneyBillWave />,
+            title: "REVENUE",
+            value: `₹${dashboard.totalRevenue}`,
+            className: "revenue",
+          },
+          {
+            icon: <FaUsers />,
+            title: "CUSTOMERS",
+            value: dashboard.totalCustomers,
+            className: "customers",
+          },
+          {
+            icon: <FaUtensils />,
+            title: "RESTAURANTS",
+            value: dashboard.totalRestaurants,
+            className: "restaurants",
+          },
+          {
+            icon: <FaShoppingBag />,
+            title: "PENDING",
+            value: dashboard.pendingOrders,
+            className: "pending",
+          },
+          {
+            icon: <FaCheckCircle />,
+            title: "DELIVERED",
+            value: dashboard.deliveredOrders,
+            className: "delivered",
+          },
+        ].map((card, index) => (
+          <div key={index} className="admin-stat-card">
 
-    <h2 className="admin-stat-value">
-        {card.value}
-    </h2>
+            <div className="admin-stat-header">
+              <div className={`admin-stat-icon ${card.className}`}>
+                {card.icon}
+              </div>
+            </div>
 
-</div>
+            <div className="admin-stat-body">
+              <p className="admin-stat-title">{card.title}</p>
+              <h2 className="admin-stat-value">{card.value}</h2>
+            </div>
 
-    </div>
+          </div>
+        ))}
 
-  ))}
-
-</div>
-      {/* Main Grid */}
+      </div>
 
       <div className="dashboard-grid">
 
-        {/* Left Side */}
-
         <div className="dashboard-left">
-<div className="admin-card chart-card">
+            <div className="admin-card chart-card">
 
   <div className="chart-top">
 
@@ -145,264 +153,194 @@ function Dashboard() {
 
   </div>
 
-  <div className="chart-container">
+ <div className="chart-container">
 
-    <div className="chart-grid">
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-    </div>
+  <ResponsiveContainer width="100%" height={300}>
 
-    <div className="bars">
+    <BarChart data={dashboard.weeklyRevenue}>
 
-      <div className="bar-box">
-        <div className="chart-bar h1"></div>
-        <p>Mon</p>
-      </div>
+      <CartesianGrid strokeDasharray="3 3" />
 
-      <div className="bar-box">
-        <div className="chart-bar h2"></div>
-        <p>Tue</p>
-      </div>
+      <XAxis dataKey="day" />
 
-      <div className="bar-box">
-        <div className="chart-bar h3"></div>
-        <p>Wed</p>
-      </div>
+      <YAxis />
 
-      <div className="bar-box">
-        <div className="chart-bar h4 active"></div>
-        <p>Thu</p>
-      </div>
+      <Tooltip />
 
-      <div className="bar-box">
-        <div className="chart-bar h5"></div>
-        <p>Fri</p>
-      </div>
+      <Bar
+        dataKey="revenue"
+        radius={[8, 8, 0, 0]}
+      />
 
-      <div className="bar-box">
-        <div className="chart-bar h6"></div>
-        <p>Sat</p>
-      </div>
+    </BarChart>
 
-      <div className="bar-box">
-        <div className="chart-bar h2"></div>
-        <p>Sun</p>
-      </div>
+  </ResponsiveContainer>
 
-    </div>
+</div>
+
+  </div>
+
+
+
+<div className="admin-card recent-orders">
+
+  <div className="section-header">
+
+    <h3>Recent Orders</h3>
+
+    <button
+      className="view-all-btn"
+      onClick={() => navigate("/admin/orders")}
+    >
+      View All
+    </button>
+
+  </div>
+
+  <table className="orders-table">
+
+    <thead>
+
+      <tr>
+        <th>Order</th>
+        <th>Customer</th>
+        <th>Amount</th>
+        <th>Status</th>
+      </tr>
+
+    </thead>
+
+    <tbody>
+
+      {dashboard.recentOrders?.length > 0 ? (
+
+        dashboard.recentOrders.map((order) => (
+
+          <tr
+            key={order._id}
+            onClick={() => navigate("/admin/orders")}
+            style={{ cursor: "pointer" }}
+          >
+
+            <td className="order-id">
+              #{order._id.slice(-6)}
+            </td>
+
+            <td>
+
+              <div className="customer-info">
+
+                <div className="customer-avatar">
+                  {order.user?.name?.charAt(0).toUpperCase()}
+                </div>
+
+                <div>
+
+                  <div className="customer-name">
+                    {order.user?.name}
+                  </div>
+
+                  <div className="customer-email">
+                    {order.user?.email}
+                  </div>
+
+                </div>
+
+              </div>
+
+            </td>
+
+            <td className="order-price">
+              ₹{order.total}
+            </td>
+
+            <td>
+
+              <span
+                className={`status ${
+                  order.status === "Delivered"
+                    ? "delivered"
+                    : order.status === "Pending"
+                    ? "pending"
+                    : "preparing"
+                }`}
+              >
+                {order.status}
+              </span>
+
+            </td>
+
+          </tr>
+
+        ))
+
+      ) : (
+
+        <tr>
+
+          <td
+            colSpan="4"
+            style={{ textAlign: "center", padding: "20px" }}
+          >
+            No Orders Found
+          </td>
+
+        </tr>
+
+      )}
+
+    </tbody>
+
+  </table>
+
+</div>
+
+</div> {/* dashboard-left */}
+
+<div className="dashboard-right">
+    {/* Quick Actions */}
+
+<div className="admin-card quick-actions-card">
+
+  <h3>Quick Actions</h3>
+
+  <div className="quick-actions">
+
+    <button
+      className="quick-btn"
+      onClick={() => navigate("/admin/restaurants")}
+    >
+      Add Restaurant
+    </button>
+
+    <button
+      className="quick-btn"
+      onClick={() => navigate("/admin/coupons")}
+    >
+      Create Coupon
+    </button>
+
+    <button
+      className="quick-btn"
+      onClick={() => navigate("/admin/orders")}
+    >
+      Manage Orders
+    </button>
+
+    <button
+      className="quick-btn"
+      onClick={() => navigate("/admin/customers")}
+    >
+      Customers
+    </button>
 
   </div>
 
 </div>
-          <div className="admin-card recent-orders">
 
-            <div className="section-header">
+{/* Top Restaurants */}
 
-            <h3>Recent Orders</h3>
-
-              <button
-    className="view-all-btn"
-    onClick={() => navigate("/admin/orders")}
->
-    View All
-</button>
-
-            </div>
-
-            <table className="orders-table">
-
-              <thead>
-
-                <tr>
-
-                  <th>Order</th>
-                  <th>Customer</th>
-                  <th>Amount</th>
-                  <th>Status</th>
-
-                </tr>
-
-              </thead>
-
-              <tbody>
-
-               <tr
-    onClick={() => navigate("/admin/orders")}
-    style={{ cursor: "pointer" }}
->
-
-                  <td className="order-id">#1001</td>
-
-                  <td>
-
-                    <div className="customer-info">
-
-                      <div className="customer-avatar">
-                        R
-                      </div>
-
-                      <div>
-
-                        <div className="customer-name">
-                          Rahul
-                        </div>
-
-                        <div className="customer-email">
-                          rahul@gmail.com
-                        </div>
-
-                      </div>
-
-                    </div>
-
-                  </td>
-
-                  <td className="order-price">$42</td>
-
-                  <td>
-                    <span className="status delivered">
-                      Delivered
-                    </span>
-                  </td>
-
-                </tr>
-
-                <tr
-    onClick={() => navigate("/admin/orders")}
-    style={{ cursor: "pointer" }}
->
-
-                  <td className="order-id">#1002</td>
-
-                  <td>
-
-                    <div className="customer-info">
-
-                      <div className="customer-avatar">
-                        P
-                      </div>
-
-                      <div>
-
-                        <div className="customer-name">
-                          Priya
-                        </div>
-
-                        <div className="customer-email">
-                          priya@gmail.com
-                        </div>
-
-                      </div>
-
-                    </div>
-
-                  </td>
-
-                  <td className="order-price">$18</td>
-
-                  <td>
-                    <span className="status pending">
-                      Pending
-                    </span>
-                  </td>
-
-                </tr>
-
-                <tr
-    onClick={() => navigate("/admin/orders")}
-    style={{ cursor: "pointer" }}
->
-
-                  <td className="order-id">#1003</td>
-
-                  <td>
-
-                    <div className="customer-info">
-
-                      <div className="customer-avatar">
-                        A
-                      </div>
-
-                      <div>
-
-                        <div className="customer-name">
-                          Amit
-                        </div>
-
-                        <div className="customer-email">
-                          amit@gmail.com
-                        </div>
-
-                      </div>
-
-                    </div>
-
-                  </td>
-
-                  <td className="order-price">$31</td>
-
-                  <td>
-                    <span className="status preparing">
-                      Preparing
-                    </span>
-                  </td>
-
-                </tr>
-
-              </tbody>
-
-            </table>
-
-          </div>
-
-        </div>
-
-        {/* Right Side */}
-
-        <div className="dashboard-right">
-
-          <div className="admin-card quick-actions-card">
-
-            <h3> Quick Actions</h3>
-
-            <div className="quick-actions">
-
-             <button
-    className="quick-btn"
-    onClick={() => navigate("/admin/restaurants")}
->
-    Add Restaurant
-</button>
-
-<button
-    className="quick-btn"
-    onClick={() => navigate("/admin/coupons")}
->
-    Create Coupon
-</button>
-
-<button
-    className="quick-btn"
-    onClick={() => navigate("/admin/orders")}
->
-    Manage Orders
-</button>
-
-<button
-    className="quick-btn"
-    onClick={() => navigate("/admin/customers")}
->
-    Customers
-</button>
-
-            </div>
-
-          </div>
-
-          <div className="admin-card top-restaurants-card">
+<div className="admin-card top-restaurants-card">
 
   <div className="section-header">
     <h3>Top Restaurants</h3>
@@ -410,62 +348,55 @@ function Dashboard() {
 
   <div className="restaurant-list">
 
-    <div
-    className="restaurant-item"
-    onClick={() => navigate("/admin/restaurants")}
-    style={{ cursor: "pointer" }}
->
-      <div className="restaurant-left">
-        <div className="restaurant-avatar">🍕</div>
+    {dashboard.topRestaurants?.length > 0 ? (
 
-        <div className="restaurant-details">
-          <h4>La Pinoz</h4>
-          <span>Pizza • Jaipur</span>
+      dashboard.topRestaurants.map((restaurant) => (
+
+        <div
+          key={restaurant._id}
+          className="restaurant-item"
+          onClick={() => navigate("/admin/restaurants")}
+          style={{ cursor: "pointer" }}
+        >
+
+          <div className="restaurant-left">
+
+            <div className="restaurant-avatar">
+              🍽️
+            </div>
+
+            <div className="restaurant-details">
+              <h4>{restaurant.name}</h4>
+              <span>
+                {restaurant.category} • {restaurant.city}
+              </span>
+            </div>
+
+          </div>
+
+          <div className="restaurant-sales">
+            ⭐ {restaurant.rating}
+          </div>
+
         </div>
-      </div>
 
-      <div className="restaurant-sales">$4,200</div>
-    </div>
+      ))
 
-    <div
-    className="restaurant-item"
-    onClick={() => navigate("/admin/restaurants")}
-    style={{ cursor: "pointer" }}
->
-      <div className="restaurant-left">
-        <div className="restaurant-avatar">🍔</div>
+    ) : (
 
-        <div className="restaurant-details">
-          <h4>Burger Farm</h4>
-          <span>Burgers • Jaipur</span>
-        </div>
-      </div>
+      <p style={{ textAlign: "center", padding: "20px" }}>
+        No Restaurants Found
+      </p>
 
-      <div className="restaurant-sales">$3,650</div>
-    </div>
-
-    <div
-    className="restaurant-item"
-    onClick={() => navigate("/admin/restaurants")}
-    style={{ cursor: "pointer" }}
->
-      <div className="restaurant-left">
-        <div className="restaurant-avatar">🍜</div>
-
-        <div className="restaurant-details">
-          <h4>Noodles Hub</h4>
-          <span>Chinese • Jaipur</span>
-        </div>
-      </div>
-
-      <div className="restaurant-sales">$2,900</div>
-    </div>
+    )}
 
   </div>
 
 </div>
 
-          <div className="admin-card latest-customers-card">
+{/* Latest Customers */}
+
+<div className="admin-card latest-customers-card">
 
   <div className="section-header">
     <h3>Latest Customers</h3>
@@ -473,91 +404,57 @@ function Dashboard() {
 
   <div className="customer-list">
 
-   <div
-    className="customer-item"
-    onClick={() => navigate("/admin/customers")}
-    style={{ cursor: "pointer" }}
->
-      <div className="customer-left">
+    {dashboard.latestCustomers?.length > 0 ? (
 
-        <div className="customer-photo">R</div>
+      dashboard.latestCustomers.map((customer) => (
 
-        <div className="customer-meta">
-          <h4>Rahul</h4>
-          <p>rahul@gmail.com</p>
-        </div>
+        <div
+          key={customer._id}
+          className="customer-item"
+          onClick={() => navigate("/admin/customers")}
+          style={{ cursor: "pointer" }}
+        >
 
-      </div>
+          <div className="customer-left">
 
-      <div className="join-date">Today</div>
-    </div>
+            <div className="customer-photo">
+              {customer.name?.charAt(0).toUpperCase()}
+            </div>
 
-   <div
-    className="customer-item"
-    onClick={() => navigate("/admin/customers")}
-    style={{ cursor: "pointer" }}
->
-      <div className="customer-left">
+            <div className="customer-meta">
+              <h4>{customer.name}</h4>
+              <p>{customer.email}</p>
+            </div>
 
-        <div className="customer-photo">P</div>
+          </div>
 
-        <div className="customer-meta">
-          <h4>Priya</h4>
-          <p>priya@gmail.com</p>
-        </div>
-
-      </div>
-
-      <div className="join-date">Yesterday</div>
-    </div>
-
-   <div
-    className="customer-item"
-    onClick={() => navigate("/admin/customers")}
-    style={{ cursor: "pointer" }}
->
-      <div className="customer-left">
-
-        <div className="customer-photo">A</div>
-
-        <div className="customer-meta">
-          <h4>Amit</h4>
-          <p>amit@gmail.com</p>
-        </div>
-
-      </div>
-
-      <div className="join-date">2 days ago</div>
-    </div>
-
-   <div
-    className="customer-item"
-    onClick={() => navigate("/admin/customers")}
-    style={{ cursor: "pointer" }}
->
-      <div className="customer-left">
-
-        <div className="customer-photo">S</div>
-
-        <div className="customer-meta">
-          <h4>Shivam</h4>
-          <p>shivam@gmail.com</p>
-        </div>
-
-      </div>
-
-      <div className="join-date">3 days ago</div>
-    </div>
-
-  </div>
-
-</div>
+          <div className="join-date">
+            {new Date(customer.createdAt).toLocaleDateString()}
+          </div>
 
         </div>
 
-      </div>
+      ))
 
-    </div>
+    ) : (
+
+      <p style={{ textAlign: "center", padding: "20px" }}>
+        No Customers Found
+      </p>
+
+    )}
+
+
+  </div> 
+
+</div> 
+
+</div> 
+
+</div> 
+
+</div> 
+
   );
 }
 

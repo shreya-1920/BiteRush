@@ -1,5 +1,5 @@
 const Restaurant = require("../models/Restaurant");
-
+const Notification = require("../models/Notification");
 // Get All Restaurants
 const getRestaurants = async (req, res) => {
   try {
@@ -36,6 +36,13 @@ const createRestaurant = async (req, res) => {
     const restaurant = new Restaurant(req.body);
 
     await restaurant.save();
+
+    // Create Notification
+    await Notification.create({
+      title: "Restaurant Added",
+      message: `${restaurant.name} has been added.`,
+      type: "restaurant",
+    });
 
     res.status(201).json(restaurant);
   } catch (err) {

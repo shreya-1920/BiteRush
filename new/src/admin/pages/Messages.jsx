@@ -13,7 +13,7 @@ const [modalType, setModalType] = useState(null);
 const [selectedMessage, setSelectedMessage] = useState(null);
   const [messages, setMessages] = useState([]);
 const [loading, setLoading] = useState(true);
-
+const [search, setSearch] = useState("");
 const fetchMessages = async () => {
   try {
     const data = await getAllMessages();
@@ -42,6 +42,16 @@ const handleDelete = async (id) => {
 if (loading) {
   return <h3>Loading Messages...</h3>;
 }
+const filteredMessages = messages.filter((msg) => {
+  const query = search.toLowerCase();
+
+  return (
+    msg.name?.toLowerCase().includes(query) ||
+    msg.email?.toLowerCase().includes(query) ||
+    msg.subject?.toLowerCase().includes(query) ||
+    msg.message?.toLowerCase().includes(query)
+  );
+});
   return (
     <div className="restaurants-page">
 
@@ -56,7 +66,12 @@ if (loading) {
 
         <div className="search-box">
           <FaSearch className="search-icon"/>
-          <input placeholder="Search messages..." />
+          <input
+  type="text"
+  placeholder="Search messages..."
+  value={search}
+  onChange={(e) => setSearch(e.target.value)}
+/>
         </div>
 
       </div>
@@ -77,70 +92,84 @@ if (loading) {
             </tr>
 
           </thead>
+<tbody>
 
-          <tbody>
+  {filteredMessages.length > 0 ? (
 
-            {messages.map((msg)=>(
-              <tr key={msg._id}>
+    filteredMessages.map((msg) => (
 
-                <td>{msg.name}</td>
+      <tr key={msg._id}>
 
-                <td>{msg.email}</td>
+        <td>{msg.name}</td>
 
-                <td>{msg.subject}</td>
+        <td>{msg.email}</td>
 
-                <td>
-  {new Date(msg.createdAt).toLocaleDateString()}
-</td>
+        <td>{msg.subject}</td>
 
-                <td>
+        <td>
+          {new Date(msg.createdAt).toLocaleDateString()}
+        </td>
 
-                  <span
-                    className={
-                      msg.status==="Read"
-                      ? "status delivered"
-                      : "status pending"
-                    }
-                  >
-                   <td>
-    <span className="status delivered">
-        Received
-    </span>
-</td>
-                  </span>
+        <td>
 
-                </td>
+          <span className="status delivered">
+            Received
+          </span>
 
-                <td>
+        </td>
 
-                 <div className="table-actions">
+        <td>
 
-<button
-    className="icon-btn edit-btn"
-    onClick={() => {
-        setSelectedMessage(msg);
-        setModalType("view");
-    }}
->
-    <FaEye />
-</button>
+          <div className="table-actions">
 
-<button
-    className="icon-btn delete-btn"
-    onClick={() => handleDelete(msg._id)}
->
-    <FaTrash />
-</button>
+            <button
+              className="icon-btn edit-btn"
+              title="View Message"
+              onClick={() => {
+                setSelectedMessage(msg);
+                setModalType("view");
+              }}
+            >
+              <FaEye />
+            </button>
 
-</div>
+            <button
+              className="icon-btn delete-btn"
+              title="Delete Message"
+              onClick={() => handleDelete(msg._id)}
+            >
+              <FaTrash />
+            </button>
 
-                </td>
+          </div>
 
-              </tr>
-            ))}
+        </td>
 
-          </tbody>
+      </tr>
 
+    ))
+
+  ) : (
+
+    <tr>
+
+      <td
+        colSpan="6"
+        style={{
+          textAlign: "center",
+          padding: "25px",
+          color: "#777",
+          fontWeight: "500",
+        }}
+      >
+        No messages found.
+      </td>
+
+    </tr>
+
+  )}
+
+</tbody>
         </table>
 
       </div>
