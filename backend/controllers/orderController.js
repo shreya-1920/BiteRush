@@ -119,6 +119,14 @@ exports.getOrderById = async (req, res) => {
       });
     }
 
+    // Customer can only access their own order
+    if (order.user._id.toString() !== req.user.userId) {
+      return res.status(403).json({
+        success: false,
+        message: "Unauthorized",
+      });
+    }
+
     res.status(200).json({
       success: true,
       order,

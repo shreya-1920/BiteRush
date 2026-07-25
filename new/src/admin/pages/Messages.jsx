@@ -1,4 +1,4 @@
-import { FaSearch, FaEye, FaTrash } from "react-icons/fa";
+import { FaEye, FaTrash } from "react-icons/fa";
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 
@@ -6,14 +6,14 @@ import {
   getAllMessages,
   deleteMessage,
 } from "../services/AdminMessageServices";
-
+import { useSearch } from "../context/SearchContext";
 import MessageDetailsModal from "../components/modals/MessageDetailsModal";
 function Messages() {
 const [modalType, setModalType] = useState(null);
 const [selectedMessage, setSelectedMessage] = useState(null);
   const [messages, setMessages] = useState([]);
 const [loading, setLoading] = useState(true);
-const [search, setSearch] = useState("");
+const { search } = useSearch();
 const fetchMessages = async () => {
   try {
     const data = await getAllMessages();
@@ -43,13 +43,13 @@ if (loading) {
   return <h3>Loading Messages...</h3>;
 }
 const filteredMessages = messages.filter((msg) => {
-  const query = search.toLowerCase();
+  const text = search.toLowerCase();
 
   return (
-    msg.name?.toLowerCase().includes(query) ||
-    msg.email?.toLowerCase().includes(query) ||
-    msg.subject?.toLowerCase().includes(query) ||
-    msg.message?.toLowerCase().includes(query)
+    msg.name?.toLowerCase().includes(text) ||
+    msg.email?.toLowerCase().includes(text) ||
+    msg.subject?.toLowerCase().includes(text) ||
+    msg.message?.toLowerCase().includes(text)
   );
 });
   return (
@@ -64,15 +64,7 @@ const filteredMessages = messages.filter((msg) => {
 
       <div className="table-toolbar">
 
-        <div className="search-box">
-          <FaSearch className="search-icon"/>
-          <input
-  type="text"
-  placeholder="Search messages..."
-  value={search}
-  onChange={(e) => setSearch(e.target.value)}
-/>
-        </div>
+        
 
       </div>
 

@@ -607,6 +607,10 @@ align-items:center;
     height:100%;
     object-fit:cover;
 }
+.restaurant-table th:first-child,
+.restaurant-table td:first-child{
+    width:40%;
+}
 .status.active{
 
     background:#d1fae5;
@@ -858,22 +862,37 @@ align-items:center;
     font-size:22px;
 }
 
-.restaurant-details h4{
-    font-size:15px;
-    font-weight:600;
-    color:#111827;
-}
 
-.restaurant-details span{
-    color:#9CA3AF;
-    font-size:13px;
-}
 
 .restaurant-sales{
     font-weight:700;
     color:#16A34A;
 }
+.restaurant-avatar img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+}
 
+.restaurant-details{
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+}
+
+.restaurant-details h4{
+    margin:0;
+    font-size:24px;
+    font-weight:700;
+    color:#1f2937;
+    line-height:1.2;
+}
+
+.restaurant-details span{
+    margin-top:6px;
+    font-size:15px;
+    color:#8b95a7;
+}
 /* ===========================================================
                     LATEST CUSTOMERS
 =========================================================== */
@@ -1087,22 +1106,52 @@ align-items:center;
 .admin-table{
     width:100%;
     border-collapse:collapse;
+    table-layout:fixed;
 }
 
+.admin-table th:nth-child(1),
+.admin-table td:nth-child(1){
+    width:42%;
+}
+
+.admin-table th:nth-child(2),
+.admin-table td:nth-child(2){
+    width:12%;
+}
+
+.admin-table th:nth-child(3),
+.admin-table td:nth-child(3){
+    width:10%;
+}
+
+.admin-table th:nth-child(4),
+.admin-table td:nth-child(4){
+    width:10%;
+}
+
+.admin-table th:nth-child(5),
+.admin-table td:nth-child(5){
+    width:12%;
+}
+
+.admin-table th:nth-child(6),
+.admin-table td:nth-child(6){
+    width:14%;
+}
 .admin-table thead{
     background:#F9FAFB;
 }
 
 .admin-table th{
     text-align:left;
-    padding:18px 24px;
+    padding: 24px 30px;
     font-size:14px;
     color:#6B7280;
     font-weight:600;
 }
 
 .admin-table td{
-    padding:20px 24px;
+    padding:28px 30px;
     border-top:1px solid #F1F5F9;
 }
 
@@ -1116,33 +1165,52 @@ align-items:center;
 
 /* Restaurant Info */
 
+.restaurant-cell{
+    min-width:380px;
+}
+
 .restaurant-info{
     display:flex;
     align-items:center;
-    gap:15px;
+    gap:18px;
 }
 
 .restaurant-avatar{
-    width:55px;
-    height:55px;
-    border-radius:14px;
-    background:linear-gradient(135deg,#F97316,#FB923C);
+    width:72px;
+    height:72px;
+    border-radius:18px;
+    overflow:hidden;
+    flex-shrink:0;
+    background:#F3F4F6;
     display:flex;
-    justify-content:center;
     align-items:center;
-    font-size:24px;
-    color:#fff;
+    justify-content:center;
 }
 
-.restaurant-info h4{
-    font-size:17px;
+.restaurant-avatar img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+}
+
+.restaurant-details{
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+}
+
+.restaurant-details h4{
+    margin:0;
+    font-size:20px;
+    font-weight:600;
     color:#111827;
-    margin-bottom:4px;
+    line-height:1.2;
 }
 
-.restaurant-info span{
-    font-size:13px;
-    color:#9CA3AF;
+.restaurant-details span{
+    margin-top:6px;
+    font-size:15px;
+    color:#8B93A7;
 }
 
 /* Rating */
@@ -1183,8 +1251,8 @@ align-items:center;
 }
 
 .icon-btn{
-    width:40px;
-    height:40px;
+    width:54px;
+    height:54px;
     border:none;
     border-radius:10px;
     cursor:pointer;

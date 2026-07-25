@@ -4505,3 +4505,93 @@ flex-shrink:0;
 }
 
 
+.track-page{
+
+max-width:900px;
+margin:auto;
+
+padding:50px 20px;
+
+}
+
+.track-page h1{
+
+font-size:38px;
+
+margin-bottom:10px;
+
+}
+
+.track-timeline{
+
+display:flex;
+
+justify-content:space-between;
+
+margin:50px 0;
+
+}
+
+.track-timeline div{
+
+width:170px;
+
+height:90px;
+
+border-radius:18px;
+
+background:#f6f6f6;
+
+display:flex;
+
+justify-content:center;
+
+align-items:center;
+
+font-weight:600;
+
+text-align:center;
+
+}
+
+.track-timeline .active{
+
+background:#ffefe8;
+
+color:#ff5b2e;
+
+}
+
+.track-card{
+
+background:white;
+
+padding:25px;
+
+border-radius:18px;
+
+margin-bottom:20px;
+
+box-shadow:0 5px 20px rgba(0,0,0,.06);
+
+}
+
+.back-btn{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    padding:10px 18px;
+    border-radius:12px;
+    background:#fff;
+    width:fit-content;
+    margin-bottom: 20px;
+}
+
+.back-btn:hover{
+    transform:translateX(-3px);
+    background:#f9f5f2;
+}
+
+.back-btn svg{
+    font-size:15px;
+}

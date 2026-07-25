@@ -5,6 +5,7 @@ import Container from "react-bootstrap/Container";
 import "../styles/Checkout.css";
 import { placeOrder } from "../services/checkoutServices";
 import { useCart } from "../Context/CartContext";
+import { clearCart } from "../services/CartServices";
 import {
   FaMapMarkerAlt,
   FaClock,
@@ -121,7 +122,7 @@ useEffect(() => {
     setLoading(true);
 
     try {
-await placeOrder({
+const response = await placeOrder({
   restaurant: cartItems[0]?.restaurant,
   name,
   phone,
@@ -134,11 +135,17 @@ await placeOrder({
   total,
 });
 
-      clearCartState();
+await clearCart();      // Clear MongoDB cart
+clearCartState();       // Clear React state
 
-      toast.success("Order Placed Successfully!");
+toast.success("Order Placed Successfully!");
 
-      navigate("/order-success");
+navigate("/order-success", {
+  state: {
+    order: response.order,
+  },
+});
+    
     } catch (error) {
       toast.error(error.response?.data?.message || "Checkout Failed");
     } finally {

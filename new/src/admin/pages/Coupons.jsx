@@ -1,4 +1,4 @@
-import { FaEye,FaPlus, FaSearch, FaEdit, FaTrash } from "react-icons/fa";
+import { FaEye,FaPlus,  FaEdit, FaTrash } from "react-icons/fa";
 import { useState,useEffect } from "react";
 import { FaPowerOff } from "react-icons/fa";
 import { toast } from "react-toastify";
@@ -8,7 +8,7 @@ import {
   toggleCoupon,
 } from "../services/AdminCouponServices";
 
-
+import { useSearch } from "../context/SearchContext";
 import Modal from "../components/Modal";
 import ConfirmModal from "../components/ConfirmModal";
 import CouponForm from "../components/forms/CouponForm";
@@ -17,7 +17,7 @@ const [modalType, setModalType] = useState(null);
 const [selectedCoupon, setSelectedCoupon] = useState(null);
   const [coupons, setCoupons] = useState([]);
 const [loading, setLoading] = useState(true);
-const [search, setSearch] = useState("");
+const { search } = useSearch();
 const fetchCoupons = async () => {
   try {
     const data = await getAllCoupons();
@@ -36,13 +36,12 @@ if (loading) {
   return <h2>Loading...</h2>;
 }
 const filteredCoupons = coupons.filter((coupon) => {
-  const query = search.toLowerCase();
+  const text = search.toLowerCase();
 
   return (
-    coupon.code?.toLowerCase().includes(query) ||
-    coupon.description?.toLowerCase().includes(query) ||
-    coupon.discount?.toString().includes(query) ||
-    coupon.status?.toLowerCase().includes(query)
+    coupon.code?.toLowerCase().includes(text) ||
+    coupon.discountType?.toLowerCase().includes(text) ||
+    coupon.discountValue?.toString().includes(text)
   );
 });
   return (
@@ -74,18 +73,7 @@ const filteredCoupons = coupons.filter((coupon) => {
 
       <div className="table-toolbar">
 
-        <div className="search-box">
-
-          <FaSearch className="search-icon"/>
-
-         <input
-  type="text"
-  placeholder="Search coupons..."
-  value={search}
-  onChange={(e) => setSearch(e.target.value)}
-/>
-
-        </div>
+        
 
       </div>
 

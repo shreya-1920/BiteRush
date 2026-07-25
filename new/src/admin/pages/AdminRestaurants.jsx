@@ -1,6 +1,6 @@
 import {
   FaPlus,
-  FaSearch,
+  
   FaEdit,
   FaTrash,
   FaStar,
@@ -9,6 +9,7 @@ import {
   getRestaurants,
     deleteRestaurant,
 } from "../Services/RestaurantService";
+import { useSearch } from "../context/SearchContext";
 import { toast } from "react-toastify";
 import { useState, useEffect } from "react";
 import ConfirmModal from "../components/ConfirmModal";
@@ -19,7 +20,7 @@ function AdminRestaurants() {
 // "add" | "edit" | "delete"
 const [loading, setLoading] = useState(true);
 const [selectedRestaurant, setSelectedRestaurant] = useState(null);
- 
+ const { search } = useSearch();
 const handleDelete = async () => {
   try {
 
@@ -42,7 +43,7 @@ const handleDelete = async () => {
   }
 };
  const [restaurants, setRestaurants] = useState([]);
- const [search, setSearch] = useState("");
+
  const [statusFilter, setStatusFilter] = useState("All");
 const [cityFilter, setCityFilter] = useState("All");
 const fetchRestaurants = async () => {
@@ -119,20 +120,7 @@ const statuses = [
 
       {/* Filters */}
 
-      <div className="table-toolbar">
-
-        <div className="search-box">
-
-          <FaSearch className="search-icon" />
-
-          <input
-    type="text"
-    placeholder="Search restaurants..."
-    value={search}
-    onChange={(e) => setSearch(e.target.value)}
-/>
-
-        </div>
+   <div>
 
         <div className="toolbar-right">
 
@@ -196,71 +184,76 @@ const statuses = [
 
           </thead>
 
-        <tbody>
-
+       <tbody>
   {filteredRestaurants.length > 0 ? (
-
     filteredRestaurants.map((restaurant) => (
-
       <tr key={restaurant._id}>
 
-        <td>
+        {/* Restaurant */}
+
+        <td className="restaurant-cell">
           <div className="restaurant-info">
-         <div className="restaurant-avatar">
 
-  {restaurant.logo ? (
+            <div className="restaurant-avatar">
+              {restaurant.logo ? (
+                <img
+                  src={restaurant.logo}
+                  alt={restaurant.name}
+                />
+              ) : (
+                "🍽️"
+              )}
+            </div>
 
-    <img
-      src={restaurant.logo}
-      alt={restaurant.name}
-    />
-
-  ) : (
-
-    "🍽️"
-
-  )}
-
-</div>
-
-            <div>
+            <div className="restaurant-details">
               <h4>{restaurant.name}</h4>
 
-<span>
-
-{restaurant.category} • {restaurant.cuisine}
-
-</span>
+              <span>
+                {restaurant.category} • {restaurant.cuisine}
+              </span>
             </div>
+
           </div>
         </td>
 
-        <td>{restaurant.city}</td>
+        {/* City */}
 
-        <td>
-         <div className="rating">
-
-    <FaStar />
-
-    <span>{restaurant.rating || "N/A"}</span>
-
-</div>
+        <td className="city-cell">
+          {restaurant.city}
         </td>
 
-        <td>{restaurant.orders || 0}</td>
-        <td>
+        {/* Rating */}
+
+        <td className="rating-cell">
+          <div className="rating">
+            <FaStar />
+            <span>{restaurant.rating || "N/A"}</span>
+          </div>
+        </td>
+
+        {/* Orders */}
+
+        <td className="orders-cell">
+          {restaurant.orders || 0}
+        </td>
+
+        {/* Status */}
+
+        <td className="status-cell">
           <span
             className={
-              restaurant.status === "Open"
-    ? "status active"
-    : "status inactive"
+              restaurant.status === "Active"
+                ? "status active"
+                : "status inactive"
             }
           >
             {restaurant.status}
           </span>
         </td>
 
-        <td>
+        {/* Actions */}
+
+        <td className="actions-cell">
           <div className="table-actions">
 
             <button
@@ -287,19 +280,14 @@ const statuses = [
         </td>
 
       </tr>
-
     ))
-
   ) : (
-
     <tr>
       <td colSpan="6" className="empty-table">
         🍔 No restaurants found.
       </td>
     </tr>
-
   )}
-
 </tbody>
         </table>
 

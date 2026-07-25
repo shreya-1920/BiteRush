@@ -10,7 +10,7 @@ const {
   clearCart,
 } = require("../controllers/cartController");
 router.get("/", authMiddleware, getCart);
-
+router.delete("/clear", authMiddleware, clearCart);
 router.post("/", authMiddleware, addToCart);
 
 router.put("/:id", authMiddleware, updateCart);

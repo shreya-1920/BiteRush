@@ -1,6 +1,6 @@
 import {
   FaPlus,
-  FaSearch,
+  
   FaEdit,
   FaTrash,
 } from "react-icons/fa";
@@ -12,7 +12,7 @@ import {
   getMenus,
   deleteMenu,
 } from "../Services/MenuService";
-
+import { useSearch } from "../context/SearchContext";
 import Modal from "../components/Modal";
 import ConfirmModal from "../components/ConfirmModal";
 import MenuForm from "../components/forms/MenuForm";
@@ -24,7 +24,7 @@ function AdminMenu() {
   const [menuItems, setMenuItems] = useState([]);
   const [selectedItem, setSelectedItem] = useState(null);
 
-  const [search, setSearch] = useState("");
+ const { search } = useSearch();
   const [categoryFilter, setCategoryFilter] = useState("All");
   const [statusFilter, setStatusFilter] = useState("All");
 
@@ -64,36 +64,44 @@ function AdminMenu() {
     }
   };
 
-  const filteredItems = menuItems.filter((item) => {
-    const text = search.toLowerCase();
+const filteredItems = menuItems.filter((item) => {
+  const text = search.toLowerCase();
 
-    const matchesSearch =
-      item.name.toLowerCase().includes(text) ||
-      item.category.toLowerCase().includes(text) ||
-      item.restaurant?.name?.toLowerCase().includes(text);
+  const matchesSearch =
+    item.name?.toLowerCase().includes(text) ||
+    item.category?.toLowerCase().includes(text) ||
+    item.restaurant?.name?.toLowerCase().includes(text);
 
-    const matchesCategory =
-      categoryFilter === "All" ||
-      item.category === categoryFilter;
+  const matchesCategory =
+    categoryFilter === "All" ||
+    item.category === categoryFilter;
 
-    const matchesStatus =
-      statusFilter === "All" ||
-      item.status === statusFilter;
+  const matchesStatus =
+    statusFilter === "All" ||
+    item.status === statusFilter;
 
-    return (
-      matchesSearch &&
-      matchesCategory &&
-      matchesStatus
-    );
-  });
+  return (
+    matchesSearch &&
+    matchesCategory &&
+    matchesStatus
+  );
+});
 
-  const categories = [
-    ...new Set(menuItems.map((item) => item.category)),
-  ];
+const categories = [
+  ...new Set(
+    menuItems
+      .map((item) => item.category)
+      .filter(Boolean)
+  ),
+];
 
-  const statuses = [
-    ...new Set(menuItems.map((item) => item.status)),
-  ];
+const statuses = [
+  ...new Set(
+    menuItems
+      .map((item) => item.status)
+      .filter(Boolean)
+  ),
+];
 
   return (
     <div className="restaurants-page">
@@ -118,22 +126,7 @@ function AdminMenu() {
 
       </div>
 
-      <div className="table-toolbar">
-
-        <div className="search-box">
-
-          <FaSearch className="search-icon" />
-
-          <input
-            type="text"
-            placeholder="Search menu..."
-            value={search}
-            onChange={(e) =>
-              setSearch(e.target.value)
-            }
-          />
-
-        </div>
+      <div >
 
         <div className="toolbar-right">
 

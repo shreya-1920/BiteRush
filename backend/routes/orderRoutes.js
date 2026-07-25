@@ -32,7 +32,7 @@ router.get("/my-orders", authMiddleware, getMyOrders);
 router.get("/", adminAuth, adminMiddleware, getAllOrders);
 
 // Get Order by ID
-router.get("/:id", adminAuth, adminMiddleware, getOrderById);
+router.get("/:id", authMiddleware, getOrderById);
 
 // Update Order Status
 router.put(

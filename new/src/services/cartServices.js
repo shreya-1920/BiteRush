@@ -38,3 +38,4 @@ export const clearCart = () =>
         API,
         getAuthConfig()
     );
+

@@ -1,6 +1,6 @@
 import { Routes, Route } from "react-router-dom";
 
-
+import TrackOrder from "./pages/TrackOrder";
 import Home from "./pages/Home";
 import AuthPage from "./pages/AuthPage";
 import Restaurants from "./pages/Restaurants";
@@ -28,13 +28,16 @@ import Customers from "./admin/pages/Customers";
 import Settings from "./admin/pages/Settings";
 import Menu from "./admin/pages/Menu";
 import AdminProfile from "./admin/pages/AdminProfile";
+import RestaurantLogin from "./restaurant/pages/RestaurantLogin";
+
+import RestaurantLayout from "./restaurant/layout/RestaurantLayout";
+import RestaurantDashboard from "./restaurant/pages/RestaurantDashboard";
 function App() {
   return (
     <>
      
 
-      <Routes>
-       
+   <Routes>
 
   {/* Customer Routes */}
 
@@ -54,15 +57,13 @@ function App() {
   <Route path="/reset-password/:token" element={<ResetPassword />} />
   <Route path="/profile" element={<Profile />} />
   <Route path="/wishlist" element={<Wishlist />} />
+  <Route path="/track-order/:id" element={<TrackOrder />} />
 
-  {/* Admin Login */}
+  {/* Admin */}
 
   <Route path="/admin/login" element={<AdminLogin />} />
 
-  {/* Admin Layout */}
-
   <Route path="/admin" element={<AdminLayout />}>
-
     <Route path="dashboard" element={<Dashboard />} />
     <Route path="restaurants" element={<AdminRestaurants />} />
     <Route path="orders" element={<AdminOrders />} />
@@ -72,17 +73,18 @@ function App() {
     <Route path="settings" element={<Settings />} />
     <Route path="menu" element={<Menu />} />
     <Route path="profile" element={<AdminProfile />} />
-
   </Route>
 
+  {/* Restaurant */}
 
+  <Route path="/restaurant/login" element={<RestaurantLogin />} />
 
+  <Route path="/restaurant" element={<RestaurantLayout />}>
+    <Route index element={<RestaurantDashboard />} />
+    <Route path="dashboard" element={<RestaurantDashboard />} />
+  </Route>
 
-
-
-
-
-      </Routes>
+</Routes>
     </>
   );
 }

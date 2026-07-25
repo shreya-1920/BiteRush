@@ -5,11 +5,11 @@ import {
   deleteCustomer,
   toggleBlockCustomer,
 } from "../services/AdminCustomerServices";
-import { FaSearch, FaEye, FaTrash, FaBan } from "react-icons/fa";
+import { FaEye, FaTrash, FaBan } from "react-icons/fa";
 import { toast } from "react-toastify";
 
 import ConfirmModal from "../components/ConfirmModal";
-
+import { useSearch } from "../context/SearchContext";
 import CustomerDetailsModal from "../components/modals/CustomerDetailsModal";
 
 function Customers() {
@@ -17,7 +17,7 @@ const [modalType, setModalType] = useState(null);
 const [selectedCustomer, setSelectedCustomer] = useState(null);
   const [customers, setCustomers] = useState([]);
 const [loading, setLoading] = useState(true);
-const [search, setSearch] = useState("");
+const { search } = useSearch();
 const fetchCustomers = async () => {
   try {
     const data = await getAllCustomers();
@@ -33,17 +33,21 @@ useEffect(() => {
   fetchCustomers();
 }, []);
 if (loading) {
-  return <h2>Loading...</h2>;
+  return (
+    <div className="loading-state">
+      Loading customers...
+    </div>
+  );
 }
 
 const filteredCustomers = customers.filter((customer) => {
-  const query = search.toLowerCase();
+  const text = search.toLowerCase();
 
   return (
-    customer.name?.toLowerCase().includes(query) ||
-    customer.email?.toLowerCase().includes(query) ||
-    customer.phone?.toLowerCase().includes(query) ||
-    customer._id.slice(-6).toLowerCase().includes(query)
+    customer.name?.toLowerCase().includes(text) ||
+    customer.email?.toLowerCase().includes(text) ||
+    customer.phone?.toLowerCase().includes(text) ||
+    customer._id?.slice(-6).toLowerCase().includes(text)
   );
 });
   return (
@@ -60,22 +64,9 @@ const filteredCustomers = customers.filter((customer) => {
 
       </div>
 
-      <div className="table-toolbar">
+      <div >
 
-        <div className="search-box">
-
-          <FaSearch className="search-icon" />
-
-        <input
-  type="text"
-  placeholder="Search customers..."
-  value={search}
-  onChange={(e) => setSearch(e.target.value)}
-/>
-
-        </div>
-
-      </div>
+      
 
       <div className="table-card">
 
@@ -259,6 +250,7 @@ const filteredCustomers = customers.filter((customer) => {
       }
     }}
 />
+    </div>
     </div>
   );
 }

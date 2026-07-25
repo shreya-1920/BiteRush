@@ -48,37 +48,6 @@ export const menuData = {
         "https://images.unsplash.com/photo-1576107232684-1279f390859f?w=600&auto=format&fit=crop&q=60",
     },
 
-    {
-      id: 104,
-      name: "Crispy Chicken Wings",
-      price: 329,
-      oldPrice: 379,
-      rating: 4.8,
-      reviews: 241,
-      time: "25 mins",
-      veg: false,
-      bestseller: true,
-      description:
-        "Crunchy chicken wings tossed in spicy peri-peri seasoning.",
-      image:
-        "https://images.unsplash.com/photo-1527477396000-e27163b481c2?w=600&auto=format&fit=crop&q=60",
-    },
-
-    {
-      id: 105,
-      name: "Veggie Supreme Burger",
-      price: 249,
-      oldPrice: 299,
-      rating: 4.6,
-      reviews: 165,
-      time: "18 mins",
-      veg: true,
-      bestseller: false,
-      description:
-        "Grilled veggie patty with fresh lettuce, tomato and cheese.",
-      image:
-        "https://images.unsplash.com/photo-1520072959219-c595dc870360?w=600&auto=format&fit=crop&q=60",
-    },
 
     {
       id: 106,
@@ -196,31 +165,6 @@ description:"Layers of pasta with cheese and meat sauce.",
 image:"https://plus.unsplash.com/premium_photo-1671559021023-3da68c12aeed?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8TGFzYWduYXxlbnwwfHwwfHx8MA%3D%3D"
 },
 {
-id:206,
-name:"Tiramisu",
-price:249,
-oldPrice:299,
-rating:4.9,
-reviews:165,
-time:"10 mins",
-veg:true,
-bestseller:false,
-description:"Classic Italian coffee-flavoured dessert.",
-image:"https://plus.unsplash.com/premium_photo-1695028378225-97fbe39df62a?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8dGlyYW1pc3V8ZW58MHx8MHx8fDA%3D"
-},
-{
-id:207,
-name:"Italian Lemonade",
-price:149,
-oldPrice:179,
-rating:4.7,
-reviews:88,
-time:"5 mins",
-veg:true,
-bestseller:false,
-description:"Refreshing sparkling lemonade.",
-image:"https://images.unsplash.com/photo-1623084921164-4a8c5c37a912?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8aXRhbGlhbiUyMGxlbW9uYWRlfGVufDB8fDB8fHww"
-},{
   id: 208,
   name: "Chocolate Lava Cake",
   price: 229,
@@ -331,37 +275,7 @@ image:"https://images.unsplash.com/photo-1623084921164-4a8c5c37a912?w=600&auto=f
       "https://images.unsplash.com/photo-1547592180-85f173990554?w=600&auto=format&fit=crop&q=60",
   },
 
-  {
-    id: 307,
-    name: "Matcha Cheesecake",
-    price: 249,
-    oldPrice: 299,
-    rating: 4.8,
-    reviews: 154,
-    time: "8 mins",
-    veg: true,
-    bestseller: false,
-    description:
-      "Creamy Japanese-style cheesecake infused with premium matcha.",
-    image:
-      "https://images.unsplash.com/photo-1565958011703-44f9829ba187?w=600&auto=format&fit=crop&q=60",
-  },
-
-  {
-    id: 308,
-    name: "Japanese Green Tea",
-    price: 129,
-    oldPrice: 159,
-    rating: 4.7,
-    reviews: 96,
-    time: "5 mins",
-    veg: true,
-    bestseller: false,
-    description:
-      "Refreshing authentic Japanese green tea served hot.",
-    image:
-      "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=600&auto=format&fit=crop&q=60",
-  },
+ 
 ],
   4: [
   {
@@ -460,37 +374,7 @@ image:"https://images.unsplash.com/photo-1623084921164-4a8c5c37a912?w=600&auto=f
       "https://images.unsplash.com/photo-1599487488170-d11ec9c172f0?w=600&auto=format&fit=crop&q=60",
   },
 
-  {
-    id: 407,
-    name: "Gulab Jamun",
-    price: 149,
-    oldPrice: 179,
-    rating: 4.9,
-    reviews: 180,
-    time: "8 mins",
-    veg: true,
-    bestseller: false,
-    description:
-      "Soft milk dumplings soaked in warm cardamom-flavoured sugar syrup.",
-    image:
-      "https://images.unsplash.com/photo-1601050690597-df0568f70950?w=600&auto=format&fit=crop&q=60",
-  },
-
-  {
-    id: 408,
-    name: "Mango Lassi",
-    price: 159,
-    oldPrice: 199,
-    rating: 4.8,
-    reviews: 145,
-    time: "5 mins",
-    veg: true,
-    bestseller: false,
-    description:
-      "Refreshing yogurt drink blended with sweet Alphonso mangoes.",
-    image:
-      "https://images.unsplash.com/photo-1623065422902-30a2d299bbe4?w=600&auto=format&fit=crop&q=60",
-  },
+ 
 ],
   5: [
   {
@@ -589,37 +473,7 @@ image:"https://images.unsplash.com/photo-1623084921164-4a8c5c37a912?w=600&auto=f
       "https://images.unsplash.com/photo-1547592180-85f173990554?w=600&auto=format&fit=crop&q=60",
   },
 
-  {
-    id: 507,
-    name: "Honey Chilli Potato",
-    price: 249,
-    oldPrice: 299,
-    rating: 4.8,
-    reviews: 229,
-    time: "16 mins",
-    veg: true,
-    bestseller: true,
-    description:
-      "Crispy potato fingers tossed in sweet and spicy honey chilli sauce.",
-    image:
-      "https://images.unsplash.com/photo-1512058564366-18510be2db19?w=600&auto=format&fit=crop&q=60",
-  },
-
-  {
-    id: 508,
-    name: "Bubble Tea",
-    price: 199,
-    oldPrice: 239,
-    rating: 4.7,
-    reviews: 141,
-    time: "8 mins",
-    veg: true,
-    bestseller: false,
-    description:
-      "Refreshing milk tea served with chewy tapioca pearls.",
-    image:
-      "https://images.unsplash.com/photo-1558857563-c0c2c9d79d28?w=600&auto=format&fit=crop&q=60",
-  },
+ 
 ],
   6: [
   {
@@ -718,37 +572,7 @@ image:"https://images.unsplash.com/photo-1623084921164-4a8c5c37a912?w=600&auto=f
       "https://plus.unsplash.com/premium_photo-1671485196355-32005a27fd02?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8bWV4aWNhbiUyMHJpY2UlMjBib3dsfGVufDB8fDB8fHww",
   },
 
-  {
-    id: 607,
-    name: "Churros with Chocolate",
-    price: 199,
-    oldPrice: 239,
-    rating: 4.9,
-    reviews: 152,
-    time: "10 mins",
-    veg: true,
-    bestseller: false,
-    description:
-      "Fresh cinnamon churros served with warm chocolate dipping sauce.",
-    image:
-      "https://plus.unsplash.com/premium_photo-1714180194796-8cb272b0bfed?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8Y2h1cnJvcyUyMHdpdGglMjBjaG9jb2xhdGV8ZW58MHx8MHx8fDA%3D",
-  },
 
-  {
-    id: 608,
-    name: "Classic Lemon Soda",
-    price: 149,
-    oldPrice: 179,
-    rating: 4.6,
-    reviews: 118,
-    time: "5 mins",
-    veg: true,
-    bestseller: false,
-    description:
-      "Fresh sparkling lemon soda with mint and crushed ice.",
-    image:
-      "https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?w=600&auto=format&fit=crop&q=60",
-  },
 ],
   7:[ 
   {
@@ -835,38 +659,11 @@ image:"https://images.unsplash.com/photo-1623084921164-4a8c5c37a912?w=600&auto=f
     description: "Lightly battered calamari served with spicy aioli dip.",
     image: "https://images.unsplash.com/photo-1625944230945-1b7dd3b949ab?w=600&auto=format&fit=crop&q=60"
   },
-  {
-    id: 707,
-    name: "Shrimp Fried Rice",
-    price: 329,
-    oldPrice: 379,
-    rating: 4.5,
-    reviews: 168,
-    time: "16 mins",
-    category: "Rice",
-    isVeg: false,
-    bestseller: false,
-    description: "Flavorful fried rice tossed with shrimp, vegetables and soy sauce.",
-    image: "https://images.unsplash.com/photo-1512058564366-18510be2db19?w=600&auto=format&fit=crop&q=60"
-  },
-  {
-    id: 708,
-    name: "Lobster Bisque",
-    price: 299,
-    oldPrice: 349,
-    rating: 4.7,
-    reviews: 138,
-    time: "12 mins",
-    category: "Soup",
-    isVeg: false,
-    bestseller: false,
-    description: "Creamy French-style lobster soup with rich seafood flavors.",
-    image: "https://images.unsplash.com/photo-1547592166-23ac45744acd?w=600&auto=format&fit=crop&q=60"
-  }
+ 
 ],
   8:  [
  {
-    id: 701,
+    id: 801,
     name: "Grilled Salmon",
     price: 499,
     oldPrice: 559,
@@ -880,7 +677,7 @@ image:"https://images.unsplash.com/photo-1623084921164-4a8c5c37a912?w=600&auto=f
     image: "https://images.unsplash.com/photo-1467003909585-2f8a72700288?w=600&auto=format&fit=crop&q=60"
   },
   {
-    id: 702,
+    id: 802,
     name: "Garlic Butter Prawns",
     price: 459,
     oldPrice: 519,
@@ -894,7 +691,7 @@ image:"https://images.unsplash.com/photo-1623084921164-4a8c5c37a912?w=600&auto=f
     image: "https://images.unsplash.com/photo-1563379091339-03246963d29d?w=600&auto=format&fit=crop&q=60"
   },
   {
-    id: 703,
+    id: 803,
     name: "Fish & Chips",
     price: 389,
     oldPrice: 439,
@@ -908,7 +705,7 @@ image:"https://images.unsplash.com/photo-1623084921164-4a8c5c37a912?w=600&auto=f
     image: "https://images.unsplash.com/photo-1544025162-d76694265947?w=600&auto=format&fit=crop&q=60"
   },
   {
-    id: 704,
+    id: 804,
     name: "Seafood Platter",
     price: 699,
     oldPrice: 799,
@@ -922,7 +719,7 @@ image:"https://images.unsplash.com/photo-1623084921164-4a8c5c37a912?w=600&auto=f
     image: "https://images.unsplash.com/photo-1559847844-5315695dadae?w=600&auto=format&fit=crop&q=60"
   },
   {
-    id: 705,
+    id: 805,
     name: "Lemon Herb Fish",
     price: 429,
     oldPrice: 489,
@@ -936,7 +733,7 @@ image:"https://images.unsplash.com/photo-1623084921164-4a8c5c37a912?w=600&auto=f
     image: "https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?w=600&auto=format&fit=crop&q=60"
   },
   {
-    id: 706,
+    id: 806,
     name: "Crispy Calamari",
     price: 349,
     oldPrice: 399,
@@ -949,34 +746,7 @@ image:"https://images.unsplash.com/photo-1623084921164-4a8c5c37a912?w=600&auto=f
     description: "Lightly battered calamari served with spicy aioli dip.",
     image: "https://images.unsplash.com/photo-1625944230945-1b7dd3b949ab?w=600&auto=format&fit=crop&q=60"
   },
-  {
-    id: 707,
-    name: "Shrimp Fried Rice",
-    price: 329,
-    oldPrice: 379,
-    rating: 4.5,
-    reviews: 168,
-    time: "16 mins",
-    category: "Rice",
-    isVeg: false,
-    bestseller: false,
-    description: "Flavorful fried rice tossed with shrimp, vegetables and soy sauce.",
-    image: "https://images.unsplash.com/photo-1512058564366-18510be2db19?w=600&auto=format&fit=crop&q=60"
-  },
-  {
-    id: 708,
-    name: "Lobster Bisque",
-    price: 299,
-    oldPrice: 349,
-    rating: 4.7,
-    reviews: 138,
-    time: "12 mins",
-    category: "Soup",
-    isVeg: false,
-    bestseller: false,
-    description: "Creamy French-style lobster soup with rich seafood flavors.",
-    image: "https://images.unsplash.com/photo-1547592166-23ac45744acd?w=600&auto=format&fit=crop&q=60"
-  }
+  
 ],
 9: [
   {
@@ -1063,34 +833,7 @@ image:"https://images.unsplash.com/photo-1623084921164-4a8c5c37a912?w=600&auto=f
     description: "Golden French toast topped with maple syrup and berries.",
     image: "https://images.unsplash.com/photo-1484723091739-30a097e8f929?w=600&auto=format&fit=crop&q=60"
   },
-  {
-    id: 907,
-    name: "Cold Coffee",
-    price: 199,
-    oldPrice: 239,
-    rating: 4.8,
-    reviews: 325,
-    time: "5 mins",
-    category: "Drinks",
-    isVeg: true,
-    bestseller: true,
-    description: "Creamy chilled coffee blended with ice cream and chocolate.",
-    image: "https://images.unsplash.com/photo-1517701604599-bb29b565090c?w=600&auto=format&fit=crop&q=60"
-  },
-  {
-    id: 908,
-    name: "Hazelnut Mocha",
-    price: 229,
-    oldPrice: 269,
-    rating: 4.9,
-    reviews: 301,
-    time: "7 mins",
-    category: "Coffee",
-    isVeg: true,
-    bestseller: true,
-    description: "Espresso infused with rich chocolate and roasted hazelnut syrup.",
-    image: "https://images.unsplash.com/photo-1494314671902-399b18174975?w=600&auto=format&fit=crop&q=60"
-  }
+
 ],
   10: [
   {
@@ -1177,34 +920,8 @@ image:"https://images.unsplash.com/photo-1623084921164-4a8c5c37a912?w=600&auto=f
     description: "Freshly baked tandoor naan topped with garlic butter.",
     image: "https://images.unsplash.com/photo-1671507136750-05ebd0f97843?w=600&auto=format&fit=crop&q=60"
   },
-  {
-    id: 1007,
-    name: "Chicken Seekh Kebab",
-    price: 319,
-    oldPrice: 369,
-    rating: 4.8,
-    reviews: 301,
-    time: "15 mins",
-    category: "Starter",
-    isVeg: false,
-    bestseller: false,
-    description: "Juicy minced chicken kebabs grilled to smoky perfection.",
-    image: "https://images.unsplash.com/photo-1529563021893-cc83c992d75d?w=600&auto=format&fit=crop&q=60"
-  },
-  {
-    id: 1008,
-    name: "Gulab Jamun",
-    price: 99,
-    oldPrice: 129,
-    rating: 4.8,
-    reviews: 287,
-    time: "5 mins",
-    category: "Dessert",
-    isVeg: true,
-    bestseller: true,
-    description: "Soft milk dumplings soaked in warm cardamom sugar syrup.",
-    image: "https://images.unsplash.com/photo-1601050690597-df0568f70950?w=600&auto=format&fit=crop&q=60"
-  }
+  
+ 
 ],
 11: [
   {
@@ -1263,34 +980,7 @@ image:"https://images.unsplash.com/photo-1623084921164-4a8c5c37a912?w=600&auto=f
     description: "Loaded vegetable patty with fresh lettuce, tomatoes and cheese.",
     image: "https://images.unsplash.com/photo-1520072959219-c595dc870360?w=600&auto=format&fit=crop&q=60"
   },
-  {
-    id: 1105,
-    name: "Loaded Fries",
-    price: 169,
-    oldPrice: 209,
-    rating: 4.7,
-    reviews: 318,
-    time: "10 mins",
-    category: "Sides",
-    isVeg: true,
-    bestseller: true,
-    description: "Golden fries loaded with cheese sauce, jalapeños and herbs.",
-    image: "https://images.unsplash.com/photo-1576107232684-1279f390859f?w=600&auto=format&fit=crop&q=60"
-  },
-  {
-    id: 1106,
-    name: "Chicken Nuggets",
-    price: 229,
-    oldPrice: 269,
-    rating: 4.8,
-    reviews: 291,
-    time: "11 mins",
-    category: "Sides",
-    isVeg: false,
-    bestseller: false,
-    description: "Crispy chicken nuggets served with spicy dipping sauce.",
-    image: "https://images.unsplash.com/photo-1562967916-eb82221dfb92?w=600&auto=format&fit=crop&q=60"
-  },
+  
   {
     id: 1107,
     name: "Coke",
@@ -1405,33 +1095,6 @@ image:"https://images.unsplash.com/photo-1623084921164-4a8c5c37a912?w=600&auto=f
     description: "Creamy Italian risotto cooked with mushrooms, parmesan and herbs.",
     image: "https://images.unsplash.com/photo-1476124369491-e7addf5db371?w=600&auto=format&fit=crop&q=60"
   },
-  {
-    id: 1207,
-    name: "Tiramisu",
-    price: 249,
-    oldPrice: 299,
-    rating: 4.9,
-    reviews: 397,
-    time: "6 mins",
-    category: "Dessert",
-    isVeg: true,
-    bestseller: true,
-    description: "Classic Italian dessert layered with coffee-soaked ladyfingers and mascarpone cream.",
-    image: "https://images.unsplash.com/photo-1571877227200-a0d98ea607e9?w=600&auto=format&fit=crop&q=60"
-  },
-  {
-    id: 1208,
-    name: "Italian Lemonade",
-    price: 159,
-    oldPrice: 199,
-    rating: 4.7,
-    reviews: 214,
-    time: "5 mins",
-    category: "Drinks",
-    isVeg: true,
-    bestseller: false,
-    description: "Refreshing sparkling lemonade infused with fresh lemons and mint.",
-    image: "https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?w=600&auto=format&fit=crop&q=60"
-  }
+ 
 ]
 };

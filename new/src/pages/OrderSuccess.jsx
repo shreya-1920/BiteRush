@@ -9,13 +9,22 @@ import {
   FaBoxOpen,
   FaShoppingBag,
 } from "react-icons/fa";
-import { useNavigate } from "react-router-dom";
+import {
+  useLocation,
+  useNavigate,
+} from "react-router-dom";
 import "../styles/OrderSuccess.css"
+
 import scooterImage from "../assets/images/order-scooter.png";
+
 export default function OrderSuccess() {
 
   const navigate = useNavigate();
 
+
+const { state } = useLocation();
+
+const order = state?.order;
  const orderId = "BR48291";
 
   return (
@@ -186,11 +195,12 @@ export default function OrderSuccess() {
 
         <div className="success-buttons">
 
-          <button
-            className="track-btn"
-          >
-            Track Order
-          </button>
+<button
+  className="track-btn"
+  onClick={() => navigate(`/track-order/${order._id}`)}
+>
+  Track Order
+</button>
 
           <button
             className="continue-btn"
