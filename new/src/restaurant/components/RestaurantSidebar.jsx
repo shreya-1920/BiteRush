@@ -1,5 +1,5 @@
 import {
-  FaStore,
+  
   FaHome,
   FaUtensils,
   FaClipboardList,
@@ -11,25 +11,29 @@ import {
 import { NavLink } from "react-router-dom";
 
 
-
+import logo from "../../assets/images/logo2.png";
 function RestaurantSidebar() {
   return (
     <aside className="rp-sidebar">
 
       {/* Logo */}
 
-      <div className="rp-sidebar-logo">
+      <div className="rp-logo">
 
-        <div className="rp-sidebar-logo-icon">
-          <FaStore />
-        </div>
+    <img
+        src={logo}
+        alt="BiteRush"
+    />
 
-        <div className="rp-sidebar-logo-text">
-          <h2>BiteRush</h2>
-          <span>Restaurant Panel</span>
-        </div>
+    <div>
 
-      </div>
+        <h2>BiteRush</h2>
+
+        <p>Restaurant Panel</p>
+
+    </div>
+
+</div>
 
       {/* Menu */}
 

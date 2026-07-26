@@ -1,126 +1,167 @@
 import { useState } from "react";
 import {
+  FaStore,
   FaEnvelope,
   FaLock,
   FaEye,
   FaEyeSlash,
-  FaStore,
+  FaArrowLeft,
 } from "react-icons/fa";
 
-
+import "../styles/RestaurantLogin.css";
 
 function RestaurantLogin() {
   const [showPassword, setShowPassword] = useState(false);
 
+  const [formData, setFormData] = useState({
+    email: "",
+    password: "",
+    remember: false,
+  });
+
+  const handleChange = (e) => {
+    const { name, value, type, checked } = e.target;
+
+    setFormData((prev) => ({
+      ...prev,
+      [name]: type === "checkbox" ? checked : value,
+    }));
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    // TODO
-    // navigate("/restaurant/dashboard");
+    console.log(formData);
   };
 
   return (
-    <div className="rl-page">
+    <div className="brPartnerViewport">
 
-      {/* Background Blobs */}
+      {/* Decorative Blobs */}
 
-      <div className="rl-blob rl-blob-one"></div>
-      <div className="rl-blob rl-blob-two"></div>
-
-      {/* Logo */}
-
-      <div className="rl-brand">
-
-        <div className="rl-brand-icon">
-          <FaStore />
-        </div>
-
-        <h1>BiteRush</h1>
-
-        <span>Restaurant Partner Portal</span>
-
-      </div>
+      <div className="brPartnerGlowOne"></div>
+      <div className="brPartnerGlowTwo"></div>
+      <div className="brPartnerGlowThree"></div>
 
       {/* Login Card */}
 
-      <div className="rl-card">
+      <div className="brPartnerCard">
 
-        <h2>Welcome Back 👋</h2>
+        <div className="brPartnerStoreBadge">
+          <FaStore />
+        </div>
 
-        <p>
-          Sign in to manage your restaurant,
-          orders and sales.
+        <h1 className="brPartnerHeading">
+          Welcome Back <span>👋</span>
+        </h1>
+
+        <p className="brPartnerSubHeading">
+          Restaurant Partner Dashboard
         </p>
 
-        <form onSubmit={handleSubmit}>
+        <p className="brPartnerDescription">
+          Manage orders, menu, earnings and customers from one secure place.
+        </p>
 
-          <label>Email Address</label>
+        <form
+          className="brPartnerForm"
+          onSubmit={handleSubmit}
+        >
 
-          <div className="rl-input">
+          {/* EMAIL */}
 
-            <FaEnvelope />
+          <div className="brPartnerField">
 
-            <input
-              type="email"
-              placeholder="restaurant@example.com"
-            />
-
-          </div>
-
-          <label>Password</label>
-
-          <div className="rl-input">
-
-            <FaLock />
-
-            <input
-              type={showPassword ? "text" : "password"}
-              placeholder="Enter Password"
-            />
-
-            <button
-              type="button"
-              className="rl-eye-btn"
-              onClick={() =>
-                setShowPassword(!showPassword)
-              }
-            >
-              {showPassword ? (
-                <FaEyeSlash />
-              ) : (
-                <FaEye />
-              )}
-            </button>
-
-          </div>
-
-          <div className="rl-options">
-
-            <label className="rl-checkbox">
-
-              <input type="checkbox" />
-
-              Remember Me
-
+            <label className="brPartnerLabel">
+              EMAIL ADDRESS
             </label>
 
+            <div className="brPartnerInputBox">
+
+              <FaEnvelope className="brPartnerInputIcon" />
+
+              <input
+                type="email"
+                name="email"
+                value={formData.email}
+                onChange={handleChange}
+                placeholder="restaurant@example.com"
+                className="brPartnerInput"
+              />
+
+            </div>
+
           </div>
 
+          {/* PASSWORD */}
+
+          <div className="brPartnerField">
+
+            <label className="brPartnerLabel">
+              PASSWORD
+            </label>
+
+            <div className="brPartnerInputBox">
+
+              <FaLock className="brPartnerInputIcon" />
+
+              <input
+                type={showPassword ? "text" : "password"}
+                name="password"
+                value={formData.password}
+                onChange={handleChange}
+                placeholder="Enter your password"
+                className="brPartnerInput"
+              />
+
+              <button
+                type="button"
+                className="brPartnerEyeButton"
+                onClick={() => setShowPassword(!showPassword)}
+              >
+                {showPassword ? <FaEyeSlash /> : <FaEye />}
+              </button>
+
+            </div>
+
+          </div>
+
+          {/* REMEMBER */}
+
+          
+
+          {/* LOGIN */}
+
           <button
-            className="rl-login-btn"
             type="submit"
+            className="brPartnerLoginBtn"
           >
             Login to Dashboard
           </button>
 
         </form>
 
-        <div className="rl-divider"></div>
+        {/* Footer */}
 
-        <small>
-          Need help?
-          <span> Contact Administrator</span>
-        </small>
+        <div className="brPartnerFooter">
+
+          <button className="brPartnerBackBtn">
+
+            <FaArrowLeft />
+
+            <span>Back to BiteRush</span>
+
+          </button>
+
+          <p className="brPartnerSupport">
+
+            Need help?
+
+            <span> Contact Administrator</span>
+
+          </p>
+
+        </div>
 
       </div>
 

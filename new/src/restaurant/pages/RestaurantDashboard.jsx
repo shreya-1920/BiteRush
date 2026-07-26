@@ -6,9 +6,30 @@ import {
   FaUtensils,
   FaStar,
   FaArrowUp,
-  FaFire,
+  FaChartLine,
+  FaStore,
+  FaPlus
+  
 } from "react-icons/fa";
-
+import {
+  ResponsiveContainer,
+  LineChart,
+  Line,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip
+} from "recharts";
+import "../styles/Restaurant-panel.css";
+const salesData = [
+  { day: "Sun", sales: 12 },
+  { day: "Mon", sales: 18 },
+  { day: "Tue", sales: 15 },
+  { day: "Wed", sales: 28 },
+  { day: "Thu", sales: 25 },
+  { day: "Fri", sales: 35 },
+  { day: "Sat", sales: 42 },
+];
 function RestaurantDashboard() {
   return (
     <div className="rp-dashboard">
@@ -19,27 +40,23 @@ function RestaurantDashboard() {
 
       <div className="rp-dashboard-header">
 
-        <div>
+        <div className="restaurant-banner">
 
-          <h1>
-            Good Evening 👋
-          </h1>
+    <div className="restaurant-banner-left">
 
-          <p>
-            Welcome back, <strong>Pizza Palace</strong>. Here's your restaurant
-            performance today.
-          </p>
+    <h1>
+        Welcome Back, Pizza Palace 
+    </h1>
 
-        </div>
+    <p>
+        Manage your restaurant, orders and customers from one place.
+    </p>
 
-        <div className="rp-dashboard-date">
+</div>
 
-          <span>Saturday</span>
 
-          <h3>25 July 2026</h3>
 
-        </div>
-
+</div>
       </div>
 
       {/* =========================
@@ -146,96 +163,154 @@ function RestaurantDashboard() {
 
         <div className="rp-sales-card">
 
-          <div className="rp-card-header">
+    <div className="rp-sales-header">
+
+        <div>
 
             <h3>Sales Overview</h3>
 
-            <button>This Week</button>
-
-          </div>
-
-          <div className="rp-chart-placeholder">
-
-            <FaFire />
-
-            <h2>Sales Analytics</h2>
-
-            <p>
-              Sales graph will be displayed here using Recharts.
-            </p>
-
-          </div>
+            <p>Weekly sales performance</p>
 
         </div>
 
+        <select>
+
+            <option>This Week</option>
+
+            <option>Last Week</option>
+
+            <option>This Month</option>
+
+        </select>
+
+    </div>
+
+    <div className="rp-sales-chart">
+
+        <ResponsiveContainer width="100%" height="100%">
+
+            <LineChart data={salesData}>
+
+                <CartesianGrid
+                    strokeDasharray="4 4"
+                    stroke="#E5E7EB"
+                />
+
+                <XAxis
+                    dataKey="day"
+                    tick={{ fill:"#64748B" }}
+                />
+
+                <YAxis
+                    tick={{ fill:"#64748B" }}
+                />
+
+                <Tooltip/>
+
+                <Line
+                    type="monotone"
+                    dataKey="sales"
+                    stroke="#F97316"
+                    strokeWidth={4}
+                    dot={{
+                        r:5,
+                        fill:"#F97316"
+                    }}
+                    activeDot={{
+                        r:8
+                    }}
+                />
+
+            </LineChart>
+
+        </ResponsiveContainer>
+
+    </div>
+
+</div>
         {/* Popular Dishes */}
+<div className="rp-popular-card">
 
-        <div className="rp-popular-card">
+    <div className="rp-card-header">
 
-          <div className="rp-card-header">
+        <h3>Popular Dishes</h3>
 
-            <h3>Popular Dishes</h3>
+    </div>
 
-          </div>
+    <div className="rp-popular-list">
 
-          <div className="rp-dish">
+        <div className="rp-popular-item">
 
             <img
-              src="https://images.unsplash.com/photo-1513104890138-7c749659a591?w=300"
-              alt=""
+                src="https://images.unsplash.com/photo-1513104890138-7c749659a591?w=300"
+                alt=""
             />
 
-            <div>
+            <div className="rp-popular-info">
 
-              <h4>Farmhouse Pizza</h4>
+                <h4>Farmhouse Pizza</h4>
 
-              <span>120 Orders</span>
+                <span>Pizza • Bestseller</span>
 
             </div>
 
-            <strong>₹320</strong>
+            <div className="rp-popular-rating">
 
-          </div>
-
-          <div className="rp-dish">
-
-            <img
-              src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=300"
-              alt=""
-            />
-
-            <div>
-
-              <h4>Cheese Burger</h4>
-
-              <span>98 Orders</span>
+                ⭐ 4.8
 
             </div>
-
-            <strong>₹180</strong>
-
-          </div>
-
-          <div className="rp-dish">
-
-            <img
-              src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=300"
-              alt=""
-            />
-
-            <div>
-
-              <h4>Caesar Salad</h4>
-
-              <span>84 Orders</span>
-
-            </div>
-
-            <strong>₹220</strong>
-
-          </div>
 
         </div>
+
+        <div className="rp-popular-item">
+
+            <img
+                src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=300"
+                alt=""
+            />
+
+            <div className="rp-popular-info">
+
+                <h4>Cheese Burger</h4>
+
+                <span>Fast Food • Popular</span>
+
+            </div>
+
+            <div className="rp-popular-rating">
+
+                ⭐ 4.6
+
+            </div>
+
+        </div>
+
+        <div className="rp-popular-item">
+
+            <img
+                src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=300"
+                alt=""
+            />
+
+            <div className="rp-popular-info">
+
+                <h4>Caesar Salad</h4>
+
+                <span>Healthy • Fresh</span>
+
+            </div>
+
+            <div className="rp-popular-rating">
+
+                ⭐ 4.5
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
 {/* =========================
       BOTTOM SECTION
 ========================= */}
@@ -244,117 +319,218 @@ function RestaurantDashboard() {
 
   {/* Recent Orders */}
 
-  <div className="rp-orders-card">
+ <div className="rp-orders-card">
 
     <div className="rp-card-header">
 
-      <h3>Recent Orders</h3>
+        <h3>Recent Orders</h3>
 
-      <button>View All</button>
+        <button>View All</button>
 
     </div>
 
     <table className="rp-orders-table">
 
-      <thead>
+        <thead>
 
-        <tr>
+            <tr>
 
-          <th>Order ID</th>
+                <th>Order</th>
 
-          <th>Customer</th>
+                <th>Customer</th>
 
-          <th>Amount</th>
+                <th>Amount</th>
 
-          <th>Status</th>
+                <th>Status</th>
 
-        </tr>
+            </tr>
 
-      </thead>
+        </thead>
 
-      <tbody>
+        <tbody>
 
-        <tr>
+            <tr>
 
-          <td>#1025</td>
+                <td>
 
-          <td>Rahul Sharma</td>
+                    <strong>#1025</strong>
 
-          <td>₹560</td>
+                </td>
 
-          <td>
-            <span className="rp-status delivered">
-              Delivered
-            </span>
-          </td>
+                <td>
 
-        </tr>
+                    <div className="rp-customer">
 
-        <tr>
+                        <div className="rp-avatar-small">
 
-          <td>#1024</td>
+                            R
 
-          <td>Priya Verma</td>
+                        </div>
 
-          <td>₹340</td>
+                        <div>
 
-          <td>
-            <span className="rp-status preparing">
-              Preparing
-            </span>
-          </td>
+                            <h5>Rahul Sharma</h5>
 
-        </tr>
+                            <span>rahul@gmail.com</span>
 
-        <tr>
+                        </div>
 
-          <td>#1023</td>
+                    </div>
 
-          <td>Amit Singh</td>
+                </td>
 
-          <td>₹760</td>
+                <td>
 
-          <td>
-            <span className="rp-status pending">
-              Pending
-            </span>
-          </td>
+                    ₹560
 
-        </tr>
+                </td>
 
-      </tbody>
+                <td>
+
+                    <span className="rp-status delivered">
+
+                        Delivered
+
+                    </span>
+
+                </td>
+
+            </tr>
+
+            <tr>
+
+                <td>
+
+                    <strong>#1024</strong>
+
+                </td>
+
+                <td>
+
+                    <div className="rp-customer">
+
+                        <div className="rp-avatar-small">
+
+                            P
+
+                        </div>
+
+                        <div>
+
+                            <h5>Priya Verma</h5>
+
+                            <span>priya@gmail.com</span>
+
+                        </div>
+
+                    </div>
+
+                </td>
+
+                <td>
+
+                    ₹340
+
+                </td>
+
+                <td>
+
+                    <span className="rp-status preparing">
+
+                        Preparing
+
+                    </span>
+
+                </td>
+
+            </tr>
+
+            <tr>
+
+                <td>
+
+                    <strong>#1023</strong>
+
+                </td>
+
+                <td>
+
+                    <div className="rp-customer">
+
+                        <div className="rp-avatar-small">
+
+                            A
+
+                        </div>
+
+                        <div>
+
+                            <h5>Amit Singh</h5>
+
+                            <span>amit@gmail.com</span>
+
+                        </div>
+
+                    </div>
+
+                </td>
+
+                <td>
+
+                    ₹760
+
+                </td>
+
+                <td>
+
+                    <span className="rp-status pending">
+
+                        Pending
+
+                    </span>
+
+                </td>
+
+            </tr>
+
+        </tbody>
 
     </table>
 
-  </div>
-
+</div>
   {/* Quick Actions */}
-
-  <div className="rp-actions-card">
+<div className="rp-actions-card">
 
     <div className="rp-card-header">
+        <h3>Quick Actions</h3>
+    </div>
 
-      <h3>Quick Actions</h3>
+    <div className="rp-actions-list">
+
+        <button className="rp-action-btn">
+            <FaPlus />
+            <span>Add New Dish</span>
+        </button>
+
+        <button className="rp-action-btn">
+            <FaClipboardList />
+            <span>View Orders</span>
+        </button>
+
+        <button className="rp-action-btn">
+            <FaChartLine />
+            <span>View Analytics</span>
+        </button>
+
+        <button className="rp-action-btn">
+            <FaStore />
+            <span>Edit Restaurant</span>
+        </button>
 
     </div>
 
-    <button className="rp-action-btn">
-      ➕ Add New Dish
-    </button>
+</div>
 
-    <button className="rp-action-btn">
-      📦 View Orders
-    </button>
-
-    <button className="rp-action-btn">
-      📊 View Analytics
-    </button>
-
-    <button className="rp-action-btn">
-      🏪 Edit Restaurant
-    </button>
-
-  </div>
 
 </div>
       </div>

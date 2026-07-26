@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { toast } from "react-toastify";
+import { Link } from "react-router-dom";
+import { FaStore, FaUserShield } from "react-icons/fa";
 
 import Logo from "../assets/images/logo.png";
 /*import foodImage from "../assets/images/auth-food.png";*/
@@ -524,15 +526,39 @@ const handleForgotPassword = async () => {
     ? (isLogin ? "Logging in..." : "Creating Account...")
     : (isLogin ? "Login" : "Register")}
 </button>
-<div className="admin-portal-link">
-  <span>Administrator?</span>
 
-  <button
-    type="button"
-    onClick={() => navigate("/admin/login")}
-  >
-    Admin Portal →
-  </button>
+
+  <div className="brPortalAccessSection">
+
+    <div className="brPortalDivider">
+        <span>Looking for another portal?</span>
+    </div>
+
+    <div className="brPortalLinks">
+
+        <Link
+            to="/restaurant/login"
+            className="brPortalQuickLink"
+        >
+            <FaStore />
+
+            <span>Restaurant Partner</span>
+        </Link>
+
+        <span className="brPortalSeparator">•</span>
+
+        <Link
+            to="/admin/login"
+            className="brPortalQuickLink"
+        >
+            <FaUserShield />
+
+            <span>Administrator</span>
+        </Link>
+
+    </div>
+
+
 </div>
 </>
             )}

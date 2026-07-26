@@ -1,0 +1,641 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Poppins:wght@300;400;500;600;700&display=swap');
+
+/* ======================================
+   RESET
+====================================== */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:"Poppins",sans-serif;
+    background:#FFF8F2;
+}
+
+/* ======================================
+   PAGE
+====================================== */
+
+.brPartnerViewport{
+
+    width:100%;
+    min-height:100vh;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    padding:50px;
+
+    position:relative;
+    overflow:hidden;
+
+    background:
+    radial-gradient(circle at top left,#FFE8CF 0%,transparent 28%),
+    radial-gradient(circle at bottom right,#FFE6C4 0%,transparent 30%),
+    #FFF8F2;
+
+}
+
+/* ======================================
+   GLOW BLOBS
+====================================== */
+
+.brPartnerGlowOne{
+
+    position:absolute;
+
+    width:320px;
+    height:320px;
+
+    background:#FFD8AA;
+
+    border-radius:50%;
+
+    filter:blur(120px);
+
+    left:-80px;
+    top:-80px;
+
+}
+
+.brPartnerGlowTwo{
+
+    position:absolute;
+
+    width:280px;
+    height:280px;
+
+    background:#FFE9CF;
+
+    border-radius:50%;
+
+    filter:blur(120px);
+
+    right:-60px;
+    bottom:-80px;
+
+}
+
+.brPartnerGlowThree{
+
+    position:absolute;
+
+    width:220px;
+    height:220px;
+
+    background:#FFE0B6;
+
+    border-radius:50%;
+
+    filter:blur(100px);
+
+    top:50%;
+
+    left:8%;
+
+}
+
+/* ======================================
+   CARD
+====================================== */
+
+.brPartnerCard{
+
+    width:560px;
+    max-width:100%;
+
+    background:#ffffff;
+
+    border-radius:32px;
+
+    padding:52px;
+
+    position:relative;
+
+    z-index:5;
+
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+
+    border:1px solid rgba(255,255,255,.65);
+
+    box-shadow:
+    0 35px 80px rgba(20,20,20,.08);
+
+    animation:brPartnerCardEntry .7s ease;
+
+}
+
+/* ======================================
+   STORE BADGE
+====================================== */
+
+.brPartnerStoreBadge{
+
+    width:90px;
+    height:90px;
+
+    border-radius:26px;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    background:linear-gradient(135deg,#FF8A00,#FF6400);
+
+    color:white;
+
+    font-size:34px;
+
+    margin-bottom:28px;
+
+    box-shadow:
+    0 18px 45px rgba(255,115,0,.35);
+
+}
+
+/* ======================================
+   HEADING
+====================================== */
+
+.brPartnerHeading{
+
+    font-family:"Playfair Display",serif;
+
+    font-size:54px;
+
+    color:#24365F;
+
+    line-height:1.1;
+
+    text-align:center;
+
+    margin-bottom:12px;
+
+}
+
+.brPartnerHeading span{
+
+    font-size:44px;
+
+}
+
+.brPartnerSubHeading{
+
+    font-size:18px;
+
+    font-weight:600;
+
+    color:#555;
+
+    margin-bottom:18px;
+
+}
+
+.brPartnerDescription{
+
+    width:92%;
+
+    text-align:center;
+
+    color:#777;
+
+    font-size:16px;
+
+    line-height:1.8;
+
+    margin-bottom:40px;
+
+}
+
+/* ======================================
+   FORM
+====================================== */
+
+.brPartnerForm{
+
+    width:100%;
+
+}
+
+/* ======================================
+   FIELD
+====================================== */
+
+.brPartnerField{
+
+    width:100%;
+
+    margin-bottom:22px;
+
+}
+
+.brPartnerLabel{
+
+    display:block;
+
+    font-size:13px;
+
+    font-weight:700;
+
+    letter-spacing:1px;
+
+    color:#444;
+
+    margin-bottom:12px;
+
+}
+
+/* ======================================
+   INPUT
+====================================== */
+
+.brPartnerInputBox{
+
+    width:100%;
+    height:62px;
+
+    border:1px solid #E6E6E6;
+
+    border-radius:18px;
+
+    display:flex;
+    align-items:center;
+
+    padding:0 20px;
+
+    background:#fff;
+
+    transition:.35s;
+
+}
+
+.brPartnerInputBox:focus-within{
+
+    border-color:#FF7A00;
+
+    box-shadow:
+    0 0 0 5px rgba(255,122,0,.15);
+
+}
+
+.brPartnerInputIcon{
+
+    color:#999;
+
+    font-size:18px;
+
+    margin-right:16px;
+
+}
+
+.brPartnerInput{
+
+    flex:1;
+
+    height:100%;
+
+    border:none;
+
+    outline:none;
+
+    background:transparent;
+
+    font-size:16px;
+
+    color:#333;
+
+}
+
+.brPartnerInput::placeholder{
+
+    color:#A0A0A0;
+
+}
+
+.brPartnerEyeButton{
+
+    width:40px;
+    height:40px;
+
+    border:none;
+
+    background:none;
+
+    cursor:pointer;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    color:#888;
+
+    border-radius:12px;
+
+    transition:.3s;
+
+}
+
+.brPartnerEyeButton:hover{
+
+    background:#FFF2E8;
+
+    color:#FF7300;
+
+}
+
+/* ======================================
+   ANIMATION
+====================================== */
+
+@keyframes brPartnerCardEntry{
+
+    from{
+
+        opacity:0;
+
+        transform:translateY(30px);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:translateY(0);
+
+    }
+
+}
+/* ======================================
+   REMEMBER ROW
+====================================== */
+
+.brPartnerRememberRow{
+
+    width:100%;
+
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+
+    margin-top:4px;
+    margin-bottom:34px;
+
+}
+
+.brPartnerRememberLabel{
+
+    display:flex;
+    align-items:center;
+
+    gap:12px;
+
+    cursor:pointer;
+
+    font-size:15px;
+
+    color:#666;
+
+    user-select:none;
+
+}
+
+.brPartnerRememberLabel input{
+
+    width:18px;
+    height:18px;
+
+    accent-color:#FF7300;
+
+    cursor:pointer;
+
+}
+
+/* ======================================
+   LOGIN BUTTON
+====================================== */
+
+.brPartnerLoginBtn{
+
+    width:100%;
+    height:62px;
+
+    border:none;
+
+    border-radius:18px;
+
+    background:linear-gradient(135deg,#FF8A00,#FF6200);
+
+    color:#fff;
+
+    font-size:17px;
+
+    font-weight:600;
+
+    letter-spacing:.4px;
+
+    cursor:pointer;
+
+    transition:all .35s ease;
+
+    box-shadow:
+    0 18px 35px rgba(255,120,0,.28);
+
+}
+
+.brPartnerLoginBtn:hover{
+
+    transform:translateY(-3px);
+
+    box-shadow:
+    0 24px 50px rgba(255,120,0,.35);
+
+}
+
+.brPartnerLoginBtn:active{
+
+    transform:scale(.98);
+
+}
+
+/* ======================================
+   FOOTER
+====================================== */
+
+.brPartnerFooter{
+
+    width:100%;
+
+    margin-top:36px;
+
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+
+    gap:18px;
+
+}
+
+/* ======================================
+   BACK BUTTON
+====================================== */
+
+.brPartnerBackBtn{
+
+    border:none;
+
+    background:none;
+
+    display:flex;
+    align-items:center;
+
+    gap:10px;
+
+    cursor:pointer;
+
+    color:#555;
+
+    font-size:16px;
+
+    transition:.3s;
+
+}
+
+.brPartnerBackBtn:hover{
+
+    color:#FF7300;
+
+    transform:translateX(-4px);
+
+}
+
+/* ======================================
+   SUPPORT
+====================================== */
+
+.brPartnerSupport{
+
+    color:#777;
+
+    font-size:15px;
+
+}
+
+.brPartnerSupport span{
+
+    color:#FF7300;
+
+    font-weight:600;
+
+    cursor:pointer;
+
+    transition:.3s;
+
+}
+
+.brPartnerSupport span:hover{
+
+    text-decoration:underline;
+
+}
+
+/* ======================================
+   RESPONSIVE
+====================================== */
+
+@media(max-width:768px){
+
+    .brPartnerViewport{
+
+        padding:24px;
+
+    }
+
+    .brPartnerCard{
+
+        padding:36px 26px;
+
+        border-radius:26px;
+
+    }
+
+    .brPartnerHeading{
+
+        font-size:42px;
+
+    }
+
+    .brPartnerHeading span{
+
+        font-size:34px;
+
+    }
+
+    .brPartnerSubHeading{
+
+        font-size:16px;
+
+    }
+
+    .brPartnerDescription{
+
+        width:100%;
+
+        font-size:15px;
+
+    }
+
+    .brPartnerStoreBadge{
+
+        width:74px;
+        height:74px;
+
+        font-size:28px;
+
+        border-radius:20px;
+
+    }
+
+    .brPartnerInputBox{
+
+        height:56px;
+
+    }
+
+    .brPartnerLoginBtn{
+
+        height:58px;
+
+    }
+
+}
+
+@media(max-width:480px){
+
+    .brPartnerHeading{
+
+        font-size:34px;
+
+    }
+
+    .brPartnerDescription{
+
+        font-size:14px;
+
+        line-height:1.7;
+
+    }
+
+    .brPartnerCard{
+
+        padding:30px 22px;
+
+    }
+
+}

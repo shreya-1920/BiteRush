@@ -32,6 +32,11 @@ import RestaurantLogin from "./restaurant/pages/RestaurantLogin";
 
 import RestaurantLayout from "./restaurant/layout/RestaurantLayout";
 import RestaurantDashboard from "./restaurant/pages/RestaurantDashboard";
+import RestaurantMenu from "./restaurant/pages/RestaurantMenu";
+import RestaurantOrders from "./restaurant/pages/RestaurantOrders";
+import RestaurantAnalytics from "./restaurant/pages/RestaurantAnalytics";
+import RestaurantProfile from "./restaurant/pages/RestaurantProfile";
+
 function App() {
   return (
     <>
@@ -82,6 +87,25 @@ function App() {
   <Route path="/restaurant" element={<RestaurantLayout />}>
     <Route index element={<RestaurantDashboard />} />
     <Route path="dashboard" element={<RestaurantDashboard />} />
+    <Route
+        path="menu"
+        element={<RestaurantMenu />}
+    />
+    <Route
+        path="orders"
+        element={<RestaurantOrders />}
+    />
+
+    <Route
+        path="analytics"
+        element={<RestaurantAnalytics />}
+    />
+
+    <Route
+        path="profile"
+        element={<RestaurantProfile />}
+    />
+
   </Route>
 
 </Routes>
