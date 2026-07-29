@@ -39,9 +39,9 @@ function Dashboard() {
     }
   };
 
-  useEffect(() => {
+useEffect(() => {
     fetchDashboard();
-  }, []);
+}, []);
 
   if (loading) {
     return <h2>Loading Dashboard...</h2>;
@@ -67,9 +67,11 @@ function Dashboard() {
     <strong>{dashboard.totalOrders}</strong> Orders
   </p>
 
-  <p>
-    <strong>₹{dashboard.totalRevenue}</strong> Revenue
-  </p>
+  
+   <p>
+  <strong>{dashboard.totalSales}</strong> Sales
+</p>
+  
 
  
 </div>
@@ -85,11 +87,13 @@ function Dashboard() {
             value: dashboard.totalOrders,
             className: "orders",
           },
-          {
-            icon: <FaMoneyBillWave />,
-            title: "REVENUE",
-            value: `₹${dashboard.totalRevenue}`,
-            className: "revenue",
+          
+            {
+  icon: <FaMoneyBillWave />,
+  title: "SALES",
+  value: dashboard.totalSales,
+  className: "sales",
+
           },
           {
             icon: <FaUsers />,
@@ -142,8 +146,9 @@ function Dashboard() {
   <div className="chart-top">
 
     <div>
-      <h3>Revenue Overview</h3>
-      <p>Weekly revenue performance</p>
+    <h3>Sales Overview</h3>
+
+<p>Weekly sales performance</p>
     </div>
 
     <select>
@@ -157,7 +162,7 @@ function Dashboard() {
 
   <ResponsiveContainer width="100%" height={300}>
 
-    <BarChart data={dashboard.weeklyRevenue}>
+    <BarChart data={dashboard.weeklySales}>
 
       <CartesianGrid strokeDasharray="3 3" />
 
@@ -168,7 +173,7 @@ function Dashboard() {
       <Tooltip />
 
       <Bar
-        dataKey="revenue"
+        dataKey="sales"
         radius={[8, 8, 0, 0]}
       />
 
@@ -362,8 +367,13 @@ function Dashboard() {
           <div className="restaurant-left">
 
             <div className="restaurant-avatar">
-              🍽️
-            </div>
+
+    <img
+        src={restaurant.logo || "/restaurant-placeholder.png"}
+        alt={restaurant.name}
+    />
+
+</div>
 
             <div className="restaurant-details">
               <h4>{restaurant.name}</h4>

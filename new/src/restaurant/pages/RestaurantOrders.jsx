@@ -1,47 +1,114 @@
 import { useState } from "react";
+import {  FaEye } from "react-icons/fa";
+import { toast } from "react-toastify";
 import {
-  FaSearch,
-  FaEye,
-  FaCheck,
-  FaTimes,
-} from "react-icons/fa";
+    FaClipboardList,
+    FaUtensils,
+    FaCircleCheck,
+    FaIndianRupeeSign
+} from "react-icons/fa6";
+import { useEffect } from "react";
 
+import { useSearch } from "../context/SearchContext";
+import {
+  getOrders,
+  
+  updateStatus,
+} from "../services/RestaurantOrderServices";
 import "../styles/Restaurant-panel.css";
 
 function RestaurantOrders() {
-  const [status, setStatus] = useState("All");
+  const [status, ] = useState("All");
 
-  const orders = [
-    {
-      id: "#1025",
-      customer: "Rahul Sharma",
-      items: 3,
-      amount: 560,
-      status: "Preparing",
-    },
-    {
-      id: "#1024",
-      customer: "Priya Verma",
-      items: 2,
-      amount: 340,
-      status: "Pending",
-    },
-    {
-      id: "#1023",
-      customer: "Amit Singh",
-      items: 4,
-      amount: 760,
-      status: "Delivered",
-    },
-    {
-      id: "#1022",
-      customer: "Neha Jain",
-      items: 1,
-      amount: 220,
-      status: "Cancelled",
-    },
-  ];
 
+const { search } = useSearch();
+const [selectedOrder, setSelectedOrder] = useState(null);
+  const [orders, setOrders] = useState([]);
+const [loading, setLoading] = useState(true);
+
+
+
+
+const filteredOrders = orders.filter((order) => {
+
+    const query = search.toLowerCase();
+
+    // This is the Order ID shown in the table
+    const displayOrderId = order._id.slice(-6).toUpperCase();
+
+    const matchesSearch =
+        displayOrderId.includes(search.toUpperCase()) ||
+        order.name.toLowerCase().includes(query) ||
+        (order.phone || "").toLowerCase().includes(query) ||
+        order.status.toLowerCase().includes(query);
+
+    const matchesStatus =
+        status === "All" || order.status === status;
+
+    return matchesSearch && matchesStatus;
+});
+const updateOrderStatus = async (id, newStatus) => {
+  try {
+    await updateStatus(id, newStatus);
+
+    await fetchOrders();
+
+    switch (newStatus) {
+      case "Preparing":
+        toast.info("Order is now Preparing 🍳");
+        break;
+
+      case "Out for Delivery":
+        toast.info("Order is Out for Delivery 🚚");
+        break;
+
+      case "Delivered":
+        toast.success("Order Delivered Successfully 🎉");
+        break;
+
+      case "Cancelled":
+        toast.error("Order Cancelled");
+        break;
+
+      default:
+        toast.success("Order Updated");
+    }
+  } catch (err) {
+    toast.error(
+      err.response?.data?.message ||
+      "Unable to update order"
+    );
+  }
+};
+useEffect(() => {
+    fetchOrders();
+
+    const interval = setInterval(() => {
+        fetchOrders();
+    }, 45000);
+
+    return () => clearInterval(interval);
+}, []);
+
+const fetchOrders = async () => {
+  try {
+    setLoading(true);
+
+    const data = await getOrders();
+
+    console.log(data);
+
+    setOrders(data.orders);
+  } catch (err) {
+    console.error(err);
+    toast.error("Unable to load orders");
+  } finally {
+    setLoading(false);
+  }
+};
+if (loading) {
+  return <h2>Loading Orders...</h2>;
+}
   return (
     <div className="ro-page">
 
@@ -58,36 +125,76 @@ function RestaurantOrders() {
         </div>
 
       </div>
+<div className="ro-summary">
 
-      {/* Toolbar */}
+    <div className="summary-card">
 
-      <div className="ro-toolbar">
-
-        <div className="ro-search">
-
-          <FaSearch />
-
-          <input
-            type="text"
-            placeholder="Search Order ID..."
-          />
-
+        <div className="summary-icon pending">
+            <FaClipboardList />
         </div>
 
-        <select
-          value={status}
-          onChange={(e) => setStatus(e.target.value)}
-        >
+        <h4>Pending Orders</h4>
 
-          <option>All</option>
-          <option>Pending</option>
-          <option>Preparing</option>
-          <option>Delivered</option>
-          <option>Cancelled</option>
+        <h2>
+            {orders.filter(o => o.status === "Pending").length}
+        </h2>
 
-        </select>
+    </div>
 
-      </div>
+    <div className="summary-card">
+
+        <div className="summary-icon preparing">
+            <FaUtensils />
+        </div>
+
+        <h4>Preparing</h4>
+
+        <h2>
+            {orders.filter(o => o.status === "Preparing").length}
+        </h2>
+
+    </div>
+
+    <div className="summary-card">
+
+        <div className="summary-icon delivered">
+            <FaCircleCheck />
+        </div>
+
+        <h4>Delivered</h4>
+
+        <h2>
+            {orders.filter(o => o.status === "Delivered").length}
+        </h2>
+
+    </div>
+
+    <div className="summary-card">
+
+        <div className="summary-icon sales">
+            <FaIndianRupeeSign />
+        </div>
+
+        <h4>Today's Sales</h4>
+
+        <h2>
+
+            ₹{
+
+orders
+  .filter(o => o.status === "Delivered")
+  .reduce((sum, order) => sum + order.total, 0)
+
+            }
+
+        </h2>
+
+    </div>
+
+</div>
+      {/* Toolbar */}
+
+      
 
       {/* Orders Table */}
 
@@ -115,58 +222,232 @@ function RestaurantOrders() {
 
           </thead>
 
-          <tbody>
+        
 
-            {orders.map((order) => (
+            <tbody>
 
-              <tr key={order.id}>
+  {filteredOrders.length > 0 ? (
 
-                <td>{order.id}</td>
+    filteredOrders.map((order) => (
 
-                <td>{order.customer}</td>
+      <tr key={order._id}>
 
-                <td>{order.items}</td>
+        <td>#{order._id.slice(-6).toUpperCase()}</td>
 
-                <td>₹{order.amount}</td>
+        <td>{order.name}</td>
 
-                <td>
+        <td>{order.items.length}</td>
 
-                  <span
-                    className={`ro-status ${order.status.toLowerCase()}`}
-                  >
-                    {order.status}
-                  </span>
+        <td>₹{order.total}</td>
 
-                </td>
+        <td>
+          <span
+            className={`ro-status ${order.status
+              .toLowerCase()
+              .replace(/\s/g, "-")}`}
+          >
+            {order.status}
+          </span>
+        </td>
 
-                <td>
+        <td>
 
-                  <div className="ro-actions">
+          <div className="ro-actions">
 
-                    <button className="view-btn">
-                      <FaEye />
-                    </button>
+            <button
+              className="view-btn"
+              onClick={() => setSelectedOrder(order)}
+            >
+              <FaEye />
+            </button>
+<div className="status-dropdown-wrapper">
+            <select
+              className={`status-dropdown ${order.status
+                .toLowerCase()
+                .replace(/\s/g, "-")}`}
+              value={order.status}
+              disabled={
+                order.status === "Delivered" ||
+                order.status === "Cancelled"
+              }
+              onChange={(e) =>
+                updateOrderStatus(order._id, e.target.value)
+              }
+            >
 
-                    <button className="accept-btn">
-                      <FaCheck />
-                    </button>
+              <option value="Pending">Pending</option>
 
-                    <button className="reject-btn">
-                      <FaTimes />
-                    </button>
+              <option value="Preparing">
+                Preparing
+              </option>
 
-                  </div>
+              <option value="Out for Delivery">
+                Out for Delivery
+              </option>
 
-                </td>
+              <option value="Delivered">
+                Delivered
+              </option>
 
-              </tr>
+              <option value="Cancelled">
+                Cancelled
+              </option>
 
-            ))}
+            </select>
+
+          </div>
+</div>
+        </td>
+
+      </tr>
+
+    ))
+
+  ) : (
+
+    <tr>
+
+      <td
+        colSpan="6"
+        style={{
+          textAlign: "center",
+          padding: "30px",
+        }}
+      >
+
+        No Orders Found
+
+      </td>
+
+    </tr>
+
+  )}
+
 
           </tbody>
 
         </table>
+{selectedOrder && (
 
+<div className="ro-modal-overlay">
+
+    <div className="ro-modal">
+
+        <div className="ro-modal-header">
+
+            <div>
+
+                <h2>Order #{selectedOrder._id.slice(-6).toUpperCase()}</h2>
+
+                <span className={`ro-status ${selectedOrder.status.toLowerCase().replace(/\s/g,"-")}`}>
+                    {selectedOrder.status}
+                </span>
+
+            </div>
+
+            <button
+                className="close-modal"
+                onClick={() => setSelectedOrder(null)}
+            >
+                ✕
+            </button>
+
+        </div>
+
+        <div className="ro-info">
+
+            <div>
+
+                <h4>Customer</h4>
+
+                <p>{selectedOrder.name}</p>
+
+            </div>
+
+            <div>
+
+                <h4>Phone</h4>
+
+                <p>{selectedOrder.phone}</p>
+
+            </div>
+
+        </div>
+
+        <div className="ro-info">
+
+            <div>
+
+                <h4>Delivery Address</h4>
+
+                <p>{selectedOrder.address}</p>
+
+            </div>
+
+            <div>
+
+                <h4>Payment</h4>
+
+                <p>{selectedOrder.paymentMethod}</p>
+
+            </div>
+
+        </div>
+
+        <div className="ro-items-card">
+
+            <h3>Ordered Items</h3>
+
+            {selectedOrder.items.map((dish,index)=>(
+
+                <div
+                    className="ro-item"
+                    key={index}
+                >
+
+                    <span>{dish.name}</span>
+
+                   <strong>x{dish.quantity}</strong>
+
+                </div>
+
+            ))}
+
+        </div>
+
+        <div className="bill-summary">
+
+            <div>
+
+                <span>Subtotal</span>
+
+                <span>₹{selectedOrder.subtotal}</span>
+
+            </div>
+
+            <div>
+
+                <span>Delivery Fee</span>
+
+                <span>₹{selectedOrder.deliveryFee}</span>
+
+            </div>
+
+            <div className="total">
+
+                <span>Total</span>
+
+                <strong>₹{selectedOrder.total}</strong>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+)}
       </div>
 
     </div>

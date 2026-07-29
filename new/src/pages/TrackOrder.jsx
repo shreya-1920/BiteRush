@@ -21,8 +21,13 @@ const navigate = useNavigate();
 
 useEffect(() => {
   fetchOrder();
-}, []);
 
+  const interval = setInterval(() => {
+    fetchOrder();
+  }, 15000);
+
+  return () => clearInterval(interval);
+}, [id]);
 if (!order) {
   return <h2>Loading...</h2>;
 }
@@ -61,12 +66,86 @@ if (!order) {
         <p>₹{order.total}</p>
       </div>
 
-      <div className="track-card">
-        <h4>Status</h4>
-        <p>{order.status}</p>
-      </div>
+   <div className="track-card">
 
-    </div>
+<h4>Order Progress</h4>
+
+<div
+  className="track-progress"
+  style={{
+    "--progress":
+      order.status === "Pending"
+        ? "0%"
+        : order.status === "Preparing"
+        ? "33%"
+        : order.status === "Out for Delivery"
+        ? "66%"
+        : "100%",
+  }}
+>
+
+<div className={`track-step ${
+order.status === "Pending" ||
+order.status === "Preparing" ||
+order.status === "Out for Delivery" ||
+order.status === "Delivered"
+? "active" : ""
+}`}>
+
+<div className="track-circle"></div>
+
+<p>Pending</p>
+
+</div>
+
+<div className={`track-step ${
+order.status === "Preparing" ||
+order.status === "Out for Delivery" ||
+order.status === "Delivered"
+? "active" : ""
+}`}>
+
+<div className="track-circle"></div>
+
+<p>Preparing</p>
+
+</div>
+
+<div className={`track-step ${
+order.status === "Out for Delivery" ||
+order.status === "Delivered"
+? "active" : ""
+}`}>
+
+<div className="track-circle"></div>
+
+<p>Out for Delivery</p>
+
+</div>
+
+<div className={`track-step ${
+order.status === "Delivered"
+? "active" : ""
+}`}>
+
+<div className="track-circle"></div>
+
+<p>Delivered</p>
+
+</div>
+
+</div>
+
+<h3 className="current-status">
+Current Status: {order.status}
+</h3>
+
+</div>
+ 
+
+  
+  </div>
+
   );
 }
 

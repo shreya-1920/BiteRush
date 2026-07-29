@@ -1,76 +1,72 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {
   FaPlus,
-  FaSearch,
+  
   FaEdit,
   FaTrash,
   FaLeaf,
   FaDrumstickBite,
 } from "react-icons/fa";
-
+import DeleteDishModal from "../components/DeleteDishModal";
+import {
+  getMenu,
+  addDish,
+  updateDish,
+  deleteDish,
+  toggleDishStatus,
+} from "../services/RestaurantMenuServices";
+import { toast } from "react-toastify";
 import "../styles/Restaurant-panel.css";
 import AddDishModal from "../components/AddDishModal";
+import { useSearch } from "../context/SearchContext";
 function RestaurantMenu() {
   const [category, setCategory] = useState("All");
 const [showModal, setShowModal] = useState(false);
+const { search } = useSearch();
 
-const [search, setSearch] = useState("");
-  const [dishes, setDishes] = useState([
-  {
-    id: 1,
-    name: "Farmhouse Pizza",
-    category: "Pizza",
-    price: 320,
-    rating: 4.8,
-    available: true,
-    image:
-      "https://images.unsplash.com/photo-1513104890138-7c749659a591?w=400",
-    veg: true,
-  },
-  {
-    id: 2,
-    name: "Cheese Burger",
-    category: "Burger",
-    price: 180,
-    rating: 4.6,
-    available: true,
-    image:
-      "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=400",
-    veg: false,
-  },
-  {
-    id: 3,
-    name: "White Sauce Pasta",
-    category: "Pasta",
-    price: 240,
-    rating: 4.7,
-    available: false,
-    image:
-      "https://images.unsplash.com/photo-1621996346565-e3dbc646d9a9?w=400",
-    veg: true,
-  },
-  {
-    id: 4,
-    name: "Paneer Tikka",
-    category: "Starter",
-    price: 260,
-    rating: 4.9,
-    available: true,
-    image:
-      "https://images.unsplash.com/photo-1567188040759-fb8a883dc6d8?w=400",
-    veg: true,
-  },
-]);
+const [editingDish, setEditingDish] = useState(null);
+const [showDeleteModal, setShowDeleteModal] = useState(false);
+const [dishToDelete, setDishToDelete] = useState(null);
+  const [dishes, setDishes] = useState([]);
+const [loading, setLoading] = useState(true);
 const filteredDishes = dishes.filter((dish) => {
-  const matchCategory =
-    category === "All" || dish.category === category;
 
-  const matchSearch = dish.name
-    .toLowerCase()
-    .includes(search.toLowerCase());
+    const query = search.toLowerCase();
 
-  return matchCategory && matchSearch;
+    const matchCategory =
+        category === "All" ||
+        dish.category === category;
+
+    const matchSearch =
+        dish.name.toLowerCase().includes(query) ||
+        dish.category.toLowerCase().includes(query) ||
+        String(dish.price).includes(query);
+
+    return matchCategory && matchSearch;
+
 });
+useEffect(() => {
+    fetchMenu();
+}, []);
+
+const fetchMenu = async () => {
+  try {
+    setLoading(true);
+
+    const data = await getMenu();
+
+console.log(data.menu);
+    setDishes(data.menu);
+  } catch (error) {
+    console.log(error);
+    toast.error("Unable to load menu");
+  } finally {
+    setLoading(false);
+  }
+};
+if (loading) {
+  return <h2>Loading Menu...</h2>;
+}
 
   return (
     <div className="rm-page">
@@ -99,35 +95,7 @@ const filteredDishes = dishes.filter((dish) => {
 
       {/* Toolbar */}
 
-      <div className="rm-toolbar">
-
-        <div className="rm-search">
-
-          <FaSearch />
-
-         <input
-    type="text"
-    placeholder="Search dishes..."
-    value={search}
-    onChange={(e)=>setSearch(e.target.value)}
-/>
-
-        </div>
-
-        <select
-          value={category}
-          onChange={(e) => setCategory(e.target.value)}
-        >
-
-          <option>All</option>
-          <option>Pizza</option>
-          <option>Burger</option>
-          <option>Pasta</option>
-          <option>Starter</option>
-
-        </select>
-
-      </div>
+      
 
       {/* Cards */}
 
@@ -136,14 +104,14 @@ const filteredDishes = dishes.filter((dish) => {
         {filteredDishes.map((dish) => (
 
           <div
-            key={dish.id}
+            key={dish._id}
             className="rm-card"
           >
 
-            <img
-              src={dish.image}
-              alt={dish.name}
-            />
+<img
+  src={dish.image || "https://placehold.co/400x300"}
+  alt={dish.name}
+/>
 
             <div className="rm-card-body">
 
@@ -151,7 +119,7 @@ const filteredDishes = dishes.filter((dish) => {
 
                 <h3>{dish.name}</h3>
 
-                {dish.veg ? (
+                {dish.isVeg ? (
                   <FaLeaf className="veg" />
                 ) : (
                   <FaDrumstickBite className="nonveg" />
@@ -167,20 +135,36 @@ const filteredDishes = dishes.filter((dish) => {
 
                 ₹{dish.price}
 
-                <span>⭐ {dish.rating}</span>
+                <span>⭐ 4.8</span>
 
               </div>
 
-              <div className="rm-status">
+             <div className="rm-status">
 
-                <span
-                  className={
-                    dish.available
-                      ? "available"
-                      : "unavailable"
-                  }
-                >
-                  {dish.available
+    <span
+        className={
+            dish.status === "Available"
+                ? "available"
+                : "unavailable"
+        }
+   onClick={async () => {
+  try {
+    await toggleDishStatus(dish._id);
+
+    toast.success("Dish status updated!");
+
+    fetchMenu();
+  } catch (err) {
+    toast.error(
+      err.response?.data?.message ||
+        "Unable to update status"
+    );
+  }
+}}
+        
+        style={{ cursor: "pointer" }}
+    >
+                  {dish.status === "Available"
                     ? "Available"
                     : "Unavailable"}
                 </span>
@@ -189,13 +173,21 @@ const filteredDishes = dishes.filter((dish) => {
 
              <div className="rm-actions">
 
-    <button className="edit-btn">
+    <button className="edit-btn"   onClick={() => {
+        setEditingDish(dish);
+        setShowModal(true);
+    }}>
         <FaEdit />
     </button>
-
-    <button className="delete-btn">
-        <FaTrash />
-    </button>
+<button
+    className="delete-btn"
+    onClick={() => {
+        setDishToDelete(dish);
+        setShowDeleteModal(true);
+    }}
+>
+    <FaTrash />
+</button>
 
 </div>
 
@@ -206,7 +198,76 @@ const filteredDishes = dishes.filter((dish) => {
         ))}
 <AddDishModal
     open={showModal}
-    onClose={() => setShowModal(false)}
+    dishData={editingDish}
+    onClose={() => {
+        setShowModal(false);
+        setEditingDish(null);
+    }}
+ onSave={async (newDish) => {
+  try {
+    const formData = new FormData();
+
+    formData.append("name", newDish.name);
+    formData.append("description", newDish.description);
+    formData.append("category", newDish.category);
+    formData.append("price", Number(newDish.price));
+    formData.append("isVeg", newDish.veg);
+    formData.append(
+      "status",
+      newDish.available ? "Available" : "Unavailable"
+    );
+
+    if (newDish.image instanceof File) {
+      formData.append("image", newDish.image);
+    }
+
+    if (editingDish) {
+      await updateDish(editingDish._id, formData);
+      toast.success("Dish updated successfully!");
+    } else {
+      await addDish(formData);
+      toast.success("Dish added successfully!");
+    }
+
+    await fetchMenu();
+
+    setShowModal(false);
+    setEditingDish(null);
+  } catch (err) {
+    toast.error(
+      err.response?.data?.message ||
+      "Something went wrong"
+    );
+  }
+}}
+/>
+       
+
+    
+<DeleteDishModal
+    open={showDeleteModal}
+    dish={dishToDelete}
+    onClose={() => {
+        setShowDeleteModal(false);
+        setDishToDelete(null);
+    }}
+onDelete={async () => {
+  try {
+    await deleteDish(dishToDelete._id);
+
+    toast.success("Dish deleted successfully!");
+
+    await fetchMenu();
+
+    setShowDeleteModal(false);
+    setDishToDelete(null);
+  } catch (err) {
+    toast.error(
+      err.response?.data?.message ||
+      "Unable to delete dish"
+    );
+  }
+}}
 />
       </div>
 

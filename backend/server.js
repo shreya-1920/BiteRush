@@ -56,19 +56,21 @@ app.use("/api/admin", adminRoutes);
 app.use("/api/admin/customers", customerRoutes);
 app.use("/api/admin/coupons", couponRoutes);
 const notificationRoutes = require("./routes/notificationRoutes");
-
+const restaurantAuthRoutes = require("./routes/restaurantAuthRoutes");
 app.use("/api/admin/notifications", notificationRoutes);
 const searchRoutes = require("./routes/searchRoutes");
 app.use("/api/admin/search", searchRoutes);
 // Customer Coupons
 app.use("/api/coupons", customerCouponRoutes);
-
+app.use("/api/restaurant", restaurantAuthRoutes);
 // Contact
 app.use("/api/contact", contactRoutes);
-
+const restaurantPanelRoutes = require("./routes/restaurantPanelRoutes");
+app.use("/api/restaurant", restaurantPanelRoutes);
 // Cart
 app.use("/api/cart", cartRoutes);
-
+const restaurantMenuRoutes = require("./routes/restaurantMenuRoutes");
+app.use("/api/restaurant", restaurantMenuRoutes);
 // Wishlist
 app.use("/api/wishlist", wishlistRoutes);
 
@@ -78,7 +80,13 @@ app.use("/api/menu", menuRoutes);
 
 // Orders
 app.use("/api/orders", orderRoutes);
+const restaurantOrderRoutes = require("./routes/restaurantOrderRoutes");
+app.use("/api/restaurant", restaurantOrderRoutes);
 
+const restaurantDashboardRoutes = require("./routes/restaurantDashboardRoutes");
+app.use("/api/restaurant", restaurantDashboardRoutes);
+const restaurantAnalyticsRoutes = require("./routes/restaurantAnalyticsRoutes");
+app.use("/api/restaurant", restaurantAnalyticsRoutes);
 // ==================== Server ====================
 
 const PORT = process.env.PORT || 5000;

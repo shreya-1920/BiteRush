@@ -5,33 +5,69 @@ import {
   FaClipboardList,
   FaUtensils,
   FaStar,
-  FaArrowUp,
+  FaChevronDown,
   FaChartLine,
   FaStore,
   FaPlus
   
 } from "react-icons/fa";
-import {
-  ResponsiveContainer,
-  LineChart,
-  Line,
-  XAxis,
-  YAxis,
-  CartesianGrid,
-  Tooltip
-} from "recharts";
+import { FaCalendarAlt } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+import {useSearch} from "../context/SearchContext";
+
+import { getDashboard } from "../services/RestaurantDashboardServices";
+import SalesChart from "../components/SalesChart";
 import "../styles/Restaurant-panel.css";
-const salesData = [
-  { day: "Sun", sales: 12 },
-  { day: "Mon", sales: 18 },
-  { day: "Tue", sales: 15 },
-  { day: "Wed", sales: 28 },
-  { day: "Thu", sales: 25 },
-  { day: "Fri", sales: 35 },
-  { day: "Sat", sales: 42 },
-];
+
+
 function RestaurantDashboard() {
+  const [chartFilter, setChartFilter] = useState("week");
+   const navigate = useNavigate();
+const [dashboard, setDashboard] = useState(null);
+
+const [loading, setLoading] = useState(true);
+
+
+const { search } = useSearch();
+const fetchDashboard = async (filter = "week") => {
+    try {
+        const data = await getDashboard(filter);
+        console.log(data);
+        setDashboard(data);
+    } catch (error) {
+        console.log(error);
+    } finally {
+        setLoading(false);
+    }
+};
+
+useEffect(() => {
+    fetchDashboard(chartFilter);
+}, [chartFilter]);
+
+if (loading) {
+    return <h2>Loading...</h2>;
+}
+
+if (!dashboard) {
+    return <h2>Unable to load dashboard.</h2>;
+}
+const query = search.toLowerCase();
+
+const filteredPopularDishes = dashboard.popularDishes.filter((dish) =>
+    dish.name.toLowerCase().includes(query)
+);
+
+const filteredRecentOrders = dashboard.recentOrders.filter((order) =>
+    order.name.toLowerCase().includes(query) ||
+    order.status.toLowerCase().includes(query) ||
+    order._id.slice(-5).toUpperCase().includes(search.toUpperCase())
+);
+console.log(dashboard);
+console.log(dashboard?.salesOverview);
   return (
+    
     <div className="rp-dashboard">
 
       {/* =========================
@@ -42,117 +78,135 @@ function RestaurantDashboard() {
 
         <div className="restaurant-banner">
 
-    <div className="restaurant-banner-left">
+        <div className="restaurant-banner-left">
 
-    <h1>
-        Welcome Back, Pizza Palace 
-    </h1>
+            <h1>
+                Welcome Back, {JSON.parse(localStorage.getItem("restaurant")).name}
+            </h1>
 
-    <p>
-        Manage your restaurant, orders and customers from one place.
-    </p>
+            <p>
+                Manage your restaurant, orders and customers from one place.
+            </p>
 
-</div>
+        </div>
 
+    </div>
 
-
-</div>
       </div>
 
       {/* =========================
             STATS
       ========================== */}
 
-      <div className="rp-dashboard-stats">
+<div className="rp-dashboard-stats">
 
-        <div className="rp-stat-card">
+  {/* Sales */}
+  <div className="rp-stat-card">
 
-          <div className="rp-stat-icon sales">
+    <div className="rp-stat-header">
 
-            <FaDollarSign />
-
-          </div>
-
-          <div>
-
-            <span>Today's Sales</span>
-
-            <h2>₹24,580</h2>
-
-            <small>
-              <FaArrowUp />
-              12% from yesterday
-            </small>
-
-          </div>
-
-        </div>
-
-        <div className="rp-stat-card">
-
-          <div className="rp-stat-icon orders">
-
-            <FaClipboardList />
-
-          </div>
-
-          <div>
-
-            <span>Orders Today</span>
-
-            <h2>128</h2>
-
-            <small>
-              <FaArrowUp />
-              8 New Orders
-            </small>
-
-          </div>
-
-        </div>
-
-        <div className="rp-stat-card">
-
-          <div className="rp-stat-icon menu">
-
-            <FaUtensils />
-
-          </div>
-
-          <div>
-
-            <span>Menu Items</span>
-
-            <h2>42</h2>
-
-            <small>4 Categories</small>
-
-          </div>
-
-        </div>
-
-        <div className="rp-stat-card">
-
-          <div className="rp-stat-icon rating">
-
-            <FaStar />
-
-          </div>
-
-          <div>
-
-            <span>Average Rating</span>
-
-            <h2>4.8</h2>
-
-            <small>Excellent</small>
-
-          </div>
-
-        </div>
-
+      <div className="rp-stat-icon sales">
+        <FaDollarSign />
       </div>
 
+      <span className="rp-stat-title">
+        Today's Sales
+      </span>
+
+    </div>
+
+    <h2>
+      ₹{dashboard.stats.todaySales}
+    </h2>
+
+    <div className="rp-stat-footer">
+      <span>Today's Revenue</span>
+    </div>
+
+  </div>
+
+  {/* Orders */}
+
+<div className="rp-stat-card">
+
+  <div className="rp-stat-header">
+
+    <div className="rp-stat-icon orders">
+      <FaClipboardList />
+    </div>
+
+    <span className="rp-stat-title">
+      Today's Orders
+    </span>
+
+  </div>
+
+  <h2>
+    {dashboard.stats.todayOrders}
+  </h2>
+
+  <div className="rp-stat-footer">
+    <span>{dashboard.stats.pendingOrders} Pending</span>
+  </div>
+
+</div>
+  {/* Menu */}
+
+  <div className="rp-stat-card">
+
+    <div className="rp-stat-header">
+
+      <div className="rp-stat-icon menu">
+        <FaUtensils />
+      </div>
+
+      <span className="rp-stat-title">
+        Menu Items
+      </span>
+
+    </div>
+
+    <h2>
+      {dashboard.stats.totalMenuItems}
+    </h2>
+
+    <div className="rp-stat-footer">
+      <span>{dashboard.stats.availableDishes} Available</span>
+    </div>
+
+  </div>
+
+  {/* Available */}
+
+  <div className="rp-stat-card">
+
+    <div className="rp-stat-header">
+
+      <div className="rp-stat-icon rating">
+        <FaStar />
+      </div>
+
+      <span className="rp-stat-title">
+        Available Dishes
+      </span>
+
+    </div>
+
+    <h2>
+      {dashboard.stats.availableDishes}
+    </h2>
+
+    <div className="rp-stat-footer">
+      <span>
+        {dashboard.stats.totalMenuItems -
+          dashboard.stats.availableDishes}
+        {" "}Unavailable
+      </span>
+    </div>
+
+  </div>
+
+</div>
       {/* =========================
           SALES + POPULAR
       ========================== */}
@@ -169,64 +223,35 @@ function RestaurantDashboard() {
 
             <h3>Sales Overview</h3>
 
-            <p>Weekly sales performance</p>
+           <p>Track your restaurant revenue trends</p>
 
         </div>
+<div className="rp-filter">
 
-        <select>
+    <FaCalendarAlt className="rp-filter-icon"/>
 
-            <option>This Week</option>
-
-            <option>Last Week</option>
-
-            <option>This Month</option>
-
-        </select>
-
-    </div>
-
-    <div className="rp-sales-chart">
-
-        <ResponsiveContainer width="100%" height="100%">
-
-            <LineChart data={salesData}>
-
-                <CartesianGrid
-                    strokeDasharray="4 4"
-                    stroke="#E5E7EB"
-                />
-
-                <XAxis
-                    dataKey="day"
-                    tick={{ fill:"#64748B" }}
-                />
-
-                <YAxis
-                    tick={{ fill:"#64748B" }}
-                />
-
-                <Tooltip/>
-
-                <Line
-                    type="monotone"
-                    dataKey="sales"
-                    stroke="#F97316"
-                    strokeWidth={4}
-                    dot={{
-                        r:5,
-                        fill:"#F97316"
-                    }}
-                    activeDot={{
-                        r:8
-                    }}
-                />
-
-            </LineChart>
-
-        </ResponsiveContainer>
+    <select
+        value={chartFilter}
+        onChange={(e)=>setChartFilter(e.target.value)}
+    >
+        <option value="day">Per Day</option>
+        <option value="week">This Week</option>
+        <option value="month">This Month</option>
+    </select>
+<FaChevronDown className="rp-arrow" />
+</div>
 
     </div>
 
+ <div className="rp-sales-chart">
+
+    <SalesChart
+        data={dashboard.salesOverview}
+        xKey="label"
+        dataKey="sales"
+    />
+
+</div>
 </div>
         {/* Popular Dishes */}
 <div className="rp-popular-card">
@@ -237,77 +262,60 @@ function RestaurantDashboard() {
 
     </div>
 
-    <div className="rp-popular-list">
 
-        <div className="rp-popular-item">
 
-            <img
-                src="https://images.unsplash.com/photo-1513104890138-7c749659a591?w=300"
-                alt=""
-            />
+     <div className="rp-popular-list">
 
-            <div className="rp-popular-info">
+{
+dashboard.popularDishes.length > 0 ? (
 
-                <h4>Farmhouse Pizza</h4>
+filteredPopularDishes.map((dish,index)=>(
 
-                <span>Pizza • Bestseller</span>
+<div
+    key={index}
+    className="rp-popular-item"
+>
+    <img
+        src={dish.image || "/food-placeholder.png"}
+        alt={dish.name}
+        className="rp-popular-img"
+    />
 
-            </div>
+    <div className="rp-popular-info">
 
-            <div className="rp-popular-rating">
+        <h4>{dish.name}</h4>
 
-                ⭐ 4.8
+        <span>{dish.orders} Orders</span>
 
-            </div>
+    </div>
 
-        </div>
+    <div className="rp-hot-badge">
 
-        <div className="rp-popular-item">
+        🔥
 
-            <img
-                src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=300"
-                alt=""
-            />
+    </div>
 
-            <div className="rp-popular-info">
+</div>
 
-                <h4>Cheese Burger</h4>
 
-                <span>Fast Food • Popular</span>
 
-            </div>
+))
 
-            <div className="rp-popular-rating">
+):(
 
-                ⭐ 4.6
+<div className="rp-empty">
 
-            </div>
+{search
+    ? "No matching dishes found."
+    : "No popular dishes yet."}
 
-        </div>
+</div>
 
-        <div className="rp-popular-item">
+)
 
-            <img
-                src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=300"
-                alt=""
-            />
+}
 
-            <div className="rp-popular-info">
-
-                <h4>Caesar Salad</h4>
-
-                <span>Healthy • Fresh</span>
-
-            </div>
-
-            <div className="rp-popular-rating">
-
-                ⭐ 4.5
-
-            </div>
-
-        </div>
-
+</div>
     </div>
 
 </div>
@@ -325,177 +333,77 @@ function RestaurantDashboard() {
 
         <h3>Recent Orders</h3>
 
-        <button>View All</button>
+        <button   onClick={() => navigate("/restaurant/orders")}>View All</button>
 
     </div>
+<table className="rp-orders-table">
 
-    <table className="rp-orders-table">
+    <thead>
+        <tr>
+            <th>Order</th>
+            <th>Customer</th>
+            <th>Amount</th>
+            <th>Status</th>
+        </tr>
+    </thead>
 
-        <thead>
+    <tbody>
+
+        {dashboard.recentOrders.length > 0 ? (
+filteredRecentOrders.map((order) => (
+
+                <tr key={order._id}>
+
+                    <td>
+                        <strong>#{order._id.slice(-5)}</strong>
+                    </td>
+
+                    <td>
+                        <div className="rp-customer">
+
+                            <div className="rp-avatar-small">
+                                {order.name?.charAt(0).toUpperCase()}
+                            </div>
+
+                            <div>
+                                <h5>{order.name}</h5>
+                                <span>{order.email}</span>
+                            </div>
+
+                        </div>
+                    </td>
+
+                    <td>₹{order.total}</td>
+
+                    <td>
+                        <span
+                            className={`rp-status ${
+                                order.status.toLowerCase().replace(/\s/g, "-")
+                            }`}
+                        >
+                            {order.status}
+                        </span>
+                    </td>
+
+                </tr>
+
+            ))
+
+        ) : (
 
             <tr>
-
-                <th>Order</th>
-
-                <th>Customer</th>
-
-                <th>Amount</th>
-
-                <th>Status</th>
-
+                <td colSpan={4} style={{ textAlign: "center" }}>
+                   {search
+    ? "No matching orders found."
+    : "No recent orders found."}
+                </td>
             </tr>
 
-        </thead>
+        )}
 
-        <tbody>
+    </tbody>
 
-            <tr>
-
-                <td>
-
-                    <strong>#1025</strong>
-
-                </td>
-
-                <td>
-
-                    <div className="rp-customer">
-
-                        <div className="rp-avatar-small">
-
-                            R
-
-                        </div>
-
-                        <div>
-
-                            <h5>Rahul Sharma</h5>
-
-                            <span>rahul@gmail.com</span>
-
-                        </div>
-
-                    </div>
-
-                </td>
-
-                <td>
-
-                    ₹560
-
-                </td>
-
-                <td>
-
-                    <span className="rp-status delivered">
-
-                        Delivered
-
-                    </span>
-
-                </td>
-
-            </tr>
-
-            <tr>
-
-                <td>
-
-                    <strong>#1024</strong>
-
-                </td>
-
-                <td>
-
-                    <div className="rp-customer">
-
-                        <div className="rp-avatar-small">
-
-                            P
-
-                        </div>
-
-                        <div>
-
-                            <h5>Priya Verma</h5>
-
-                            <span>priya@gmail.com</span>
-
-                        </div>
-
-                    </div>
-
-                </td>
-
-                <td>
-
-                    ₹340
-
-                </td>
-
-                <td>
-
-                    <span className="rp-status preparing">
-
-                        Preparing
-
-                    </span>
-
-                </td>
-
-            </tr>
-
-            <tr>
-
-                <td>
-
-                    <strong>#1023</strong>
-
-                </td>
-
-                <td>
-
-                    <div className="rp-customer">
-
-                        <div className="rp-avatar-small">
-
-                            A
-
-                        </div>
-
-                        <div>
-
-                            <h5>Amit Singh</h5>
-
-                            <span>amit@gmail.com</span>
-
-                        </div>
-
-                    </div>
-
-                </td>
-
-                <td>
-
-                    ₹760
-
-                </td>
-
-                <td>
-
-                    <span className="rp-status pending">
-
-                        Pending
-
-                    </span>
-
-                </td>
-
-            </tr>
-
-        </tbody>
-
-    </table>
+</table>
 
 </div>
   {/* Quick Actions */}
@@ -507,22 +415,22 @@ function RestaurantDashboard() {
 
     <div className="rp-actions-list">
 
-        <button className="rp-action-btn">
+        <button className="rp-action-btn" onClick={() => navigate("/restaurant/menu")}>
             <FaPlus />
             <span>Add New Dish</span>
         </button>
 
-        <button className="rp-action-btn">
+        <button className="rp-action-btn" onClick={() => navigate("/restaurant/orders")}>
             <FaClipboardList />
             <span>View Orders</span>
         </button>
 
-        <button className="rp-action-btn">
+        <button className="rp-action-btn"  onClick={() => navigate("/restaurant/analytics")}>
             <FaChartLine />
             <span>View Analytics</span>
         </button>
 
-        <button className="rp-action-btn">
+        <button className="rp-action-btn" onClick={() => navigate("/restaurant/profile")}>
             <FaStore />
             <span>Edit Restaurant</span>
         </button>
@@ -531,11 +439,11 @@ function RestaurantDashboard() {
 
 </div>
 
-
 </div>
-      </div>
+</div>
+    
 
-    </div>
+    
   );
 }
 

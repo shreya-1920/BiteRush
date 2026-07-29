@@ -62,7 +62,73 @@ const restaurantSchema = new mongoose.Schema(
     logo: String,
 
     gallery: [String],
+ownerName: {
+    type: String,
+    default: "",
+},
 
+email: {
+    type: String,
+    unique: true,
+    sparse: true,
+    lowercase: true,
+    trim: true,
+},
+
+password: {
+    type: String,
+    select: false,
+},
+
+phone: {
+    type: String,
+    default: "",
+},
+
+address: {
+    type: String,
+    default: "",
+},
+
+website: {
+    type: String,
+    default: "",
+},
+
+instagram: {
+    type: String,
+    default: "",
+},
+
+facebook: {
+    type: String,
+    default: "",
+},
+
+opening: {
+    type: String,
+    default: "",
+},
+
+closing: {
+    type: String,
+    default: "",
+},
+
+description: {
+    type: String,
+    default: "",
+},
+
+role: {
+    type: String,
+    default: "restaurant",
+},
+
+isOpen: {
+    type: Boolean,
+    default: true,
+},
     status: {
       type: String,
       enum: ["Active", "Inactive"],

@@ -1,4 +1,8 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+
+import { loginRestaurant } from "../services/RestaurantAuthServices";
 import {
   FaStore,
   FaEnvelope,
@@ -12,7 +16,7 @@ import "../styles/RestaurantLogin.css";
 
 function RestaurantLogin() {
   const [showPassword, setShowPassword] = useState(false);
-
+const navigate = useNavigate();
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -28,11 +32,40 @@ function RestaurantLogin() {
     }));
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  const handleSubmit = async (e) => {
 
-    console.log(formData);
-  };
+  e.preventDefault();
+
+  try {
+
+    const data = await loginRestaurant({
+      email: formData.email,
+      password: formData.password,
+    });
+
+    localStorage.setItem(
+      "restaurantToken",
+      data.token
+    );
+
+    localStorage.setItem(
+      "restaurant",
+      JSON.stringify(data.restaurant)
+    );
+
+    toast.success("Login Successful");
+
+    navigate("/restaurant/dashboard");
+
+  } catch (err) {
+
+    toast.error(
+      err.response?.data?.message || "Login Failed"
+    );
+
+  }
+
+};
 
   return (
     <div className="brPartnerViewport">
@@ -145,7 +178,7 @@ function RestaurantLogin() {
 
         <div className="brPartnerFooter">
 
-          <button className="brPartnerBackBtn">
+          <button className="brPartnerBackBtn" onClick={() => navigate("/")}>
 
             <FaArrowLeft />
 

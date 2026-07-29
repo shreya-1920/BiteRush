@@ -10,9 +10,18 @@ import {
 
 import { NavLink } from "react-router-dom";
 
-
+import { useNavigate } from "react-router-dom";
 import logo from "../../assets/images/logo2.png";
 function RestaurantSidebar() {
+  const navigate = useNavigate();
+
+const handleLogout = () => {
+
+  localStorage.removeItem("restaurantToken");
+  localStorage.removeItem("restaurant");
+
+  navigate("/restaurant/login");
+};
   return (
     <aside className="rp-sidebar">
 
@@ -85,13 +94,16 @@ function RestaurantSidebar() {
 
       <div className="rp-sidebar-footer">
 
-        <button className="rp-sidebar-logout">
+       <button
+  className="rp-sidebar-logout"
+  onClick={handleLogout}
+>
 
-          <FaSignOutAlt />
+  <FaSignOutAlt />
 
-          <span>Logout</span>
+  <span>Logout</span>
 
-        </button>
+</button>
 
       </div>
 

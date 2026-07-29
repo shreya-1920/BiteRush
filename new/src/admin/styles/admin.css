@@ -94,7 +94,35 @@ textarea{
 /* ===========================================================
                      SIDEBAR
 =========================================================== */
+.admin-stat-icon.orders{
+    background:#E8F0FF;
+    color:#3B82F6;
+}
 
+.admin-stat-icon.sales{
+    background:#F3E8FF;
+    color:#9333EA;
+}
+
+.admin-stat-icon.customers{
+    background:#EEF2FF;
+    color:#6366F1;
+}
+
+.admin-stat-icon.restaurants{
+    background:#FFF4E5;
+    color:#F97316;
+}
+
+.admin-stat-icon.pending{
+    background:#FFF6D8;
+    color:#EAB308;
+}
+
+.admin-stat-icon.delivered{
+    background:#DCFCE7;
+    color:#16A34A;
+}
 .admin-sidebar{
     width:290px;
     background:var(--sidebar);
@@ -1108,6 +1136,12 @@ align-items:center;
     border-collapse:collapse;
     table-layout:fixed;
 }
+.restaurant-avatar img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    border-radius:inherit;
+}
 
 .admin-table th:nth-child(1),
 .admin-table td:nth-child(1){
@@ -1201,7 +1235,7 @@ align-items:center;
 
 .restaurant-details h4{
     margin:0;
-    font-size:20px;
+    font-size:18px;
     font-weight:600;
     color:#111827;
     line-height:1.2;

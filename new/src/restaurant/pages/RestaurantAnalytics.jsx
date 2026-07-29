@@ -5,29 +5,42 @@ import {
   FaStar,
   FaFire,
 } from "react-icons/fa";
-
+import SalesChart from "../components/SalesChart";
+import { useEffect, useState } from "react";
+import { getAnalytics } from "../services/RestaurantAnalyticsServices";
 import "../styles/Restaurant-panel.css";
 
 function RestaurantAnalytics() {
+const [chartFilter, setChartFilter] = useState("week");
+  const [analytics, setAnalytics] = useState(null);
 
-  const topDishes = [
-    {
-      name: "Farmhouse Pizza",
-      orders: 120,
-    },
-    {
-      name: "Cheese Burger",
-      orders: 98,
-    },
-    {
-      name: "White Sauce Pasta",
-      orders: 82,
-    },
-    {
-      name: "Paneer Tikka",
-      orders: 76,
-    },
-  ];
+const [loading, setLoading] = useState(true);
+const fetchAnalytics = async (filter = "week") => {
+
+    try {
+
+        const data = await getAnalytics(filter);
+
+        setAnalytics(data);
+
+    } catch (err) {
+
+        console.log(err);
+
+    } finally {
+
+        setLoading(false);
+
+    }
+
+};
+useEffect(() => {
+    fetchAnalytics(chartFilter);
+}, [chartFilter]);
+
+if (loading) {
+    return <h2>Loading Analytics...</h2>;
+}
 
   return (
 
@@ -51,50 +64,63 @@ function RestaurantAnalytics() {
 
       {/* Stats */}
 
-      <div className="ra-stats">
+{/* Stats */}
 
-        <div className="ra-card">
+<div className="ra-stats">
 
-          <FaRupeeSign />
+  <div className="ra-card">
 
-          <h2>₹2,48,500</h2>
+    <div className="ra-icon sales">
+      <FaRupeeSign />
+    </div>
 
-          <span>Total Sales</span>
+    <div className="ra-info">
+      <p>Total Sales</p>
+      <h2>₹{analytics.stats.totalSales.toLocaleString()}</h2>
+    </div>
 
-        </div>
+  </div>
 
-        <div className="ra-card">
+  <div className="ra-card">
 
-          <FaClipboardList />
+    <div className="ra-icon orders">
+      <FaClipboardList />
+    </div>
 
-          <h2>845</h2>
+    <div className="ra-info">
+      <p>Total Orders</p>
+      <h2>{analytics.stats.totalOrders}</h2>
+    </div>
 
-          <span>Total Orders</span>
+  </div>
 
-        </div>
+  <div className="ra-card">
 
-        <div className="ra-card">
+    <div className="ra-icon customers">
+      <FaUsers />
+    </div>
 
-          <FaUsers />
+    <div className="ra-info">
+      <p>Customers</p>
+      <h2>{analytics.stats.totalCustomers}</h2>
+    </div>
 
-          <h2>615</h2>
+  </div>
 
-          <span>Customers</span>
+  <div className="ra-card">
 
-        </div>
+    <div className="ra-icon rating">
+      <FaStar />
+    </div>
 
-        <div className="ra-card">
+    <div className="ra-info">
+      <p>Average Rating</p>
+      <h2>{analytics.stats.averageRating.toFixed(1)}</h2>
+    </div>
 
-          <FaStar />
+  </div>
 
-          <h2>4.8</h2>
-
-          <span>Average Rating</span>
-
-        </div>
-
-      </div>
-
+</div>
       {/* Chart */}
 
       <div className="ra-chart-card">
@@ -103,23 +129,43 @@ function RestaurantAnalytics() {
 
           <h3>Sales Overview</h3>
 
-          <button>This Month</button>
+         <select
+    value={chartFilter}
+    onChange={(e)=>setChartFilter(e.target.value)}
+>
+    <option value="day">Per Day</option>
+    <option value="week">This Week</option>
+    <option value="month">This Month</option>
+</select>
 
         </div>
+<div className="ra-chart">
 
-        <div className="ra-chart">
+{analytics.salesChart.length > 0 ? (
 
-          <FaFire />
+<SalesChart
+    data={analytics.salesChart}
+    xKey="label"
+    dataKey="sales"
+/>
 
-          <h2>Sales Chart</h2>
+) : (
 
-          <p>
-            Recharts graph will be added here.
-          </p>
+<div className="ra-empty-chart">
 
-        </div>
+    <FaFire/>
 
-      </div>
+    <h3>No Sales Data</h3>
+
+    <p>
+        Sales chart will appear after delivered orders.
+    </p>
+
+</div>
+
+)}
+
+</div>
 
       {/* Bottom */}
 
@@ -135,22 +181,20 @@ function RestaurantAnalytics() {
 
           {
 
-            topDishes.map((dish,index)=>(
+        analytics.topDishes.map((dish,index)=>(
+    <div
+        key={index}
+        className="ra-dish"
+    >
 
-              <div
-              key={index}
-              className="ra-dish"
-              >
+        <span>{dish.name}</span>
 
-                <span>{dish.name}</span>
+        <strong>
+            {dish.orders} Orders
+        </strong>
 
-                <strong>
-                  {dish.orders} Orders
-                </strong>
-
-              </div>
-
-            ))
+    </div>
+))
 
           }
 
@@ -164,20 +208,20 @@ function RestaurantAnalytics() {
 
           </div>
 
-          <p>🔥 Peak Hour : 8 PM</p>
+          <p>🔥 Peak Hour : {analytics.todaySummary.peakHour}</p>
 
-          <p>🍕 Best Category : Pizza</p>
+          <p>🍕 Best Category : {analytics.todaySummary.bestCategory}</p>
 
-          <p>⭐ Rating : 4.8 / 5</p>
+          <p>⭐ Rating : {analytics.stats.averageRating.toFixed(1)} / 5</p>
 
-          <p>📦 Pending Orders : 12</p>
+          <p>📦 Pending Orders : {analytics.todaySummary.pendingOrders}</p>
 
         </div>
 
       </div>
 
     </div>
-
+</div>
   );
 
 }

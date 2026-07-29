@@ -26,7 +26,13 @@ const fetchOrders = async () => {
   }
 };
 useEffect(() => {
-  fetchOrders();
+    fetchOrders();
+
+    const interval = setInterval(() => {
+        fetchOrders();
+    }, 45000);
+
+    return () => clearInterval(interval);
 }, []);
 
 if (loading) {

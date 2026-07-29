@@ -458,75 +458,129 @@ font-size:18px;
 
 }
 /*coupon section*/
-.coupon-card{
+.br-coupon-card{
 
     display:flex;
+
     justify-content:space-between;
+
     align-items:center;
 
-    padding:20px 25px;
+    padding:26px 30px;
 
-    margin-top:25px;
+    background:#fff;
 
-    background:#FFF5EF;
+    border:2px dashed #FFD2C2;
 
-    border:2px dashed #F4CDBF;
+    border-radius:24px;
 
-    border-radius:22px;
+    box-shadow:0 12px 35px rgba(0,0,0,.06);
+
 }
 
-.coupon-left{
+.br-coupon-left{
 
     display:flex;
+
     align-items:center;
+
     gap:18px;
+
 }
 
-.coupon-icon{
+.br-coupon-icon{
 
-    width:46px;
-    height:46px;
+    width:62px;
 
-    border-radius:50%;
+    height:62px;
 
-    background:#FFE5D9;
+    border-radius:18px;
+
+    background:#FFF2E8;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    font-size:28px;
+
+    color:var(--primary);
+
+}
+
+.br-coupon-text h3{
+
+    margin:0;
+
+    font-size:24px;
+
+    color:var(--heading);
+
+}
+
+.br-coupon-text p{
+
+    margin-top:6px;
+
+    color:#6B7280;
+
+    font-size:15px;
+
+}
+
+.apply-btn{
+
+    width:180px;
+    height:56px;
+
+    border:none;
+
+    border-radius:999px;
+
+    background:var(--primary);
+
+    color:#fff;
+
+    font-size:18px;
+    font-weight:600;
+
+    cursor:pointer;
 
     display:flex;
     justify-content:center;
     align-items:center;
-
-    font-size:22px;
+margin-left:20px;
+    transition:.3s;
 }
 
-.coupon-card h4{
+.apply-btn:hover{
 
-    color:var(--heading);
-    margin-bottom:4px;
+    transform:translateY(-2px);
+
+}
+.coupon-right{
+
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:center;
+
+    gap:10px;
+
 }
 
-.coupon-card p{
+.coupon-success{
 
-    color:#777;
-    font-size:15px;
-}
+    color:#16A34A;
 
-.coupon-card button{
-
-    border:none;
-
-    background:#E24A42;
-
-    color:white;
-
-    padding:12px 28px;
-
-    border-radius:30px;
-
-    cursor:pointer;
+    font-size:14px;
 
     font-weight:600;
-}
 
+}
 .cart-summary{
 
     position:sticky;
@@ -1022,7 +1076,7 @@ font-size:18px;
  
 
 
-.apply-btn{
+/* .apply-btn{
     background:#ff6b35;
     color:white;
     border:none;
@@ -1039,7 +1093,7 @@ font-size:18px;
 .apply-btn:disabled{
     background:#2ecc71;
     cursor:not-allowed;
-}
+} */
 .coupon-success{
     margin-top:12px;
     color:#2ecc71;

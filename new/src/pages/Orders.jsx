@@ -29,9 +29,15 @@ const Orders = () => {
 
         }
     };
- useEffect(() => {
+useEffect(() => {
+    fetchOrders();
+
+    const interval = setInterval(() => {
         fetchOrders();
-    }, []);
+    }, 30000);
+
+    return () => clearInterval(interval);
+}, []);
 
     if (loading) {
         return <h2 style={{ textAlign: "center" }}>Loading...</h2>;

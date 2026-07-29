@@ -1,4 +1,9 @@
-import { useState } from "react";
+
+import { useEffect, useRef, useState } from "react";
+import {
+  getProfile,
+  updateProfile,
+} from "../services/RestaurantProfileServices";
 import {
   FaCamera,
   FaStar,
@@ -9,24 +14,75 @@ import {
   
 } from "react-icons/fa";
 
+import { toast } from "react-toastify";
 import "../styles/Restaurant-panel.css";
 
 function RestaurantProfile() {
-const [isOpen, setIsOpen] = useState(true);
-  const [restaurant, setRestaurant] = useState({
 
-    name: "The Pizza House",
-    owner: "John Doe",
-    email: "pizzahouse@gmail.com",
-    phone: "+91 9876543210",
-    address: "MI Road, Jaipur",
-    website: "www.thepizzahouse.com",
-    instagram: "@thepizzahouse",
-    facebook: "The Pizza House",
-    opening: "09:00",
-    closing: "23:00",
+const [coverPreview, setCoverPreview] = useState("");
+const coverInputRef = useRef(null);
+const [logoPreview, setLogoPreview] = useState("");
+const logoInputRef = useRef(null);
+const [gallery,setGallery]=useState([]);
+const galleryRef=useRef(null);
+const [logoFile, setLogoFile] = useState(null);
+const [bannerFile, setBannerFile] = useState(null);
+const [galleryFiles, setGalleryFiles] = useState([]);
+const handleSave = async () => {
+  try {
+    if (
+      !restaurant.name ||
+      !restaurant.ownerName ||
+      !restaurant.email
+    ) {
+      toast.warning("Please fill all required fields.");
+      return;
+    }
 
-  });
+    const formData = new FormData();
+
+Object.keys(restaurant).forEach((key) => {
+    if (["logo", "banner", "gallery"].includes(key)) return;
+
+    formData.append(key, restaurant[key] ?? "");
+});
+
+if (logoFile) {
+    formData.append("logo", logoFile);
+}
+
+if (bannerFile) {
+    formData.append("banner", bannerFile);
+}
+
+galleryFiles.forEach((file) => {
+    formData.append("gallery", file);
+});
+
+await updateProfile(formData);
+
+    toast.success("Profile Updated Successfully!");
+
+    fetchProfile();
+  } catch (err) {
+    toast.error(
+      err.response?.data?.message || "Unable to update profile"
+    );
+  }
+};
+ const [restaurant, setRestaurant] = useState({
+  name: "",
+  ownerName: "",
+  email: "",
+  phone: "",
+  address: "",
+  website: "",
+  instagram: "",
+  facebook: "",
+  opening: "",
+  closing: "",
+  description: "",
+});
 
   const handleChange = (e)=>{
 
@@ -38,6 +94,27 @@ const [isOpen, setIsOpen] = useState(true);
     });
 
   };
+const fetchProfile = async () => {
+  try {
+    const data = await getProfile();
+  
+    console.log(JSON.stringify(data.restaurant, null, 2));
+    setRestaurant(data.restaurant);
+
+    setGallery(data.restaurant.gallery || []);
+
+    setLogoPreview(data.restaurant.logo || "");
+
+    setCoverPreview(data.restaurant.banner || "");
+
+  } catch (err) {
+    toast.error("Unable to load profile");
+  }
+};
+useEffect(() => {
+  fetchProfile();
+}, []);
+console.log("Restaurant State:", restaurant);
 
   return (
 
@@ -45,15 +122,42 @@ const [isOpen, setIsOpen] = useState(true);
 
 {/* COVER */}
 
-<div className="profile-cover">
+<div
+    className="profile-cover"
+    style={{
+        backgroundImage: coverPreview
+            ? `url(${coverPreview})`
+            : "",
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+    }}
+>
 
-<button>
+    <input
+        type="file"
+        accept="image/*"
+        hidden
+        ref={coverInputRef}
+        onChange={(e) => {
 
-<FaCamera/>
+            const file = e.target.files[0];
 
-Change Cover
+            if (!file) return;
 
-</button>
+           setBannerFile(file);
+setCoverPreview(URL.createObjectURL(file));
+
+            toast.success("Cover image updated!");
+
+        }}
+    />
+
+    <button
+        onClick={() => coverInputRef.current.click()}
+    >
+        <FaCamera />
+        Change Cover
+    </button>
 
 </div>
 
@@ -61,9 +165,42 @@ Change Cover
 
 <div className="profile-card">
 
-<div className="profile-logo">
+<div
+    className="profile-logo"
+    onClick={() => logoInputRef.current.click()}
+>
 
-🍕
+    <input
+        type="file"
+        hidden
+        accept="image/*"
+        ref={logoInputRef}
+        onChange={(e)=>{
+
+            const file = e.target.files[0];
+
+            if(!file) return;
+
+           setLogoFile(file);
+setLogoPreview(URL.createObjectURL(file));
+
+            toast.success("Logo updated!");
+
+        }}
+    />
+
+    {
+
+        <img
+    src={logoPreview || restaurant.logo}
+    alt={restaurant.name}
+/>
+
+        
+
+        
+
+    }
 
 </div>
 
@@ -73,7 +210,7 @@ Change Cover
 
 <FaStar/>
 
-4.8 (254 Reviews)
+{restaurant.rating} ({restaurant.reviews} Reviews)
 
 </div>
 
@@ -89,8 +226,8 @@ Change Cover
 
         <label>Restaurant Status</label>
 
-        <p className={isOpen ? "status-open" : "status-closed"}>
-            {isOpen ? "🟢 OPEN" : "🔴 CLOSED"}
+       <p className={restaurant.isOpen ? "status-open" : "status-closed"}>
+           {restaurant.isOpen ? "🟢 OPEN" : "🔴 CLOSED"}
         </p>
 
     </div>
@@ -99,8 +236,21 @@ Change Cover
 
         <input
             type="checkbox"
-            checked={isOpen}
-            onChange={() => setIsOpen(!isOpen)}
+            checked={restaurant.isOpen}
+onChange={() => {
+    const next = !restaurant.isOpen;
+
+    setRestaurant(prev => ({
+        ...prev,
+        isOpen: next
+    }));
+
+    toast.info(
+        next
+            ? "Restaurant is now Open 🟢"
+            : "Restaurant is now Closed 🔴"
+    );
+}}
         />
 
         <span className="toggle-slider"></span>
@@ -111,11 +261,13 @@ Change Cover
 
 <div className="cuisines">
 
-<span>Pizza</span>
-
-<span>Italian</span>
-
-<span>Fast Food</span>
+{restaurant.cuisine
+    ?.split("•")
+    .map((item, index) => (
+        <span key={index}>
+            {item.trim()}
+        </span>
+))}
 
 </div>
 
@@ -147,8 +299,8 @@ onChange={handleChange}
 <label>Owner Name</label>
 
 <input
-name="owner"
-value={restaurant.owner}
+name="ownerName"
+value={restaurant.ownerName}
 onChange={handleChange}
 />
 
@@ -159,7 +311,7 @@ onChange={handleChange}
 <label>Opening Time</label>
 
 <input
-type="time"
+type="text"
 name="opening"
 value={restaurant.opening}
 onChange={handleChange}
@@ -172,7 +324,7 @@ onChange={handleChange}
 <label>Closing Time</label>
 
 <input
-type="time"
+type="text"
 name="closing"
 value={restaurant.closing}
 onChange={handleChange}
@@ -222,14 +374,23 @@ value={restaurant.address}
 onChange={handleChange}
 />
 
-<button>
+<button
+    onClick={()=>
+
+        window.open(
+
+            `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(restaurant.address)}`
+
+        )
+
+    }
+>
 
 <FaMapMarkerAlt/>
 
 View Map
 
 </button>
-
 </div>
 
 </div>
@@ -240,21 +401,60 @@ View Map
 
 <div className="gallery">
 
-<div className="upload-box">
+<div
+    className="upload-box"
+    onClick={()=>galleryRef.current.click()}
+>
 
 <FaCamera/>
 
 <p>Upload Photo</p>
 
+<input
+type="file"
+hidden
+multiple
+accept="image/*"
+ref={galleryRef}
+onChange={(e)=>{
+
+const files=Array.from(e.target.files);
+setGalleryFiles(files);
+setGallery(prev=>[
+
+...prev,
+
+...files.map(file=>URL.createObjectURL(file))
+
+]);
+
+toast.success(`${files.length} image(s) uploaded`);
+
+}}
+/>
+
 </div>
 
-<div className="gallery-img"></div>
+{
+gallery.map((img,index)=>(
 
-<div className="gallery-img"></div>
+<div
+className="gallery-img"
+key={index}
+>
 
-<div className="gallery-img"></div>
+<img
+src={img}
+alt=""
+/>
 
-<div className="gallery-img"></div>
+</div>
+
+))
+}
+
+
+
 
 </div>
 
@@ -318,7 +518,10 @@ onChange={handleChange}
 
 </div>
 
-<button className="save-btn">
+<button
+    className="save-btn"
+    onClick={handleSave}
+>
 
 Save Changes
 

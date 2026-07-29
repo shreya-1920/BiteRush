@@ -18,47 +18,41 @@ const getDashboardStats = async (req, res) => {
     });
 
     // Revenue
-    const delivered = await Order.find({
-      status: "Delivered",
-    });
-
-    const totalRevenue = delivered.reduce(
-      (sum, order) => sum + order.total,
-      0
-    );
+  const totalSales = await Order.countDocuments({
+  status: "Delivered",
+});
 
     // Weekly Revenue
-    const revenueData = await Order.aggregate([
-      {
-        $match: {
-          status: "Delivered",
-        },
+   const salesData = await Order.aggregate([
+  {
+    $match: {
+      status: "Delivered",
+    },
+  },
+  {
+    $group: {
+      _id: {
+        $dayOfWeek: "$createdAt",
       },
-      {
-        $group: {
-          _id: {
-            $dayOfWeek: "$createdAt",
-          },
-          revenue: {
-            $sum: "$total",
-          },
-        },
+      sales: {
+        $sum: 1,
       },
-    ]);
+    },
+  },
+]);
+   const weeklySales = [
+  { day: "Sun", sales: 0 },
+  { day: "Mon", sales: 0 },
+  { day: "Tue", sales: 0 },
+  { day: "Wed", sales: 0 },
+  { day: "Thu", sales: 0 },
+  { day: "Fri", sales: 0 },
+  { day: "Sat", sales: 0 },
+];
 
-    const weeklyRevenue = [
-      { day: "Sun", revenue: 0 },
-      { day: "Mon", revenue: 0 },
-      { day: "Tue", revenue: 0 },
-      { day: "Wed", revenue: 0 },
-      { day: "Thu", revenue: 0 },
-      { day: "Fri", revenue: 0 },
-      { day: "Sat", revenue: 0 },
-    ];
-
-    revenueData.forEach((item) => {
-      weeklyRevenue[item._id - 1].revenue = item.revenue;
-    });
+    salesData.forEach((item) => {
+  weeklySales[item._id - 1].sales = item.sales;
+});
 
     // Recent Orders
     const recentOrders = await Order.find()
@@ -73,9 +67,40 @@ const getDashboardStats = async (req, res) => {
       .limit(5);
 
     // Top Restaurants
-    const topRestaurants = await Restaurant.find()
-      .sort({ createdAt: -1 })
-      .limit(5);
+   const restaurants = await Restaurant.find();
+
+const rankedRestaurants = await Promise.all(
+
+  restaurants.map(async (restaurant) => {
+
+    const deliveredOrders = await Order.find({
+      restaurant: restaurant._id,
+      status: "Delivered",
+    });
+
+    return {
+      _id: restaurant._id,
+      name: restaurant.name,
+      logo: restaurant.logo,
+      cuisine: restaurant.cuisine,
+      city: restaurant.city,
+      rating: restaurant.rating,
+      totalOrders: deliveredOrders.length,
+      revenue: deliveredOrders.reduce(
+        (sum, order) => sum + order.total,
+        0
+      ),
+    };
+
+  })
+
+);
+
+rankedRestaurants.sort(
+  (a, b) => b.totalOrders - a.totalOrders
+);
+
+const topRestaurants = rankedRestaurants.slice(0,5);
 
     res.status(200).json({
       totalOrders,
@@ -83,8 +108,8 @@ const getDashboardStats = async (req, res) => {
       totalRestaurants,
       pendingOrders,
       deliveredOrders,
-      totalRevenue,
-      weeklyRevenue,
+     totalSales,
+weeklySales,
       recentOrders,
       latestCustomers,
       topRestaurants,

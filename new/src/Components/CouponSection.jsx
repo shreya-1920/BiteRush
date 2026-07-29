@@ -22,14 +22,16 @@ const CouponSection = ({
 };
 
     return (
-        <div className="coupon-card">
-            <div className="coupon-left">
-                <span className="coupon-icon">🎟️</span>
+        <div className="br-coupon-card">
+            <div className="br-coupon-left">
+                <span className="br-coupon-icon">🎟️</span>
                 <div>
                     <h4>BITEGOLDRUSH</h4>
                     <p>Apply for 15% discount</p>
                 </div>
             </div>
+            <div className="coupon-right">
+
             <button
     className="apply-btn"
     onClick={handleApply}
@@ -42,6 +44,7 @@ const CouponSection = ({
                 🎉 15% discount applied successfully!
             </p>
         )}
+        </div>
         </div>
     );
 };
