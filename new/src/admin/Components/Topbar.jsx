@@ -93,19 +93,19 @@ function Topbar() {
         >
 
           <button
-            className="icon-btn"
-            onClick={() => {
-              loadNotifications();
-              setShowNotifications(!showNotifications);
-            }}
-          >
-            <FaBell />
+  className="icon-btn"
+  onClick={() => {
+    console.log("Bell clicked");
+    console.log("Before:", showNotifications);
 
-            <span className="notification-count">
-              {notifications.filter((n) => !n.read).length}
-            </span>
-
-          </button>
+    setShowNotifications(prev => {
+      console.log("After:", !prev);
+      return !prev;
+    });
+  }}
+>
+  <FaBell />
+</button>
 
           {showNotifications && (
 

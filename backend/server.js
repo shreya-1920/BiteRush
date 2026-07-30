@@ -87,6 +87,8 @@ const restaurantDashboardRoutes = require("./routes/restaurantDashboardRoutes");
 app.use("/api/restaurant", restaurantDashboardRoutes);
 const restaurantAnalyticsRoutes = require("./routes/restaurantAnalyticsRoutes");
 app.use("/api/restaurant", restaurantAnalyticsRoutes);
+const addressRoutes=require("./routes/addressRoutes");
+app.use("/api/address",addressRoutes);
 // ==================== Server ====================
 
 const PORT = process.env.PORT || 5000;

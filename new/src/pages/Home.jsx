@@ -526,7 +526,7 @@ const navigate = useNavigate();
       
               <Container fluid className="px-5">
       
-                  <div className="section-title">
+                  <div className="br-section-title">
                       <h2>Browse Categories</h2>
                       <p>Choose your favourite dishes</p>
                   </div>

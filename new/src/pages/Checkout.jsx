@@ -6,13 +6,20 @@ import "../styles/Checkout.css";
 import { placeOrder } from "../services/checkoutServices";
 import { useCart } from "../Context/CartContext";
 import { clearCart } from "../services/CartServices";
+import { getProfile } from "../services/AuthServices";
+import {
+  saveAddress,
+  getAddresses,
+  updateAddress,
+  deleteAddress,
+} from "../services/addressServices";
 import {
   FaMapMarkerAlt,
   FaClock,
   FaUser,
   FaCreditCard,
   FaTag,
-  FaEdit,
+  
   FaPlus,
   FaLock,
   FaMoneyBillWave,
@@ -35,8 +42,8 @@ function Checkout() {
   const [address, setAddress] = useState("");
   const [email, setEmail] = useState("");
   const [instructions, setInstructions] = useState("");
-  const [editingAddress, setEditingAddress] = useState(false);
-  const [showAddressInput, setShowAddressInput] = useState(false);
+ 
+
   const [paymentMethod, setPaymentMethod] = useState("Cash");
   const [deliveryType, setDeliveryType] = useState("ASAP");
   const [scheduledDate, setScheduledDate] = useState("");
@@ -45,7 +52,15 @@ const [appliedCoupon, setAppliedCoupon] = useState("");
   const [discount, setDiscount] = useState(0);
 const [coupons, setCoupons] = useState([]);
   const [loading, setLoading] = useState(false);
+const [addresses, setAddresses] = useState([]);
 
+const [showAddressForm, setShowAddressForm] = useState(false);
+
+const [addressForm, setAddressForm] = useState({
+    fullName: "",
+    phone: "",
+    address: "",
+});
   const { cartItems, clearCartState } = useCart();
 
   const navigate = useNavigate();
@@ -74,6 +89,31 @@ useEffect(() => {
     }
 
 }, [navigate]);
+useEffect(() => {
+
+    const fetchProfile = async () => {
+
+        try {
+
+            const res = await getProfile();
+
+            const user = res.data.user;
+
+            setName(user.name);
+            setEmail(user.email);
+            setPhone(user.phone || "");
+
+        } catch (err) {
+
+            console.log(err);
+
+        }
+
+    };
+
+    fetchProfile();
+
+}, []);
   const subtotal = cartItems.reduce(
     (sum, item) => sum + item.price * item.quantity,
     0,
@@ -152,7 +192,65 @@ navigate("/order-success", {
       setLoading(false);
     }
   };
+const fetchAddresses = async () => {
 
+    try {
+
+        const res = await getAddresses();
+
+        setAddresses(res.data.addresses);
+if (res.data.addresses.length > 0) {
+
+    const latest = res.data.addresses[0];
+
+    setName(latest.fullName);
+    setPhone(latest.phone);
+    setAddress(latest.address);
+}
+    }
+
+    catch(err){
+
+        console.log(err);
+
+    }
+
+};
+
+useEffect(() => {
+
+    fetchAddresses();
+
+}, []);
+const handleSaveAddress = async () => {
+    try {
+
+        const res = await saveAddress(addressForm);
+
+        toast.success("Address Saved!");
+
+        fetchAddresses();
+
+        // Update checkout fields
+        setName(addressForm.fullName);
+        setPhone(addressForm.phone);
+        setAddress(addressForm.address);
+
+        setShowAddressForm(false);
+
+        setAddressForm({
+            fullName: "",
+            phone: "",
+            address: "",
+        });
+
+    } catch (err) {
+
+        console.log(err);
+
+        toast.error("Failed to save address.");
+    }
+};
   return (
     <>
       <Header />
@@ -178,135 +276,203 @@ navigate("/order-success", {
             <div className="checkout-left">
               {/* Delivery Address */}
 
-              <div className="checkout-card">
-                <div className="checkout-card-header">
-                  <div className="checkout-title">
-                    <div className="checkout-icon">
-                      <FaMapMarkerAlt />
+
+{/* Delivery Address */}
+
+<div className="checkout-card">
+
+    <div className="checkout-card-header">
+
+ <div className="checkout-title">
+
+    <div className="checkout-icon">
+        <FaMapMarkerAlt />
+    </div>
+
+    <div>
+
+        <h3>Delivery Address</h3>
+
+        <p className="address-subtitle">
+            Select a saved address or add a new one.
+        </p>
+
+    </div>
+
+</div>
+</div>
+
+    <div className="address-box">
+
+        {addresses.length === 0 ? (
+
+          <div className="empty-address">
+
+    <h4>📍 No saved addresses</h4>
+
+    <p>
+        Save your first delivery address to checkout faster.
+    </p>
+
+</div>
+
+        ) : (
+
+            <div className="address-list">
+
+                {addresses.map((item) => (
+
+                    <div
+                        key={item._id}
+                        className={`address-card ${
+                            address === item.address ? "selected" : ""
+                        }`}
+                        onClick={() => {
+                            setName(item.fullName);
+                            setPhone(item.phone);
+                            setAddress(item.address);
+                        }}
+                    >
+
+                        <div className="address-top">
+
+                            <h4>
+                                🏠 {item.label || "Home"}
+                            </h4>
+
+                            {address === item.address && (
+
+                                <span className="address-badge">
+
+                                    ✓ Selected
+
+                                </span>
+
+                            )}
+
+                        </div>
+
+                        <p className="address-name">
+
+                            {item.fullName}
+
+                        </p>
+
+                        <p>{item.phone}</p>
+
+                        <p>{item.address}</p>
+
+                        <div className="address-actions">
+
+                            <button
+                                className="edit-btn"
+                                type="button"
+                            >
+                                ✏ Edit
+                            </button>
+
+                            <button
+                                className="delete-btn"
+                                type="button"
+                            >
+                                🗑 Delete
+                            </button>
+
+                        </div>
+
                     </div>
-                    <h3>Delivery Address</h3>
-                  </div>
 
-                  <div className="checkout-address-actions">
-                    <button
-                      className="checkout-edit-btn"
-                      onClick={() => setEditingAddress(!editingAddress)}
-                    >
-                      <FaEdit />
-                      <span>Edit</span>
-                    </button>
+                ))}
 
-                    <button
-                      className="checkout-add-btn"
-                      onClick={() => setShowAddressInput(!showAddressInput)}
-                    >
-                      <FaPlus />
-                      <span>Add New</span>
-                    </button>
-                  </div>
+            </div>
+
+        )}
+
+        <button
+            type="button"
+            className="add-address-button"
+            onClick={() => setShowAddressForm(!showAddressForm)}
+        >
+
+            <FaPlus />
+
+            <span>Add New Address</span>
+
+        </button>
+
+        {showAddressForm && (
+
+            <div className="new-address-card">
+
+                <h3>Add New Address</h3>
+
+                <div className="form-group">
+
+                    <label>Full Name</label>
+
+                    <input
+                        type="text"
+                        value={addressForm.fullName}
+                        onChange={(e) =>
+                            setAddressForm({
+                                ...addressForm,
+                                fullName: e.target.value,
+                            })
+                        }
+                    />
+
                 </div>
 
-             <div className="address-box">
+                <div className="form-group">
 
-   {editingAddress ? (
+                    <label>Phone Number</label>
 
-<div className="address-form">
+                    <input
+                        type="text"
+                        value={addressForm.phone}
+                        onChange={(e) =>
+                            setAddressForm({
+                                ...addressForm,
+                                phone: e.target.value,
+                            })
+                        }
+                    />
 
-    <div className="form-group">
-        <label>Full Name</label>
+                </div>
 
-        <input
-            type="text"
-            value={name}
-            onChange={(e)=>setName(e.target.value)}
-        />
-    </div>
+                <div className="form-group">
 
-    <div className="form-group">
-        <label>Phone Number</label>
+                    <label>Complete Address</label>
 
-        <input
-            type="text"
-            value={phone}
-            onChange={(e)=>setPhone(e.target.value)}
-        />
-    </div>
+                    <textarea
+                        rows="4"
+                        value={addressForm.address}
+                        onChange={(e) =>
+                            setAddressForm({
+                                ...addressForm,
+                                address: e.target.value,
+                            })
+                        }
+                    />
 
-    <div className="form-group">
-        <label>Delivery Address</label>
+                </div>
 
-        <textarea
-            rows="3"
-            value={address}
-            onChange={(e)=>setAddress(e.target.value)}
-        />
-    </div>
+                <button
+                    className="save-address-btn"
+                    type="button"
+                    onClick={handleSaveAddress}
+                >
 
-    <button
-        className="save-address-btn"
-        onClick={() => setEditingAddress(false)}
-    >
-        Save Changes
-    </button>
+                    Save Address
 
-</div>
+                </button>
 
-) : (
-        <>
-            <h4>{name || "Customer"}</h4>
+            </div>
 
-            <p>{phone || "Phone Number"}</p>
-
-            <p>{address || "Please enter your delivery address"}</p>
-
-            {deliveryType === "SCHEDULED" && (
-                <p className="schedule-time">
-                    Delivery Time :
-                    {scheduledDate || "Not Selected"}
-                </p>
-            )}
-        </>
-
-    )}
-
-   {showAddressInput && (
-
-<div className="new-address-card">
-
-    <h4>Add New Address</h4>
-
-    <div className="new-address-grid">
-
-        <input
-            type="text"
-            placeholder="Full Name"
-        />
-
-        <input
-            type="text"
-            placeholder="Phone Number"
-        />
+        )}
 
     </div>
 
-    <textarea
-        rows="4"
-        placeholder="Enter complete address"
-    />
-
-    <button
-        className="save-address-btn"
-        onClick={() => setShowAddressInput(false)}
-    >
-        Save Address
-    </button>
-
-</div>
-
-)}
-
-
-</div>
 </div>
               {/* Delivery Schedule */}
 
@@ -592,7 +758,7 @@ navigate("/order-success", {
                 <div className="summary-items">
                   {cartItems.map((item) => (
                     <div
-                      className="summary-item"
+                      className="ch-summary-item"
                       key={item._id || item.productId}
                     >
                       <div>
@@ -659,6 +825,7 @@ navigate("/order-success", {
             </aside>
           </section>
         </div>
+        
       </Container>
 
       <Footer />

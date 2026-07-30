@@ -12,7 +12,7 @@ const {
 } = require("../controllers/authController");
 
 const authMiddleware = require("../middleware/authMiddleware");
-
+const { protect } = require("../middleware/authMiddleware");
 // Test Route
 router.get("/test", (req, res) => {
   res.json({

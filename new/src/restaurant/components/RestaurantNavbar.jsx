@@ -127,7 +127,7 @@ const placeholder =
   </button>
 
   <div
-    className={`notification-dropdown ${
+    className={`rp-notification-dropdown ${
       showNotifications ? "show" : ""
     }`}
   >

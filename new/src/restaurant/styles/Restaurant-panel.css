@@ -409,7 +409,7 @@
 
     color:#94A3B8;
 }
-.notification-dropdown{
+.rp-notification-dropdown{
     position:absolute;
 
     top:calc(100% + 12px);
@@ -425,13 +425,14 @@
 
     box-shadow:0 20px 45px rgba(15,23,42,.12);
 
-    overflow:hidden;
+    max-height: 420px;
+overflow-y: auto;
+overflow-x: hidden;
 
     z-index:999;
 
-    opacity:0;
-    visibility:hidden;
-
+  opacity: 0;
+visibility: hidden;
     transform:translateY(10px);
 
     transition:
