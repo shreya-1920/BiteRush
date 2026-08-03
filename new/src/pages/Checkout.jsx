@@ -168,7 +168,13 @@ const response = await placeOrder({
   phone,
   address,
   paymentMethod,
-  items: cartItems,
+  items: cartItems.map((item) => ({
+  menuItem: item.productId,   // <-- IMPORTANT
+  name: item.name,
+  image: item.image,
+  price: item.price,
+  quantity: item.quantity,
+})),
   subtotal,
   deliveryFee,
   discount,

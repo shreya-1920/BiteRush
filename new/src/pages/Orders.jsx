@@ -3,13 +3,41 @@ import { Link } from "react-router-dom";
 import { FaClipboardList } from "react-icons/fa";
 import { getMyOrders } from "../services/checkoutServices";
 import "../styles/Orders.css";
+import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
+import { useCart } from "../Context/CartContext";
+import { FaArrowLeft } from "react-icons/fa";
 
+import {
+
+    reorderOrder,
+} from "../services/checkoutServices";
 const Orders = () => {
 
     const [orders, setOrders] = useState([]);
     const [loading, setLoading] = useState(true);
+const navigate = useNavigate();
+const { fetchCart } = useCart();
+const handleReorder = async (orderId) => {
+    try {
 
-    
+        const data = await reorderOrder(orderId);
+
+        await fetchCart();   // Refresh cart state
+
+        toast.success(data.message);
+
+        navigate("/cart");
+
+    } catch (err) {
+
+        toast.error(
+            err.response?.data?.message ||
+            "Unable to reorder."
+        );
+
+    }
+};
 
     const fetchOrders = async () => {
         try {
@@ -45,7 +73,13 @@ useEffect(() => {
  
     return (
         <div className="orders-page">
-
+<button
+  className="back-btn"
+  onClick={() => navigate("/")}
+>
+  <FaArrowLeft />
+  <span>Back</span>
+</button>
             <section className="orders-hero">
                 <h1>Your Recent Orders</h1>
                 <p>Track all your previous BiteRush orders.</p>
@@ -75,7 +109,7 @@ useEffect(() => {
 
                 <div className="orders-list">
 
-                    <div className="orders-list">
+                    
 
   {orders.map((order) => (
 
@@ -90,9 +124,10 @@ useEffect(() => {
           </span>
         </div>
 
-        <div className="order-status">
-          Delivered
-        </div>
+        <div className={`order-status ${order.status.toLowerCase().replace(/\s+/g, "-")}`}>
+    {order.status}
+</div>
+        
 
       </div>
 
@@ -134,14 +169,19 @@ useEffect(() => {
         </div>
 
       </div>
-
+<button
+  className="reorder-btn"
+  onClick={() => handleReorder(order._id)}
+>
+  Order Again
+</button>
     </div>
 
   ))}
 
 </div>
 
-                </div>
+               
 
             )}
 

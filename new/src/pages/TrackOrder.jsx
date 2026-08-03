@@ -1,151 +1,180 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { getOrderById } from "../services/checkoutServices";
-import { FaArrowLeft } from "react-icons/fa";
-import { useNavigate } from "react-router-dom";
+
+import {
+  FaArrowLeft,
+  FaClipboardCheck,
+  FaUtensils,
+  FaMotorcycle,
+  FaBoxOpen,
+} from "react-icons/fa";
+
 function TrackOrder() {
   const { id } = useParams();
+  const navigate = useNavigate();
 
   const [order, setOrder] = useState(null);
-const navigate = useNavigate();
- 
 
- const fetchOrder = async () => {
-  try {
-    const data = await getOrderById(id);
-    setOrder(data);
-  } catch (err) {
-    console.log(err);
-  }
-};
+  const fetchOrder = async () => {
+    try {
+      const data = await getOrderById(id);
+      setOrder(data);
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
-useEffect(() => {
-  fetchOrder();
-
-  const interval = setInterval(() => {
+  useEffect(() => {
     fetchOrder();
-  }, 15000);
 
-  return () => clearInterval(interval);
-}, [id]);
-if (!order) {
-  return <h2>Loading...</h2>;
-}
+    const interval = setInterval(() => {
+      fetchOrder();
+    }, 15000);
+
+    return () => clearInterval(interval);
+  }, [id]);
+
+  if (!order) {
+    return <h2>Loading...</h2>;
+  }
+
+  const statusMap = {
+    Pending: 1,
+    Confirmed: 2,
+    Preparing: 2,
+    "Out for Delivery": 3,
+    Delivered: 4,
+  };
+
+  const step = statusMap[order.status] || 1;
+
+
   return (
     <div className="track-page">
-<button
-  className="back-btn"
-  onClick={() => navigate("/my-orders")}
->
-  <FaArrowLeft />
-  <span>Back</span>
-</button>
 
-<h1>Track Order</h1>
-      
+      <button
+        className="back-btn"
+        onClick={() => navigate("/orders")}
+      >
+        <FaArrowLeft />
+        <span>Back</span>
+      </button>
+
+      <h1>Track Order</h1>
 
       <h3>Order #{order._id.slice(-6)}</h3>
+
+      {/* Restaurant */}
 
       <div className="track-card">
         <h4>Restaurant</h4>
         <p>{order.restaurant?.name}</p>
       </div>
 
+      {/* Address */}
+
       <div className="track-card">
         <h4>Delivery Address</h4>
         <p>{order.address}</p>
       </div>
+
+      {/* Payment */}
 
       <div className="track-card">
         <h4>Payment</h4>
         <p>{order.paymentMethod}</p>
       </div>
 
+      {/* Total */}
+
       <div className="track-card">
         <h4>Total</h4>
         <p>₹{order.total}</p>
       </div>
 
-   <div className="track-card">
+      {/* Order Progress */}
 
-<h4>Order Progress</h4>
+      <div className="track-card">
 
-<div
-  className="track-progress"
-  style={{
-    "--progress":
-      order.status === "Pending"
-        ? "0%"
-        : order.status === "Preparing"
-        ? "33%"
-        : order.status === "Out for Delivery"
-        ? "66%"
-        : "100%",
-  }}
->
+        <h4>Order Progress</h4>
 
-<div className={`track-step ${
-order.status === "Pending" ||
-order.status === "Preparing" ||
-order.status === "Out for Delivery" ||
-order.status === "Delivered"
-? "active" : ""
-}`}>
+        <div className="tracking-wrapper">
 
-<div className="track-circle"></div>
+          <div className="tracking-line"></div>
 
-<p>Pending</p>
+         <div
+    className="tracking-fill"
+    style={{
+        width:
+            step === 1
+                ? "0%"
+                : step === 2
+                ? "33%"
+                : step === 3
+                ? "66%"
+                : "calc(100% - 210px)"
+    }}
+></div>
 
-</div>
+          <div
+            className={`tracking-step ${
+              step >= 1 ? "active" : ""
+            }`}
+          >
+            <div className="tracking-circle">
+              <FaClipboardCheck />
+            </div>
 
-<div className={`track-step ${
-order.status === "Preparing" ||
-order.status === "Out for Delivery" ||
-order.status === "Delivered"
-? "active" : ""
-}`}>
+            <p>Pending</p>
+          </div>
 
-<div className="track-circle"></div>
+          <div
+            className={`tracking-step ${
+              step >= 2 ? "active" : ""
+            }`}
+          >
+            <div className="tracking-circle">
+              <FaUtensils />
+            </div>
 
-<p>Preparing</p>
+            <p>Preparing</p>
+          </div>
 
-</div>
+          <div
+            className={`tracking-step ${
+              step >= 3 ? "active" : ""
+            }`}
+          >
+            <div className="tracking-circle">
+              <FaMotorcycle />
+            </div>
 
-<div className={`track-step ${
-order.status === "Out for Delivery" ||
-order.status === "Delivered"
-? "active" : ""
-}`}>
+            <p>Out for Delivery</p>
+          </div>
 
-<div className="track-circle"></div>
+          <div
+            className={`tracking-step ${
+              step >= 4 ? "active" : ""
+            }`}
+          >
+            <div className="tracking-circle">
+              <FaBoxOpen />
+            </div>
 
-<p>Out for Delivery</p>
+            <p>Delivered</p>
+          </div>
 
-</div>
+        </div>
 
-<div className={`track-step ${
-order.status === "Delivered"
-? "active" : ""
-}`}>
+        <div className="status-pill">
+          <span>Current Status</span>
+          <h3>{order.status}</h3>
+        </div>
 
-<div className="track-circle"></div>
+      </div>
 
-<p>Delivered</p>
-
-</div>
-
-</div>
-
-<h3 className="current-status">
-Current Status: {order.status}
-</h3>
-
-</div>
- 
-
-  
-  </div>
-
+    </div>
   );
 }
 

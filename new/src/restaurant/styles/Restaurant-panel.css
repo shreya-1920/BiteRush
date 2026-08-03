@@ -441,7 +441,7 @@ visibility: hidden;
         visibility .25s;
 }
 
-.notification-dropdown.show{
+.rp-notification-dropdown.show{
     opacity:1;
     visibility:visible;
     transform:translateY(0);

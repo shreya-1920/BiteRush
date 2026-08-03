@@ -1,5 +1,8 @@
 const Order = require("../models/Order");
 const Notification = require("../models/Notification");
+const Cart = require("../models/Cart");
+const Menu = require("../models/Menu");
+
 /* ==========================
    Create Order
 ========================== */
@@ -199,5 +202,88 @@ exports.deleteOrder = async (req, res) => {
       success: false,
       message: error.message,
     });
+  }
+};
+
+
+exports.reorderOrder = async (req, res) => {
+  try {
+
+    const { orderId } = req.params;
+
+    const order = await Order.findById(orderId);
+
+    if (!order) {
+      return res.status(404).json({
+        success: false,
+        message: "Order not found",
+      });
+    }
+
+    // Security Check
+
+  if (order.user.toString() !== req.user.userId) {
+      return res.status(403).json({
+        success: false,
+        message: "Unauthorized",
+      });
+    }
+
+    // Remove current cart
+
+  await Cart.deleteMany({
+  user: req.user.userId,
+});
+
+    // Copy previous items
+
+    for (const item of order.items) {
+
+      const menu = await Menu.findById(item.menuItem);
+
+      if (!menu) continue;
+
+      if (menu.status !== "Available") continue;
+
+      await Cart.create({
+
+      user: req.user.userId,
+
+        restaurant: order.restaurant,
+
+        productId: menu._id,
+
+        name: menu.name,
+
+        image: menu.image,
+
+        price: menu.price,
+
+        quantity: item.quantity,
+
+      });
+
+    }
+
+    return res.status(200).json({
+
+      success: true,
+
+      message: "Items added to cart successfully.",
+
+    });
+
+  } catch (err) {
+
+    console.log(err);
+
+    return res.status(500).json({
+
+      success: false,
+
+      message: "Server Error",
+
+    });
+
   }
 };

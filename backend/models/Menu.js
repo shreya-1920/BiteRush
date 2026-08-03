@@ -33,7 +33,15 @@ const menuSchema = new mongoose.Schema(
       type: String,
       default: "",
     },
+rating: {
+    type: Number,
+    default: 4.5,
+},
 
+reviews: {
+    type: Number,
+    default: 0,
+},
     isVeg: {
       type: Boolean,
       default: true,

@@ -12,6 +12,7 @@ const {
   getOrderById,
   updateOrderStatus,
   deleteOrder,
+  reorderOrder,
 } = require("../controllers/orderController");
 
 /* ===========================
@@ -49,5 +50,9 @@ router.delete(
   adminMiddleware,
   deleteOrder
 );
-
+router.post(
+    "/reorder/:orderId",
+    authMiddleware,
+    reorderOrder
+);
 module.exports = router;

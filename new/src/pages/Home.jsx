@@ -6,6 +6,7 @@ import Button from "react-bootstrap/Button";
 import foodPlatter from "../assets/images/food-platter.png";
 import Stats from "../Components/Stats";
 import { useLocation } from "../context/LocationContext";
+
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import {
   FaStar,

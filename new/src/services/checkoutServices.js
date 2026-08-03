@@ -35,3 +35,19 @@ export const getMyOrders = async () => {
 
   return res.data.orders;
 };
+
+export const reorderOrder = async (orderId) => {
+  const token = localStorage.getItem("token");
+
+  const res = await axios.post(
+    `${API}/reorder/${orderId}`,
+    {},
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }
+  );
+
+  return res.data;
+};

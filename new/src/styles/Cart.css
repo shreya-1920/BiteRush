@@ -1197,3 +1197,39 @@ transform:translateY(0);
     opacity:1 !important;
     -webkit-text-fill-color:#fff !important;
 }
+
+.recommended-section{
+    margin-top:40px;
+}
+
+.recommend-subtitle{
+
+    color:#ff6b35;
+
+    font-size:16px;
+
+    font-weight:600;
+
+    margin-bottom:25px;
+
+}
+
+.recommend-grid{
+
+    display:grid;
+
+    grid-template-columns:repeat(2,1fr);
+
+    gap:25px;
+
+}
+
+@media(max-width:768px){
+
+.recommend-grid{
+
+    grid-template-columns:1fr;
+
+}
+
+}

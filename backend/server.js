@@ -89,6 +89,11 @@ const restaurantAnalyticsRoutes = require("./routes/restaurantAnalyticsRoutes");
 app.use("/api/restaurant", restaurantAnalyticsRoutes);
 const addressRoutes=require("./routes/addressRoutes");
 app.use("/api/address",addressRoutes);
+const recommendationRoutes = require("./routes/recommendationRoutes");
+app.use(
+    "/api/recommendations",
+    recommendationRoutes
+);
 // ==================== Server ====================
 
 const PORT = process.env.PORT || 5000;

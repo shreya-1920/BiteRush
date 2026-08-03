@@ -159,7 +159,8 @@ const removeFromCart = async (item) => {
     removeFromCart,
     increaseQuantity,
     decreaseQuantity,
-    clearCartState
+    clearCartState,
+    fetchCart
   }}
 >
             {children}

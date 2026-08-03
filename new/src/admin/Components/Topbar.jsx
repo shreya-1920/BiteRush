@@ -92,19 +92,19 @@ function Topbar() {
           ref={notificationRef}
         >
 
-          <button
+<button
   className="icon-btn"
   onClick={() => {
-    console.log("Bell clicked");
-    console.log("Before:", showNotifications);
-
-    setShowNotifications(prev => {
-      console.log("After:", !prev);
-      return !prev;
-    });
+    setShowNotifications((prev) => !prev);
   }}
 >
   <FaBell />
+
+  {notifications.filter(n => !n.isRead).length > 0 && (
+    <span className="notification-badge">
+      {notifications.filter(n => !n.isRead).length}
+    </span>
+  )}
 </button>
 
           {showNotifications && (

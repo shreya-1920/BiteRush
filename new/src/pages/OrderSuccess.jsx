@@ -146,7 +146,7 @@ const order = state?.order;
 
           </div>
 
-          <div className="progress-line"></div>
+         
 
           <div className="progress-step">
 
@@ -160,7 +160,7 @@ const order = state?.order;
 
           </div>
 
-          <div className="progress-line"></div>
+        
 
           <div className="progress-step">
 
@@ -174,7 +174,7 @@ const order = state?.order;
 
           </div>
 
-          <div className="progress-line"></div>
+          
 
           <div className="progress-step">
 
