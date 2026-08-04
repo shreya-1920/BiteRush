@@ -49,9 +49,9 @@ const filteredOrders = orders.filter((order) => {
   );
 });
   return (
-    <div className="restaurants-page">
+    <div className="admin-orders-page">
 
-      <div className="page-header">
+      <div className="admin-orders-header">
         <div>
           <h2>Orders</h2>
           <p>Manage customer orders</p>
@@ -60,9 +60,9 @@ const filteredOrders = orders.filter((order) => {
 
       
      
-      <div className="table-card">
+      <div className="admin-orders-table-card">
 
-        <table className="admin-table">
+        <table className="admin-orders-table">
 
           <thead>
             <tr>
@@ -79,24 +79,32 @@ const filteredOrders = orders.filter((order) => {
   {filteredOrders.length > 0 ? (
     filteredOrders.map((order) => (
       <tr key={order._id}>
-        <td>#{order._id.slice(-6)}</td>
+        <td className="admin-order-id">
+    #{order._id.slice(-6)}
+</td>
 
-        <td>{order.user?.name}</td>
+       <td className="admin-order-customer">
+    {order.user?.name}
+</td>
 
-        <td>{order.restaurant?.name}</td>
+      <td className="admin-order-restaurant">
+    {order.restaurant?.name}
+</td>
 
-        <td>₹{order.total}</td>
+        <td className="admin-order-amount">
+    ₹{order.total}
+</td>
 
         <td>
-          <span className={`status ${order.status.toLowerCase()}`}>
+          <span className={`admin-order-status ${order.status.toLowerCase()}`}>
             {order.status}
           </span>
         </td>
 
         <td>
-          <div className="table-actions">
+          <div className="admin-order-table-actions">
             <button
-              className="icon-btn edit-btn"
+              className="admin-order-view-btn"
               onClick={() => {
                 setSelectedOrder(order);
                 setModalType("view");

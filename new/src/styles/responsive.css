@@ -1,0 +1,1630 @@
+@media (max-width:1200px){
+
+    /* ================= TESTIMONIALS ================= */
+
+    .testimonial-cards{
+        gap:20px;
+    }
+
+    .testimonial-card{
+        padding:30px;
+    }
+
+    .section-heading h2{
+        font-size:46px;
+    }
+
+}/* ==========================================
+   HERO 
+========================================== */
+
+@media (max-width:1200px){
+
+    .br-hero .br-hero-container{
+        gap:40px;
+    }
+
+    .br-hero-content h1{
+        font-size:62px;
+    }
+
+    .br-hero-content p{
+        font-size:18px;
+    }
+
+    .br-hero-image{
+        width:450px;
+        height:450px;
+    }
+
+    .br-order-btn{
+        width:180px;
+    }
+
+    .br-explore-btn{
+        width:240px;
+    }
+
+}
+@media (max-width:1200px){
+
+    /* ================= FOOTER ================= */
+
+    .footer-top{
+        grid-template-columns:1.2fr 1fr 1fr 1fr;
+        gap:35px;
+    }
+
+    .footer-logo h3{
+        font-size:30px;
+    }
+
+    .footer-description{
+        max-width:100%;
+    }
+
+}
+
+
+@media (max-width:992px){
+
+    /* ================= FOOTER ================= */
+
+    .footer-top{
+        grid-template-columns:repeat(2,1fr);
+        gap:40px;
+    }
+
+    .footer-about{
+        grid-column:1/-1;
+    }
+
+    .footer-description{
+        max-width:500px;
+    }
+
+}
+@media (max-width:992px){
+
+    /* ================= TESTIMONIALS ================= */
+
+    .testimonial-cards{
+        grid-template-columns:repeat(2,1fr);
+        gap:25px;
+    }
+
+    .testimonial-card{
+        padding:28px;
+    }
+
+    .section-heading h2{
+        font-size:42px;
+    }
+
+}
+@media (max-width:992px){
+    /* ================= HERO ================= */
+
+.br-hero .br-hero-container{
+    gap:25px;
+}
+
+.br-hero-content h1{
+    font-size:52px;
+}
+
+.br-hero-content p{
+    font-size:17px;
+    line-height:1.6;
+}
+
+.br-hero-image{
+    width:350px;
+    height:350px;
+}
+
+.br-hero-search{
+    max-width:100%;
+}
+
+.br-hero-search form{
+    gap:10px;
+    padding:10px;
+}
+
+.br-location-dropdown{
+    width:150px;
+}
+
+.br-location-btn{
+    font-size:15px;
+    padding:0 12px;
+}
+
+.br-search-input{
+    font-size:15px;
+    padding:0 14px;
+}
+
+.br-search-btn{
+    min-width:110px;
+    font-size:16px;
+}
+
+.br-order-btn{
+    width:160px;
+    font-size:17px;
+}
+
+.br-explore-btn{
+    width:210px;
+    font-size:17px;
+}
+
+.br-hero-features{
+    gap:18px;
+}
+
+.br-floating-card{
+    padding:10px 15px;
+    font-size:14px;
+}
+
+.br-delivery-card{
+    right:-10px;
+}
+}
+
+@media (max-width:768px){
+
+    /* ================= TESTIMONIALS ================= */
+
+    .testimonials{
+        padding:70px 0;
+    }
+
+    .testimonial-cards{
+        grid-template-columns:1fr;
+        gap:25px;
+    }
+
+    .testimonial-card{
+        padding:30px;
+    }
+
+    .section-heading h2{
+        font-size:36px;
+    }
+
+    .section-heading p{
+        font-size:16px;
+    }
+
+}
+@media (max-width:768px){
+
+    /* ================= FOOTER ================= */
+
+    .footer{
+        padding:60px 0 25px;
+    }
+
+    .footer-top{
+        grid-template-columns:1fr;
+        gap:40px;
+        text-align:center;
+    }
+
+    .footer-logo{
+        justify-content:center;
+    }
+
+    .footer-description{
+        max-width:100%;
+        margin:20px auto 30px;
+    }
+
+    .social-icons{
+        justify-content:center;
+    }
+
+    .contact-item{
+        justify-content:center;
+        text-align:left;
+    }
+
+    .footer h4{
+        margin-bottom:18px;
+    }
+
+    .footer ul li{
+        margin-bottom:12px;
+    }
+
+}
+@media (max-width:768px){
+/* ================= HERO ================= */
+
+.br-hero{
+    padding:100px 0 60px;
+}
+
+.br-hero .br-hero-container{
+    flex-direction:column;
+    text-align:center;
+    gap:50px;
+}
+
+.br-hero-left,
+.br-hero-right{
+    width:100%;
+}
+
+.br-hero-content h1{
+    font-size:44px;
+    max-width:100%;
+}
+
+.br-hero-content p{
+    max-width:100%;
+    font-size:16px;
+}
+
+.br-hero-search{
+    max-width:100%;
+}
+
+.br-hero-search form{
+    flex-direction:column;
+    padding:18px;
+}
+
+.br-location-dropdown,
+.br-search-input,
+.br-search-btn{
+    width:100%;
+}
+
+.br-location-btn{
+    width:100%;
+}
+
+.br-search-btn{
+    min-width:100%;
+}
+
+.br-hero-buttons{
+    justify-content:center;
+    flex-wrap:wrap;
+}
+
+.br-order-btn,
+.br-explore-btn{
+    width:220px;
+}
+
+.br-hero-features{
+    justify-content:center;
+    flex-wrap:wrap;
+}
+
+.br-hero-image{
+    width:320px;
+    height:320px;
+}
+
+.br-floating-card{
+    display:none;
+}
+}
+
+
+@media (max-width:768px){
+
+    .navbar-actions{
+        margin-top:20px;
+        justify-content:center;
+        gap:15px;
+    }
+
+    .custom-nav-links{
+        text-align:center;
+        gap:15px;
+        margin:20px 0;
+    }
+
+}
+
+/* ==========================================
+   OFFERS - 992px
+========================================== */
+@media (max-width:992px){
+.home-offers-wrapper{
+    grid-template-columns:1fr;
+    gap:50px;
+}
+
+.home-offers-left{
+    text-align:center;
+}
+
+.home-offers-left p{
+    width:100%;
+    max-width:650px;
+    margin:25px auto;
+}
+
+.home-offer-tags,
+.home-offer-buttons{
+    justify-content:center;
+}
+
+.home-flash-sale{
+    margin:auto;
+}
+
+.home-coupon-card{
+    width:100%;
+}
+
+.home-top-cards{
+    justify-content:center;
+    flex-wrap:wrap;
+}}
+
+/* ==========================================
+   OFFERS - 768px
+========================================== */
+@media (max-width:768px){
+.home-offers-left h2{
+    font-size:48px;
+}
+
+.home-offer-tags{
+    flex-direction:column;
+    align-items:center;
+}
+
+.home-offer-buttons{
+    flex-direction:column;
+}
+
+.home-claim-btn{
+    width:100%;
+    max-width:320px;
+}
+
+.home-flash-sale{
+    width:100%;
+}
+
+.home-coupon-card{
+    flex-direction:column;
+    height:auto;
+    padding:20px;
+    gap:20px;
+}
+
+.home-coupon-left{
+    flex-direction:column;
+    text-align:center;
+}
+
+.home-copy-btn{
+    width:100%;
+}}
+@media (max-width:576px){
+
+    /* ================= TESTIMONIALS ================= */
+
+    .testimonial-card{
+        padding:22px;
+    }
+
+    .quote{
+        font-size:30px;
+    }
+
+    .review{
+        font-size:15px;
+        line-height:1.7;
+    }
+
+    .customer{
+        flex-direction:column;
+        align-items:center;
+        text-align:center;
+        gap:15px;
+    }
+
+    .section-heading span{
+        font-size:14px;
+        letter-spacing:2px;
+    }
+
+    .section-heading h2{
+        font-size:30px;
+    }
+
+}
+@media (max-width:576px){
+
+    /* ================= FEATURED RESTAURANTS ================= */
+
+    .br-featured-restaurants{
+        padding:60px 0;
+    }
+
+    .section-header{
+        flex-direction:column;
+        align-items:center;
+        text-align:center;
+        gap:15px;
+        margin-bottom:35px;
+    }
+
+    .section-tag{
+        font-size:12px;
+        letter-spacing:2px;
+    }
+
+    .section-header h2{
+        font-size:32px;
+    }
+
+    .view-all{
+        font-size:15px;
+    }
+
+    .br-restaurant-grid{
+        grid-template-columns:1fr;
+        gap:20px;
+    }
+
+    .br-restaurant-card{
+        max-width:350px;
+        width:100%;
+        margin:0 auto;
+    }
+
+    .br-restaurant-image{
+        height:200px;
+    }
+
+    .br-restaurant-content{
+        padding:16px;
+    }
+
+    .br-restaurant-content h3{
+        font-size:20px;
+    }
+
+    .br-cuisine{
+        font-size:14px;
+    }
+
+    .br-restaurant-info{
+        flex-direction:column;
+        align-items:flex-start;
+        gap:10px;
+    }
+
+    .br-restaurant-footer{
+        flex-direction:column;
+        align-items:flex-start;
+        gap:12px;
+    }
+
+}
+@media (max-width:576px){
+
+.footer-container{
+    text-align:left;
+}
+
+.footer-top{
+    display:flex;
+    flex-direction:column;
+    align-items:flex-start;
+}
+
+.footer-logo{
+    justify-content:flex-start;
+}
+
+.footer-social{
+    justify-content:flex-start;
+}
+
+.footer-links{
+    display:flex;
+    flex-direction:column;
+    gap:30px;
+}
+
+.footer-column{
+    width:100%;
+    text-align:left;
+}
+
+.footer-column h4{
+    text-align:left;
+}
+
+.footer-column ul{
+    padding:0;
+    text-align:left;
+}
+
+.footer-bottom{
+    text-align:left;
+}
+
+}
+/* ==========================================
+   OFFERS - 576px
+========================================== */
+@media (max-width:576px){
+.home-offers-left h2{
+    font-size:36px;
+}
+
+.home-offers-left p{
+    font-size:16px;
+    line-height:1.7;
+}
+
+.home-large-card,
+.home-white-card,
+.home-navy-card{
+    width:100%;
+    max-width:340px;
+    height:auto;
+}
+
+.home-top-cards{
+    flex-direction:column;
+    align-items:center;
+}}
+
+@media (max-width:1200px){
+
+    /* ================= RESTAURANT HERO ================= */
+
+    .hero-title{
+        font-size:60px;
+        white-space:normal;
+    }
+
+    .hero-description{
+        font-size:20px;
+    }
+
+    .hero-search{
+        max-width:100%;
+    }
+
+}
+@media (max-width:992px){
+
+    /* ================= RESTAURANT HERO ================= */
+
+    .restaurant-hero{
+        padding:70px 0 30px;
+    }
+
+    .hero-title{
+        font-size:50px;
+    }
+
+    .hero-description{
+        font-size:18px;
+    }
+
+    .hero-search{
+        flex-direction:column;
+        gap:15px;
+    }
+
+    .location-box{
+        width:100%;
+        border-right:none;
+        padding-right:0;
+    }
+
+    .search-input{
+        width:100%;
+    }
+
+    .search-btn{
+        width:100%;
+    }
+
+    .hero-stats{
+        justify-content:center;
+        flex-wrap:wrap;
+        gap:30px;
+    }
+
+}
+@media (max-width:768px){
+
+    /* ================= RESTAURANT HERO ================= */
+
+    .hero-content{
+        min-height:auto;
+        text-align:center;
+    }
+
+    .hero-title{
+        font-size:42px;
+    }
+
+    .hero-description{
+        font-size:17px;
+    }
+
+    .hero-search{
+        padding:15px;
+    }
+
+    .hero-badge{
+        margin:auto auto 20px;
+    }
+
+    .hero-stats{
+        justify-content:center;
+    }
+
+}
+@media (max-width:576px){
+
+    /* ================= RESTAURANT HERO ================= */
+
+    .restaurant-hero{
+        padding:60px 0 20px;
+    }
+
+    .hero-title{
+        font-size:34px;
+        line-height:1.2;
+    }
+
+    .hero-description{
+        font-size:15px;
+        line-height:1.7;
+    }
+
+    .hero-badge{
+        font-size:14px;
+        padding:10px 16px;
+    }
+
+    .hero-search{
+        padding:12px;
+    }
+
+    .location-box{
+        min-width:100%;
+    }
+
+    .location-select{
+        font-size:16px;
+    }
+
+    .search-input{
+        height:55px;
+    }
+
+    .search-input input{
+        font-size:15px;
+    }
+
+    .search-btn{
+        height:52px;
+        font-size:16px;
+    }
+
+    .hero-stats{
+        flex-direction:column;
+        gap:15px;
+        align-items:center;
+    }
+
+    .stat{
+        font-size:16px;
+    }
+
+}
+@media (max-width:1200px){
+
+    /* ================= FILTER BAR ================= */
+
+    .filter-bar{
+        padding:18px;
+    }
+
+    .filter-options{
+        gap:10px;
+    }
+
+    .filter-options button{
+        padding:10px 18px;
+        font-size:14px;
+    }
+
+}
+@media (max-width:992px){
+
+    /* ================= FILTER BAR ================= */
+
+    .filter-bar{
+        flex-direction:column;
+        align-items:flex-start;
+        gap:20px;
+    }
+
+    .filter-options{
+        width:100%;
+        justify-content:center;
+    }
+
+    .sort-section{
+        width:100%;
+        justify-content:center;
+        border-left:none;
+        padding-left:0;
+    }
+@media(max-width:992px){
+
+.testimonial-swiper .swiper-button-prev{
+
+left:-12px;
+
+}
+
+.testimonial-swiper .swiper-button-next{
+
+right:-12px;
+
+}
+
+}
+
+@media(max-width:576px){
+
+.testimonial-swiper{
+
+padding-bottom:45px;
+
+}
+
+.testimonial-swiper .swiper-button-prev,
+.testimonial-swiper .swiper-button-next{
+
+width:45px;
+height:45px;
+
+}
+
+.testimonial-swiper .swiper-button-prev::after,
+.testimonial-swiper .swiper-button-next::after{
+
+font-size:16px;
+
+}
+
+}
+    /* ================= RESTAURANT GRID ================= */
+
+    .restaurant-grid{
+        grid-template-columns:repeat(2,1fr);
+        gap:20px;
+    }
+
+}
+@media (max-width:768px){
+
+    /* ================= FILTER BAR ================= */
+
+    .filter-bar{
+        padding:16px;
+    }
+
+    .filter-options{
+        justify-content:center;
+    }
+
+    .filter-options button{
+        padding:10px 16px;
+        font-size:14px;
+    }
+
+    .sort-section{
+        flex-direction:column;
+        align-items:center;
+        gap:10px;
+    }
+
+    .sort-section select{
+        width:100%;
+        max-width:250px;
+    }
+
+    /* ================= RESTAURANT GRID ================= */
+
+    .restaurant-grid{
+        grid-template-columns:repeat(2,1fr);
+        gap:18px;
+    }
+
+}
+@media (max-width:576px){
+
+    /* ================= FILTER BAR ================= */
+
+    .filter-bar{
+        padding:15px;
+        border-radius:16px;
+    }
+
+    .filter-options{
+        flex-direction:column;
+        width:100%;
+    }
+
+    .filter-options button{
+        width:100%;
+    }
+
+    .sort-section{
+        width:100%;
+    }
+
+    .sort-section select{
+        width:100%;
+    }
+
+    /* ================= RESTAURANT GRID ================= */
+
+    .restaurant-grid{
+        grid-template-columns:1fr;
+    }
+
+}
+@media (max-width:1200px){
+
+    /* ================= ABOUT HERO ================= */
+
+    .about-hero-left{
+        padding:120px 6%;
+    }
+
+    .about-hero-left h1{
+        font-size:3.5rem;
+    }
+
+    .about-hero-image{
+        max-width:500px;
+        height:560px;
+    }
+
+    /* ================= OUR STORY ================= */
+
+    .our-story{
+        gap:50px;
+    }
+
+    /* ================= CTA ================= */
+
+    .cta-overlay h2{
+        font-size:54px;
+    }
+
+    .cta-overlay p{
+        font-size:20px;
+    }
+
+}
+@media (max-width:992px){
+
+    /* ================= ABOUT HERO ================= */
+
+    .about-hero{
+        padding-bottom:60px;
+    }
+
+    .about-hero-left{
+        text-align:center;
+        align-items:center;
+    }
+
+    .about-hero-image{
+        max-width:450px;
+        height:500px;
+    }
+
+    /* ================= OUR STORY ================= */
+
+    .our-story{
+        padding:80px 6%;
+        gap:40px;
+    }
+
+    /* ================= MISSION ================= */
+
+    .mission-section{
+        padding:80px 6%;
+    }
+
+    /* ================= CTA ================= */
+
+    .cta-section{
+        margin:80px 20px;
+    }
+
+}
+@media (max-width:768px){
+
+    /* ================= ABOUT HERO ================= */
+
+    .about-hero-left{
+        padding:110px 5% 40px;
+    }
+
+    .about-hero-left h1{
+        font-size:2.8rem;
+    }
+
+    .about-hero-image{
+        max-width:360px;
+        height:420px;
+    }
+
+    /* ================= SECTION HEADINGS ================= */
+
+    .story-content h2,
+    .why-us h2,
+    .mission-card h2,
+    .how-it-works h2,
+    .testimonials h2,
+    .cta-overlay h2{
+        font-size:36px;
+    }
+
+    /* ================= CTA ================= */
+
+    .cta-overlay{
+        padding:40px 25px;
+    }
+
+    .cta-overlay p{
+        font-size:18px;
+    }
+
+}
+@media (max-width:576px){
+
+    /* ================= ABOUT HERO ================= */
+
+    .about-hero-left{
+        padding:100px 20px 30px;
+    }
+
+    .about-hero-left h1{
+        font-size:2.2rem;
+        line-height:1.2;
+    }
+
+    .about-hero-left p{
+        font-size:15px;
+        line-height:1.7;
+    }
+
+    .about-hero-image{
+        max-width:300px;
+        height:340px;
+    }
+
+    .about-primary-btn,
+    .about-secondary-btn{
+        width:100%;
+    }
+
+    /* ================= OUR STORY ================= */
+
+    .our-story{
+        padding:60px 20px;
+    }
+
+    .story-content h2{
+        font-size:30px;
+    }
+
+    .story-content p{
+        font-size:16px;
+    }
+
+    /* ================= WHY CHOOSE US ================= */
+
+    .feature-card{
+        padding:28px;
+        text-align:center;
+    }
+
+    .feature-icon{
+        margin:0 auto 20px;
+    }
+
+    /* ================= MISSION ================= */
+
+    .mission-card{
+        padding:30px;
+    }
+
+    .mission-card h2{
+        font-size:28px;
+    }
+
+    .mission-card p{
+        font-size:16px;
+    }
+
+    /* ================= HOW IT WORKS ================= */
+
+    .how-it-works-container{
+        padding:0 20px;
+    }
+
+    .step{
+        text-align:center;
+    }
+
+    /* ================= TESTIMONIALS ================= */
+
+    .testimonial-card{
+        padding:25px;
+    }
+
+    .customer{
+        flex-direction:column;
+        text-align:center;
+    }
+
+    /* ================= CTA ================= */
+
+    .cta-section{
+        margin:60px 15px;
+        min-height:400px;
+        border-radius:25px;
+    }
+
+    .cta-overlay h2{
+        font-size:30px;
+    }
+
+    .cta-overlay p{
+        font-size:16px;
+    }
+
+    .cta-btn{
+        width:100%;
+    }
+
+}
+@media (max-width:1200px){
+
+    /* ================= CONTACT HERO ================= */
+
+    .contact-content{
+        gap:60px;
+    }
+
+    .contact-left h1{
+        font-size:3.8rem;
+    }
+
+    .contact-left p{
+        font-size:1.15rem;
+    }
+
+    .contact-right img{
+        max-width:550px;
+    }
+
+}
+@media (max-width:992px){
+
+    /* ================= CONTACT HERO ================= */
+
+    .contact-content{
+        grid-template-columns:1fr;
+        gap:50px;
+        text-align:center;
+    }
+
+    .contact-buttons{
+        justify-content:center;
+        flex-wrap:wrap;
+    }
+
+    .contact-left h1{
+        font-size:3.3rem;
+    }
+
+    .contact-right img{
+        max-width:450px;
+    }
+
+}
+@media (max-width:768px){
+
+    /* ================= CONTACT HERO ================= */
+
+    .contact-hero{
+        padding:90px 20px 50px;
+    }
+
+    .contact-left h1{
+        font-size:2.8rem;
+    }
+
+    .contact-left p{
+        font-size:16px;
+    }
+
+    .contact-buttons{
+        flex-direction:column;
+        align-items:center;
+    }
+
+    .contact-primary-btn,
+    .contact-secondary-btn{
+        width:100%;
+        max-width:320px;
+    }
+
+    .contact-right img{
+        max-width:340px;
+    }
+
+}
+@media (max-width:576px){
+
+    /* ================= CONTACT HERO ================= */
+
+    .contact-hero{
+        padding:40px 15px 40px;
+    }
+.contact-hero{
+    padding-top:40px;
+}
+
+.contact-badge{
+    margin-top:20px;
+    margin-bottom:25px;
+}
+    .contact-left h1{
+        font-size:2.2rem;
+        line-height:1.2;
+    }
+
+    .contact-left p{
+        font-size:15px;
+        line-height:1.7;
+    }
+
+    .contact-right img{
+        max-width:280px;
+    }
+
+    /* ================= CONTACT INFO ================= */
+
+    .contact-heading h2,
+    .contact-info h2,
+    .contact-left-info h2,
+    .location-section h2,
+    .br-faq-section h2,
+    .cta-overlay h2{
+        font-size:30px;
+    }
+
+    .contact-card{
+        padding:25px;
+        flex-direction:column;
+        text-align:center;
+    }
+
+    .contact-card-content{
+        align-items:center;
+        text-align:center;
+    }
+
+    /* ================= CONTACT FORM ================= */
+
+    .contact-form-card{
+        padding:25px;
+    }
+
+    .support-item{
+        flex-direction:column;
+        text-align:center;
+    }
+
+    .support-icon{
+        margin:auto;
+    }
+
+    /* ================= LOCATION ================= */
+
+    .location-wrapper{
+        padding:20px;
+    }
+
+    .location-info{
+        text-align:center;
+    }
+
+    .location-info button{
+        width:100%;
+    }
+
+    /* ================= FAQ ================= */
+
+    .br-faq-box .accordion-button{
+        font-size:16px;
+        padding:18px;
+    }
+
+    .br-faq-box .accordion-body{
+        padding:18px;
+    }
+
+}
+@media (max-width:1200px){
+
+    /* ================= CART ================= */
+
+    .cart-title{
+        font-size:54px;
+    }
+
+    .cart-layout{
+        gap:30px;
+    }
+
+    .cart-summary h2{
+        font-size:34px;
+    }
+
+}
+@media (max-width:992px){
+
+    /* ================= CART ================= */
+
+    .cart-layout{
+        grid-template-columns:1fr;
+    }
+
+    .cart-summary{
+        position:static;
+        width:100%;
+    }
+
+    .cart-right{
+        position:static;
+    }
+
+    .delivery-card{
+        flex-direction:column;
+        text-align:center;
+        gap:25px;
+    }
+
+    .progress-bar{
+        max-width:100%;
+    }
+
+    .br-coupon-card{
+        flex-direction:column;
+        gap:20px;
+        text-align:center;
+    }
+
+    .br-coupon-left{
+        justify-content:center;
+    }
+
+    .apply-btn{
+        width:100%;
+        margin-left:0;
+    }
+
+}
+@media (max-width:768px){
+
+    /* ================= CART ================= */
+
+    .cart-title{
+        font-size:44px;
+        text-align:center;
+    }
+
+    .cart-item{
+        flex-direction:column;
+        text-align:center;
+        gap:20px;
+    }
+
+    .cart-item-info{
+        margin-left:0;
+    }
+
+    .cart-item-actions{
+        justify-content:center;
+    }
+
+    .summary-info{
+        grid-template-columns:1fr;
+    }
+
+}
+@media (max-width:576px){
+
+    /* ================= CART ================= */
+
+    .cart-page{
+        padding:100px 0 40px;
+    }
+
+    .cart-title{
+        font-size:34px;
+        margin-bottom:30px;
+    }
+
+    .cart-item{
+        padding:18px;
+    }
+
+    .cart-item-image{
+        width:90px;
+        height:90px;
+    }
+
+    .cart-item-info h2{
+        font-size:24px;
+    }
+
+    .price{
+        font-size:22px;
+    }
+
+    .cart-summary{
+        padding:22px;
+    }
+
+    .cart-summary h2{
+        font-size:28px;
+    }
+
+    .summary-row{
+        font-size:16px;
+    }
+
+    .summary-total{
+        font-size:22px;
+    }
+
+    .checkout-btn{
+        font-size:16px;
+        padding:16px;
+    }
+
+}
+@media (max-width:1200px){
+
+    /* ================= CHECKOUT ================= */
+
+    .checkout-hero h1{
+        font-size:54px;
+    }
+
+    .checkout-layout{
+        grid-template-columns:minmax(0,2fr) 360px;
+        gap:35px;
+    }
+
+    .checkout-card{
+        padding:30px;
+    }
+
+    .order-summary{
+        padding:30px;
+    }
+
+}
+@media (max-width:992px){
+
+    /* ================= CHECKOUT ================= */
+
+    .checkout-layout{
+        grid-template-columns:1fr;
+    }
+
+    .checkout-right{
+        position:static;
+    }
+
+    .order-summary{
+        position:static;
+        width:100%;
+    }
+
+    .checkout-card-header{
+        flex-direction:column;
+        align-items:flex-start;
+        gap:20px;
+    }
+
+    .address-actions{
+        width:100%;
+        justify-content:flex-start;
+    }
+
+    .payment-options{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .promo-grid{
+        grid-template-columns:1fr 1fr;
+    }
+
+}
+@media (max-width:768px){
+
+    /* ================= CHECKOUT ================= */
+
+    .checkout-page{
+        padding:100px 20px 60px;
+    }
+
+    .checkout-container{
+        margin-top:30px;
+    }
+
+    .checkout-hero{
+        text-align:center;
+    }
+
+    .checkout-hero h1{
+        font-size:42px;
+    }
+
+    .checkout-card{
+        padding:24px;
+    }
+
+    .checkout-title h3{
+        font-size:28px;
+    }
+
+    .new-address-grid{
+        grid-template-columns:1fr;
+    }
+
+    .promo-input-wrapper{
+        flex-direction:column;
+        gap:15px;
+    }
+
+    .promo-input{
+        width:100%;
+        border-radius:18px;
+        border-right:2px solid #FFD9CA;
+    }
+
+    .apply-btn{
+        width:100%;
+        border-radius:18px;
+    }
+
+}
+@media (max-width:576px){
+
+    /* ================= CHECKOUT ================= */
+
+    .checkout-page{
+        padding:90px 15px 40px;
+    }
+
+    .checkout-hero h1{
+        font-size:34px;
+    }
+
+    .checkout-subtitle{
+        font-size:16px;
+    }
+
+    .checkout-card{
+        padding:18px;
+    }
+
+    .checkout-title{
+        gap:10px;
+    }
+
+    .checkout-title h3{
+        font-size:22px;
+    }
+
+    .checkout-icon{
+        width:42px;
+        height:42px;
+        font-size:18px;
+    }
+
+    .payment-options{
+        grid-template-columns:1fr;
+    }
+
+    .promo-grid{
+        grid-template-columns:1fr;
+    }
+
+    .eta-card{
+        flex-direction:column;
+        text-align:center;
+        gap:15px;
+    }
+
+    .place-order-btn{
+        font-size:16px;
+        padding:16px;
+    }
+
+    .add-address-button{
+        width:100%;
+    }
+
+}
+
+@media (max-width:576px){
+
+.how-card h3{
+    font-size:2rem;
+    line-height:1.15;
+    margin-bottom:12px;
+}
+
+.how-card p{
+    font-size:1.15rem;
+    line-height:1.8;
+}
+
+.step-label{
+    font-size:.9rem;
+    letter-spacing:3px;
+}
+
+.step-icon{
+    width:80px;
+    height:80px;
+}
+
+.step-icon i,
+.step-icon svg{
+    font-size:32px;
+}
+
+}
+@media (max-width:576px){
+
+.categories-swiper{
+    padding:0 10px;
+}
+
+.categories-swiper .swiper-slide{
+    width:48% !important;
+}
+
+}

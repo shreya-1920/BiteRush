@@ -9,6 +9,7 @@ import { SearchProvider } from "./admin/context/SearchContext";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./index.css";
 import "./styles/global.css";
+import "./styles/responsive.css";   
 
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";

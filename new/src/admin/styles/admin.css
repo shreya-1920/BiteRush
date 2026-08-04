@@ -915,7 +915,13 @@ align-items:center;
     color:#1f2937;
     line-height:1.2;
 }
-
+.top-restaurant-details h4{
+    margin:0;
+    font-size:20px;
+    font-weight:700;
+    color:#1f2937;
+    line-height:1.2;
+}
 .restaurant-details span{
     margin-top:6px;
     font-size:15px;
@@ -1199,17 +1205,17 @@ align-items:center;
 
 /* Restaurant Info */
 
-.restaurant-cell{
+.admin-restaurant-cell{
     min-width:380px;
 }
 
-.restaurant-info{
+.admin-restaurant-info{
     display:flex;
     align-items:center;
     gap:18px;
 }
 
-.restaurant-avatar{
+.admin-restaurant-avatar{
     width:72px;
     height:72px;
     border-radius:18px;
@@ -1221,19 +1227,19 @@ align-items:center;
     justify-content:center;
 }
 
-.restaurant-avatar img{
+.admin-restaurant-avatar img{
     width:100%;
     height:100%;
     object-fit:cover;
 }
 
-.restaurant-details{
+.admin-restaurant-details{
     display:flex;
     flex-direction:column;
     justify-content:center;
 }
 
-.restaurant-details h4{
+.admin-restaurant-details h4{
     margin:0;
     font-size:18px;
     font-weight:600;
@@ -1241,7 +1247,7 @@ align-items:center;
     line-height:1.2;
 }
 
-.restaurant-details span{
+.admin-restaurant-details span{
     margin-top:6px;
     font-size:15px;
     color:#8B93A7;
@@ -1249,7 +1255,7 @@ align-items:center;
 
 /* Rating */
 
-.rating{
+.admin-rating{
     display:flex;
     align-items:center;
     gap:6px;
@@ -1259,7 +1265,7 @@ align-items:center;
 
 /* Status */
 
-.status{
+.admin-status{
     display:inline-block;
     padding:8px 16px;
     border-radius:30px;
@@ -1267,19 +1273,19 @@ align-items:center;
     font-weight:600;
 }
 
-.status.delivered{
+.admin-status.delivered{
     background:#DCFCE7;
     color:#16A34A;
 }
 
-.status.cancelled{
+.admin-status.cancelled{
     background:#FEE2E2;
     color:#DC2626;
 }
 
 /* Action Buttons */
 
-.table-actions{
+.admin-table-actions{
     display:flex;
     gap:10px;
 }
@@ -2434,4 +2440,868 @@ align-items:center;
 .success-btn:hover {
   background: #16a34a;
   color: #fff;
+}
+
+
+/* ===========================
+   COUPON ACTION BUTTONS
+=========================== */
+
+.coupon-table-actions{
+    display:flex;
+    align-items:center;
+    gap:12px;
+}
+
+.coupon-icon-btn{
+    width:42px;
+    height:42px;
+
+    border:none;
+    border-radius:12px;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    cursor:pointer;
+
+    transition:.3s;
+
+    box-shadow:0 6px 18px rgba(0,0,0,.12);
+}
+
+.coupon-icon-btn:hover{
+    transform:translateY(-2px);
+}
+
+.coupon-icon-btn svg{
+    font-size:18px;
+}
+
+.coupon-view-btn{
+    background:#EEF2FF;
+    color:#4F46E5;
+}
+
+.coupon-edit-btn{
+    background:#EFF6FF;
+    color:#2563EB;
+}
+
+.coupon-warning-btn{
+    background:#FFF7ED;
+    color:#EA580C;
+}
+
+.coupon-success-btn{
+    background:#ECFDF5;
+    color:#16A34A;
+}
+
+.coupon-delete-btn{
+    background:#FEF2F2;
+    color:#DC2626;
+}
+
+
+.admin-order-status{
+    display:inline-block;
+    padding:8px 16px;
+    border-radius:30px;
+    font-size:13px;
+    font-weight:600;
+}
+
+.admin-order-actions{
+    display:flex;
+    gap:10px;
+}
+
+.admin-table-icon-btn{
+    width:44px;
+    height:44px;
+    border:none;
+    border-radius:12px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    cursor:pointer;
+}
+
+.admin-view-btn{
+    background:#EEF2FF;
+    color:#2563EB;
+}
+
+
+.admin-menu-item-info{
+    display:flex;
+    align-items:center;
+    gap:18px;
+}
+
+.admin-menu-item-avatar{
+    width:70px;
+    height:70px;
+    border-radius:18px;
+    overflow:hidden;
+}
+
+.admin-menu-item-avatar img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+}
+
+.admin-menu-item-details{
+    display:flex;
+    flex-direction:column;
+}
+
+.admin-menu-item-details h4{
+    margin:0;
+}
+.admin-menu-item-details h4{
+    margin:0;
+    font-size:20px;
+    font-weight:600;
+    color:#111827;
+    line-height:1.3;
+}
+.admin-menu-item-details span{
+    margin-top:6px;
+}
+
+.admin-menu-actions{
+    display:flex;
+    gap:10px;
+}
+
+.admin-menu-btn{
+    width:46px;
+    height:46px;
+    border:none;
+    border-radius:12px;
+}
+
+.admin-menu-type,
+.admin-menu-status{
+    padding:8px 16px;
+    border-radius:30px;
+    font-size:13px;
+    font-weight:600;
+}
+
+.admin-menu-type.veg{
+    background:#DCFCE7;
+    color:#15803D;
+}
+
+.admin-menu-type.non-veg{
+    background:#FEE2E2;
+    color:#DC2626;
+}
+
+.admin-menu-status.available{
+    background:#DCFCE7;
+    color:#15803D;
+}
+
+.admin-menu-status.unavailable{
+    background:#FEE2E2;
+    color:#DC2626;
+}
+
+
+.admin-coupons-table td strong{
+    font-size: 20px;
+    font-weight: 700;
+    color: #1F2937;
+}
+.admin-coupons-table td{
+    font-size: 18px;
+    color:#374151;
+    padding:30px 36px;
+}
+.admin-coupons-table th{
+    font-size:17px;
+    font-weight:600;
+    color:#64748B;
+}
+.admin-coupon-status{
+    font-size:15px;
+    padding:10px 22px;
+}
+.admin-coupon-btn{
+    width:48px;
+    height:48px;
+}
+.admin-coupon-code{
+
+display:flex;
+
+flex-direction:column;
+
+}
+
+.admin-coupon-code h4{
+
+margin:0;
+
+font-size:18px;
+
+font-weight:600;
+
+color:#111827;
+
+}
+
+.admin-coupon-code span{
+
+margin-top:6px;
+
+font-size:14px;
+
+color:#8B93A7;
+
+}
+
+.admin-coupon-code{
+
+display:flex;
+
+flex-direction:column;
+
+}
+
+.admin-coupon-code h4{
+
+margin:0;
+
+font-size:18px;
+
+font-weight:600;
+
+color:#111827;
+
+}
+
+.admin-coupon-code span{
+
+margin-top:6px;
+
+font-size:14px;
+
+color:#8B93A7;
+
+}
+.admin-coupon-actions{
+
+display:flex;
+
+gap:10px;
+
+}
+
+.admin-coupon-btn{
+
+width:46px;
+
+height:46px;
+
+border:none;
+
+border-radius:12px;
+
+display:flex;
+
+align-items:center;
+
+justify-content:center;
+
+cursor:pointer;
+
+transition:.25s;
+
+}
+
+/*orders*/
+.admin-orders-page{
+    display:flex;
+    flex-direction:column;
+    gap:28px;
+}
+.admin-orders-header p{
+    font-size:20px;
+}
+.admin-order-status{
+    display:inline-block;
+    padding:8px 16px;
+    border-radius:30px;
+    font-size:13px;
+    font-weight:600;
+}
+.admin-order-status.pending{
+    background:#FEF3C7;
+    color:#B45309;
+}
+
+.admin-order-status.preparing{
+    background:#DBEAFE;
+    color:#2563EB;
+}
+
+.admin-order-status.outfordelivery{
+    background:#E0F2FE;
+    color:#0284C7;
+}
+
+.admin-order-status.delivered{
+    background:#DCFCE7;
+    color:#15803D;
+}
+
+.admin-order-status.cancelled{
+    background:#FEE2E2;
+    color:#DC2626;
+}
+.admin-order-table-actions{
+    display:flex;
+    gap:10px;
+}
+.admin-orders-table{
+    width:100%;
+    border-collapse:collapse;
+    table-layout:fixed;
+}
+
+.admin-orders-table th{
+    text-align:left;
+    padding:24px 30px;
+    font-size:14px;
+    color:#6B7280;
+    font-weight:600;
+}
+
+.admin-orders-table td{
+    padding:28px 30px;
+    border-top:1px solid #F1F5F9;
+}
+
+.admin-orders-table tbody tr:hover{
+    background:#FFF7ED;
+}
+.admin-order-btn{
+    width:44px;
+    height:44px;
+
+    border:none;
+    border-radius:12px;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    cursor:pointer;
+    transition:.25s;
+}
+.admin-order-view-btn{
+    background:#EEF2FF;
+    color:#2563EB;
+}
+
+.admin-order-view-btn:hover{
+    background:#2563EB;
+    color:#fff;
+}
+.admin-orders-table-card{
+    background:#fff;
+    border-radius:20px;
+    overflow:hidden;
+    box-shadow:0 12px 30px rgba(0,0,0,.05);
+}
+.admin-orders-table thead{
+    background:#F9FAFB;
+}
+.admin-orders-table th{
+    padding:26px 32px;
+    font-size:16px;
+    font-weight:600;
+    color:#64748B;
+    text-align:left;
+}
+.admin-orders-table td{
+    padding:32px;
+    font-size:17px;
+    color:#374151;
+    border-top:1px solid #EEF2F7;
+    vertical-align:middle;
+}
+.admin-orders-table tbody tr{
+    transition:.3s;
+}
+
+.admin-orders-table tbody tr:hover{
+    background:#FFF7ED;
+}
+.admin-order-status{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+
+    min-width:120px;
+    padding:10px 22px;
+
+    border-radius:999px;
+
+    font-size:15px;
+    font-weight:600;
+}
+.admin-order-btn{
+    width:48px;
+    height:48px;
+    border-radius:12px;
+}
+
+.admin-customers-page{
+    display:flex;
+    flex-direction:column;
+    gap:28px;
+}
+
+.admin-customers-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-start;
+    margin-bottom:30px;
+}
+
+.admin-customers-table-card{
+    background:#fff;
+    border-radius:20px;
+    overflow:hidden;
+    box-shadow:0 12px 30px rgba(0,0,0,.05);
+}
+
+.admin-customers-table{
+    width:100%;
+    border-collapse:collapse;
+    table-layout:fixed;
+}
+
+.admin-customers-table thead{
+    background:#F9FAFB;
+}
+
+.admin-customers-table th{
+    text-align:left;
+    padding:24px 30px;
+    font-size:14px;
+    color:#6B7280;
+    font-weight:600;
+}
+
+.admin-customers-table td{
+    padding:28px 30px;
+    border-top:1px solid #F1F5F9;
+    vertical-align:middle;
+}
+
+.admin-customers-table tbody tr:hover{
+    background:#FFF7ED;
+}
+.admin-customer-info{
+    display:flex;
+    align-items:center;
+    gap:18px;
+}
+
+.admin-customer-avatar{
+    width:72px;
+    height:72px;
+    border-radius:18px;
+    background:#FDF2F8;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-size:30px;
+    flex-shrink:0;
+}
+
+.admin-customer-details h4{
+    margin:0;
+    font-size:20px;
+    font-weight:600;
+    color:#111827;
+}
+
+.admin-customer-details span{
+    display:block;
+    margin-top:6px;
+    color:#8B93A7;
+}
+.admin-customer-status{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    padding:8px 18px;
+    border-radius:999px;
+    font-size:14px;
+    font-weight:600;
+}
+
+.admin-customer-status.active{
+    background:#DCFCE7;
+    color:#16A34A;
+}
+
+.admin-customer-status.blocked{
+    background:#FEE2E2;
+    color:#DC2626;
+}
+.admin-customer-actions{
+    display:flex;
+    gap:10px;
+}
+
+.admin-customer-btn{
+    width:46px !important;
+    height:46px !important;
+    border:none;
+    border-radius:12px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    cursor:pointer;
+    transition:.25s;
+}
+.admin-customers-table{
+    width:100%;
+    table-layout:auto;
+}
+.admin-customers-table td:last-child{
+    padding-right:30px;
+}
+
+.admin-customer-actions{
+    display:flex;
+    justify-content:flex-start;
+    align-items:center;
+    gap:10px;
+}
+.admin-customer-details h4{
+    white-space: nowrap;
+}
+.admin-customer-info{
+    display:flex;
+    align-items:center;
+    gap:18px;
+}
+.admin-customer-actions{
+    display:flex;
+    gap:10px;
+    flex-wrap:nowrap;
+}
+.admin-customer-details{
+    flex:1;
+}
+.admin-customer-btn{
+    width:48px;
+    height:48px;
+
+    border:none;
+    border-radius:12px;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    cursor:pointer;
+    transition:.3s;
+
+    font-size:18px;
+
+    flex-shrink:0;
+}
+.admin-customer-actions{
+    display:flex;
+    align-items:center;
+    justify-content:flex-start;
+    gap:12px;
+    flex-wrap:nowrap;
+}
+.admin-customers-table td:last-child{
+    min-width:180px;
+}
+.admin-customer-btn.edit-btn{
+    background:#EEF4FF;
+    color:#2563EB;
+}
+
+.admin-customer-btn.warning-btn{
+    background:#FFF4E5;
+    color:#EA580C;
+}
+
+.admin-customer-btn.delete-btn{
+    background:#FEE2E2;
+    color:#DC2626;
+}
+.admin-customers-header p{
+    font-size:20px;
+
+}
+/* Coupon Actions */
+
+.admin-coupon-actions{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:12px;
+    flex-wrap:nowrap;
+}
+
+.admin-coupon-btn{
+    width:48px;
+    height:48px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border:none;
+    border-radius:12px;
+    cursor:pointer;
+    flex-shrink:0;
+    font-size:18px;
+    box-shadow:0 8px 20px rgba(0,0,0,.12);
+    transition:.25s;
+}
+
+.admin-coupon-btn svg{
+    font-size:18px;
+}
+
+.admin-table th:last-child,
+.admin-table td:last-child{
+    width:220px;
+}
+.admin-message-actions{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap:12px;
+}
+
+.admin-message-btn{
+    width:48px;
+    height:48px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    border:none;
+    border-radius:12px;
+    cursor:pointer;
+    flex-shrink:0;
+    font-size:18px;
+    box-shadow:0 8px 20px rgba(0,0,0,.12);
+}
+
+.admin-message-btn svg{
+    font-size:18px;
+}
+
+.admin-message-btn.view-btn{
+    background:#EEF4FF;
+    color:#2563EB;
+}
+
+.admin-message-btn.delete-btn{
+    background:#FEE2E2;
+    color:#DC2626;
+}
+/* ================= COUPONS ================= */
+
+.admin-coupons-table-card{
+    background:#fff;
+    border-radius:24px;
+    overflow:hidden;
+    box-shadow:0 12px 30px rgba(0,0,0,.06);
+}
+
+.admin-coupons-table{
+    width:100%;
+    border-collapse:collapse;
+}
+
+.admin-coupons-table thead{
+    background:#F8FAFC;
+}
+
+.admin-coupons-table th{
+    padding:26px 36px;
+    text-align:left;
+    font-size:17px;
+    font-weight:600;
+    color:#475569;
+}
+
+.admin-coupons-table td{
+    padding:34px 36px;
+    font-size:20px;
+    color:#374151;
+    border-top:1px solid #EEF2F7;
+}
+.admin-coupon-btn svg{
+    font-size:18px;
+}
+.admin-coupons-table tbody tr:hover{
+    background:#FFF8EF;
+}
+
+.admin-coupon-status{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    padding:10px 22px;
+    border-radius:999px;
+    font-size:15px;
+    font-weight:600;
+}
+
+.admin-coupon-status.active{
+    background:#DCFCE7;
+    color:#15803D;
+}
+
+.admin-coupon-status.inactive{
+    background:#FEE2E2;
+    color:#DC2626;
+}
+
+.admin-coupon-actions{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap:12px;
+}
+
+.admin-coupon-btn{
+    width:48px;
+    height:48px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    border:none;
+    border-radius:12px;
+    cursor:pointer;
+    flex-shrink:0;
+    font-size:18px;
+    box-shadow:0 8px 18px rgba(0,0,0,.12);
+    transition:.25s;
+}
+
+.admin-coupon-btn svg{
+    font-size:18px;
+}
+
+.admin-coupon-btn.view-btn{
+    background:#EEF4FF;
+    color:#2563EB;
+}
+
+.admin-coupon-btn.edit-btn{
+    background:#FEF3C7;
+    color:#D97706;
+}
+
+.admin-coupon-btn.warning-btn{
+    background:#FFF7ED;
+    color:#EA580C;
+}
+
+.admin-coupon-btn.delete-btn{
+    background:#FEE2E2;
+    color:#DC2626;
+}
+/* ================= MESSAGES ================= */
+
+.admin-messages-table-card{
+    background:#fff;
+    border-radius:24px;
+    overflow:hidden;
+    box-shadow:0 12px 30px rgba(0,0,0,.06);
+}
+
+.admin-messages-table{
+    width:100%;
+    border-collapse:collapse;
+}
+
+.admin-messages-table thead{
+    background:#F8FAFC;
+}
+
+.admin-messages-table th{
+    padding:26px 36px;
+    text-align:left;
+    font-size:17px;
+    font-weight:600;
+    color:#475569;
+}
+
+.admin-messages-table td{
+    padding:34px 36px;
+    font-size:18px;
+    color:#374151;
+    border-top:1px solid #EEF2F7;
+}
+
+.admin-messages-table tbody tr:hover{
+    background:#FFF8EF;
+}
+
+.admin-message-status{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    padding:10px 22px;
+    border-radius:999px;
+    background:#DCFCE7;
+    color:#15803D;
+    font-size:15px;
+    font-weight:600;
+}
+
+.admin-message-actions{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap:12px;
+}
+
+.admin-message-btn{
+    width:48px;
+    height:48px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    border:none;
+    border-radius:12px;
+    cursor:pointer;
+    flex-shrink:0;
+    box-shadow:0 8px 18px rgba(0,0,0,.12);
+}
+
+.admin-message-btn svg{
+    font-size:18px;
+}
+
+.admin-message-btn.view-btn{
+    background:#EEF4FF;
+    color:#2563EB;
+}
+
+.admin-message-btn.delete-btn{
+    background:#FEE2E2;
+    color:#DC2626;
 }

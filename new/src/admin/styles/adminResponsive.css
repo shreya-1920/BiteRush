@@ -1,0 +1,284 @@
+/* ==========================================
+   ADMIN RESPONSIVE
+========================================== */
+
+
+/* =========================
+   1200px
+========================= */
+
+@media (max-width:1200px){
+
+    .admin-sidebar{
+        width:250px;
+    }
+
+    .admin-content{
+        padding:24px;
+    }
+
+    .dashboard-grid{
+        grid-template-columns:1fr 320px;
+    }
+
+    .search-box{
+        width:300px;
+    }
+
+}
+
+
+/* =========================
+   992px
+========================= */
+
+@media (max-width:992px){
+
+    .admin-layout{
+        flex-direction:column;
+    }
+
+    .admin-sidebar{
+        width:100%;
+        height:auto;
+        position:relative;
+        border-right:none;
+        border-bottom:1px solid var(--border);
+    }
+
+    .sidebar-menu{
+        flex-direction:row;
+        flex-wrap:wrap;
+        justify-content:center;
+    }
+
+    .sidebar-bottom{
+        margin-top:20px;
+    }
+
+    .admin-content{
+        padding:20px;
+    }
+
+    .admin-topbar{
+        padding:0 20px;
+    }
+
+    .dashboard-grid{
+        grid-template-columns:1fr;
+    }
+
+    .dashboard-right{
+        width:100%;
+    }
+
+}
+
+
+/* =========================
+   768px
+========================= */
+
+@media (max-width:768px){
+
+    .admin-topbar{
+        flex-direction:column;
+        height:auto;
+        gap:15px;
+        padding:18px;
+    }
+
+    .search-box{
+        width:100%;
+    }
+
+    .topbar-right{
+        width:100%;
+        justify-content:space-between;
+    }
+
+    .welcome-card{
+        flex-direction:column;
+        align-items:flex-start;
+        gap:20px;
+    }
+
+    .admin-content{
+        padding:16px;
+    }
+
+    .sidebar-logo h1{
+        font-size:28px;
+    }
+
+}
+
+
+/* ==========================================
+   576px
+========================================== */
+
+@media (max-width:576px){
+
+    .admin-layout{
+        flex-direction:column;
+    }
+
+    .admin-sidebar{
+        width:100%;
+        height:auto;
+        min-height:auto;
+        position:relative;
+        padding:18px;
+        border-right:none;
+        border-bottom:1px solid #ececec;
+    }
+
+    .sidebar-logo{
+        text-align:center;
+        margin-bottom:20px;
+    }
+
+    .sidebar-logo h1{
+        font-size:32px;
+    }
+
+    .sidebar-menu{
+        display:flex;
+        flex-direction:column;
+        gap:10px;
+    }
+
+    .sidebar-menu a{
+        width:100%;
+        padding:14px 18px;
+        font-size:17px;
+    }
+
+    .sidebar-bottom{
+        margin-top:20px;
+        padding-top:20px;
+    }
+
+    .logout-btn{
+        width:100%;
+        justify-content:center;
+    }
+
+    .admin-main{
+        width:100%;
+        margin-left:0;
+    }
+
+    .admin-content{
+        padding:16px;
+    }
+
+}
+/* ======================================
+   MOBILE SIDEBAR
+====================================== */
+
+.menu-toggle{
+    display:none;
+}
+
+.sidebar-close{
+    display:none;
+}
+
+@media (max-width:768px){
+
+    .menu-toggle{
+        display:flex;
+        align-items:center;
+        justify-content:center;
+
+        width:45px;
+        height:45px;
+
+        border:none;
+        border-radius:10px;
+
+        background:#ff6b35;
+        color:#fff;
+
+        font-size:20px;
+
+        cursor:pointer;
+    }
+
+    .admin-sidebar{
+
+        position:fixed;
+
+        left:-280px;
+        top:0;
+
+        width:260px;
+        height:100vh;
+
+        background:#fff;
+
+        z-index:9999;
+
+        transition:.35s;
+    }
+
+    .admin-sidebar.open{
+
+        left:0;
+
+    }
+
+    .sidebar-close{
+
+        display:flex;
+
+        position:absolute;
+
+        top:20px;
+        right:20px;
+
+        border:none;
+        background:none;
+
+        font-size:22px;
+
+        cursor:pointer;
+    }
+
+    .admin-main{
+
+        width:100%;
+        margin-left:0;
+
+    }
+
+}
+@media (max-width:768px){
+
+    .notification-wrapper{
+        position:static;
+    }
+
+    .notification-dropdown{
+
+        position:fixed;
+
+        top:90px;
+        left:50%;
+
+        transform:translateX(-50%);
+
+        width:calc(100vw - 30px);
+        max-width:380px;
+
+        max-height:65vh;
+
+        overflow-y:auto;
+
+        z-index:99999;
+    }
+
+}

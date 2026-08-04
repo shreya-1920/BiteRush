@@ -22,7 +22,7 @@ import { HiArrowLongRight } from "react-icons/hi2";
 import { Swiper, SwiperSlide } from "swiper/react";
 
 import { Navigation } from "swiper/modules";
-import "swiper/css/navigation";
+
 import { useState } from "react";
 import "swiper/css";
 import burgerImg from "../assets/images/burger-image.png";
@@ -196,7 +196,7 @@ const testimonials = [
     review:
       "BiteRush has completely changed how I order food. The delivery is lightning fast and the food always arrives hot and fresh.",
     image: customer2,
-    active: false,
+   
   },
   {
     id: 2,
@@ -205,7 +205,7 @@ const testimonials = [
     review:
       "The variety of restaurants is incredible. I can find everything from biryani to gourmet burgers. BiteRush is my go-to app every day.",
     image: customer1,
-    active: true,
+    
   },
   {
     id: 3,
@@ -214,8 +214,32 @@ const testimonials = [
     review:
       "Super easy to use, fast delivery, and excellent customer support. I ordered late at night and still got my pizza in under 30 minutes.",
     image: customer3,
-    active: false,
+    
   },
+  {
+    id:4,
+    name:"Rahul Verma",
+    role:"Doctor",
+    review:"Ordering food has never been easier. The app is smooth, delivery is always on time, and every meal arrives fresh.",
+    image: customer1,
+    
+},
+{
+    id:5,
+    name:"Ananya Kapoor",
+    role:"Content Creator",
+    review:"I love the restaurant choices and exclusive discounts. BiteRush has become my favorite food delivery app.",
+    image: customer2,
+    
+},
+{
+    id:6,
+    name:"David Wilson",
+    role:"Business Analyst",
+    review:"Excellent service, quick delivery, and fantastic customer support. Highly recommended for anyone who loves good food.",
+    image: customer3,
+    
+},
 ];
 const steps = [
     {
@@ -289,6 +313,7 @@ const steps = [
   },
 ];
 const navigate = useNavigate();
+const [activeIndex, setActiveIndex] = useState(1);
   return (
     <>
       <Header />
@@ -542,15 +567,22 @@ const navigate = useNavigate();
         <FaChevronRight />
     </button>
 
-    <Swiper
-        modules={[Navigation]}
-        navigation={{
-            prevEl: ".category-prev",
-            nextEl: ".category-next",
-        }}
-        spaceBetween={20}
-        slidesPerView={3.6}
-    >
+   <Swiper
+    modules={[Navigation]}
+    navigation={{
+        prevEl: ".category-prev",
+        nextEl: ".category-next",
+    }}
+    breakpoints={{
+        0: {
+            slidesPerView: 2,
+        },
+        577: {
+            slidesPerView: 3.6,
+        }
+    }}
+    spaceBetween={20}
+>
 
         {categories.map((category) => (
 
@@ -992,66 +1024,114 @@ View Menu
           </section>
 {/*Testimonials*/}
 <section className="testimonials">
-      <Container>
-       <div className="section-heading">
-        <span>CUSTOMER REVIEWS</span>
-        <h2>What Our Customers Say</h2>
-        <p>
-            Thousands of food lovers trust BiteRush every day.
-        </p>
+    <Container>
 
-       </div>
-      <div className="testimonial-cards">
+        <div className="section-heading">
+            <span>CUSTOMER REVIEWS</span>
+            <h2>What Our Customers Say</h2>
+            <p>Thousands of food lovers trust BiteRush every day.</p>
+        </div>
 
-  {testimonials.map((testimonial) => (
+        <div className="testimonial-slider-wrapper">
 
-    <div
-      key={testimonial.id}
-      className={`testimonial-card ${
-        testimonial.active ? "active" : ""
-      }`}
-    >
+            <button className="testimonial-prev">
+                <FaChevronLeft />
+            </button>
 
-      <div className="quote"><FaQuoteLeft/></div>
+            <Swiper
+    modules={[Navigation]}
+    navigation={{
+        prevEl: ".testimonial-prev",
+        nextEl: ".testimonial-next",
+    }}
+    loop={true}
+    centeredSlides={false}
+    slidesPerView={3}
+    spaceBetween={35}
+    className="testimonial-swiper"
 
-      <p className="review">
-        {testimonial.review}
-      </p>
+    onSlideChange={(swiper)=>{
+        setActiveIndex(swiper.realIndex);
+    }}
 
-     
+    breakpoints={{
+        0:{
+            slidesPerView:1
+        },
+        768:{
+            slidesPerView:2
+        },
+        1200:{
+            slidesPerView:3
+        }
+    }}
 
-      <div className="customer">
+                className="testimonial-swiper"
+            >
 
-    <img
-        src={testimonial.image}
-        alt={testimonial.name}
-        className="customer-image"
-    />
+                {testimonials.map((testimonial,index) => (
 
-    <div className="customer-content">
+                    <SwiperSlide key={testimonial.id}>
 
-        <div className="customer-top">
+                        <div
+                            
+                            className={`testimonial-card ${
+    index === (activeIndex + 1) % testimonials.length
+        ? "active"
+        : ""
+}`}
+                        >
 
-            <h5>{testimonial.name}</h5>
+                            <div className="quote">
+                                <FaQuoteLeft />
+                            </div>
 
-            <div className="stars">
-                ⭐⭐⭐⭐⭐
-            </div>
+                            <p className="review">
+                                {testimonial.review}
+                            </p>
+
+                            <div className="customer">
+
+                                <img
+                                    src={testimonial.image}
+                                    alt={testimonial.name}
+                                    className="customer-image"
+                                />
+
+                                <div className="customer-content">
+
+                                    <div className="customer-top">
+
+                                        <h5>{testimonial.name}</h5>
+
+                                        <div className="stars">
+                                            ⭐⭐⭐⭐⭐
+                                        </div>
+
+                                    </div>
+
+                                    <span>{testimonial.role}</span>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </SwiperSlide>
+
+                ))}
+
+            </Swiper>
+
+            <button className="testimonial-next">
+                <FaChevronRight />
+            </button>
 
         </div>
 
-        <span>{testimonial.role}</span>
-
-    </div>
-
-</div>
-
-    </div>
-    ))}
-
-</div>
-      </Container>
-    </section>
+    </Container>
+</section>
 
 
 {/*HowItWorks*/}

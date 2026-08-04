@@ -9,16 +9,25 @@ import "../styles/Restaurant-panel.css";
 function RestaurantLayout() {
 
     const [search, setSearch] = useState("");
-
+const [sidebarOpen, setSidebarOpen] = useState(false);
     return (
        <SearchContext.Provider value={{ search, setSearch }}>
         <div className="rp-layout">
 
             {/* Sidebar */}
-            <aside className="rp-layout-sidebar">
+          <aside
+    className={`rp-layout-sidebar ${
+        sidebarOpen ? "open" : ""
+    }`}
+>
                 <RestaurantSidebar />
             </aside>
-
+{sidebarOpen && (
+    <div
+        className="rp-overlay"
+        onClick={() => setSidebarOpen(false)}
+    ></div>
+)}
             {/* Main Content */}
             <div className="rp-layout-main">
 
@@ -26,6 +35,7 @@ function RestaurantLayout() {
                 <RestaurantNavbar
                     search={search}
                     setSearch={setSearch}
+                        setSidebarOpen={setSidebarOpen}
                 />
 
                 {/* Page Content */}

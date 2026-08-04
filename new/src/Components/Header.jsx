@@ -69,6 +69,9 @@ const cartCount = cartItems.reduce(
             <span className="rush">Rush</span>
           </span>
         </Navbar.Brand>
+<Navbar.Toggle aria-controls="basic-navbar-nav" />
+<Navbar.Collapse id="basic-navbar-nav">
+
 
        <Nav className="mx-auto custom-nav-links">
 
@@ -110,7 +113,7 @@ const cartCount = cartItems.reduce(
 
 </Nav>
 
-        <div className="d-flex align-items-center">
+        <div className="d-flex align-items-center  navbar-actions">
          <Link to="/cart" className="cart-link">
 
     <div className="cart-icon">
@@ -204,6 +207,7 @@ const cartCount = cartItems.reduce(
             </>
           )}
         </div>
+        </Navbar.Collapse>
       </Container>
     </Navbar>
   );

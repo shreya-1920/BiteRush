@@ -68,9 +68,9 @@ const filteredMessages = messages.filter((msg) => {
 
       </div>
 
-      <div className="table-card">
+      <div className="admin-messages-table-card">
 
-        <table className="admin-table">
+        <table className="admin-messages-table">
 
           <thead>
 
@@ -104,7 +104,7 @@ const filteredMessages = messages.filter((msg) => {
 
         <td>
 
-          <span className="status delivered">
+          <span className="admin-message-status">
             Received
           </span>
 
@@ -112,10 +112,10 @@ const filteredMessages = messages.filter((msg) => {
 
         <td>
 
-          <div className="table-actions">
+          <div className="admin-message-actions">
 
             <button
-              className="icon-btn edit-btn"
+              className="admin-message-btn view-btn"
               title="View Message"
               onClick={() => {
                 setSelectedMessage(msg);
@@ -126,7 +126,7 @@ const filteredMessages = messages.filter((msg) => {
             </button>
 
             <button
-              className="icon-btn delete-btn"
+              className="admin-message-btn delete-btn"
               title="Delete Message"
               onClick={() => handleDelete(msg._id)}
             >

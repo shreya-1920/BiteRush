@@ -46,7 +46,7 @@ const filteredCoupons = coupons.filter((coupon) => {
 });
   return (
 
-    <div className="restaurants-page">
+    <div className="coupons-page">
 
       <div className="page-header">
 
@@ -77,9 +77,9 @@ const filteredCoupons = coupons.filter((coupon) => {
 
       </div>
 
-      <div className="table-card">
+      <div className="admin-coupons-table-card">
 
-        <table className="admin-table">
+        <table className="admin-coupons-table">
 
           <thead>
 
@@ -122,13 +122,11 @@ const filteredCoupons = coupons.filter((coupon) => {
 
         <td>
 
-          <span
-            className={
-              coupon.isActive
-                ? "status delivered"
-                : "status cancelled"
-            }
-          >
+<span
+className={`admin-coupon-status ${
+coupon.isActive ? "active" : "inactive"
+}`}
+>
             {coupon.isActive ? "Active" : "Inactive"}
           </span>
 
@@ -136,12 +134,12 @@ const filteredCoupons = coupons.filter((coupon) => {
 
         <td>
 
-          <div className="table-actions">
+          <div className="admin-coupon-actions">
 
             {/* View */}
 
             <button
-              className="icon-btn view-btn"
+              className="admin-coupon-btn view-btn"
               title="View Coupon"
               onClick={() => {
                 setSelectedCoupon(coupon);
@@ -154,7 +152,7 @@ const filteredCoupons = coupons.filter((coupon) => {
             {/* Edit */}
 
             <button
-              className="icon-btn edit-btn"
+              className="admin-coupon-btn edit-btn"
               title="Edit Coupon"
               onClick={() => {
                 setSelectedCoupon(coupon);
@@ -167,7 +165,7 @@ const filteredCoupons = coupons.filter((coupon) => {
             {/* Activate / Deactivate */}
 
             <button
-              className={`icon-btn ${
+              className={`admin-coupon-btn ${
                 coupon.isActive
                   ? "warning-btn"
                   : "success-btn"
@@ -199,7 +197,7 @@ const filteredCoupons = coupons.filter((coupon) => {
             {/* Delete */}
 
             <button
-              className="icon-btn delete-btn"
+              className="admin-coupon-btn delete-btn"
               title="Delete Coupon"
               onClick={() => {
                 setSelectedCoupon(coupon);

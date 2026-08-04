@@ -375,7 +375,7 @@ useEffect(() => {
 
 </div>
 
-            <div className="restaurant-details">
+            <div className="top-restaurant-details">
               <h4>{restaurant.name}</h4>
               <span>
                 {restaurant.category} • {restaurant.city}

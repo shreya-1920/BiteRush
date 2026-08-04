@@ -212,9 +212,9 @@ const statuses = [
 
                     <td>
 
-                      <div className="restaurant-info">
+                      <div className="admin-menu-item-info">
 
-                        <div className="restaurant-avatar">
+                        <div className="admin-menu-item-avatar">
 
                           {item.image ? (
                             <img
@@ -227,7 +227,7 @@ const statuses = [
 
                         </div>
 
-                        <div>
+                        <div className="admin-menu-item-details">
 
                           <h4>{item.name}</h4>
 
@@ -247,34 +247,22 @@ const statuses = [
                                         <td>₹{item.price}</td>
 
                     <td>
-                      <span
-                        className={
-                          item.isVeg
-                            ? "status active"
-                            : "status inactive"
-                        }
-                      >
+                      <span className={item.isVeg ? "admin-menu-type veg" : "admin-menu-type non-veg"}>
                         {item.isVeg ? "Veg" : "Non Veg"}
                       </span>
                     </td>
 
                     <td>
-                      <span
-                        className={
-                          item.status === "Available"
-                            ? "status active"
-                            : "status inactive"
-                        }
-                      >
+                      <span className={item.status==="Available" ? "admin-menu-status available" : "admin-menu-status unavailable"}>
                         {item.status}
                       </span>
                     </td>
 
                     <td>
-                      <div className="table-actions">
+                     <div className="admin-menu-actions">
 
                         <button
-                          className="icon-btn edit-btn"
+                          className="admin-menu-btn admin-menu-edit-btn"
                           onClick={() => {
                             setSelectedItem(item);
                             setModalType("edit");
@@ -284,7 +272,7 @@ const statuses = [
                         </button>
 
                         <button
-                          className="icon-btn delete-btn"
+                          className="admin-menu-btn admin-menu-delete-btn"
                           onClick={() => {
                             setSelectedItem(item);
                             setModalType("delete");

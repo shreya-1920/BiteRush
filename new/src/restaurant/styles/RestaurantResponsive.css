@@ -1,0 +1,113 @@
+/* ==========================================
+   RESTAURANT PANEL MOBILE
+========================================== */
+
+.rp-menu-toggle,
+.rp-sidebar-close{
+    display:none;
+}
+
+/* Tablet + Mobile */
+@media (max-width:768px){
+
+    /* Sidebar wrapper */
+    .rp-layout-sidebar{
+        position:fixed;
+        left:-280px;
+        top:0;
+        width:280px;
+        height:100vh;
+        z-index:9999;
+        transition:.35s ease;
+    }
+
+    .rp-layout-sidebar.open{
+        left:0;
+    }
+
+    /* Sidebar itself */
+    .rp-sidebar{
+        width:100%;
+        height:100%;
+    }
+
+    /* Main */
+    .rp-layout-main{
+        width:100%;
+        margin-left:0;
+    }
+
+    .rp-layout-content{
+        padding:20px;
+    }
+
+    /* Navbar */
+    .rp-navbar{
+        padding:0 18px;
+        justify-content:space-between;
+    }
+
+    .rp-navbar-right{
+        width:100%;
+        gap:12px;
+    }
+
+    .rp-navbar-search{
+        width:100%;
+        margin-right:0 !important;
+    }
+
+    /* Menu Button */
+    .rp-menu-toggle{
+        display:flex;
+        align-items:center;
+        justify-content:center;
+
+        width:45px;
+        height:45px;
+
+        border:none;
+        border-radius:12px;
+
+        background:#F97316;
+        color:#fff;
+
+        font-size:20px;
+        cursor:pointer;
+    }
+
+    /* Close Button */
+    .rp-sidebar-close{
+        display:block;
+        position:absolute;
+        top:18px;
+        right:18px;
+
+        border:none;
+        background:none;
+
+        color:#fff;
+        font-size:24px;
+        cursor:pointer;
+    }
+
+    /* Notification */
+    .rp-notification{
+        position:relative;
+    }
+
+    .rp-notification-dropdown{
+        position:fixed;
+        top:90px;
+        left:50%;
+        transform:translateX(-50%);
+        width:95%;
+        max-width:360px;
+        right:auto;
+    }
+
+    /* Profile */
+    .rp-user{
+        display:none;
+    }
+}

@@ -2,7 +2,7 @@ import { FaBell, FaSearch, FaUserCircle } from "react-icons/fa";
 import { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-
+import { FaBars } from "react-icons/fa";
 import {
   getNotifications,
   markAllRead,
@@ -17,7 +17,7 @@ import {
   FaUser,
 } from "react-icons/fa";
 
-function Topbar() {
+function Topbar({ setSidebarOpen }) {
   const navigate = useNavigate();
 
   const { search, setSearch } = useSearch();
@@ -71,7 +71,12 @@ function Topbar() {
 
   return (
     <header className="admin-topbar">
-
+<button
+    className="menu-toggle"
+    onClick={() => setSidebarOpen(true)}
+>
+    <FaBars />
+</button>
       <div className="search-box">
 
         <FaSearch className="search-icon" />

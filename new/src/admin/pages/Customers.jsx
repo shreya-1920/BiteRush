@@ -51,9 +51,9 @@ const filteredCustomers = customers.filter((customer) => {
   );
 });
   return (
-    <div className="restaurants-page">
+    <div className="admin-customers-page">
 
-      <div className="page-header">
+      <div className="admin-customers-header">
 
         <div>
           <h2>Customers</h2>
@@ -68,9 +68,9 @@ const filteredCustomers = customers.filter((customer) => {
 
       
 
-      <div className="table-card">
+      <div className="admin-customers-table-card">
 
-        <table className="admin-table">
+        <table className="admin-customers-table">
 
           <thead>
 
@@ -96,16 +96,17 @@ const filteredCustomers = customers.filter((customer) => {
 
         <td>
 
-          <div className="restaurant-info">
+          <div className="admin-customer-info">
 
-            <div className="restaurant-avatar">
+            <div className="admin-customer-avatar">
               👤
             </div>
 
-            <div>
-              <h4>{customer.name}</h4>
-              <span>ID #{customer._id.slice(-6)}</span>
-            </div>
+           <div className="admin-customer-details">
+    <h4>{customer.name}</h4>
+    <span>ID #{customer._id.slice(-6)}</span>
+</div>
+            
 
           </div>
 
@@ -121,11 +122,11 @@ const filteredCustomers = customers.filter((customer) => {
 
         <td>
           <span
-            className={
-              !customer.isBlocked
-                ? "status delivered"
-                : "status cancelled"
-            }
+           className={
+    !customer.isBlocked
+        ? "admin-customer-status active"
+        : "admin-customer-status blocked"
+}
           >
             {customer.isBlocked ? "Blocked" : "Active"}
           </span>
@@ -133,10 +134,10 @@ const filteredCustomers = customers.filter((customer) => {
 
         <td>
 
-          <div className="table-actions">
+         <div className="admin-customer-actions">
 
             <button
-              className="icon-btn edit-btn"
+              className="admin-customer-btn edit-btn"
               onClick={() => {
                 setSelectedCustomer(customer);
                 setModalType("view");
@@ -146,7 +147,7 @@ const filteredCustomers = customers.filter((customer) => {
             </button>
 
             <button
-              className={`icon-btn ${
+              className={`admin-customer-btn ${
                 customer.isBlocked
                   ? "success-btn"
                   : "warning-btn"
@@ -179,7 +180,7 @@ const filteredCustomers = customers.filter((customer) => {
             </button>
 
             <button
-              className="icon-btn delete-btn"
+              className="admin-customer-btn delete-btn"
               onClick={() => {
                 setSelectedCustomer(customer);
                 setModalType("delete");

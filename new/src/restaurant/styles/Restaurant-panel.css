@@ -4836,3 +4836,148 @@ color:#ff7a00;
     color:#94A3B8;
     font-weight:500;
 }
+
+/* ==========================================
+   TABLET & MOBILE
+========================================== */
+
+.rp-menu-toggle{
+    display:none;
+}
+
+@media (max-width:768px){
+
+    /* Layout */
+
+    .rp-layout-sidebar{
+
+        position:fixed;
+
+        left:-280px;
+
+        top:0;
+
+        width:280px;
+
+        height:100vh;
+
+        z-index:9999;
+
+        transition:left .35s ease;
+    }
+
+    .rp-layout-sidebar.open{
+
+        left:0;
+
+    }
+
+    .rp-layout-main{
+
+        width:100%;
+
+    }
+
+    .rp-layout-content{
+
+        padding:20px;
+
+    }
+
+    /* Navbar */
+
+    .rp-navbar{
+
+        justify-content:flex-start;
+
+        gap:16px;
+
+        padding:0 20px;
+    }
+
+    .rp-menu-toggle{
+
+        display:flex;
+
+        align-items:center;
+
+        justify-content:center;
+
+        width:46px;
+
+        height:46px;
+
+        border:none;
+
+        border-radius:12px;
+
+        background:#F97316;
+
+        color:#fff;
+
+        font-size:20px;
+
+        cursor:pointer;
+
+        flex-shrink:0;
+    }
+
+    .rp-navbar-right{
+
+        flex:1;
+
+        gap:14px;
+    }
+
+    .rp-navbar-search{
+
+        width:100%;
+
+        margin-right:0;
+    }
+
+    .rp-user{
+
+        display:none;
+    }
+
+    /* Notification */
+
+    .rp-notification-dropdown{
+
+        position:fixed;
+
+        top:90px;
+
+        left:50%;
+
+        right:auto;
+
+        transform:translateX(-50%);
+
+        width:calc(100vw - 30px);
+
+        max-width:360px;
+    }
+
+}
+.rp-overlay{
+    display:none;
+}
+
+@media (max-width:768px){
+
+    .rp-overlay{
+
+        display:block;
+
+        position:fixed;
+
+        inset:0;
+
+        background:rgba(0,0,0,.45);
+
+        z-index:9998;
+    }
+
+}

@@ -1,4 +1,6 @@
 import "../styles/admin.css";
+import "../styles/adminResponsive.css";
+
 import { Outlet } from "react-router-dom";
 import { useState } from "react";
 
@@ -8,18 +10,23 @@ import Topbar from "../Components/Topbar";
 function AdminLayout() {
 
     const [search, setSearch] = useState("");
+    const [sidebarOpen, setSidebarOpen] = useState(false);
 
     return (
 
         <div className="admin-layout">
 
-            <Sidebar />
+            <Sidebar
+                sidebarOpen={sidebarOpen}
+                setSidebarOpen={setSidebarOpen}
+            />
 
             <div className="admin-main">
 
                 <Topbar
                     search={search}
                     setSearch={setSearch}
+                    setSidebarOpen={setSidebarOpen}
                 />
 
                 <main className="admin-content">

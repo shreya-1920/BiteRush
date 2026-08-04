@@ -191,10 +191,10 @@ const statuses = [
 
         {/* Restaurant */}
 
-        <td className="restaurant-cell">
-          <div className="restaurant-info">
+        <td className="admin-restaurant-cell">
+          <div className="admin-restaurant-info">
 
-            <div className="restaurant-avatar">
+            <div className="admin-restaurant-avatar">
               {restaurant.logo ? (
                 <img
                   src={restaurant.logo}
@@ -205,7 +205,7 @@ const statuses = [
               )}
             </div>
 
-            <div className="restaurant-details">
+            <div className="admin-restaurant-details">
               <h4>{restaurant.name}</h4>
 
               <span>
@@ -218,14 +218,14 @@ const statuses = [
 
         {/* City */}
 
-        <td className="city-cell">
+        <td className="admin-city-cell">
           {restaurant.city}
         </td>
 
         {/* Rating */}
 
-        <td className="rating-cell">
-          <div className="rating">
+        <td className="admin-rating-cell">
+          <div className="admin-rating">
             <FaStar />
             <span>{restaurant.rating || "N/A"}</span>
           </div>
@@ -233,13 +233,13 @@ const statuses = [
 
         {/* Orders */}
 
-        <td className="orders-cell">
+        <td className="admin-orders-cell">
           {restaurant.orders || 0}
         </td>
 
         {/* Status */}
 
-        <td className="status-cell">
+        <td className="admin-status-cell">
           <span
             className={
               restaurant.status === "Active"
@@ -253,11 +253,11 @@ const statuses = [
 
         {/* Actions */}
 
-        <td className="actions-cell">
-          <div className="table-actions">
+        <td className="admin-actions-cell">
+          <div className="admin-table-actions">
 
             <button
-              className="icon-btn edit-btn"
+              className="table-icon-btn edit-btn"
               onClick={() => {
                 setSelectedRestaurant(restaurant);
                 setModalType("edit");
@@ -267,7 +267,7 @@ const statuses = [
             </button>
 
             <button
-              className="icon-btn delete-btn"
+              className="table-icon-btn delete-btn"
               onClick={() => {
                 setSelectedRestaurant(restaurant);
                 setModalType("delete");

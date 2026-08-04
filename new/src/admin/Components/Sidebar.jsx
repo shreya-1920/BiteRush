@@ -9,10 +9,10 @@ import {
   FaCog,
   FaSignOutAlt,
 } from "react-icons/fa";
+import { FaTimes } from "react-icons/fa";
 import logo2 from "../../assets/images/logo2.png";
 import { NavLink, useNavigate } from "react-router-dom";
-
-function Sidebar() {
+function Sidebar({ sidebarOpen, setSidebarOpen }) {
   const navigate = useNavigate();
 
   const logout = () => {
@@ -23,7 +23,13 @@ function Sidebar() {
   };
 
   return (
-    <aside className="admin-sidebar">
+    <aside className={`admin-sidebar ${sidebarOpen ? "open" : ""}`}>
+      <button
+    className="sidebar-close"
+    onClick={() => setSidebarOpen(false)}
+>
+    <FaTimes />
+</button>
 <div className="sidebar-logo">
 
   <div className="brand">
@@ -41,42 +47,42 @@ function Sidebar() {
 
       <nav className="sidebar-menu">
 
-        <NavLink to="/admin/dashboard">
+        <NavLink to="/admin/dashboard" onClick={() => setSidebarOpen(false)}>
           <FaTachometerAlt />
           Dashboard
         </NavLink>
 
-        <NavLink to="/admin/restaurants">
+        <NavLink to="/admin/restaurants" onClick={() => setSidebarOpen(false)}>
           <FaUtensils />
           Restaurants
         </NavLink>
 
-        <NavLink to="/admin/menu">
+        <NavLink to="/admin/menu" onClick={() => setSidebarOpen(false)}>
           <FaPizzaSlice />
           Menu
         </NavLink>
 
-        <NavLink to="/admin/orders">
+        <NavLink to="/admin/orders" onClick={() => setSidebarOpen(false)}>
           <FaClipboardList />
           Orders
         </NavLink>
 
-        <NavLink to="/admin/customers">
+        <NavLink to="/admin/customers" onClick={() => setSidebarOpen(false)}>
           <FaUsers />
           Customers
         </NavLink>
 
-        <NavLink to="/admin/coupons">
+        <NavLink to="/admin/coupons" onClick={() => setSidebarOpen(false)}>
           <FaTags />
           Coupons
         </NavLink>
 
-        <NavLink to="/admin/messages">
+        <NavLink to="/admin/messages" onClick={() => setSidebarOpen(false)}>
           <FaEnvelope />
           Messages
         </NavLink>
 
-        <NavLink to="/admin/settings">
+        <NavLink to="/admin/settings" onClick={() => setSidebarOpen(false)}>
           <FaCog />
           Settings
         </NavLink>
@@ -87,7 +93,10 @@ function Sidebar() {
 
     <button
         className="logout-btn"
-        onClick={logout}
+        onClick={()=>{
+    setSidebarOpen(false);
+    logout();
+}}
     >
         <FaSignOutAlt />
         Logout
