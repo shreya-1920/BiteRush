@@ -5,7 +5,7 @@ import Container from "react-bootstrap/Container";
 import "../styles/Checkout.css";
 import { placeOrder } from "../services/checkoutServices";
 import { useCart } from "../Context/CartContext";
-import { clearCart } from "../services/CartServices";
+import { clearCart } from "../services/cartServices";
 import { getProfile } from "../services/AuthServices";
 import {
   saveAddress,

@@ -5,9 +5,9 @@ import { toast } from "react-toastify";
 import {
   getAllMessages,
   deleteMessage,
-} from "../services/AdminMessageServices";
+} from "../Services/AdminMessageServices";
 import { useSearch } from "../context/SearchContext";
-import MessageDetailsModal from "../components/modals/MessageDetailsModal";
+import MessageDetailsModal from "../Components/modals/MessageDetailsModal";
 function Messages() {
 const [modalType, setModalType] = useState(null);
 const [selectedMessage, setSelectedMessage] = useState(null);

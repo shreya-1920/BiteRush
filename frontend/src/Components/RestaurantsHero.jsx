@@ -6,7 +6,7 @@ import {
   FaStar,
   FaTag,
 } from "react-icons/fa";
-import { useLocation } from "../context/LocationContext";
+import { useLocation } from "../Context/LocationContext";
 
 
 function RestaurantHero({

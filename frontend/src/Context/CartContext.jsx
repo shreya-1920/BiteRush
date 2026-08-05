@@ -5,7 +5,7 @@ import {
     addCart,
     updateCart,
     removeCart
-} from "../services/CartServices";
+} from "../services/cartServices";
 import { toast } from "react-toastify";
 export const CartContext = createContext();
 

@@ -5,7 +5,7 @@ import RestaurantCard from "../Components/RestaurantCard";
 import Footer from "../Components/Footer";
 import { getWishlist } from "../services/WishlistService";
 import { getRestaurants } from "../admin/Services/RestaurantService";
-import { useLocation } from "../context/LocationContext";
+import { useLocation } from "../Context/LocationContext";
 
 import { useState,useEffect } from "react";
 function Restaurants() {
