@@ -3,11 +3,11 @@ import { useEffect, useState } from "react";
 import {
   getAllOrders,
   updateOrderStatus,
-} from "../services/AdminOrderServices";
+} from "../Services/AdminOrderServices";
 import { useSearch } from "../context/SearchContext";
-import OrderDetailsModal from "../components/modals/OrderDetailsModal";
-import StatusForm from "../components/forms/StatusForm";
-import Modal from "../components/Modal";
+import OrderDetailsModal from "../Components/modals/OrderDetailsModal";
+import StatusForm from "../Components/forms/StatusForm";
+import Modal from "../Components/Modal";
 function AdminOrders() {
   const [modalType, setModalType] = useState(null);
 const [selectedOrder, setSelectedOrder] = useState(null);

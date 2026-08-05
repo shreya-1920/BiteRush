@@ -3,7 +3,7 @@ import { toast } from "react-toastify";
 import {
   createCoupon,
   updateCoupon,
-} from "../../services/AdminCouponServices";
+} from "../../Services/AdminCouponServices";
 function CouponForm({
   mode,
   coupon,

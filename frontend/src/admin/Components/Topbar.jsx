@@ -6,7 +6,7 @@ import { FaBars } from "react-icons/fa";
 import {
   getNotifications,
   markAllRead,
-} from "../services/NotificationServices";
+} from "../Services/NotificationServices";
 
 import { useSearch } from "../context/SearchContext";
 

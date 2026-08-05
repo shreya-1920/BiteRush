@@ -5,7 +5,7 @@ import { toast } from "react-toastify";
 import {
   getSettings,
   updateSettings,
-} from "../services/AdminSettingServices";
+} from "../Services/AdminSettingServices";
 
 function Settings() {
   const [settings, setSettings] = useState({

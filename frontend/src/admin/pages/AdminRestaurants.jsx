@@ -12,9 +12,9 @@ import {
 import { useSearch } from "../context/SearchContext";
 import { toast } from "react-toastify";
 import { useState, useEffect } from "react";
-import ConfirmModal from "../components/ConfirmModal";
-import Modal from "../components/Modal";
-import RestaurantForm from "../components/forms/RestaurantForm";
+import ConfirmModal from "../Components/ConfirmModal";
+import Modal from "../Components/Modal";
+import RestaurantForm from "../Components/forms/RestaurantForm";
 function AdminRestaurants() {
   const [modalType, setModalType] = useState(null);
 // "add" | "edit" | "delete"

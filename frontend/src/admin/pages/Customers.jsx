@@ -4,13 +4,13 @@ import {
   getAllCustomers,
   deleteCustomer,
   toggleBlockCustomer,
-} from "../services/AdminCustomerServices";
+} from "../Services/AdminCustomerServices";
 import { FaEye, FaTrash, FaBan } from "react-icons/fa";
 import { toast } from "react-toastify";
 
-import ConfirmModal from "../components/ConfirmModal";
+import ConfirmModal from "../Components/ConfirmModal";
 import { useSearch } from "../context/SearchContext";
-import CustomerDetailsModal from "../components/modals/CustomerDetailsModal";
+import CustomerDetailsModal from "../Components/modals/CustomerDetailsModal";
 
 function Customers() {
 const [modalType, setModalType] = useState(null);
