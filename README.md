@@ -16,7 +16,7 @@ BiteRush is a modern full-stack food ordering web application that connects cust
 ---
 ### 🚀 Built With
 
-React • Bootstrap • Node.js • Express.js • MongoDB • JWT • Mongoose • Multer
+React • Bootstrap • Node.js • Express.js • MongoDB • JWT • Mongoose • Multer • Cloudinary • Axios 
 
 </div>
 
