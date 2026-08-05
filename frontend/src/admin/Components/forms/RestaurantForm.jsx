@@ -7,7 +7,7 @@ import {
   FaImage,
   FaTags,
 } from "react-icons/fa";
-import "../../Styles/RestaurantForm.css";
+import "../../styles/RestaurantForm.css";
 import {
   addRestaurant,
   updateRestaurant,

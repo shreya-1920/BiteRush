@@ -13,9 +13,9 @@ import {
   deleteMenu,
 } from "../Services/MenuService";
 import { useSearch } from "../context/SearchContext";
-import Modal from "../components/Modal";
-import ConfirmModal from "../components/ConfirmModal";
-import MenuForm from "../components/forms/MenuForm";
+import Modal from "../Components/Modal";
+import ConfirmModal from "../Components/ConfirmModal";
+import MenuForm from "../Components/forms/MenuForm";
 
 function AdminMenu() {
   const [modalType, setModalType] = useState(null);
