@@ -15,7 +15,7 @@ const cartRoutes = require("./routes/cartRoutes");
 const wishlistRoutes = require("./routes/wishlistRoutes");
 
 const restaurantRoutes = require("./routes/restaurantRoutes");
-const menuRoutes = require("./routes/MenuRoutes");
+const menuRoutes = require("./routes/menuRoutes");
 const orderRoutes = require("./routes/orderRoutes");
 const customerRoutes = require("./routes/customerRoutes");
 
