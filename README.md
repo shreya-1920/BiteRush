@@ -402,49 +402,52 @@ CLIENT_URL=http://localhost:5173
 
 ## 🏠 Landing Page
 
-_Add Screenshot_
+
 ![landing-page](screenshots/landing-page.png)
 ---
 
 ## 🍴 Restaurants
 
-_Add Screenshot_
+![Restaurants](screenshots/restaurants-page.png)
+
 
 ---
 
 ## 🛒 Cart
 
-_Add Screenshot_
+![Cart](screenshots/cart-page.png)
+
 
 ---
 
 ## 💳 Checkout
 
-_Add Screenshot_
+![Checkout](screenshots/checkout-page.png)
+
 
 ---
 
 ## 🔄 Smart Reorder
 
-_Add Screenshot_
-
+![Smart Reorder](screenshots/smart-reorder.png)
 ---
 
 ## 🤖 AI Recommendations
 
-_Add Screenshot_
+![AI Recommendations](screenshots/ai-reccos.png)
 
 ---
 
 ## 🛠 Admin Dashboard
 
-_Add Screenshot_
+![Admin Dashboard](screenshots/admin-dashboard.png)
+
 
 ---
 
 ## 🍽 Restaurant Dashboard
 
-_Add Screenshot_
+![Restaurant Dashboard](screenshots/restaurants-dashboard.png)
 
 ---
 
