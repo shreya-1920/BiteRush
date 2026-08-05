@@ -711,12 +711,14 @@ const handleSaveAddress = async () => {
     />
 
     <button
-        className="apply-btn"
-        onClick={applyCoupon}
-        disabled={!promo}
-    >
-        Apply
-    </button>
+    className={`checkout-apply-btn ${
+        appliedCoupon === promo ? "applied" : ""
+    }`}
+    onClick={applyCoupon}
+    disabled={!promo || appliedCoupon === promo}
+>
+    {appliedCoupon === promo ? "Applied ✓" : "Apply"}
+</button>
 
 </div>
 

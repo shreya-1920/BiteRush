@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
 import MealRecommendationCard from "./MealRecommendationCard";
 import { getRecommendations } from "../services/recommendationServices";
-
+import { useCart } from "../Context/CartContext";
 function RecommendedItems() {
 
     const [meals, setMeals] = useState([]);
     const [reason, setReason] = useState("");
-
+const { cartItems } = useCart();
     useEffect(() => {
 
         fetchRecommendations();
@@ -34,7 +34,12 @@ function RecommendedItems() {
     };
 
     if (meals.length === 0) return null;
-
+const filteredMeals = meals.filter(
+  (meal) =>
+    !cartItems.some(
+      (cartItem) => cartItem.productId === meal._id
+    )
+);
     return (
 
         <div className="recommended-section">
@@ -49,7 +54,7 @@ function RecommendedItems() {
 
             <div className="recommend-grid">
 
-                {meals.map((meal) => (
+                {filteredMeals.map((meal) => (
 
                     <MealRecommendationCard
                         key={meal._id}

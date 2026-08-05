@@ -275,11 +275,11 @@ export default function About() {
         Ordering your favorite meal has never been easier.
     </p>
 
-    <div className="steps">
+    <div className="about-steps">
 
-        <div className="step">
+        <div className="about-step">
 
-            <div className="step-icon">🍽️</div>
+            <div className="about-step-icon">🍽️</div>
 
             <h3>Browse</h3>
 
@@ -289,9 +289,9 @@ export default function About() {
 
         </div>
 
-        <div className="step">
+        <div className="about-step">
 
-            <div className="step-icon">🛒</div>
+            <div className="about-step-icon">🛒</div>
 
             <h3>Order</h3>
 
@@ -301,9 +301,9 @@ export default function About() {
 
         </div>
 
-        <div className="step">
+        <div className="about-step">
 
-            <div className="step-icon">🚴</div>
+            <div className="about-step-icon">🚴</div>
 
             <h3>Delivery</h3>
 
@@ -313,9 +313,9 @@ export default function About() {
 
         </div>
 
-        <div className="step">
+        <div className="about-step">
 
-            <div className="step-icon">😋</div>
+            <div className="about-step-icon">😋</div>
 
             <h3>Enjoy</h3>
 

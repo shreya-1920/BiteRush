@@ -195,7 +195,7 @@ const cartItem = cartItems.find(
 
 const quantity = cartItem ? cartItem.quantity : 0;
             console.log("Cart Items:", cartItems);
-console.log("Current Item ID:", item.id);
+console.log("Current Item ID:", );
 
             return (
 

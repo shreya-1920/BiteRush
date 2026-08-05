@@ -17,7 +17,41 @@
     margin-top:60px;
     margin-bottom: 80px;
 }
+.apply-btn.applied{
+    background:#22c55e;
+    color:#fff;
+    cursor:not-allowed;
+}
 
+.apply-btn.applied:hover{
+    background:#22c55e;
+    transform:none;
+}
+.checkout-apply-btn{
+    width:180px;
+    height:64px;
+    background:var(--primary);
+    color:#fff;
+    border:none;
+    border-radius:0 18px 18px 0;
+    font-size:17px;
+    font-weight:700;
+    cursor:pointer;
+    transition:.3s;
+}
+
+.checkout-apply-btn:hover{
+    background:#e54735;
+}
+
+.checkout-apply-btn.applied{
+    background:#22c55e;
+    cursor:not-allowed;
+}
+
+.checkout-apply-btn.applied:hover{
+    background:#22c55e;
+}
 /* ===========================
         HERO
 =========================== */
