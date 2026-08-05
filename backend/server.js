@@ -32,7 +32,15 @@ mongoose
 
 // ==================== Middleware ====================
 
-app.use(cors());
+app.use(
+  cors({
+    origin: [
+      "http://localhost:5173",
+      "https://bite-rush-umber.vercel.app/",
+    ],
+    credentials: true,
+  })
+);
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 

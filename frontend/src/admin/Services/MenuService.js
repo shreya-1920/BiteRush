@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API = "http://localhost:5000/api/menu";
+const API = `${import.meta.env.VITE_API_URL}/api/menu`;
 
 // Get all menu items
 export const getMenus = () => {
