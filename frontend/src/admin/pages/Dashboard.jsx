@@ -20,7 +20,7 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
 import "../styles/statCard.css";
-import { getDashboardStats } from "../services/AdminDashboardServices";
+import { getDashboardStats } from "../Services/AdminDashboardServices";
 
 function Dashboard() {
   const navigate = useNavigate();

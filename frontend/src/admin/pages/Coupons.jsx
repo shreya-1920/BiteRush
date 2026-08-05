@@ -6,12 +6,12 @@ import {
   getAllCoupons,
   deleteCoupon,
   toggleCoupon,
-} from "../services/AdminCouponServices";
+} from "../Services/AdminCouponServices";
 
 import { useSearch } from "../context/SearchContext";
-import Modal from "../components/Modal";
-import ConfirmModal from "../components/ConfirmModal";
-import CouponForm from "../components/forms/CouponForm";
+import Modal from "../Components/Modal";
+import ConfirmModal from "../Components/ConfirmModal";
+import CouponForm from "../Components/forms/CouponForm";
 function Coupons() {
 const [modalType, setModalType] = useState(null);
 const [selectedCoupon, setSelectedCoupon] = useState(null);
