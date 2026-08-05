@@ -349,7 +349,7 @@ GET /api/recommendations
 ## Clone Repository
 
 ```bash
-git clone https://github.com/yourusername/BiteRush.git
+git clone https://github.com/shreya-1920/BiteRush.git
 ```
 
 ---
@@ -400,57 +400,87 @@ CLIENT_URL=http://localhost:5173
 
 # 📸 Screenshots
 
+---
+
 ## 🏠 Landing Page
 
+Beautiful and modern landing page with featured restaurants, categories, and search.
 
-![landing-page](screenshots/landing-page.png)
+<p align="center">
+  <img src="screenshots/landing-page.png" width="900" alt="Landing Page">
+</p>
+
 ---
 
 ## 🍴 Restaurants
 
-![Restaurants](screenshots/restaurants-page.png)
+Browse restaurants, search by cuisine, and explore available food options.
 
+<p align="center">
+  <img src="screenshots/restaurants-page.png" width="900" alt="Restaurants Page">
+</p>
 
 ---
 
 ## 🛒 Cart
 
-![Cart](screenshots/cart-page.png)
+Add, remove, and update items before proceeding to checkout.
 
+<p align="center">
+  <img src="screenshots/cart-page.png" width="900" alt="Cart Page">
+</p>
 
 ---
 
 ## 💳 Checkout
 
-![Checkout](screenshots/checkout-page.png)
+Simple and secure checkout experience with address and order summary.
 
+<p align="center">
+  <img src="screenshots/checkout-page.png" width="900" alt="Checkout Page">
+</p>
 
 ---
 
 ## 🔄 Smart Reorder
 
-![Smart Reorder](screenshots/smart-reorder.png)
+Instantly reorder your previous meals with intelligent cart validation.
+
+<p align="center">
+  <img src="screenshots/smart-reorder.png" width="900" alt="Smart Reorder">
+</p>
+
 ---
 
-## 🤖 AI Recommendations
+## 🤖 AI Meal Recommendations
 
-![AI Recommendations](screenshots/ai-reccos.png)
+Personalized recommendations generated using user order history and preferences.
+
+<p align="center">
+  <img src="screenshots/ai-reccos.png" width="900" alt="AI Recommendations">
+</p>
 
 ---
 
 ## 🛠 Admin Dashboard
 
-![Admin Dashboard](screenshots/admin-dashboard.png)
+Manage restaurants, customers, coupons, and platform analytics from a centralized dashboard.
 
+<p align="center">
+  <img src="screenshots/admin-dashboard.png" width="900" alt="Admin Dashboard">
+</p>
 
 ---
 
 ## 🍽 Restaurant Dashboard
 
-![Restaurant Dashboard](screenshots/restaurants-dashboard.png)
+Restaurant partners can manage menus, monitor orders, and track business performance.
+
+<p align="center">
+  <img src="screenshots/restaurants-dashboard.png" width="900" alt="Restaurant Dashboard">
+</p>
 
 ---
-
 # 🌟 Project Highlights
 
 - ✅ Full Stack MERN Application
