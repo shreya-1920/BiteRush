@@ -403,7 +403,7 @@ CLIENT_URL=http://localhost:5173
 ## 🏠 Landing Page
 
 _Add Screenshot_
-
+![landing-page](screenshots/landing-page.png)
 ---
 
 ## 🍴 Restaurants
