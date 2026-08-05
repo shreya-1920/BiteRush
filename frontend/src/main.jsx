@@ -3,7 +3,7 @@ import { BrowserRouter } from "react-router-dom";
 
 import App from "./App";
 import { CartProvider } from "./Context/CartContext";
-import { LocationProvider } from "./context/LocationContext";
+import { LocationProvider } from "./Context/LocationContext";
 import { SearchProvider } from "./admin/context/SearchContext";
 
 import "bootstrap/dist/css/bootstrap.min.css";
