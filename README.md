@@ -9,7 +9,11 @@
 BiteRush is a modern full-stack food ordering web application that connects customers with restaurants through an intuitive interface. It features secure authentication, restaurant and admin dashboards, AI-powered meal recommendations, and a Smart Reorder system to provide a seamless food ordering experience.
 
 ---
+## 🚀 Live Demo
 
+🔗 https://bite-rush-umber.vercel.app
+
+---
 ### 🚀 Built With
 
 React • Bootstrap • Node.js • Express.js • MongoDB • JWT • Mongoose • Multer
