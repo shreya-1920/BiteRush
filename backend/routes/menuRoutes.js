@@ -9,7 +9,7 @@ const {
   addMenu,
   updateMenu,
   deleteMenu,
-} = require("../controllers/MenuController");
+} = require("../controllers/menuController");
 
 router.get("/", getMenus);
 router.get("/restaurant/:restaurantId", getRestaurantMenu);
