@@ -263,9 +263,9 @@ const steps = [
         "Fresh food delivered to your doorstep. Enjoy every bite!",
     },
   ];
- const restaurants = [
+const restaurants = [
   {
-    id: 1,
+    id: "6a5f711cc2181f5bef6f6988", // The Smokehouse Grill
     image: burgerImg2,
     badge: "Top Rated",
     name: "The Smokehouse Grill",
@@ -277,7 +277,7 @@ const steps = [
   },
 
   {
-    id: 2,
+    id: "6a5f711cc2181f5bef6f6989", // Napoli Express
     image: pizzaImg2,
     badge: "Popular",
     name: "Napoli Express",
@@ -289,7 +289,7 @@ const steps = [
   },
 
   {
-    id: 3,
+    id: "6a5f711cc2181f5bef6f698a", // Sakura Kitchen
     image: ramenImg,
     badge: "New",
     name: "Sakura Kitchen",
@@ -301,7 +301,7 @@ const steps = [
   },
 
   {
-    id: 4,
+    id: "6a5f711cc2181f5bef6f698f", // Green Bowl
     image: saladImg,
     badge: "Trending",
     name: "Green Bowl Co.",

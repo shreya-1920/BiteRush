@@ -195,3 +195,28 @@
 
     background:var(--primary-hover);
 }
+.wishlist-back{
+    max-width:1200px;
+    margin:40px auto 20px;
+    padding:0 20px;
+}
+
+.wishlist-back button{
+    display:flex;
+    align-items:center;
+    gap:10px;
+
+    border:none;
+    background:none;
+
+    color:var(--primary);
+    font-size:18px;
+    font-weight:600;
+
+    cursor:pointer;
+    transition:.3s;
+}
+
+.wishlist-back button:hover{
+    transform:translateX(-4px);
+}

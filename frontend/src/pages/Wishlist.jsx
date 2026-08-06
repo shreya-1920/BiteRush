@@ -7,9 +7,12 @@ import {
   getWishlist,
   removeWishlist,
 } from "../services/WishlistService";
+import { useNavigate } from "react-router-dom";
+import { FaArrowLeft } from "react-icons/fa";
+
 
 const Wishlist = () => {
-
+const navigate = useNavigate(); 
   const [wishlist, setWishlist] = useState([]);
 
   const fetchWishlist = async () => {
@@ -40,7 +43,12 @@ const Wishlist = () => {
 
   return (
     <div className="wishlist-page">
-
+<div className="wishlist-back">
+    <button onClick={() => navigate(-1)}>
+        <FaArrowLeft />
+        <span>Back</span>
+    </button>
+</div>
       <div className="wishlist-header">
         <h1>My Wishlist</h1>
         <p>Your favourite restaurants saved for later ❤️</p>
