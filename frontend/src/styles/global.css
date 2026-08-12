@@ -4472,13 +4472,13 @@ color:#7a7a7a;
 
 }
 
-.stars{
-    display:flex;
-    align-items:center;
-    gap:3px;
-    color:#FFC107;
-    flex-shrink:0;
-    margin-left:20px;
+.stars {
+    display: flex;
+    align-items: center;
+    gap: 3px;
+    color: #FFC107;
+    flex-shrink: 1;
+    margin-left: 10px;
 }
 .customer{
 
@@ -4532,19 +4532,7 @@ color:#777;
 
 }
 
-.stars{
 
-display:flex;
-
-gap:2px;
-
-font-size:18px;
-
-color:#FFC107;
-
-flex-shrink:0;
-
-}
 .testimonial-card.active .customer-info span{
     color:rgba(255,255,255,.8);
 }
@@ -4782,4 +4770,12 @@ box-shadow:0 5px 20px rgba(0,0,0,.06);
     color:#E6483D;
     font-size:30px;
     font-weight:700;
+}
+
+@media (max-width: 768px) {
+    .stars {
+        font-size: 14px;
+        gap: 1px;
+        margin-left: 5px;
+    }
 }
