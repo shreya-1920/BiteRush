@@ -25,22 +25,13 @@ export default function CartSummary({
 
     const handleCheckout = () => {
 
-        if (cartItems.length === 0) {
-            toast.error("Your cart is empty!");
-            return;
-        }
+    if (cartItems.length === 0) {
+        toast.error("Your cart is empty!");
+        return;
+    }
 
-        const token = localStorage.getItem("token");
-
-        if (!token) {
-            toast.warning("Please login first!");
-            navigate("/auth");
-            return;
-        }
-
-        navigate("/checkout");
-    };
-
+    navigate("/checkout");
+};
     return (
         <div className="cart-summary">
 

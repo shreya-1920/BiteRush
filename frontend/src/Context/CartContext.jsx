@@ -19,16 +19,76 @@ const addToCart = async (item) => {
 
     console.log("Item received:", item);
 
+    const token = localStorage.getItem("token");
+
+    // ================================
+    // GUEST USER
+    // ================================
+    if (!token) {
+
+        const guestCart =
+            JSON.parse(localStorage.getItem("guestCart")) || [];
+
+        const productId = item._id || item.id;
+
+        const existingItem = guestCart.find(
+            (cartItem) =>
+                String(cartItem.productId) === String(productId)
+        );
+
+        let updatedCart;
+
+        if (existingItem) {
+
+            updatedCart = guestCart.map((cartItem) =>
+                String(cartItem.productId) === String(productId)
+                    ? {
+                        ...cartItem,
+                        quantity: cartItem.quantity + 1
+                    }
+                    : cartItem
+            );
+
+        } else {
+
+            updatedCart = [
+                ...guestCart,
+                {
+                    productId: productId,
+                    restaurant: item.restaurant,
+                    name: item.name,
+                    image: item.image,
+                    price: item.price,
+                    quantity: 1
+                }
+            ];
+        }
+
+        localStorage.setItem(
+            "guestCart",
+            JSON.stringify(updatedCart)
+        );
+
+        setCartItems(updatedCart);
+
+        toast.success("Added to Cart!");
+
+        return;
+    }
+
+    // ================================
+    // LOGGED-IN USER
+    // ================================
     try {
 
         const res = await addCart({
-    restaurant: item.restaurant,
-    productId: item._id || item.id,
-    name: item.name,
-    image: item.image,
-    price: item.price,
-    quantity: 1,
-});
+            restaurant: item.restaurant,
+            productId: item._id || item.id,
+            name: item.name,
+            image: item.image,
+            price: item.price,
+            quantity: 1,
+        });
 
         console.log("API Response:", res);
 
@@ -36,16 +96,16 @@ const addToCart = async (item) => {
 
         toast.success("Added to Cart!");
 
-    }
+    } catch (err) {
 
-    catch (err) {
-
-        console.log("Error:", err.response?.data || err);
+        console.log(
+            "Error:",
+            err.response?.data || err
+        );
 
         toast.error("Failed to add item.");
 
     }
-
 };
 const fetchCart = async () => {
   try {
@@ -60,11 +120,19 @@ const fetchCart = async () => {
   }
 };
 useEffect(() => {
-  const token = localStorage.getItem("token"); // customer token
 
-  if (!token) return;
+    const token = localStorage.getItem("token");
 
-  fetchCart();
+    if (token) {
+        fetchCart();
+    } else {
+
+        const guestCart =
+            JSON.parse(localStorage.getItem("guestCart")) || [];
+
+        setCartItems(guestCart);
+    }
+
 }, []);
 useEffect(() => {
   console.log("Cart State:", cartItems);
@@ -78,78 +146,173 @@ useEffect(() => {
    
 const increaseQuantity = async (item) => {
 
-    try{
+    const token = localStorage.getItem("token");
 
-        await updateCart(
+    // ================================
+    // GUEST USER
+    // ================================
+    if (!token) {
 
-            item._id,
+        const guestCart =
+            JSON.parse(localStorage.getItem("guestCart")) || [];
 
-            item.quantity + 1
-
+        const updatedCart = guestCart.map((cartItem) =>
+            String(cartItem.productId) === String(item.productId)
+                ? {
+                    ...cartItem,
+                    quantity: cartItem.quantity + 1
+                }
+                : cartItem
         );
 
-        fetchCart();
+        localStorage.setItem(
+            "guestCart",
+            JSON.stringify(updatedCart)
+        );
 
+        setCartItems(updatedCart);
+
+        return;
     }
 
-    catch(err){
+    // ================================
+    // LOGGED-IN USER
+    // ================================
+    try {
+
+        await updateCart(
+            item._id,
+            item.quantity + 1
+        );
+
+        await fetchCart();
+
+    } catch (err) {
 
         console.log(err);
 
     }
-
 };
 
 const decreaseQuantity = async (item) => {
 
-    try{
+    const token = localStorage.getItem("token");
 
-        if(item.quantity===1){
+    // ================================
+    // GUEST USER
+    // ================================
+    if (!token) {
+
+        const guestCart =
+            JSON.parse(localStorage.getItem("guestCart")) || [];
+
+        let updatedCart;
+
+        // If quantity is 1, remove the item
+        if (item.quantity === 1) {
+
+            updatedCart = guestCart.filter(
+                (cartItem) =>
+                    String(cartItem.productId) !==
+                    String(item.productId)
+            );
+
+        } else {
+
+            // Otherwise decrease quantity
+            updatedCart = guestCart.map(
+                (cartItem) =>
+                    String(cartItem.productId) ===
+                    String(item.productId)
+                        ? {
+                            ...cartItem,
+                            quantity: cartItem.quantity - 1
+                        }
+                        : cartItem
+            );
+        }
+
+        localStorage.setItem(
+            "guestCart",
+            JSON.stringify(updatedCart)
+        );
+
+        setCartItems(updatedCart);
+
+        return;
+    }
+
+    // ================================
+    // LOGGED-IN USER
+    // ================================
+    try {
+
+        if (item.quantity === 1) {
 
             await removeCart(item._id);
 
-        }
-
-        else{
+        } else {
 
             await updateCart(
-
                 item._id,
-
-                item.quantity-1
-
+                item.quantity - 1
             );
 
         }
 
-        fetchCart();
+        await fetchCart();
 
-    }
-
-    catch(err){
+    } catch (err) {
 
         console.log(err);
 
     }
-
 };
 
 const removeFromCart = async (item) => {
 
-    try{
+    const token = localStorage.getItem("token");
+
+    // ================================
+    // GUEST USER
+    // ================================
+    if (!token) {
+
+        const guestCart =
+            JSON.parse(localStorage.getItem("guestCart")) || [];
+
+        const updatedCart = guestCart.filter(
+            (cartItem) =>
+                String(cartItem.productId) !==
+                String(item.productId)
+        );
+
+        localStorage.setItem(
+            "guestCart",
+            JSON.stringify(updatedCart)
+        );
+
+        setCartItems(updatedCart);
+
+        toast.info("Item removed from cart.");
+
+        return;
+    }
+
+    // ================================
+    // LOGGED-IN USER
+    // ================================
+    try {
 
         await removeCart(item._id);
 
-        fetchCart();
+        await fetchCart();
 
-    }
-
-    catch(err){
+    } catch (err) {
 
         console.log(err);
 
     }
-
 };
     return (
 <CartContext.Provider

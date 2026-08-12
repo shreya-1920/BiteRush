@@ -76,19 +76,7 @@ const [addressForm, setAddressForm] = useState({
 
   fetchCoupons();
 }, []);
-useEffect(() => {
 
-    const token = localStorage.getItem("token");
-
-    if (!token) {
-
-        toast.warning("Please login first!");
-
-        navigate("/auth"); // or "/auth" depending on your route
-
-    }
-
-}, [navigate]);
 useEffect(() => {
 
     const fetchProfile = async () => {
@@ -141,6 +129,23 @@ useEffect(() => {
   }
 };
   const handlePlaceOrder = async () => {
+
+    const token = localStorage.getItem("token");
+
+    if (!token) {
+
+        toast.warning("Please login to place your order.");
+
+        navigate("/auth", {
+            state: {
+                from: "/checkout"
+            }
+        });
+
+        return;
+    }
+
+    
     if (!name.trim()) {
       toast.error("Please enter your name.");
 

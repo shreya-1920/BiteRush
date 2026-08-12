@@ -29,11 +29,11 @@ const orderSchema = new mongoose.Schema(
       required: true,
     },
 
-    paymentMethod: {
-      type: String,
-      enum: ["Cash", "Card", "UPI"],
-      default: "Cash",
-    },
+   paymentMethod: {
+    type: String,
+    enum: ["Cash", "Card", "UPI", "Wallet"],
+    default: "Cash",
+},
 
     paymentStatus: {
       type: String,

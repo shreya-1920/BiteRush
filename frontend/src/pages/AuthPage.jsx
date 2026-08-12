@@ -5,7 +5,7 @@ import { FaStore, FaUserShield } from "react-icons/fa";
 
 import Logo from "../assets/images/logo.png";
 /*import foodImage from "../assets/images/auth-food.png";*/
-
+import { addCart } from "../services/cartServices";
 import { useNavigate, useLocation } from "react-router-dom";
 import {
   loginUser,
@@ -123,15 +123,40 @@ const handleSubmit = async () => {
       });
 
       localStorage.setItem("token", res.data.token);
-      localStorage.setItem(
-        "user",
-        JSON.stringify(res.data.user)
-      );
 
-      toast.success("Login successful!");
+localStorage.setItem(
+    "user",
+    JSON.stringify(res.data.user)
+);
 
-      navigate("/");
-      window.location.reload();
+// Get items added before login
+const guestCart =
+    JSON.parse(localStorage.getItem("guestCart")) || [];
+
+// Move guest cart to user's cart
+for (const item of guestCart) {
+
+    await addCart({
+        restaurant: item.restaurant,
+        productId: item.productId,
+        name: item.name,
+        image: item.image,
+        price: item.price,
+        quantity: item.quantity
+    });
+}
+
+// Guest cart is now transferred
+localStorage.removeItem("guestCart");
+
+toast.success("Login successful!");
+
+navigate(
+    location.state?.from || "/",
+    { replace: true }
+);
+
+window.location.reload();
     } else {
       if (formData.password !== formData.confirmPassword) {
         toast.error("Passwords do not match!");
