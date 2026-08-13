@@ -282,3 +282,184 @@
     }
 
 }
+@media (max-width: 480px) {
+
+    html,
+    body,
+    #root {
+        width: 100%;
+        max-width: 100%;
+        overflow-x: hidden !important;
+    }
+
+    .admin-main,
+    .admin-content {
+        width: 100%;
+        max-width: 100%;
+        min-width: 0;
+        overflow-x: hidden;
+    }
+
+    .dashboard-grid,
+    .dashboard-right,
+    .dashboard-left {
+        width: 100%;
+        max-width: 100%;
+        min-width: 0;
+    }
+
+   
+}
+/* =========================
+   RESTAURANT PAGE HEADER
+========================= */
+
+.page-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+}
+
+@media (max-width: 576px) {
+
+    .page-header {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 15px;
+    }
+
+    .page-header h2 {
+        margin: 0;
+        font-size: 36px;
+    }
+
+    .page-header p {
+        margin: 5px 0 0;
+        font-size: 17px;
+    }
+
+    .page-header .admin-btn {
+        width: 100%;
+        justify-content: center;
+    }
+}
+@media (max-width: 576px) {
+
+    .admin-orders-table-card {
+        width: 100%;
+        overflow: hidden;
+    }
+
+    .admin-orders-table-wrapper {
+        width: 100%;
+        overflow-x: auto;
+    }
+
+    .admin-orders-table {
+        min-width: 750px;
+    }
+
+    .admin-orders-table th,
+    .admin-orders-table td {
+        padding: 16px 14px;
+    }
+}
+@media (max-width: 576px) {
+
+    .admin-main,
+    .admin-content {
+        width: 100%;
+        max-width: 100%;
+        min-width: 0;
+        overflow-x: hidden;
+    }
+
+    .admin-customers-table-card {
+        width: 100%;
+        max-width: 100%;
+        overflow: hidden;
+    }
+
+    .admin-customers-table-wrapper {
+        width: 100%;
+        max-width: 100%;
+        overflow-x: auto;
+    }
+
+    .admin-customers-table {
+        min-width: 700px;
+    }
+}
+@media (max-width: 480px) {
+
+    .admin-coupons-table-card {
+        width: 100%;
+        max-width: 100%;
+        overflow: hidden;
+    }
+
+    .admin-coupons-table-wrapper {
+        width: 100%;
+        overflow-x: auto;
+    }
+
+    .admin-coupons-table {
+        min-width: 650px;
+    }
+}
+@media (max-width: 480px) {
+
+    .admin-messages-table-card {
+        width: 100%;
+        max-width: 100%;
+        overflow: hidden;
+    }
+
+    .admin-messages-table-wrapper {
+        width: 100%;
+        max-width: 100%;
+        overflow-x: auto;
+    }
+
+    .admin-messages-table {
+        min-width: 700px;
+    }
+}
+/* ==========================================
+   ADMIN - 576px SIDE SPACING FIX
+========================================== */
+
+@media (max-width: 576px) {
+
+    .admin-main,
+    .admin-content {
+        width: 100%;
+        max-width: 100%;
+        min-width: 0;
+        box-sizing: border-box;
+    }
+
+    .admin-content {
+        padding: 20px 16px !important;
+        overflow-x: hidden;
+    }
+
+    /* Make every dashboard section respect the padding */
+    .admin-content > *,
+    .dashboard,
+    .dashboard-grid,
+    .dashboard-left,
+    .dashboard-right,
+    .admin-card {
+        width: 100%;
+        max-width: 100%;
+        min-width: 0;
+        box-sizing: border-box;
+    }
+
+    /* Prevent grid children from forcing width */
+    .dashboard-grid > * {
+        min-width: 0;
+    }
+}

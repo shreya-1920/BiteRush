@@ -436,7 +436,53 @@ margin-bottom: 10px;
     justify-content:center;
     font-size:18px;
 }
+/* ================================
+   ADMIN PROFILE
+================================ */
 
+/* ================================
+   ADMIN PROFILE
+================================ */
+
+.profile-page {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+/* Header */
+.profile-header {
+    position: relative;
+    z-index: 2;
+    margin-bottom: 35px !important;
+}
+
+.profile-header h2 {
+    margin: 0 0 8px;
+    font-size: 40px;
+}
+
+.profile-header p {
+    margin: 0;
+    font-size: 18px;
+    color: #6B7280;
+}
+
+/* Profile Card */
+.profile-card {
+    position: relative;
+    z-index: 1;
+
+    width: 100%;
+    margin-top: 0 !important;
+
+    background: #fff;
+    border-radius: 24px;
+    padding: 40px;
+
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+    border: 1px solid #F1F5F9;
+}
 .admin-profile{
     display:flex;
     align-items:center;
@@ -3304,4 +3350,57 @@ transition:.25s;
 .admin-message-btn.delete-btn{
     background:#FEE2E2;
     color:#DC2626;
+}
+.admin-customers-table-wrapper {
+    width: 100%;
+    overflow-x: auto;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+}
+
+.admin-customers-table {
+    width: 100%;
+    min-width: 700px;
+    border-collapse: collapse;
+}
+
+.admin-customers-table th,
+.admin-customers-table td {
+    white-space: nowrap;
+}
+.admin-coupons-table-wrapper {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: auto;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+}
+
+.admin-coupons-table {
+    width: 100%;
+    min-width: 650px;
+    border-collapse: collapse;
+}
+
+.admin-coupons-table th,
+.admin-coupons-table td {
+    white-space: nowrap;
+}
+.admin-messages-table-wrapper {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: auto;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+}
+
+.admin-messages-table {
+    width: 100%;
+    min-width: 700px;
+    border-collapse: collapse;
+}
+
+.admin-messages-table th,
+.admin-messages-table td {
+    white-space: nowrap;
 }

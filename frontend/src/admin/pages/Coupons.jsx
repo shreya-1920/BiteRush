@@ -78,7 +78,7 @@ const filteredCoupons = coupons.filter((coupon) => {
       </div>
 
       <div className="admin-coupons-table-card">
-
+  <div className="admin-coupons-table-wrapper">
         <table className="admin-coupons-table">
 
           <thead>
@@ -239,6 +239,7 @@ coupon.isActive ? "active" : "inactive"
 
         </table>
 
+      </div>
       </div>
 <Modal
     open={modalType === "add" || modalType === "edit"}

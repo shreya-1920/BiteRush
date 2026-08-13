@@ -4981,3 +4981,301 @@ color:#ff7a00;
     }
 
 }
+/* =====================================================
+   RESTAURANT DASHBOARD RESPONSIVE FIX
+   ===================================================== */
+
+/* ---------- TABLET ---------- */
+@media (max-width: 900px) {
+
+    /* Dashboard stats */
+    .rp-dashboard-stats {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 18px;
+    }
+
+    /* Main dashboard grid */
+    .rp-dashboard-grid {
+        grid-template-columns: 1fr;
+    }
+
+    /* Bottom section */
+    .rp-dashboard-bottom {
+        grid-template-columns: 1fr;
+    }
+
+    /* Sales card */
+    .rp-sales-card {
+        height: auto;
+        min-height: 400px;
+    }
+
+    /* Popular card */
+    .rp-popular-card {
+        height: auto;
+    }
+
+}
+
+
+/* ---------- MOBILE ---------- */
+@media (max-width: 600px) {
+
+    /* Dashboard container */
+    .rp-dashboard {
+        gap: 20px;
+        width: 100%;
+        max-width: 100%;
+    }
+
+    /* Dashboard header */
+    .rp-dashboard-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+
+    .rp-dashboard-header h1 {
+        font-size: 28px;
+    }
+
+    .rp-dashboard-header p {
+        font-size: 14px;
+    }
+
+    .rp-dashboard-date {
+        text-align: left;
+    }
+
+
+    /* ==============================
+       STAT CARDS
+       ============================== */
+
+    .rp-dashboard-stats {
+        grid-template-columns: 1fr;
+        gap: 16px;
+        width: 100%;
+    }
+
+    .rp-stat-card {
+        width: 100%;
+        min-width: 0;
+        min-height: 120px;
+        padding: 18px;
+    }
+
+    .rp-stat-card h2 {
+        font-size: 30px;
+    }
+
+
+    /* ==============================
+       MAIN GRID
+       ============================== */
+
+    .rp-dashboard-grid {
+        grid-template-columns: 1fr;
+        width: 100%;
+        gap: 18px;
+    }
+
+
+    /* ==============================
+       SALES CARD
+       ============================== */
+
+    .rp-sales-card {
+        width: 100%;
+        min-width: 0;
+        height: auto;
+        min-height: 380px;
+        padding: 20px;
+        border-radius: 20px;
+    }
+
+    .rp-sales-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+        margin-bottom: 20px;
+    }
+
+    .rp-sales-header h3 {
+        font-size: 21px;
+    }
+
+    .rp-sales-header p {
+        font-size: 14px;
+    }
+
+    .rp-sales-header select {
+        width: 100%;
+        height: 44px;
+    }
+
+    .rp-sales-chart {
+        width: 100%;
+        max-width: 100%;
+        height: 260px;
+        margin-top: 10px;
+        overflow: hidden;
+    }
+
+
+    /* ==============================
+       POPULAR DISHES
+       ============================== */
+
+    .rp-popular-card {
+        width: 100%;
+        min-width: 0;
+        padding: 20px;
+        border-radius: 20px;
+    }
+
+    .rp-popular-item {
+        gap: 12px;
+        padding: 14px 0;
+    }
+
+    .rp-popular-img {
+        width: 58px;
+        height: 58px;
+        border-radius: 14px;
+    }
+
+    .rp-popular-info h4 {
+        font-size: 15px;
+    }
+
+    .rp-popular-info span {
+        font-size: 13px;
+    }
+
+    .rp-popular-rating {
+        font-size: 16px;
+    }
+
+
+    /* ==============================
+       BOTTOM GRID
+       ============================== */
+
+    .rp-dashboard-bottom {
+        grid-template-columns: 1fr;
+        width: 100%;
+        gap: 18px;
+        margin-top: 0;
+    }
+
+    .rp-orders-card,
+    .rp-actions-card {
+        width: 100%;
+        min-width: 0;
+        padding: 20px;
+    }
+
+
+    /* ==============================
+       QUICK ACTIONS
+       ============================== */
+
+    .rp-actions-list {
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+    }
+
+    .rp-action-btn {
+        height: 100px;
+    }
+
+    .rp-action-btn svg {
+        font-size: 28px;
+    }
+
+
+    /* ==============================
+       RECENT ORDERS
+       ============================== */
+
+    .rp-orders-card {
+        overflow-x: auto;
+    }
+
+    .rp-orders-table {
+        min-width: 650px;
+    }
+}
+/* ==========================================
+   RESTAURANT ORDERS - 480px FIX
+========================================== */
+
+@media (max-width: 600px) {
+
+    /* Prevent the page itself from creating horizontal scroll */
+    .ro-page {
+        width: 100%;
+        max-width: 100%;
+        min-width: 0;
+        padding: 16px;
+        box-sizing: border-box;
+        overflow-x: hidden;
+    }
+
+    /* Header */
+    .ro-header {
+        width: 100%;
+        max-width: 100%;
+    }
+
+    .ro-header h1 {
+        font-size: 30px;
+        margin: 0;
+    }
+
+    .ro-header p {
+        font-size: 14px;
+    }
+
+
+    /* ======================================
+       SUMMARY CARDS
+    ====================================== */
+
+    .ro-summary {
+        display: flex !important;
+        flex-direction: column !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        min-width: 0 !important;
+        gap: 14px;
+    }
+
+    .summary-card {
+        width: 100% !important;
+        max-width: 100% !important;
+        min-width: 0 !important;
+        box-sizing: border-box;
+    }
+
+
+    /* ======================================
+       TABLE
+    ====================================== */
+
+    .ro-card {
+        width: 100%;
+        max-width: 100%;
+        min-width: 0;
+        overflow-x: auto;
+        overflow-y: hidden;
+        box-sizing: border-box;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .ro-table {
+        min-width: 800px;
+        width: 800px;
+    }
+}

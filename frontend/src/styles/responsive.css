@@ -1940,9 +1940,367 @@ font-size:16px;
 
 @media (max-width: 480px) {
 
-    .how-it-works-container {
-        grid-template-columns: 1fr;
-        gap: 50px;
+    .steps {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 15px;
+        margin-top: 50px;
     }
 
+    .icon-box {
+        width: 65px;
+        height: 65px;
+        font-size: 28px;
+        margin-bottom: 20px;
+    }
+
+    .step-number {
+        width: 28px;
+        height: 28px;
+        font-size: 14px;
+        top: -6px;
+        right: -5px;
+        border-width: 2px;
+    }
+
+    .progress-line {
+        top: 32px;
+        left: 15%;
+        width: 70%;
+        height: 2px;
+    }
+
+    .step-label {
+        font-size: 10px;
+        letter-spacing: 2px;
+        margin-bottom: 10px;
+    }
+
+    .step-card h3 {
+        font-size: 25px;
+        line-height: 1.2;
+        margin-bottom: 12px;
+    }
+
+    .step-description {
+        font-size: 13px;
+        line-height: 1.6;
+        max-width: 120px;
+    }
+
+    .section-heading {
+        margin-bottom: 30px;
+    }
+
+    .section-heading h2 {
+        font-size: 38px;
+        margin-bottom: 30px;
+    }
+}
+
+@media (max-width: 375px) {
+
+    .categories .category-card {
+        height: 350px !important;
+        overflow: hidden;
+    }
+
+    .categories .category-image {
+        height: 180px !important;
+    }
+
+    .categories .category-card h4 {
+        font-size: 20px;
+        line-height: 1.2;
+        margin: 14px 0 6px;
+    }
+
+    .categories .category-content p {
+        display: block;
+        font-size: 14px;
+        line-height: 1.4;
+        margin: 0;
+        padding: 0;
+    }
+
+}
+
+@media (max-width: 480px) {
+
+    .hero-search {
+        padding: 12px;
+        border-radius: 18px;
+        gap: 8px;
+    }
+
+    .hero-search .location-select {
+        padding: 6px 0;
+        font-size: 16px;
+    }
+
+    .hero-search input {
+        height: 38px;
+        font-size: 14px;
+    }
+
+    .hero-search button {
+        height: 42px;
+        font-size: 15px;
+    }
+
+}
+/* Thin scrollbar */
+::-webkit-scrollbar {
+    width: 6px;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #ff5a3d;
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #e94b32;
+}
+@media (max-width: 480px) {
+    .hero-search {
+        padding: 12px;
+        border-radius: 18px;
+        gap: 8px;
+    }
+}
+@media (max-width: 480px) {
+
+    .page-banner {
+        transform: translateX(8px);
+    }
+
+    .hero-search {
+        transform: translateX(8px);
+    }
+
+}@media (max-width: 480px) {
+
+    .details-header {
+        width: 92% !important;
+        margin: -40px auto 0 !important;
+
+        display: block !important;
+        padding: 30px 20px !important;
+
+        text-align: center;
+    }
+
+    .details-logo {
+        width: 120px !important;
+        height: 120px !important;
+
+        flex-shrink: 0 !important;
+
+        margin: 0 auto 25px !important;
+    }
+
+    .details-logo img {
+        width: 100% !important;
+        height: 100% !important;
+        object-fit: cover !important;
+    }
+
+    .details-content {
+        width: 100% !important;
+    }
+
+    .details-content h1 {
+        font-size: 38px !important;
+        line-height: 1.15;
+    }
+
+    .details-meta {
+        justify-content: center !important;
+    }
+}
+@media (max-width: 480px) {
+
+    /* =========================
+       ABOUT HERO
+    ========================= */
+
+    .about-hero {
+        padding: 40px 20px !important;
+    }
+
+    .about-hero-content {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 35px !important;
+    }
+
+    .about-hero-left {
+        width: 100% !important;
+        text-align: center;
+    }
+
+    .about-hero-right {
+        width: 100% !important;
+        display: flex !important;
+        justify-content: center !important;
+    }
+
+    .about-hero-image {
+        width: 100% !important;
+        max-width: 320px !important;
+        height: auto !important;
+        object-fit: cover !important;
+        margin: 0 auto !important;
+    }
+
+
+    /* =========================
+       HOW IT WORKS - 2 x 2
+    ========================= */
+
+    .about-steps {
+        display: grid !important;
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 35px 20px !important;
+    }
+
+    .about-step {
+        width: 100% !important;
+        text-align: center !important;
+    }
+
+    .about-step-icon {
+        width: 70px;
+        height: 70px;
+        margin: 0 auto 15px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 32px;
+    }
+
+    .about-step h3 {
+        font-size: 22px !important;
+        margin-bottom: 8px;
+    }
+
+    .about-step p {
+        font-size: 14px !important;
+        line-height: 1.6;
+    }
+
+}
+@media (max-width: 480px) {
+
+    /* =========================
+       ABOUT HERO MOBILE
+    ========================= */
+
+    .about-hero {
+        padding: 30px 20px 40px !important;
+        min-height: auto !important;
+        height: auto !important;
+    }
+
+    .about-hero-content {
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        gap: 30px !important;
+        height: auto !important;
+    }
+
+    .about-hero-left {
+        width: 100% !important;
+        text-align: center !important;
+    }
+
+    .about-hero-right {
+        width: 100% !important;
+        height: auto !important;
+
+        display: flex !important;
+        justify-content: center !important;
+        align-items: center !important;
+
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+
+    .about-hero-image {
+        display: block !important;
+
+        width: 100% !important;
+        max-width: 300px !important;
+
+        height: 300px !important;
+
+        object-fit: cover !important;
+
+        margin: 0 auto !important;
+        border-radius: 24px;
+    }
+}
+
+@media (max-width: 480px) {
+
+    .contact-hero {
+        padding-top: 70px !important;
+    }
+
+}
+/* ==============================
+   CART - MOBILE COUPON
+============================== */
+
+@media (max-width: 480px) {
+
+    .br-coupon-card {
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 20px;
+        padding: 25px 20px;
+    }
+
+    .br-coupon-left {
+        width: 100%;
+        justify-content: center;
+        gap: 14px;
+    }
+
+    .br-coupon-icon {
+        width: 58px;
+        height: 58px;
+        min-width: 58px;
+        font-size: 26px;
+    }
+
+    .br-coupon-text {
+        text-align: left;
+    }
+
+    .br-coupon-text h3 {
+        font-size: 20px;
+    }
+
+    .br-coupon-text p {
+        font-size: 14px;
+    }
+
+    .coupon-right {
+        width: 100%;
+        align-items: center;
+    }
+
+    .apply-btn {
+        width: 140px;
+        height: 50px;
+        margin-left: 0;
+        font-size: 16px;
+    }
 }

@@ -61,7 +61,7 @@ const filteredOrders = orders.filter((order) => {
       
      
       <div className="admin-orders-table-card">
-
+  <div className="admin-orders-table-wrapper">
         <table className="admin-orders-table">
 
           <thead>
@@ -133,6 +133,7 @@ const filteredOrders = orders.filter((order) => {
 
         </table>
 
+      </div>
       </div>
 
 <OrderDetailsModal

@@ -69,7 +69,7 @@ const filteredCustomers = customers.filter((customer) => {
       
 
       <div className="admin-customers-table-card">
-
+ <div className="admin-customers-table-wrapper">
         <table className="admin-customers-table">
 
           <thead>
@@ -217,6 +217,7 @@ const filteredCustomers = customers.filter((customer) => {
 
         </table>
 
+      </div>
       </div>
 
 

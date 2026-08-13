@@ -13,9 +13,7 @@
 .checkout-container{
     max-width:1450px;
     width:100%;
-    margin:auto;
-    margin-top:60px;
-    margin-bottom: 80px;
+    margin: 0 auto 80px;
 }
 .apply-btn.applied{
     background:#22c55e;
@@ -1690,3 +1688,120 @@ color:var(--primary);
 
 }
 
+/* =========================================
+   CHECKOUT - MOBILE 480px
+========================================= */
+
+@media (max-width: 480px) {
+
+    /* Keep content below navbar */
+    .checkout-page {
+        padding: 100px 15px 60px;
+    }
+
+    .checkout-container {
+        margin-top: 20px;
+        margin-bottom: 40px;
+    }
+
+    /* Checkout heading */
+    .checkout-hero {
+        margin-bottom: 25px;
+        text-align: center;
+    }
+
+    .checkout-hero h1 {
+        font-size: 38px;
+        margin-bottom: 8px;
+    }
+
+    .checkout-subtitle {
+        font-size: 16px;
+    }
+
+    /* Promo section */
+    .promo-grid {
+        grid-template-columns: 1fr;
+        gap: 14px;
+    }
+
+    /* Coupon cards */
+    .promo-offer {
+        padding: 16px 12px;
+        min-height: 0;
+        height: auto;
+        border-radius: 16px;
+    }
+
+    .offer-icon {
+        font-size: 26px;
+        margin-bottom: 6px;
+    }
+
+    .promo-offer h5 {
+        font-size: 20px;
+        margin: 5px 0;
+    }
+
+    .promo-offer p {
+        font-size: 15px;
+        margin: 4px 0;
+    }
+
+    .promo-offer small {
+        font-size: 13px;
+        margin-top: 5px;
+    }
+
+    /* Apply button */
+    .apply-btn {
+        width: 110px;
+        height: 50px;
+        font-size: 15px;
+        border-radius: 0 14px 14px 0;
+    }
+
+    /* Promo input */
+    .promo-input {
+        height: 50px;
+        font-size: 14px;
+        padding: 0 14px;
+    }
+
+    .promo-input-wrapper {
+        margin: 20px 0;
+    }
+
+    /* Offers heading */
+    .offers-title {
+        margin: 25px 0 18px;
+        font-size: 14px;
+    }
+}
+@media (max-width: 480px) {
+
+    .checkout-hero {
+        position: relative;
+        z-index: 1;
+        margin-top: 70px !important;
+        padding-top: 30px !important;
+    }
+
+    .checkout-hero h1 {
+        position: relative;
+        z-index: 2;
+        font-size: 38px !important;
+        line-height: 1.2 !important;
+        margin-top: 0 !important;
+        margin-bottom: 10px !important;
+    }
+
+    .checkout-subtitle {
+        position: relative;
+        z-index: 2;
+        font-size: 16px !important;
+    }
+}
+.checkout-hero {
+    padding-top: 100px !important;
+}

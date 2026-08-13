@@ -270,9 +270,9 @@ const handleSaveAddress = async () => {
           {/* HERO */}
 
           <section className="checkout-hero">
-            <p className="checkout-breadcrumb">
+            {/* <p className="checkout-breadcrumb">
               Home <span>›</span> Cart <span>›</span> <strong>Checkout</strong>
-            </p>
+            </p> */}
 
             <h1>Checkout</h1>
 

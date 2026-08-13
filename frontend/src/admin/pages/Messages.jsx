@@ -69,7 +69,7 @@ const filteredMessages = messages.filter((msg) => {
       </div>
 
       <div className="admin-messages-table-card">
-
+<div className="admin-messages-table-wrapper">
         <table className="admin-messages-table">
 
           <thead>
@@ -164,6 +164,7 @@ const filteredMessages = messages.filter((msg) => {
 </tbody>
         </table>
 
+      </div>
       </div>
 <MessageDetailsModal
     open={modalType === "view"}
